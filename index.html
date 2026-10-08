@@ -246,11 +246,6 @@ textarea.fi{resize:vertical;min-height:96px}
 .mail-box{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--greenT);border:1px solid var(--greenB);border-radius:14px;padding:12px 14px}
 .mail-box a{color:var(--green);font-weight:700;font-size:.95rem;text-decoration:none;word-break:break-all}
 .mail-box small{display:block;color:var(--t2);font-size:.72rem}
-.don-card{background:var(--goldT);border:1px solid var(--gold);border-radius:16px;padding:16px;text-align:center}
-.don-card h4{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--gold);margin:6px 0}
-.don-card p{font-size:.82rem;color:var(--t2);line-height:1.6;margin-bottom:12px}
-.pix-row{background:var(--surf);border:1px solid var(--bd);border-radius:12px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left}
-.pix-key{font-family:'Outfit',sans-serif;font-size:.86rem;color:var(--t1);font-weight:600;word-break:break-all}
 .pix-copy{background:var(--greenT);border:1px solid var(--greenB);color:var(--green);font-size:.78rem;font-weight:700;min-height:38px;padding:4px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}
 .sec-lbl{font-size:.78rem;font-weight:700;color:var(--t2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
 .tbl-hdr{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;border-bottom:1px solid var(--bd);padding-bottom:12px}
@@ -666,7 +661,7 @@ footer .warn{color:var(--t3)}
   <footer>
     <p>&copy; 2026 SorteMax Mega · <span id="ftVer">v0</span></p>
     <p class="warn" data-i="footer-warn">Sem vínculo com a Caixa Econômica Federal. Aposte com responsabilidade.</p>
-    <p><button class="link-btn" id="btnShowWelcome" data-i="ft-welcome">Ver tela inicial</button> · <a class="link-btn" href="/baixar/" data-i="ft-install">Como instalar o app</a></p>
+    <p><button class="link-btn" id="btnShowWelcome" data-i="ft-welcome">Ver tela inicial</button> · <a class="link-btn" href="/baixar/" data-i="ft-install">Como instalar o app</a> · <a class="link-btn" href="/privacidade/" data-i="ft-priv">Privacidade</a></p>
   </footer>
 </div>
 
@@ -717,7 +712,7 @@ footer .warn{color:var(--t3)}
 
 <script>
 'use strict';
-var APP_VERSION='2.3.1';
+var APP_VERSION='2.3.2';
 var CONTACT_EMAIL='contato@duriup.com.br';
 var pad=function(n){return n<10?'0'+n:String(n);};
 var brl=function(v){return isNaN(v)||v===null?'R$ 0,00':'R$ '+Number(v).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1.');};
@@ -745,7 +740,7 @@ pt:{
 'myhist-title':'Registrar Jogo','myhist-sub':'Marque os números que você jogou','help-hist-title':'Como usar?','help-hist-body':'Marque os números que você jogou e toque em + Adicionar. O app compara com o último resultado automaticamente.','hist-conc-lbl':'Concurso (opcional):','ph-conc':'Ex: {n}','btn-add-hist':'+ Adicionar Jogo','mygames-title':'Meus Jogos','btn-clear-all':'Limpar Tudo',
 'res-title':'Histórico de Concursos','res-sub':'Consulte qualquer sorteio','ph-search':'Pesquisar concurso...','th-conc':'Concurso','th-nums':'Dezenas','btn-prev':'Anterior','btn-next':'Próximo',
 'cont-title':'Fale Conosco','cont-sub':'Sugestões, bugs ou parcerias','cont-mail-lbl':'E-mail oficial','cont-tipo':'Tipo','ct-sug':'💡 Sugestão','ct-bug':'🐛 Bug','ct-par':'🤝 Parceria','ct-out':'💬 Outro','cont-nome':'Nome','ph-yourname':'Seu nome','cont-msg':'Mensagem','ph-msg':'Conte tudo! Cada feedback nos ajuda...','btn-send':'Enviar por e-mail','cont-note':'Abre o seu app de e-mail com a mensagem pronta para contato@duriup.com.br',
-'don-title':'Gostou do SorteMax?','don-desc':'100% gratuito e feito com carinho. Se trouxe sorte extra, considere pagar um cafezinho!','pix-lbl':'Chave PIX','btn-pix':'Copiar PIX','channels-title':'Nossos Canais',
+'channels-title':'Nossos Canais',
 'ch-duriup':'Cripto, ações e mercados financeiros','ch-sogno':'Música italiana vintage dos anos 60','ch-cine':'Trilhas sonoras do cinema',
 'btn-copy':'Copiar','btn-export':'Exportar','btn-clear':'Limpar','btn-random':'Aleatório',
 'nd-lbl':'Próximo sorteio','lbl-last':'ÚLTIMO RESULTADO','lbl-hist-sum':'Resumo Histórico','lbl-hist-sub':'Análise de todos os concursos','lbl-hot':'Mais Sorteados','lbl-cold':'Menos Sorteados','lbl-beh':'Comportamento','lbl-oe':'Par/Ímpar:','lbl-sum':'Soma ideal:',
@@ -776,7 +771,7 @@ es:{
 'myhist-title':'Registrar Juego','myhist-sub':'Marca los números que jugaste','help-hist-title':'¿Cómo usar?','help-hist-body':'Marca los números que jugaste y toca + Agregar. La app compara con el último resultado automáticamente.','hist-conc-lbl':'Concurso (opcional):','ph-conc':'Ej: {n}','btn-add-hist':'+ Agregar Juego','mygames-title':'Mis Juegos','btn-clear-all':'Borrar Todo',
 'res-title':'Historial de Concursos','res-sub':'Consulta cualquier sorteo','ph-search':'Buscar concurso...','th-conc':'Concurso','th-nums':'Números','btn-prev':'Anterior','btn-next':'Siguiente',
 'cont-title':'Contáctanos','cont-sub':'Sugerencias, errores o alianzas','cont-mail-lbl':'E-mail oficial','cont-tipo':'Tipo','ct-sug':'💡 Sugerencia','ct-bug':'🐛 Error','ct-par':'🤝 Alianza','ct-out':'💬 Otro','cont-nome':'Nombre','ph-yourname':'Tu nombre','cont-msg':'Mensaje','ph-msg':'¡Cuéntanos todo! Cada comentario nos ayuda...','btn-send':'Enviar por e-mail','cont-note':'Abre tu app de e-mail con el mensaje listo para contato@duriup.com.br',
-'don-title':'¿Te gustó SorteMax?','don-desc':'100% gratuito y hecho con cariño. Si te trajo suerte extra, ¡considera invitarnos un cafecito!','pix-lbl':'Clave PIX','btn-pix':'Copiar PIX','channels-title':'Nuestros Canales',
+'channels-title':'Nuestros Canales',
 'ch-duriup':'Cripto, acciones y mercados financieros','ch-sogno':'Música italiana vintage de los años 60','ch-cine':'Bandas sonoras del cine',
 'btn-copy':'Copiar','btn-export':'Exportar','btn-clear':'Limpiar','btn-random':'Aleatorio',
 'nd-lbl':'Próximo sorteo','lbl-last':'ÚLTIMO RESULTADO','lbl-hist-sum':'Resumen Histórico','lbl-hist-sub':'Análisis de todos los concursos','lbl-hot':'Más Sorteados','lbl-cold':'Menos Sorteados','lbl-beh':'Comportamiento','lbl-oe':'Par/Impar:','lbl-sum':'Suma ideal:',
@@ -807,7 +802,7 @@ en:{
 'myhist-title':'Log a Game','myhist-sub':'Mark the numbers you played','help-hist-title':'How to use?','help-hist-body':'Mark the numbers you played and tap + Add. The app compares them with the last result automatically.','hist-conc-lbl':'Draw no. (optional):','ph-conc':'e.g. {n}','btn-add-hist':'+ Add Game','mygames-title':'My Games','btn-clear-all':'Clear All',
 'res-title':'Draw History','res-sub':'Look up any draw','ph-search':'Search draw...','th-conc':'Draw','th-nums':'Numbers','btn-prev':'Previous','btn-next':'Next',
 'cont-title':'Contact Us','cont-sub':'Suggestions, bugs or partnerships','cont-mail-lbl':'Official e-mail','cont-tipo':'Type','ct-sug':'💡 Suggestion','ct-bug':'🐛 Bug','ct-par':'🤝 Partnership','ct-out':'💬 Other','cont-nome':'Name','ph-yourname':'Your name','cont-msg':'Message','ph-msg':'Tell us everything! Every bit of feedback helps...','btn-send':'Send by e-mail','cont-note':'Opens your e-mail app with the message ready for contato@duriup.com.br',
-'don-title':'Enjoying SorteMax?','don-desc':'100% free and made with care. If it brought you extra luck, consider buying us a coffee!','pix-lbl':'PIX key','btn-pix':'Copy PIX','channels-title':'Our Channels',
+'channels-title':'Our Channels',
 'ch-duriup':'Crypto, stocks and financial markets','ch-sogno':'Vintage Italian music from the 60s','ch-cine':'Movie soundtracks',
 'btn-copy':'Copy','btn-export':'Export','btn-clear':'Clear','btn-random':'Random',
 'nd-lbl':'Next draw','lbl-last':'LATEST RESULT','lbl-hist-sum':'History Summary','lbl-hist-sub':'Analysis of every draw','lbl-hot':'Most Drawn','lbl-cold':'Least Drawn','lbl-beh':'Patterns','lbl-oe':'Even/Odd:','lbl-sum':'Ideal sum:',
@@ -838,7 +833,7 @@ ko:{
 'myhist-title':'번호 기록','myhist-sub':'구매한 번호를 표시하세요','help-hist-title':'어떻게 쓰나요?','help-hist-body':'구매한 번호를 표시하고 + 추가를 누르세요. 최근 결과와 자동으로 비교합니다.','hist-conc-lbl':'회차 (선택):','ph-conc':'예: {n}','btn-add-hist':'+ 번호 추가','mygames-title':'내 번호','btn-clear-all':'전체 삭제',
 'res-title':'회차별 결과','res-sub':'원하는 회차를 찾아보세요','ph-search':'회차 검색...','th-conc':'회차','th-nums':'번호','btn-prev':'이전','btn-next':'다음',
 'cont-title':'문의하기','cont-sub':'제안, 오류 신고, 제휴','cont-mail-lbl':'공식 이메일','cont-tipo':'유형','ct-sug':'💡 제안','ct-bug':'🐛 오류','ct-par':'🤝 제휴','ct-out':'💬 기타','cont-nome':'이름','ph-yourname':'이름','cont-msg':'메시지','ph-msg':'무엇이든 알려 주세요! 모든 의견이 도움이 됩니다...','btn-send':'이메일로 보내기','cont-note':'메일 앱이 열리고 contato@duriup.com.br 로 보낼 내용이 채워집니다',
-'don-title':'SorteMax가 마음에 드세요?','don-desc':'100% 무료로 정성껏 만들었습니다. 행운이 따랐다면 커피 한 잔 후원해 주세요!','pix-lbl':'PIX 키','btn-pix':'PIX 복사','channels-title':'우리 채널',
+'channels-title':'우리 채널',
 'ch-duriup':'코인·주식·금융 시장','ch-sogno':'60년대 이탈리아 빈티지 음악','ch-cine':'영화 음악',
 'btn-copy':'복사','btn-export':'내보내기','btn-clear':'지우기','btn-random':'무작위',
 'nd-lbl':'다음 추첨','lbl-last':'최근 결과','lbl-hist-sum':'통계 요약','lbl-hist-sub':'전체 회차 분석','lbl-hot':'많이 나온 번호','lbl-cold':'적게 나온 번호','lbl-beh':'패턴','lbl-oe':'짝/홀:','lbl-sum':'권장 합계:',
@@ -870,6 +865,10 @@ Object.assign(LANG.pt,{"sh-title": "Indique o SorteMax para um amigo", "sh-sub":
 Object.assign(LANG.es,{"sh-title": "Recomienda SorteMax a un amigo", "sh-sub": "Para descargar la app, apunta la cámara del celular al código QR:", "sh-or": "O envía la invitación por WhatsApp u otra app. Este es el mensaje que recibirá tu amigo:", "sh-copy": "📋 Copiar invitación", "sh-wa": "WhatsApp", "sh-more": "📤 Otras apps", "sh-copied": "¡Invitación copiada! Ahora pégala en WhatsApp u otra app y envíala.", "sh-text": "🍀 Conoce SorteMax Mega: ¡app GRATIS de la Mega-Sena!\n✅ Genera juegos, arma combinaciones y muestra los resultados oficiales\n✅ Sin registro, sin login\n\n📲 Descárgala aquí: {u}"});
 Object.assign(LANG.en,{"sh-title": "Share SorteMax with a friend", "sh-sub": "To download the app, point your phone camera at the QR code:", "sh-or": "Or send the invite via WhatsApp or another app. This is the message your friend will get:", "sh-copy": "📋 Copy invite", "sh-wa": "WhatsApp", "sh-more": "📤 Other apps", "sh-copied": "Invite copied! Now paste it into WhatsApp or another app and send.", "sh-text": "🍀 Check out SorteMax Mega: a FREE Mega-Sena app!\n✅ Creates games, builds wheels and shows official results\n✅ No sign-up, no login\n\n📲 Download here: {u}"});
 Object.assign(LANG.ko,{"sh-title": "친구에게 SorteMax 알려주기", "sh-sub": "앱을 받으려면 휴대폰 카메라로 QR 코드를 비추세요:", "sh-or": "또는 왓츠앱이나 다른 앱으로 초대 메시지를 보내세요. 친구가 받게 될 메시지예요:", "sh-copy": "📋 초대 메시지 복사", "sh-wa": "왓츠앱", "sh-more": "📤 다른 앱", "sh-copied": "초대 메시지를 복사했어요! 왓츠앱이나 다른 앱에 붙여 넣어 보내세요.", "sh-text": "🍀 메가세나 무료 앱 SorteMax Mega 를 써 보세요!\n✅ 번호 생성, 조합, 공식 결과 확인\n✅ 가입·로그인 없음\n\n📲 여기서 받기: {u}"});
+Object.assign(LANG.pt,{"ft-priv": "Privacidade"});
+Object.assign(LANG.es,{"ft-priv": "Privacidad"});
+Object.assign(LANG.en,{"ft-priv": "Privacy"});
+Object.assign(LANG.ko,{"ft-priv": "개인정보"});
 var curLang='pt';
 function t(k,v){var s=(LANG[curLang]&&LANG[curLang][k]);if(s===undefined)s=LANG.pt[k];if(s===undefined)return k;if(v)Object.keys(v).forEach(function(x){s=s.split('{'+x+'}').join(v[x]);});return s;}
 function applyLang(lang){

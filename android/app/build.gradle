@@ -1,0 +1,34 @@
+// SorteMax — app Android (Trusted Web Activity) que abre https://sortemax.duriup.com.br
+plugins { id 'com.android.application' }
+
+def host = 'sortemax.duriup.com.br'
+
+android {
+    namespace 'br.com.duriup.sortemax'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'br.com.duriup.sortemax'
+        minSdk 23
+        targetSdk 36
+        versionCode 1
+        versionName '1.0.0'
+        resValue 'string', 'app_name', 'SorteMax Mega'
+        resValue 'string', 'launcher_name', 'SorteMax'
+        resValue 'string', 'asset_statements',
+            '[{ "relation": ["delegate_permission/common.handle_all_urls"], "target": { "namespace": "web", "site": "https://' + host + '" } }]'
+        manifestPlaceholders = [hostName: host, defaultUrl: 'https://' + host + '/?source=play']
+    }
+
+    buildTypes {
+        release { minifyEnabled false }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.5.0'
+}

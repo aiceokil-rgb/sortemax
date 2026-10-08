@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "br.com.duriup.sortemax",
+      "sha256_cert_fingerprints": [
+        "A8:AD:E9:35:17:15:20:F9:A5:DE:FB:FB:5C:D6:1D:CF:19:AD:17:F9:0C:C6:09:7A:90:D5:62:06:C2:9A:57:CD"
+      ]
+    }
+  }
+]
