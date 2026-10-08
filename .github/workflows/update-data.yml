@@ -1,0 +1,35 @@
+name: Atualizar resultados Mega-Sena
+
+on:
+  schedule:
+    # 추첨 직후(브라질 21h = UTC 00h, 일요일 11h = UTC 14h)와 하루 여러 번 확인
+    - cron: '25 0,1,2,3,5 * * *'
+    - cron: '25 11,14,15,17,20 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Buscar resultados
+        run: node scripts/update-data.mjs
+      - name: Salvar se mudou
+        run: |
+          git config user.name "sortemax-bot"
+          git config user.email "contato@duriup.com.br"
+          git add data/
+          if git diff --cached --quiet; then echo "sem novidades"; exit 0; fi
+          git commit -m "dados: concurso $(node -p "require('./data/latest.json').concurso")"
+          git push
