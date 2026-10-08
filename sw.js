@@ -1,16 +1,20 @@
-const CACHE = 'sortemax-v1';
+const CACHE = 'sortemax-v2';
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap'
+  '/icons/duriup-yt.png',
+  '/icons/cinema-ballad.jpg'
 ];
+const FONT_CSS = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap';
 
 self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open(CACHE).then(function(c) {
+      // 글꼴은 실패해도 설치가 막히지 않게 따로 받음
+      c.add(FONT_CSS).catch(function() {});
       return c.addAll(ASSETS);
     })
   );
@@ -30,10 +34,26 @@ self.addEventListener('activate', function(e) {
 });
 
 self.addEventListener('fetch', function(e) {
-  // API 요청은 캐시 안 함
-  if (e.request.url.includes('servicebus2.caixa.gov.br') ||
-      e.request.url.includes('formspree.io') ||
-      e.request.url.includes('googletagmanager.com')) {
+  var url = e.request.url;
+  if (e.request.method !== 'GET') return;
+  // API·통계 요청은 캐시 안 함
+  if (url.includes('servicebus2.caixa.gov.br') ||
+      url.includes('raw.githubusercontent.com') ||
+      url.includes('googletagmanager.com') ||
+      url.includes('google-analytics.com')) {
+    return;
+  }
+  // 화면(HTML)은 항상 새 버전을 먼저 받고, 안 되면 저장본
+  if (e.request.mode === 'navigate' || e.request.destination === 'document') {
+    e.respondWith(
+      fetch(e.request).then(function(res) {
+        var clone = res.clone();
+        caches.open(CACHE).then(function(c) { c.put('/index.html', clone); });
+        return res;
+      }).catch(function() {
+        return caches.match('/index.html');
+      })
+    );
     return;
   }
   e.respondWith(
@@ -44,10 +64,6 @@ self.addEventListener('fetch', function(e) {
         var clone = res.clone();
         caches.open(CACHE).then(function(c) { c.put(e.request, clone); });
         return res;
-      }).catch(function() {
-        if (e.request.destination === 'document') {
-          return caches.match('/index.html');
-        }
       });
     })
   );

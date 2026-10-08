@@ -1,12 +1,14 @@
 {
-  "name": "SorteMax Mega",
+  "name": "SorteMax Mega — Grátis",
   "short_name": "SorteMax",
-  "description": "Gerador inteligente de jogos para Mega-Sena",
+  "description": "App 100% gratuito para Mega-Sena: gerador, fechamento, simulador e resultados. Sem cadastro.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#040d07",
-  "theme_color": "#00e676",
+  "background_color": "#050c08",
+  "theme_color": "#050c08",
   "orientation": "portrait",
+  "lang": "pt-BR",
   "icons": [
     { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },

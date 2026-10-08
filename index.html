@@ -1,343 +1,428 @@
 <!DOCTYPE html><html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SorteMax Mega — Maximize sua sorte</title>
-<meta name="description" content="Gerador inteligente de jogos para Mega-Sena com estatísticas, fechamento matemático e simulador.">
-<meta name="theme-color" content="#00e676">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SorteMax Mega — Grátis, sem cadastro</title>
+<meta name="description" content="App 100% gratuito para Mega-Sena: gerador de jogos, fechamento matemático, simulador e resultados. Sem cadastro, sem login.">
+<meta name="theme-color" content="#060d0a" id="metaTheme">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+// 화면이 그려지기 전에 테마를 먼저 적용(깜빡임 방지)
+(function(){try{var t=localStorage.getItem('sm_theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7KKRM14D7Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7KKRM14D7Y');</script>
 <style>
-:root{--bg:#040d07;--bg2:#08170e;--green:#00e676;--green2:#00b862;--green3:#0f3d23;--gold:#ffd700;--gold2:#ffab00;--blue:#00b0ff;--red:#ff1744;--t1:#f2f7f4;--t2:#8caba0;--t3:#537064;--gb:rgba(10,24,15,0.55);--gbr:rgba(255,255,255,0.07);--blur:blur(20px);--sh:0 12px 40px 0 rgba(0,0,0,0.5);--ts:all 0.3s cubic-bezier(0.25,0.8,0.25,1);--tf:all 0.15s ease-out}
+/* ── 색상: 기본은 밝은 테마, 시스템이 다크면 다크, 사용자가 고르면 그 값 ── */
+:root{
+  --bg:#eef4f0;--bg2:#ffffff;--surf:rgba(255,255,255,.86);--surf2:rgba(10,40,25,.045);--surf3:rgba(10,40,25,.08);
+  --bd:rgba(10,40,25,.10);--bd2:rgba(10,40,25,.16);
+  --t1:#0d1f16;--t2:#476356;--t3:#8aa197;
+  --green:#00a85a;--green2:#008549;--greenT:rgba(0,168,90,.10);--greenB:rgba(0,168,90,.35);
+  --gold:#c88400;--goldT:rgba(200,132,0,.12);--blue:#0a84c6;--blueT:rgba(10,132,198,.12);--red:#e0344d;--redT:rgba(224,52,77,.10);
+  --sh:0 8px 28px rgba(16,48,32,.10);--glow:.10;--tabbg:rgba(255,255,255,.92);--onAccent:#ffffff;
+  --ballA:#22c47a;--ballB:#00733d;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#050c08;--bg2:#0a1710;--surf:rgba(12,28,19,.72);--surf2:rgba(255,255,255,.04);--surf3:rgba(255,255,255,.08);
+  --bd:rgba(255,255,255,.08);--bd2:rgba(255,255,255,.14);
+  --t1:#f2f7f4;--t2:#9cb9ad;--t3:#5f7d71;
+  --green:#00e676;--green2:#00b862;--greenT:rgba(0,230,118,.10);--greenB:rgba(0,230,118,.35);
+  --gold:#ffc928;--goldT:rgba(255,201,40,.12);--blue:#38bdf8;--blueT:rgba(56,189,248,.12);--red:#ff4d6a;--redT:rgba(255,77,106,.12);
+  --sh:0 12px 40px rgba(0,0,0,.5);--glow:.16;--tabbg:rgba(6,14,10,.94);--onAccent:#04140b;
+  --ballA:#1d8a4f;--ballB:#03210f;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#050c08;--bg2:#0a1710;--surf:rgba(12,28,19,.72);--surf2:rgba(255,255,255,.04);--surf3:rgba(255,255,255,.08);
+  --bd:rgba(255,255,255,.08);--bd2:rgba(255,255,255,.14);
+  --t1:#f2f7f4;--t2:#9cb9ad;--t3:#5f7d71;
+  --green:#00e676;--green2:#00b862;--greenT:rgba(0,230,118,.10);--greenB:rgba(0,230,118,.35);
+  --gold:#ffc928;--goldT:rgba(255,201,40,.12);--blue:#38bdf8;--blueT:rgba(56,189,248,.12);--red:#ff4d6a;--redT:rgba(255,77,106,.12);
+  --sh:0 12px 40px rgba(0,0,0,.5);--glow:.16;--tabbg:rgba(6,14,10,.94);--onAccent:#04140b;
+  --ballA:#1d8a4f;--ballB:#03210f;
+  color-scheme:dark;
+}
+:root{--ts:all .3s cubic-bezier(.25,.8,.25,1);--tf:all .15s ease-out;--sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);color:var(--t1);font-family:'Inter',-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--green3);border-radius:10px}
-.glow-bg{position:fixed;width:60vw;height:60vw;border-radius:50%;filter:blur(140px);opacity:.13;z-index:-1;pointer-events:none;animation:aura 15s infinite alternate ease-in-out}
-.glow-green{background:radial-gradient(circle,var(--green) 0%,transparent 70%);top:-20vh;left:-10vw}
-.glow-gold{background:radial-gradient(circle,var(--gold2) 0%,transparent 70%);bottom:-20vh;right:-10vw;animation-delay:-7s}
-@keyframes aura{0%{transform:scale(1);opacity:.10}100%{transform:scale(1.15) translate(5vw,5vh);opacity:.16}}
-.wrap{width:100%;max-width:480px;margin:0 auto;padding:12px;display:flex;flex-direction:column;gap:16px;min-height:100vh;background:var(--bg);box-shadow:0 0 50px rgba(0,0,0,.7)}
-.card{background:var(--gb);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--gbr);border-radius:20px;padding:20px;box-shadow:var(--sh);transition:var(--ts)}
-.card h3{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;color:var(--t1);letter-spacing:-.02em}
-.card .sub{font-size:.82rem;color:var(--t2);margin-top:4px;margin-bottom:14px}
-.hdr{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:rgba(8,23,14,.7);backdrop-filter:var(--blur);border:1px solid var(--gbr);border-radius:24px;box-shadow:var(--sh)}
-.hdr-logo{display:flex;align-items:center;gap:10px}
-.hdr-logo svg{color:var(--green)}
-.hdr-logo h1{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-.03em;line-height:1.1}
-.hdr-logo h1 span{background:linear-gradient(135deg,var(--green),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hdr-logo p{font-size:.65rem;color:var(--t2);letter-spacing:.05em;text-transform:uppercase}
-.hdr-right{display:flex!important;align-items:center;gap:8px}
-.sync-badge{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid var(--gbr);padding:5px 12px;border-radius:30px;font-size:.72rem;font-weight:500}
-.lang-btn{display:inline-block!important;visibility:visible!important;opacity:1!important;background:rgba(255,255,255,.05);border:1px solid var(--gbr);color:var(--t2);font-size:.72rem;font-weight:700;padding:5px 10px;border-radius:20px;cursor:pointer;transition:var(--tf)}
-.lang-btn:hover{background:rgba(0,230,118,.1);color:var(--green);border-color:rgba(0,230,118,.3)}
-.dot{width:8px;height:8px;border-radius:50%;position:relative;flex-shrink:0}
-.dot::after{content:'';position:absolute;width:100%;height:100%;border-radius:50%;left:0;top:0;animation:pulse 1.5s infinite ease-in-out}
-.dot.g{background:var(--green)}.dot.g::after{background:var(--green)}
-.dot.r{background:var(--red)}.dot.r::after{background:var(--red)}
-.dot.y{background:var(--gold)}.dot.y::after{background:var(--gold)}
-@keyframes pulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.2);opacity:0}}
-.next-draw{display:flex;align-items:center;justify-content:space-between;background:rgba(0,230,118,.06);border:1px solid rgba(0,230,118,.2);border-radius:14px;padding:10px 16px;font-size:.78rem}
-.next-draw .nd-lbl{color:var(--t2);font-weight:500}
-.next-draw .nd-val{color:var(--green);font-family:'Outfit',sans-serif;font-weight:700;font-size:.88rem}
-.nd-bell{background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.3);color:var(--green);font-size:.72rem;font-weight:600;padding:4px 10px;border-radius:7px;cursor:pointer;transition:var(--tf)}
-.nd-bell:hover{background:rgba(0,230,118,.2)}
-.nd-bell.on{background:var(--green);color:#000}
-.ad-banner{position:relative;overflow:hidden;border-radius:14px;height:68px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.05)}
-.ad-slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;gap:12px;padding:0 14px;opacity:0;transition:opacity .8s ease;text-decoration:none;color:var(--t1);pointer-events:none}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--bg);color:var(--t1);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.55;overflow-x:hidden;min-height:100vh;min-height:100dvh;transition:background .3s,color .3s}
+button,input,select,textarea{font-family:inherit}
+button{touch-action:manipulation}
+.glow-bg{position:fixed;width:80vw;height:80vw;max-width:520px;max-height:520px;border-radius:50%;filter:blur(110px);opacity:var(--glow);z-index:-1;pointer-events:none;animation:aura 15s infinite alternate ease-in-out}
+.glow-green{background:var(--green);top:-18vh;left:-20vw}
+.glow-gold{background:var(--gold);bottom:-18vh;right:-20vw;animation-delay:-7s}
+@keyframes aura{0%{transform:scale(1)}100%{transform:scale(1.15) translate(5vw,5vh)}}
+.wrap{width:100%;max-width:480px;margin:0 auto;padding:calc(10px + var(--sat)) 12px calc(96px + var(--sab));display:flex;flex-direction:column;gap:14px;min-height:100vh;min-height:100dvh}
+.card{background:var(--surf);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--bd);border-radius:20px;padding:18px;box-shadow:var(--sh)}
+.card h3{font-family:'Outfit',sans-serif;font-size:1.12rem;font-weight:700;color:var(--t1);letter-spacing:-.02em}
+.card .sub{font-size:.85rem;color:var(--t2);margin-top:2px;margin-bottom:12px}
+/* 헤더 */
+.hdr{position:sticky;top:calc(6px + var(--sat));z-index:900;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px 10px 14px;background:var(--surf);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--bd);border-radius:22px;box-shadow:var(--sh)}
+.hdr-logo{display:flex;align-items:center;gap:10px;min-width:0}
+.hdr-logo h1{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:800;letter-spacing:-.03em;line-height:1.1;white-space:nowrap}
+.grad{background:linear-gradient(135deg,var(--green),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hdr-meta{display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--t2);margin-top:2px;white-space:nowrap}
+.ver{font-family:'Outfit',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.04em;color:var(--green);background:var(--greenT);border:1px solid var(--greenB);padding:0 6px;border-radius:20px;line-height:1.5}
+.hdr-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.icon-btn{min-width:40px;height:40px;padding:0 10px;border-radius:14px;background:var(--surf2);border:1px solid var(--bd);color:var(--t1);font-size:.8rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:var(--tf)}
+.icon-btn:active{transform:scale(.94)}
+.dot{width:7px;height:7px;border-radius:50%;position:relative;flex-shrink:0;display:inline-block}
+.dot::after{content:'';position:absolute;inset:0;border-radius:50%;animation:pulse 1.5s infinite ease-in-out}
+.dot.g,.dot.g::after{background:var(--green)}.dot.r,.dot.r::after{background:var(--red)}.dot.y,.dot.y::after{background:var(--gold)}
+@keyframes pulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.4);opacity:0}}
+.next-draw{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--greenT);border:1px solid var(--greenB);border-radius:16px;padding:10px 12px 10px 16px}
+.nd-lbl{color:var(--t2);font-weight:500;font-size:.75rem}
+.nd-val{color:var(--green);font-family:'Outfit',sans-serif;font-weight:700;font-size:.95rem;line-height:1.25}
+.nd-bell{background:var(--surf);border:1px solid var(--greenB);color:var(--green);font-size:.8rem;font-weight:700;min-height:40px;padding:0 12px;border-radius:12px;cursor:pointer;white-space:nowrap;transition:var(--tf)}
+.nd-bell.on{background:var(--green);color:var(--onAccent)}
+/* 채널 배너 */
+.ad-banner{position:relative;overflow:hidden;border-radius:16px;height:70px;background:var(--surf);border:1px solid var(--bd)}
+.ad-slide{position:absolute;inset:0;display:flex;align-items:center;gap:12px;padding:0 14px;opacity:0;transition:opacity .8s ease;text-decoration:none;color:var(--t1);pointer-events:none}
 .ad-slide.on{opacity:1;pointer-events:auto}
-.ad-slide img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0}
-.ad-slide strong{display:block;font-family:'Outfit',sans-serif;font-size:.83rem;font-weight:700;color:var(--t1)}
-.ad-slide span{font-size:.7rem;color:var(--t2)}
-.ad-dots{position:absolute;bottom:5px;right:10px;display:flex;gap:4px}
-.ad-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .3s}
+.ad-slide img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex-shrink:0;background:#fff;border:1px solid var(--bd)}
+.ad-slide strong{display:block;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:700}
+.ad-slide span{font-size:.74rem;color:var(--t2)}
+.ad-dots{position:absolute;bottom:6px;right:12px;display:flex;gap:4px}
+.ad-dot{width:6px;height:6px;border-radius:50%;background:var(--bd2);transition:background .3s}
 .ad-dot.on{background:var(--green)}
-.dash{display:none;flex-direction:column;gap:16px}
-.dash.on{display:flex}
-.w-last{position:relative;overflow:hidden;border:1px solid rgba(0,230,118,.1)}
-.w-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.badge-live{background:rgba(0,230,118,.1);border:1px solid var(--green);color:var(--green);font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:6px;letter-spacing:.05em}
-.c-meta{font-size:.78rem;color:var(--t2);font-weight:500}
-.balls-row{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
-.ball{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#1a6b3a 0%,#041a0c 80%);border:2px solid var(--green);color:#ffffff!important;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,230,118,.2);position:relative;animation:spin .5s cubic-bezier(.175,.885,.32,1.275) both}
-.ball::before{content:'';position:absolute;top:4px;left:7px;width:8px;height:5px;border-radius:50%;background:rgba(255,255,255,.35);transform:rotate(-15deg)}
-.ball.ph{background:transparent;border:2px dashed var(--t3);color:var(--t3)!important;box-shadow:none}
-.ball.ph::before{display:none}
-.ball.gld{background:radial-gradient(circle at 30% 30%,#c8960a 0%,#5a3d00 80%);border-color:var(--gold);color:#ffffff!important;box-shadow:0 4px 15px rgba(255,215,0,.2)}
-@keyframes spin{0%{transform:scale(.3) rotate(-360deg);opacity:0}100%{transform:scale(1) rotate(0deg);opacity:1}}
-.prize-row{display:flex;align-items:baseline;gap:10px;margin-top:12px;border-top:1px solid rgba(255,255,255,.06);padding-top:12px}
-.prize-badge{background:rgba(255,23,68,.12);border:1px solid var(--red);color:var(--red);font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:6px}
-.prize-badge.ok{background:rgba(0,230,118,.12);border-color:var(--green);color:var(--green)}
-.prize-amt{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:800;color:var(--gold)}
-.w-table{display:flex;flex-direction:column;gap:5px;margin-top:10px;background:rgba(0,0,0,.2);border-radius:10px;padding:10px 12px}
-.w-row{display:flex;justify-content:space-between;font-size:.75rem}
-.w-row .lbl{color:var(--t2)}.w-row .val{color:var(--t1);font-weight:600}
-.mini-grid{display:flex;flex-direction:column;gap:8px;margin-top:8px}
-.mini-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center}
-.mini-lbl{font-size:.75rem;font-weight:500;color:var(--t2)}
+.dash{display:none;flex-direction:column;gap:14px}.dash.on{display:flex}
+.w-hdr{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.badge-live{background:var(--greenT);border:1px solid var(--green);color:var(--green);font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:6px;letter-spacing:.05em;white-space:nowrap}
+.c-meta{font-size:.78rem;color:var(--t2);font-weight:500;text-align:right}
+.balls-row{display:flex;gap:7px;margin:12px 0;flex-wrap:wrap;justify-content:center}
+.ball{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--ballA) 0%,var(--ballB) 85%);border:2px solid var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,160,80,.25);position:relative;animation:spin .5s cubic-bezier(.175,.885,.32,1.275) both}
+.ball::before{content:'';position:absolute;top:5px;left:9px;width:9px;height:5px;border-radius:50%;background:rgba(255,255,255,.4);transform:rotate(-15deg)}
+.ball.ph{background:transparent;border:2px dashed var(--t3);color:var(--t3);box-shadow:none}.ball.ph::before{display:none}
+.ball.gld{background:radial-gradient(circle at 30% 30%,#e0a812 0%,#6b4700 85%);border-color:var(--gold)}
+@keyframes spin{0%{transform:scale(.3) rotate(-360deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+.prize-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;border-top:1px solid var(--bd);padding-top:12px}
+.prize-badge{background:var(--redT);border:1px solid var(--red);color:var(--red);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:6px}
+.prize-badge.ok{background:var(--greenT);border-color:var(--green);color:var(--green)}
+.prize-amt{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:800;color:var(--gold)}
+.w-table{display:flex;flex-direction:column;gap:5px;margin-top:10px;background:var(--surf2);border-radius:12px;padding:10px 12px}
+.w-row{display:flex;justify-content:space-between;gap:8px;font-size:.78rem}
+.w-row .lbl{color:var(--t2)}.w-row .val{color:var(--t1);font-weight:600;text-align:right}
+.mini-grid{display:flex;flex-direction:column;gap:8px}
+.mini-card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.mini-lbl{font-size:.8rem;font-weight:500;color:var(--t2)}
 .mini-balls{display:flex;gap:5px}
-.mball{width:25px;height:25px;border-radius:50%;background:rgba(0,230,118,.1);border:1px solid var(--green);color:var(--green);font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center}
-.mball.c{background:rgba(0,176,255,.1);border-color:var(--blue);color:var(--blue)}
-.mini-stats{display:flex;flex-direction:column;gap:3px;align-items:flex-end;font-size:.7rem}
+.mball{width:28px;height:28px;border-radius:50%;background:var(--greenT);border:1px solid var(--green);color:var(--green);font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.mball.c{background:var(--blueT);border-color:var(--blue);color:var(--blue)}
+.mini-stats{display:flex;flex-direction:column;gap:2px;align-items:flex-end;font-size:.74rem}
 .mini-stats span{color:var(--t3);margin-right:4px}.mini-stats strong{color:var(--t1)}
-.tabs{display:flex;overflow-x:auto;background:rgba(4,13,7,.97);backdrop-filter:var(--blur);border-top:1px solid var(--gbr);border-radius:20px 20px 0 0;padding:6px 4px;box-shadow:0 -4px 20px rgba(0,0,0,.6);position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:1000;gap:2px}
-.tab{flex:1 0 auto;background:transparent;border:none;outline:none;color:var(--t2);font-family:'Outfit',sans-serif;font-size:.6rem;font-weight:600;padding:6px 2px;border-radius:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:var(--tf)}
-.tab svg{opacity:.7;transition:var(--tf)}
-.tab.on{color:var(--green);background:rgba(0,230,118,.08)}
-.tab.on svg{opacity:1}
-.tab-content{padding-bottom:80px}
-.panel{display:none;animation:fadein .4s ease-out}.panel.on{display:block}
-@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.layout{display:grid;grid-template-columns:1fr;gap:16px}
-.title-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
-.help-btn{width:22px;height:22px;border-radius:50%;background:rgba(0,230,118,.12);border:1.5px solid rgba(0,230,118,.4);color:var(--green);font-size:.72rem;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;transition:var(--tf);line-height:1}
-.help-box{display:none;background:rgba(0,20,8,.95);border:1px solid rgba(0,230,118,.25);border-radius:12px;padding:12px 14px;font-size:.77rem;color:#e0f0e8;line-height:1.7;margin-bottom:10px}
+/* 아래 탭바 */
+.tabs{display:flex;background:var(--tabbg);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--bd);border-radius:22px 22px 0 0;padding:6px 4px calc(6px + var(--sab));box-shadow:0 -6px 24px rgba(0,0,0,.12);position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:1000;gap:2px}
+.tab{flex:1 1 0;min-width:0;min-height:52px;background:transparent;border:none;outline:none;color:var(--t2);font-family:'Outfit',sans-serif;font-size:.66rem;font-weight:600;padding:6px 2px;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:var(--tf)}
+.tab span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tab svg{opacity:.75}
+.tab.on{color:var(--green);background:var(--greenT)}.tab.on svg{opacity:1}
+.panel{display:none;animation:fadein .35s ease-out}.panel.on{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.layout{display:grid;grid-template-columns:1fr;gap:14px}
+.title-row{display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.help-btn{width:28px;height:28px;border-radius:50%;background:var(--greenT);border:1.5px solid var(--greenB);color:var(--green);font-size:.8rem;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.help-box{display:none;background:var(--greenT);border:1px solid var(--greenB);border-radius:12px;padding:12px 14px;font-size:.82rem;color:var(--t1);line-height:1.65;margin:6px 0 4px}
 .help-box.on{display:block}
-.help-box strong{color:var(--green);display:block;margin-bottom:5px;font-size:.82rem}
-.help-box b{color:#ffffff;font-weight:600}
-.ctrl-card{display:flex;flex-direction:column;gap:12px;border:1px solid rgba(255,255,255,.03)}
-.modes{display:flex;flex-direction:column;gap:7px}
-.mode{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:12px;padding:10px 13px;cursor:pointer;transition:var(--tf)}
-.mode input[type=radio]{appearance:none;-webkit-appearance:none;width:17px;height:17px;border:2px solid var(--t3);border-radius:50%;outline:none;position:relative;cursor:pointer;flex-shrink:0;transition:var(--tf)}
+.help-box strong{color:var(--green);display:block;margin-bottom:4px}
+.ctrl-card{display:flex;flex-direction:column;gap:12px}
+.modes{display:flex;flex-direction:column;gap:8px}
+.mode{display:flex;align-items:center;gap:12px;background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:12px 14px;min-height:56px;cursor:pointer;transition:var(--tf)}
+.mode input[type=radio]{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:2px solid var(--t3);border-radius:50%;position:relative;cursor:pointer;flex-shrink:0;transition:var(--tf)}
 .mode input[type=radio]:checked{border-color:var(--green)}
-.mode input[type=radio]::after{content:'';position:absolute;width:9px;height:9px;border-radius:50%;background:var(--green);top:50%;left:50%;transform:translate(-50%,-50%) scale(0);transition:var(--tf)}
+.mode input[type=radio]::after{content:'';position:absolute;width:10px;height:10px;border-radius:50%;background:var(--green);top:50%;left:50%;transform:translate(-50%,-50%) scale(0);transition:var(--tf)}
 .mode input[type=radio]:checked::after{transform:translate(-50%,-50%) scale(1)}
-.mode-info strong{font-size:.88rem;font-weight:600;color:var(--t1)}
-.mode-info span{font-size:.7rem;color:var(--t2)}
-.mode.on{background:rgba(0,230,118,.04);border-color:rgba(0,230,118,.15)}
-.sg{display:flex;flex-direction:column;gap:5px}
-.sg label{font-size:.8rem;font-weight:500;color:var(--t2)}
-.qty{display:flex;align-items:center;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.05);border-radius:12px;overflow:hidden;width:fit-content}
-.qty-btn{background:transparent;border:none;outline:none;color:var(--t1);font-size:1.1rem;font-weight:700;width:40px;height:36px;cursor:pointer;transition:var(--tf)}
-.qty-btn:hover{background:rgba(255,255,255,.05)}
-.qty input{background:transparent;border:none;outline:none;color:var(--t1);font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;text-align:center;width:44px}
-.sel{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);border-radius:12px;color:var(--t1);font-size:.8rem;padding:9px 12px;outline:none;cursor:pointer;width:100%}
-.sel option{background:var(--bg2)}
-.filt-box,.luck-box{background:rgba(0,0,0,.2);border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,.03);display:flex;flex-direction:column;gap:9px}
-.filt-box h4,.luck-box h4{font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--green);margin-bottom:2px}
-.chk{display:flex;align-items:center;gap:9px}
-.chk-lbl{font-size:.76rem;color:var(--t2)}
-.sw{position:relative;display:inline-block;width:33px;height:18px;flex-shrink:0}
+.mode-info strong{display:block;font-size:.92rem;font-weight:600;color:var(--t1)}
+.mode-info span{font-size:.76rem;color:var(--t2)}
+.mode.on{background:var(--greenT);border-color:var(--greenB)}
+.sg{display:flex;flex-direction:column;gap:6px}
+.sg label{font-size:.84rem;font-weight:500;color:var(--t2)}
+.qty{display:flex;align-items:center;background:var(--surf2);border:1px solid var(--bd);border-radius:14px;overflow:hidden;width:fit-content}
+.qty-btn{background:transparent;border:none;color:var(--t1);font-size:1.3rem;font-weight:700;width:48px;height:46px;cursor:pointer}
+.qty-btn:active{background:var(--surf3)}
+.qty input{background:transparent;border:none;outline:none;color:var(--t1);font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;text-align:center;width:48px}
+.sel,.fi,.inp-g input,.srch{width:100%;background:var(--surf2);border:1px solid var(--bd);border-radius:12px;color:var(--t1);font-size:16px;padding:11px 13px;outline:none;transition:var(--tf)}
+.sel:focus,.fi:focus,.inp-g input:focus,.srch:focus{border-color:var(--green)}
+.sel option,.fi option{background:var(--bg2);color:var(--t1)}
+.filt-box,.luck-box{background:var(--surf2);border-radius:14px;padding:12px;border:1px solid var(--bd);display:flex;flex-direction:column;gap:10px}
+.filt-box h4,.luck-box h4{font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--green)}
+.chk{display:flex;align-items:center;gap:10px;min-height:32px}
+.chk-lbl{font-size:.84rem;color:var(--t2)}
+.sw{position:relative;display:inline-block;width:42px;height:24px;flex-shrink:0}
 .sw input{opacity:0;width:0;height:0}
-.sl{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:var(--t3);transition:.3s;border-radius:34px}
-.sl:before{position:absolute;content:"";height:12px;width:12px;left:3px;bottom:3px;background:white;transition:.3s;border-radius:50%}
+.sl{position:absolute;cursor:pointer;inset:0;background:var(--t3);transition:.3s;border-radius:34px}
+.sl:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background:#fff;transition:.3s;border-radius:50%}
 .sw input:checked+.sl{background:var(--green)}
-.sw input:checked+.sl:before{transform:translateX(15px)}
+.sw input:checked+.sl:before{transform:translateX(18px)}
 .inp-g{display:flex;flex-direction:column;gap:5px}
-.inp-g label{font-size:.77rem;color:var(--t2)}
-.inp-g input{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:8px 12px;color:var(--t1);font-size:.87rem;outline:none;transition:var(--tf)}
-.inp-g input:focus{border-color:var(--green)}
+.inp-g label{font-size:.82rem;color:var(--t2)}
 .hidden{display:none!important}
-.btn-p{background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%);border:none;outline:none;color:#000;font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:13px 20px;border-radius:13px;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,230,118,.2);transition:var(--ts);width:100%}
-.btn-p span{position:relative;z-index:2}
-.btn-p::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:.6s;z-index:1}
-.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,230,118,.4)}
-.btn-p:hover::after{transform:translateX(100%)}
-.btn-p:disabled{background:var(--t3);color:rgba(255,255,255,.4);box-shadow:none;cursor:not-allowed;transform:none}
-.btn-s{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--t1);font-size:.76rem;font-weight:600;padding:5px 10px;border-radius:7px;cursor:pointer;transition:var(--tf)}
-.btn-s:hover{background:rgba(255,255,255,.08)}
-.btn-d{background:rgba(255,23,68,.08);border:1px solid rgba(255,23,68,.2);color:var(--red);font-size:.7rem;font-weight:600;padding:4px 8px;border-radius:6px;cursor:pointer;transition:var(--tf)}
-.out-card{display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.03);min-height:300px}
-.out-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:11px}
-.out-acts{display:flex;gap:7px}
+.btn-p{background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%);border:none;outline:none;color:var(--onAccent);font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;min-height:52px;padding:14px 20px;border-radius:15px;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,180,90,.28);transition:var(--ts);width:100%}
+.btn-p:active{transform:scale(.98)}
+.btn-p:disabled{background:var(--t3);color:rgba(255,255,255,.75);box-shadow:none;cursor:not-allowed}
+.btn-s{background:var(--surf2);border:1px solid var(--bd);color:var(--t1);font-size:.82rem;font-weight:600;min-height:38px;padding:6px 12px;border-radius:10px;cursor:pointer;transition:var(--tf)}
+.btn-s:active{background:var(--surf3)}
+.btn-s:disabled{opacity:.45}
+.btn-d{background:var(--redT);border:1px solid var(--red);color:var(--red);font-size:.76rem;font-weight:600;min-height:34px;padding:4px 10px;border-radius:8px;cursor:pointer}
+.out-card{display:flex;flex-direction:column;min-height:240px}
+.out-hdr{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;border-bottom:1px solid var(--bd);padding-bottom:10px}
+.out-acts{display:flex;gap:6px}
 .empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--t2);text-align:center;padding:20px}
-.empty p{font-size:.85rem;max-width:250px}
-.ring-wrap{position:relative;width:70px;height:70px;display:flex;align-items:center;justify-content:center}
-.ring{position:absolute;width:100%;height:100%;border:2px dashed rgba(0,230,118,.12);border-radius:50%;animation:rot 15s linear infinite}
+.empty p{font-size:.88rem;max-width:260px}
+.ring-wrap{position:relative;width:72px;height:72px;display:flex;align-items:center;justify-content:center}
+.ring{position:absolute;inset:0;border:2px dashed var(--greenB);border-radius:50%;animation:rot 15s linear infinite}
 .ph-balls{display:flex;gap:5px}
 .ph-ball{width:20px;height:20px;border-radius:50%;border:1px solid var(--t3);color:var(--t3);font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;animation:fl 2s ease-in-out infinite alternate}
 .ph-ball:nth-child(2){animation-delay:.3s}.ph-ball:nth-child(3){animation-delay:.6s}
 @keyframes rot{100%{transform:rotate(360deg)}}
 @keyframes fl{0%{transform:translateY(0)}100%{transform:translateY(-5px)}}
-.game-list{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:4px}
-.game-row{background:rgba(0,0,0,.15);border:1px solid rgba(255,255,255,.03);border-radius:12px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;gap:7px;animation:slidein .4s cubic-bezier(.165,.84,.44,1) both}
-.game-lbl{font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:700;color:var(--t2);white-space:nowrap}
-.gballs{display:flex;gap:4px;flex-wrap:wrap}
-.gball{width:31px;height:31px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(0,230,118,.12) 0%,rgba(0,100,50,.08) 80%);border:1.5px solid rgba(0,230,118,.3);color:#ffffff;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;display:flex;align-items:center;justify-content:center}
-.tags{display:flex;flex-direction:column;gap:3px;align-items:flex-end}
-.tag{font-size:.57rem;font-weight:600;padding:2px 4px;border-radius:4px;background:rgba(255,255,255,.04);color:var(--t2);white-space:nowrap}
-.tag.hi{background:rgba(0,230,118,.08);color:var(--green)}
-@keyframes slidein{0%{transform:translateX(12px);opacity:0}100%{transform:translateX(0);opacity:1}}
-.grid-wrap{background:rgba(0,0,0,.15);border:1px solid rgba(255,255,255,.03);border-radius:13px;padding:11px}
-.grid-hdr{display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:9px;flex-wrap:wrap;gap:3px}
+.game-list{display:flex;flex-direction:column;gap:10px}
+.game-row{background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:10px 12px;display:grid;grid-template-columns:1fr auto;grid-template-areas:"lbl act" "balls balls" "tags tags";gap:8px;animation:slidein .4s cubic-bezier(.165,.84,.44,1) both}
+.game-lbl{grid-area:lbl;font-family:'Outfit',sans-serif;font-size:.76rem;font-weight:700;color:var(--t2);align-self:center}
+.game-row .btn-s{grid-area:act}
+.gballs{grid-area:balls;display:flex;gap:6px;flex-wrap:wrap}
+.gball{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--ballA) 0%,var(--ballB) 90%);color:#fff;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,120,60,.25)}
+.tags{grid-area:tags;display:flex;gap:6px}
+.tag{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--surf3);color:var(--t2)}
+.tag.hi{background:var(--greenT);color:var(--green)}
+@keyframes slidein{0%{transform:translateX(12px);opacity:0}100%{transform:none;opacity:1}}
+.grid-wrap{background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:12px}
+.grid-hdr{display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:10px;flex-wrap:wrap;gap:4px;color:var(--t2)}
 .grid-hdr strong{color:var(--green)}
-.grid-tgt{color:var(--gold);font-weight:600;font-size:.67rem}
-.num-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-bottom:9px}
-.num-btn{aspect-ratio:1;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);color:var(--t2);font-family:'Outfit',sans-serif;font-size:.68rem;font-weight:600;border-radius:5px;cursor:pointer;outline:none;display:flex;align-items:center;justify-content:center;transition:var(--tf)}
-.num-btn:hover{background:rgba(255,255,255,.06);color:var(--t1)}
-.num-btn.on{background:radial-gradient(circle at 30% 30%,var(--green) 0%,var(--green2) 100%);border-color:var(--green);color:#000;font-weight:700;box-shadow:0 0 6px rgba(0,230,118,.35);animation:pop .3s ease-out}
+.grid-tgt{color:var(--gold);font-weight:600}
+.num-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-bottom:10px}
+.num-btn{aspect-ratio:1;min-height:34px;background:var(--surf);border:1px solid var(--bd);color:var(--t1);font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;border-radius:9px;cursor:pointer;outline:none;display:flex;align-items:center;justify-content:center;transition:var(--tf)}
+.num-btn.on{background:radial-gradient(circle at 30% 30%,var(--green) 0%,var(--green2) 100%);border-color:var(--green);color:var(--onAccent);font-weight:800;box-shadow:0 0 8px var(--greenB);animation:pop .3s ease-out}
 @keyframes pop{0%{transform:scale(.9)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
-.g-acts{display:flex;justify-content:space-between;gap:7px}
+.g-acts{display:flex;justify-content:space-between;gap:8px}
+.g-acts .btn-s{flex:1}
 .wheel-res{display:flex;flex-direction:column;gap:10px}
 .info-row{display:flex;gap:7px;flex-wrap:wrap}
-.ibadge{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:6px;font-size:.7rem;font-weight:600;padding:3px 8px;color:var(--t1)}
-#wGames{border-color:var(--green);color:var(--green)}
-#wPrice{border-color:var(--gold);color:var(--gold)}
-.sim-card{background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.05);border-radius:13px;padding:13px}
-.sim-balls{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
-.sball{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.12);color:#ffffff;font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;display:flex;align-items:center;justify-content:center}
-.sball.hit{background:var(--green);border-color:var(--green);color:#000;font-weight:700;box-shadow:0 0 10px rgba(0,230,118,.35)}
-.sbadge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:7px;font-size:.78rem;font-weight:700;margin-top:4px}
-.sbadge.sena{background:rgba(255,215,0,.15);color:var(--gold);border:1px solid rgba(255,215,0,.3)}
-.sbadge.quina{background:rgba(0,230,118,.15);color:var(--green);border:1px solid rgba(0,230,118,.3)}
-.sbadge.quadra{background:rgba(0,176,255,.15);color:var(--blue);border:1px solid rgba(0,176,255,.3)}
-.sbadge.miss{background:rgba(255,255,255,.04);color:var(--t2);border:1px solid rgba(255,255,255,.08)}
-.hist-item{background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.04);border-radius:12px;padding:11px 13px;margin-bottom:8px;animation:slidein .3s ease both}
-.hist-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
-.hist-conc{font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:700;color:var(--t2)}
-.hist-date{font-size:.68rem;color:var(--t3)}
-.hist-balls{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:7px}
-.hball{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);color:#ffffff;font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:600;display:flex;align-items:center;justify-content:center}
-.hball.hit{background:rgba(0,230,118,.2);border-color:var(--green);color:var(--green)}
+.ibadge{background:var(--surf2);border:1px solid var(--bd);border-radius:8px;font-size:.78rem;font-weight:700;padding:4px 10px;color:var(--t1)}
+#wGames{border-color:var(--green);color:var(--green)}#wPrice{border-color:var(--gold);color:var(--gold)}
+.sim-card{background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:14px}
+.sim-balls{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.sball{width:38px;height:38px;border-radius:50%;background:var(--surf);border:1.5px solid var(--bd2);color:var(--t1);font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:600;display:flex;align-items:center;justify-content:center}
+.sball.hit{background:var(--green);border-color:var(--green);color:var(--onAccent);font-weight:800;box-shadow:0 0 10px var(--greenB)}
+.sbadge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;font-size:.84rem;font-weight:700}
+.sbadge.sena,.hbadge.sena{background:var(--goldT);color:var(--gold);border:1px solid var(--gold)}
+.sbadge.quina,.hbadge.quina{background:var(--greenT);color:var(--green);border:1px solid var(--greenB)}
+.sbadge.quadra,.hbadge.quadra{background:var(--blueT);color:var(--blue);border:1px solid var(--blue)}
+.sbadge.miss,.hbadge.miss{background:var(--surf3);color:var(--t2);border:1px solid var(--bd)}
+.hist-item{background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:12px 14px;margin-bottom:8px;animation:slidein .3s ease both}
+.hist-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.hist-conc{font-family:'Outfit',sans-serif;font-size:.86rem;font-weight:700;color:var(--t2)}
+.hist-date{font-size:.72rem;color:var(--t3)}
+.hist-balls{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.hball{width:32px;height:32px;border-radius:50%;background:var(--surf);border:1px solid var(--bd2);color:var(--t1);font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;display:flex;align-items:center;justify-content:center}
+.hball.hit{background:var(--greenT);border-color:var(--green);color:var(--green)}
 .hist-ft{display:flex;justify-content:space-between;align-items:center}
-.hbadge{font-size:.66rem;font-weight:700;padding:2px 7px;border-radius:4px}
-.hbadge.sena{background:rgba(255,215,0,.15);color:var(--gold)}
-.hbadge.quina{background:rgba(0,230,118,.15);color:var(--green)}
-.hbadge.quadra{background:rgba(0,176,255,.15);color:var(--blue)}
-.hbadge.miss{background:rgba(255,255,255,.04);color:var(--t3)}
-.hist-empty{text-align:center;padding:28px 20px;color:var(--t2);font-size:.83rem}
-.contact-form{display:flex;flex-direction:column;gap:9px}
-.fg{display:flex;flex-direction:column;gap:4px}
-.fg label{font-size:.78rem;color:var(--t2);font-weight:500}
-.fi{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:9px 12px;color:var(--t1);font-size:.83rem;outline:none;font-family:'Inter',sans-serif;transition:var(--tf);width:100%}
-.fi:focus{border-color:var(--green)}
-textarea.fi{resize:vertical;min-height:80px}
-.social-list{display:flex;flex-direction:column;gap:7px;margin-top:4px}
-.slink{display:flex;align-items:center;gap:11px;padding:9px 13px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:11px;text-decoration:none;color:var(--t1);transition:var(--tf)}
-.slink:hover{background:rgba(255,255,255,.05)}
-.slink img{width:36px;height:36px;border-radius:10px;object-fit:cover;flex-shrink:0}
-.slink strong{display:block;font-size:.82rem;font-weight:600;color:var(--t1)}
-.slink span{font-size:.7rem;color:var(--t2)}
-.don-card{background:rgba(180,130,0,.08);border:1px solid rgba(255,215,0,.2);border-radius:14px;padding:16px;text-align:center}
-.don-card h4{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--gold);margin:8px 0 6px}
-.don-card p{font-size:.76rem;color:var(--t2);line-height:1.6;margin-bottom:14px}
-.don-btn{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:700;padding:10px 18px;border-radius:10px;text-decoration:none;transition:var(--ts)}
-.don-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,215,0,.25)}
-.pix-row{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 13px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.pix-key{font-family:'Outfit',sans-serif;font-size:.8rem;color:var(--t1);font-weight:600}
-.pix-copy{background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.3);color:var(--green);font-size:.72rem;font-weight:600;padding:4px 9px;border-radius:6px;cursor:pointer;white-space:nowrap;transition:var(--tf)}
-.fw-card{display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.03)}
-.tbl-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:11px;flex-wrap:wrap;gap:10px}
-.srch{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:10px;color:var(--t1);font-size:.8rem;padding:7px 13px;outline:none;width:100%;transition:var(--tf)}
-.srch:focus{border-color:var(--green)}
+.hbadge{font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px}
+.hist-empty{text-align:center;padding:28px 16px;color:var(--t2);font-size:.88rem}
+.contact-form{display:flex;flex-direction:column;gap:10px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:.82rem;color:var(--t2);font-weight:500}
+textarea.fi{resize:vertical;min-height:96px}
+.social-list{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.slink{display:flex;align-items:center;gap:12px;padding:10px 14px;min-height:58px;background:var(--surf2);border:1px solid var(--bd);border-radius:14px;text-decoration:none;color:var(--t1);transition:var(--tf)}
+.slink:active{background:var(--surf3)}
+.slink img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;background:#fff;border:1px solid var(--bd)}
+.slink strong{display:block;font-size:.9rem;font-weight:600}
+.slink span{font-size:.76rem;color:var(--t2);word-break:break-all}
+.mail-ic{width:40px;height:40px;border-radius:50%;background:var(--greenT);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.mail-box{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--greenT);border:1px solid var(--greenB);border-radius:14px;padding:12px 14px}
+.mail-box a{color:var(--green);font-weight:700;font-size:.95rem;text-decoration:none;word-break:break-all}
+.mail-box small{display:block;color:var(--t2);font-size:.72rem}
+.don-card{background:var(--goldT);border:1px solid var(--gold);border-radius:16px;padding:16px;text-align:center}
+.don-card h4{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--gold);margin:6px 0}
+.don-card p{font-size:.82rem;color:var(--t2);line-height:1.6;margin-bottom:12px}
+.pix-row{background:var(--surf);border:1px solid var(--bd);border-radius:12px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left}
+.pix-key{font-family:'Outfit',sans-serif;font-size:.86rem;color:var(--t1);font-weight:600;word-break:break-all}
+.pix-copy{background:var(--greenT);border:1px solid var(--greenB);color:var(--green);font-size:.78rem;font-weight:700;min-height:38px;padding:4px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.sec-lbl{font-size:.78rem;font-weight:700;color:var(--t2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+.tbl-hdr{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;border-bottom:1px solid var(--bd);padding-bottom:12px}
 .tbl-wrap{width:100%;overflow-x:auto}
 table{width:100%;border-collapse:collapse;text-align:left}
-th{font-family:'Outfit',sans-serif;font-size:.76rem;font-weight:700;color:var(--t2);border-bottom:1px solid rgba(255,255,255,.07);padding:7px}
-td{padding:7px;border-bottom:1px solid rgba(255,255,255,.03);font-size:.76rem;vertical-align:middle;color:var(--t1)}
-tr:hover{background:rgba(255,255,255,.01)}
+th{font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:700;color:var(--t2);border-bottom:1px solid var(--bd);padding:8px 6px}
+td{padding:8px 6px;border-bottom:1px solid var(--bd);font-size:.8rem;vertical-align:middle;color:var(--t1)}
 .tbl-empty{text-align:center;padding:24px!important;color:var(--t2)}
 .tballs{display:flex;gap:3px;flex-wrap:wrap}
-.tball{width:21px;height:21px;border-radius:50%;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.3);color:#ffffff;font-family:'Outfit',sans-serif;font-size:.62rem;font-weight:600;display:flex;align-items:center;justify-content:center}
+.tball{width:26px;height:26px;border-radius:50%;background:var(--greenT);border:1px solid var(--greenB);color:var(--t1);font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center}
 .pag{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:14px}
-.pag-info{font-size:.76rem;color:var(--t2)}
-.modal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:2000;display:flex;align-items:center;justify-content:center}
-.modal.hidden{display:none}
-.modal-box{width:90%;max-width:430px;border:1px solid rgba(255,255,255,.08);max-height:88vh;overflow-y:auto;animation:popin .3s cubic-bezier(.175,.885,.32,1.1) both}
-.modal-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:10px}
-.modal-close{background:transparent;border:none;color:var(--t2);font-size:1.5rem;cursor:pointer;line-height:.8}
-.modal-body{display:flex;flex-direction:column;gap:11px}
-.mrow{display:flex;justify-content:space-between;font-size:.8rem}
-@keyframes popin{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
-.gate{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(4,13,7,.97);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;transition:opacity .5s ease}
-.gate-box{width:100%;max-width:360px;background:rgba(8,20,12,.95);border:1px solid rgba(0,230,118,.2);border-radius:22px;padding:28px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.9)}
-.gate-logo{font-family:'Outfit',sans-serif;font-size:1.9rem;font-weight:800;margin-bottom:3px}
-.gate-logo span{background:linear-gradient(135deg,var(--green),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.gate-title{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;margin:14px 0 6px;color:var(--t1)}
-.gate-desc{font-size:.77rem;color:var(--t2);margin-bottom:16px;line-height:1.6}
-.gate-input{width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);border-radius:11px;padding:11px 15px;color:var(--t1);font-size:.88rem;outline:none;margin-bottom:9px;text-align:center;display:block;transition:var(--tf)}
-.gate-input:focus{border-color:var(--green)}
-.gate-btn{width:100%;background:linear-gradient(135deg,var(--green),var(--green2));border:none;border-radius:11px;padding:12px;color:#000;font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;transition:var(--ts);display:block}
-.gate-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,230,118,.35)}
-.pwa-banner{display:none;align-items:center;justify-content:space-between;background:rgba(0,230,118,.06);border:1px solid rgba(0,230,118,.2);border-radius:14px;padding:10px 14px;gap:10px;font-size:.78rem}
-.pwa-banner.on{display:flex}
-.pwa-banner p{color:var(--t2);flex:1}
-.pwa-banner strong{color:var(--green)}
-footer{border-top:1px solid rgba(255,255,255,.05);padding-top:14px;text-align:center;font-size:.7rem;color:var(--t2);display:flex;flex-direction:column;gap:4px;margin-top:auto}
+.pag-info{font-size:.8rem;color:var(--t2)}
+footer{border-top:1px solid var(--bd);padding-top:14px;text-align:center;font-size:.74rem;color:var(--t2);display:flex;flex-direction:column;gap:4px;margin-top:auto}
 footer .warn{color:var(--t3)}
-@media(max-width:480px){.num-grid{grid-template-columns:repeat(6,1fr);gap:3px}.ball{width:36px;height:36px;font-size:.9rem}}
+.link-btn{background:none;border:none;color:var(--green);font-size:.74rem;font-weight:600;cursor:pointer;text-decoration:underline;padding:4px}
+/* 모달·시트 */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:2000;display:flex;align-items:flex-end;justify-content:center}
+.modal.hidden{display:none}
+.modal-box{width:100%;max-width:480px;max-height:86vh;overflow-y:auto;border-radius:24px 24px 0 0;padding:18px 18px calc(22px + var(--sab));background:var(--bg2);animation:sheet .3s cubic-bezier(.175,.885,.32,1.05) both}
+@keyframes sheet{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.modal-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid var(--bd);padding-bottom:10px}
+.modal-close{background:var(--surf2);border:1px solid var(--bd);color:var(--t1);width:38px;height:38px;border-radius:12px;font-size:1.3rem;cursor:pointer;line-height:1}
+.modal-body{display:flex;flex-direction:column;gap:12px}
+.mrow{display:flex;justify-content:space-between;font-size:.86rem;color:var(--t2)}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt-grid.three{grid-template-columns:repeat(3,1fr)}
+.opt{min-height:50px;border-radius:14px;background:var(--surf2);border:1.5px solid var(--bd);color:var(--t1);font-size:.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:var(--tf)}
+.opt.on{border-color:var(--green);background:var(--greenT);color:var(--green)}
+.toast{position:fixed;left:50%;bottom:calc(84px + var(--sab));transform:translate(-50%,20px);background:var(--t1);color:var(--bg);font-size:.84rem;font-weight:600;padding:10px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:all .25s;z-index:3000;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.pwa-banner{display:none;align-items:center;gap:8px;background:var(--greenT);border:1px solid var(--greenB);border-radius:16px;padding:10px 12px;font-size:.82rem}
+.pwa-banner.on{display:flex}
+.pwa-banner p{color:var(--t2);flex:1}.pwa-banner strong{color:var(--green)}
+
+/* ── 첫 화면(웰컴) ── */
+.welcome{position:fixed;inset:0;z-index:9999;overflow-y:auto;overflow-x:hidden;background:
+  radial-gradient(120% 80% at 10% 0%,rgba(0,230,118,.32) 0%,transparent 55%),
+  radial-gradient(110% 70% at 100% 100%,rgba(255,196,0,.28) 0%,transparent 55%),
+  linear-gradient(160deg,#03140b 0%,#062615 45%,#0b1d10 100%);
+  color:#f2f7f4;transition:opacity .45s ease,transform .45s ease}
+.welcome.out{opacity:0;transform:scale(1.04);pointer-events:none}
+.w-inner{position:relative;z-index:2;width:100%;max-width:480px;min-height:100%;margin:0 auto;padding:calc(14px + var(--sat)) 20px calc(22px + var(--sab));display:flex;flex-direction:column}
+.w-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.w-ver{font-family:'Outfit',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.06em;color:#bff5d6;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:3px 9px;border-radius:20px}
+.w-langs{display:flex;gap:4px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);padding:3px;border-radius:14px}
+.w-lang{min-width:38px;height:32px;border:none;border-radius:10px;background:transparent;color:#cfe9db;font-size:.74rem;font-weight:700;cursor:pointer}
+.w-lang.on{background:#00e676;color:#04140b}
+.w-hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px 0 8px}
+.w-logo{width:112px;height:112px;filter:drop-shadow(0 10px 30px rgba(0,230,118,.45));animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-10px) rotate(4deg)}}
+.w-title{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-top:14px}
+.w-title .gr{background:linear-gradient(135deg,#00e676,#ffd54a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.w-free{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-family:'Outfit',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:.04em;color:#04140b;background:linear-gradient(135deg,#00e676,#b8ff5a);padding:8px 20px;border-radius:40px;box-shadow:0 0 0 6px rgba(0,230,118,.14),0 10px 30px rgba(0,230,118,.45);animation:glowp 2.4s ease-in-out infinite}
+@keyframes glowp{0%,100%{box-shadow:0 0 0 6px rgba(0,230,118,.14),0 10px 30px rgba(0,230,118,.4)}50%{box-shadow:0 0 0 12px rgba(0,230,118,.06),0 10px 40px rgba(0,230,118,.6)}}
+.w-sub{margin-top:14px;font-size:1rem;color:#d6efe2;max-width:340px;line-height:1.5}
+.w-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px}
+.w-chip{font-size:.76rem;font-weight:600;color:#e6fff0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:5px 10px;border-radius:20px}
+.w-feats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 6px}
+.w-feat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:18px;padding:14px 12px;text-align:left;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:rise .6s cubic-bezier(.2,.8,.2,1) both}
+.w-feat:nth-child(2){animation-delay:.08s}.w-feat:nth-child(3){animation-delay:.16s}.w-feat:nth-child(4){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.w-feat .ic{font-size:1.5rem;line-height:1}
+.w-feat strong{display:block;font-family:'Outfit',sans-serif;font-size:.95rem;margin-top:6px;color:#fff}
+.w-feat span{font-size:.74rem;color:#b9d8c8;line-height:1.4;display:block;margin-top:2px}
+.w-foot{position:sticky;bottom:0;margin:6px -20px calc(-22px - var(--sab));padding:14px 20px calc(16px + var(--sab));background:linear-gradient(180deg,rgba(6,24,14,0) 0%,rgba(6,24,14,.92) 30%,#07180e 100%)}
+.w-cta{width:100%;min-height:60px;border:none;border-radius:18px;background:linear-gradient(135deg,#00e676,#00b862);color:#04140b;font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:800;letter-spacing:.03em;cursor:pointer;box-shadow:0 12px 34px rgba(0,230,118,.45);position:relative;overflow:hidden}
+.w-cta::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 2.8s ease-in-out infinite}
+@keyframes shine{0%{left:-60%}60%,100%{left:130%}}
+.w-cta:active{transform:scale(.98)}
+.w-legal{margin-top:12px;font-size:.7rem;color:#9dbfae;text-align:center;line-height:1.5}
+.w-legal b{color:#e6fff0}
+.fb{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;color:#fff;background:radial-gradient(circle at 30% 30%,#36d987 0%,#0a5a30 85%);box-shadow:0 8px 24px rgba(0,0,0,.35);opacity:.4;z-index:1;animation:drift 9s ease-in-out infinite alternate}
+.fb.g{background:radial-gradient(circle at 30% 30%,#ffd54a 0%,#8a5a00 85%)}
+@keyframes drift{0%{transform:translate(0,0) rotate(0)}100%{transform:translate(18px,-26px) rotate(160deg)}}
+@media (max-width:420px){.tab{font-size:.6rem;letter-spacing:-.02em;padding:6px 0}.num-grid{grid-template-columns:repeat(6,1fr);gap:6px}.num-btn{font-size:.95rem;border-radius:11px}.ball{width:42px;height:42px;font-size:1rem}.w-title{font-size:2.1rem}}
+@media (max-width:350px){.ball{width:38px;height:38px}.gball{width:34px;height:34px;font-size:.88rem}.tab{font-size:.56rem}.hdr-logo h1{font-size:1rem}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="gate" id="gate">
-  <div class="gate-box">
-    <div class="gate-logo">Sorte<span>Max</span></div>
-    <div style="font-size:.78rem;color:#8caba0">Maximize sua sorte • Mega-Sena</div>
-    <div class="gate-title" id="gt-title">Acesso Gratuito 🎯</div>
-    <div class="gate-desc" id="gt-desc">Cadastre seu e-mail para acessar gratuitamente e receber novidades em primeira mão.</div>
-    <input class="gate-input" id="gEmail" type="email" placeholder="seu@email.com">
-    <div id="gErr" style="color:#ff1744;font-size:.73rem;margin-bottom:7px;display:none">E-mail inválido.</div>
-    <div style="background:rgba(0,230,118,.04);border:1px solid rgba(0,230,118,.12);border-radius:10px;padding:10px 12px;margin-bottom:10px;text-align:left">
-      <p style="font-size:.68rem;color:#8caba0;line-height:1.6;margin-bottom:8px">⚠️ <strong style="color:#e0f0e8">Aviso Legal:</strong> O SorteMax é uma ferramenta de entretenimento e auxílio estatístico. Não garante ganhos, não tem vínculo com a Caixa Econômica Federal e não constitui aconselhamento financeiro. Jogos de loteria envolvem risco de perda. Jogue com responsabilidade.</p>
-      <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer">
-        <input type="checkbox" id="gAgree" style="margin-top:2px;accent-color:#00e676;width:14px;height:14px;flex-shrink:0">
-        <span style="font-size:.68rem;color:#8caba0;line-height:1.5">Li e concordo com os termos. Entendo que sou <strong style="color:#e0f0e8">totalmente responsável</strong> pelas minhas decisões de jogo e que o SorteMax não se responsabiliza por quaisquer perdas.</span>
-      </label>
+<!-- ── 첫 화면 ── -->
+<div class="welcome hidden" id="welcome" role="dialog" aria-modal="true" aria-labelledby="w-title">
+  <div class="fb" style="width:46px;height:46px;top:11%;left:5%;font-size:1rem">07</div>
+  <div class="fb g" style="width:36px;height:36px;top:21%;right:6%;font-size:.85rem;animation-delay:-3s">23</div>
+  <div class="fb g" style="width:30px;height:30px;top:44%;left:-8px;font-size:.75rem;animation-delay:-5s">41</div>
+  <div class="fb" style="width:34px;height:34px;top:40%;right:-10px;font-size:.8rem;animation-delay:-6s">15</div>
+  <div class="w-inner">
+    <div class="w-top">
+      <span class="w-ver" id="wVer">v0</span>
+      <div class="w-langs" id="wLangs">
+        <button class="w-lang" data-lang="pt">PT</button><button class="w-lang" data-lang="es">ES</button><button class="w-lang" data-lang="en">EN</button><button class="w-lang" data-lang="ko">KO</button>
+      </div>
     </div>
-    <button class="gate-btn" id="gBtn" disabled style="opacity:.4;cursor:not-allowed">Acessar Agora →</button>
-    <div style="font-size:.67rem;color:#537064;margin-top:9px">🔒 Sem spam. Apenas novidades do SorteMax.</div>
+    <div class="w-hero">
+      <svg class="w-logo" viewBox="0 0 100 100" aria-hidden="true">
+        <defs><radialGradient id="wball" cx="35%" cy="30%" r="70%"><stop offset="0%" stop-color="#5cffa8"/><stop offset="55%" stop-color="#00b862"/><stop offset="100%" stop-color="#004d22"/></radialGradient></defs>
+        <circle cx="50" cy="50" r="46" fill="url(#wball)" stroke="#00e676" stroke-width="2"/>
+        <ellipse cx="34" cy="30" rx="13" ry="7" fill="#fff" opacity=".35" transform="rotate(-20,34,30)"/>
+        <text x="50" y="47" text-anchor="middle" font-family="Outfit,Arial Black,sans-serif" font-size="20" font-weight="900" fill="#04140b">Sorte</text>
+        <text x="50" y="68" text-anchor="middle" font-family="Outfit,Arial Black,sans-serif" font-size="16" font-weight="900" fill="#ffd54a">MAX</text>
+      </svg>
+      <h1 class="w-title" id="w-title">Sorte<span class="gr">Max</span><br>Mega</h1>
+      <div class="w-free"><span>🎁</span><span data-i="w-free">100% GRÁTIS</span></div>
+      <p class="w-sub" data-i="w-sub">Gere seus jogos da Mega-Sena em segundos. Abra e use — sem cadastro.</p>
+      <div class="w-chips">
+        <span class="w-chip" data-i="w-chip1">✓ Sem cadastro</span>
+        <span class="w-chip" data-i="w-chip2">✓ Sem login</span>
+        <span class="w-chip" data-i="w-chip3">✓ Sem e-mail</span>
+      </div>
+      <div class="w-feats">
+        <div class="w-feat"><div class="ic">🎲</div><strong data-i="wf1">Gerador</strong><span data-i="wf1s">Jogos aleatórios ou com estatística</span></div>
+        <div class="w-feat"><div class="ic">🧮</div><strong data-i="wf2">Fechamento</strong><span data-i="wf2s">Combinações com garantia mínima</span></div>
+        <div class="w-feat"><div class="ic">🎯</div><strong data-i="wf3">Simulador</strong><span data-i="wf3s">Confira seu jogo no último sorteio</span></div>
+        <div class="w-feat"><div class="ic">📊</div><strong data-i="wf4">Resultados</strong><span data-i="wf4s">Todos os concursos, atualizados</span></div>
+      </div>
+    </div>
+    <div class="w-foot">
+    <button class="w-cta" id="wStart"><span data-i="w-cta">Começar grátis →</span></button>
+    <p class="w-legal" data-i="w-legal">Ao continuar, você confirma ter 18+ anos e entende que o SorteMax é entretenimento e auxílio estatístico: não garante prêmios e não tem vínculo com a Caixa Econômica Federal. Jogue com responsabilidade.</p>
+    </div>
   </div>
 </div>
+
 <div class="glow-bg glow-green"></div>
 <div class="glow-bg glow-gold"></div>
 <div class="wrap">
   <header class="hdr">
     <div class="hdr-logo">
-      <svg width="36" height="36" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="hball" cx="35%" cy="30%" r="65%">
-            <stop offset="0%" stop-color="#00e676"/>
-            <stop offset="60%" stop-color="#00b862"/>
-            <stop offset="100%" stop-color="#005522"/>
-          </radialGradient>
-        </defs>
+      <svg width="40" height="40" viewBox="0 0 100 100" aria-hidden="true" style="flex-shrink:0">
+        <defs><radialGradient id="hball" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#00e676"/><stop offset="60%" stop-color="#00b862"/><stop offset="100%" stop-color="#005522"/></radialGradient></defs>
         <circle cx="50" cy="50" r="47" fill="url(#hball)" stroke="#00e676" stroke-width="2"/>
-        <ellipse cx="50" cy="50" rx="47" ry="12" fill="#003318" opacity="0.35"/>
-        <ellipse cx="35" cy="32" rx="12" ry="7" fill="white" opacity="0.28" transform="rotate(-20,35,32)"/>
-        <text x="50" y="45" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="22" font-weight="900" fill="#000">Sorte</text>
-        <text x="50" y="65" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="13" font-weight="900" fill="#ffd700">MAX</text>
+        <ellipse cx="35" cy="32" rx="12" ry="7" fill="white" opacity="0.3" transform="rotate(-20,35,32)"/>
+        <text x="50" y="47" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="21" font-weight="900" fill="#000">Sorte</text>
+        <text x="50" y="67" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="14" font-weight="900" fill="#ffd700">MAX</text>
       </svg>
-      <div><h1>Sorte<span>Max</span> Mega</h1><p id="hdr-sub">Maximize sua sorte</p></div>
+      <div style="min-width:0">
+        <h1>Sorte<span class="grad">Max</span> Mega</h1>
+        <div class="hdr-meta"><span class="ver" id="hdrVer">v0</span><span class="dot y" id="sDot"></span><span id="sTxt">...</span></div>
+      </div>
     </div>
     <div class="hdr-right">
-      <button class="lang-btn" id="langBtn">🇪🇸 ES</button>
-      <div class="sync-badge"><span class="dot y" id="sDot"></span><span id="sTxt">Sincronizando...</span></div>
+      <button class="icon-btn" id="themeBtn" aria-label="Tema">🌓</button>
+      <button class="icon-btn" id="langBtn" aria-label="Idioma">🌐 <span id="langCode">PT</span></button>
     </div>
   </header>
   <div class="pwa-banner" id="pwaBanner">
-    <p>📱 <strong id="pwa-txt">Instale o SorteMax</strong> na sua tela inicial!</p>
-    <button class="btn-s" id="pwaBtnInstall">Instalar</button>
-    <button class="btn-s" id="pwaBtnClose">✕</button>
+    <p>📱 <strong data-i="pwa-txt">Instale o SorteMax</strong> <span data-i="pwa-txt2">na sua tela inicial!</span></p>
+    <button class="btn-s" id="pwaBtnInstall" data-i="pwa-install">Instalar</button>
+    <button class="btn-s" id="pwaBtnClose" aria-label="Fechar">✕</button>
   </div>
   <div class="next-draw" id="nextDraw">
-    <div><div class="nd-lbl" id="nd-lbl">Próximo sorteio</div><div class="nd-val" id="ndVal">Calculando...</div></div>
+    <div><div class="nd-lbl" data-i="nd-lbl">Próximo sorteio</div><div class="nd-val" id="ndVal">...</div></div>
     <button class="nd-bell" id="bellBtn">🔔 <span id="bell-txt">Lembrar</span></button>
   </div>
   <div class="ad-banner">
     <a class="ad-slide on" id="ad0" href="https://www.youtube.com/@Duriup" target="_blank" rel="noopener">
-      <img src="icons/duriup-yt.png" alt="Duriup">
-      <div><strong>Duriup</strong><span>Cripto, economia e mercados financeiros</span></div>
+      <img src="icons/duriup-yt.png" alt="Duriup" width="46" height="46">
+      <div><strong>Duriup</strong><span data-i="ch-duriup">Cripto, ações e mercados financeiros</span></div>
     </a>
     <a class="ad-slide" id="ad1" href="https://www.youtube.com/@sognodargento" target="_blank" rel="noopener">
-      <img src="https://yt3.ggpht.com/YJG6FUluNtYyUiEe6lu3ceB7Sw0NM9IWGizTJePffpjFCkbCMTJQi2Dl6_mvqUMd-9IKGGfW7A=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="Sogno d'Argento">
-      <div><strong>Sogno d'Argento</strong><span>Música italiana vintage dos anos 60</span></div>
+      <img src="https://yt3.ggpht.com/YJG6FUluNtYyUiEe6lu3ceB7Sw0NM9IWGizTJePffpjFCkbCMTJQi2Dl6_mvqUMd-9IKGGfW7A=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="Sogno d'Argento" width="46" height="46">
+      <div><strong>Sogno d'Argento</strong><span data-i="ch-sogno">Música italiana vintage dos anos 60</span></div>
     </a>
     <a class="ad-slide" id="ad2" href="https://www.youtube.com/@CinemaBallad" target="_blank" rel="noopener">
-      <img src="https://yt3.ggpht.com/G4ih6JqDA6Q8c-nGfIcUmvvo4kAWDrUzW3YevYJsjJLsAL70CwLjmlTGEQyrt5MJuDVACFfu5wg=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="Cinema Ballad">
-      <div><strong>Cinema Ballad</strong><span>As melhores baladas do cinema e TV</span></div>
+      <img src="icons/cinema-ballad.jpg" alt="Cinema Ballad" width="46" height="46">
+      <div><strong>Cinema Ballad</strong><span data-i="ch-cine">Pop dos anos 70 e 80</span></div>
     </a>
     <div class="ad-dots"><div class="ad-dot on" id="d0"></div><div class="ad-dot" id="d1"></div><div class="ad-dot" id="d2"></div></div>
   </div>
   <div class="dash" id="dash">
-    <div class="card w-last">
-      <div class="w-hdr"><span class="badge-live" id="lbl-last">ÚLTIMO RESULTADO</span><span class="c-meta" id="cMeta">Concurso ----</span></div>
+    <div class="card">
+      <div class="w-hdr"><span class="badge-live" data-i="lbl-last">ÚLTIMO RESULTADO</span><span class="c-meta" id="cMeta">--</span></div>
       <div class="balls-row" id="cBalls">
         <div class="ball ph">-</div><div class="ball ph">-</div><div class="ball ph">-</div>
         <div class="ball ph">-</div><div class="ball ph">-</div><div class="ball ph">-</div>
       </div>
-      <div class="prize-row"><span class="prize-badge" id="cBadge">ACUMULOU!</span><span class="prize-amt" id="cAmt">R$ ---</span></div>
+      <div class="prize-row"><span class="prize-badge" id="cBadge">--</span><span class="prize-amt" id="cAmt">R$ ---</span></div>
       <div class="w-table">
         <div class="w-row"><span class="lbl">Sena (6):</span><strong class="val" id="wSena">--</strong></div>
         <div class="w-row"><span class="lbl">Quina (5):</span><strong class="val" id="wQuina">--</strong></div>
@@ -345,53 +430,53 @@ footer .warn{color:var(--t3)}
       </div>
     </div>
     <div class="card">
-      <h3 id="lbl-hist-sum">Resumo Histórico</h3>
-      <p class="sub" id="lbl-hist-sub">Análise consolidada de todos os concursos</p>
+      <h3 data-i="lbl-hist-sum">Resumo Histórico</h3>
+      <p class="sub" data-i="lbl-hist-sub">Análise de todos os concursos</p>
       <div class="mini-grid">
-        <div class="mini-card"><span class="mini-lbl" id="lbl-hot">Mais Sorteados</span><div class="mini-balls" id="hotMini"><span class="mball">--</span><span class="mball">--</span><span class="mball">--</span></div></div>
-        <div class="mini-card"><span class="mini-lbl" id="lbl-cold">Mais Atrasados</span><div class="mini-balls" id="coldMini"><span class="mball c">--</span><span class="mball c">--</span><span class="mball c">--</span></div></div>
-        <div class="mini-card"><span class="mini-lbl" id="lbl-beh">Comportamento</span><div class="mini-stats"><div><span>Par/Ímpar:</span><strong id="avgOE">--</strong></div><div><span>Soma ideal:</span><strong>150–220</strong></div></div></div>
+        <div class="mini-card"><span class="mini-lbl" data-i="lbl-hot">Mais Sorteados</span><div class="mini-balls" id="hotMini"><span class="mball">--</span><span class="mball">--</span><span class="mball">--</span></div></div>
+        <div class="mini-card"><span class="mini-lbl" data-i="lbl-cold">Menos Sorteados</span><div class="mini-balls" id="coldMini"><span class="mball c">--</span><span class="mball c">--</span><span class="mball c">--</span></div></div>
+        <div class="mini-card"><span class="mini-lbl" data-i="lbl-beh">Comportamento</span><div class="mini-stats"><div><span data-i="lbl-oe">Par/Ímpar:</span><strong id="avgOE">--</strong></div><div><span data-i="lbl-sum">Soma ideal:</span><strong>150–220</strong></div></div></div>
       </div>
     </div>
   </div>
   <nav class="tabs">
-    <button class="tab on" data-t="p-gen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/></svg><span data-i="tab-gen">Gerador</span></button>
-    <button class="tab" data-t="p-fech"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg><span data-i="tab-fech">Fechamento</span></button>
-    <button class="tab" data-t="p-sim"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span data-i="tab-sim">Simulador</span></button>
-    <button class="tab" data-t="p-hist"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i="tab-hist">Histórico</span></button>
-    <button class="tab" data-t="p-res"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span data-i="tab-res">Resultados</span></button>
-    <button class="tab" data-t="p-cont"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span data-i="tab-cont">Contato</span></button>
+    <button class="tab on" data-t="p-gen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/></svg><span data-i="tab-gen">Gerador</span></button>
+    <button class="tab" data-t="p-fech"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg><span data-i="tab-fech">Fechamento</span></button>
+    <button class="tab" data-t="p-sim"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span data-i="tab-sim">Simulador</span></button>
+    <button class="tab" data-t="p-hist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i="tab-hist">Meus Jogos</span></button>
+    <button class="tab" data-t="p-res"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span data-i="tab-res">Resultados</span></button>
+    <button class="tab" data-t="p-cont"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span data-i="tab-cont">Contato</span></button>
   </nav>
   <main class="tab-content">
     <div class="panel on" id="p-gen">
       <div class="layout">
         <div class="card ctrl-card">
-          <div class="title-row"><h3 data-i="gen-title">Opções de Geração</h3><button class="help-btn" data-help="h-gen">?</button></div>
-          <div class="help-box" id="h-gen"><strong data-i="help-gen-title">Como usar o Gerador?</strong><span data-i="help-gen-body">Escolha <b>Surpresinha</b> (aleatório), <b>Inteligente</b> (filtros estatísticos) ou <b>Sorte</b> (numerologia). Defina a quantidade e clique em <b>Gerar Jogos</b>.</span></div>
+          <div class="title-row"><h3 data-i="gen-title">Opções de Geração</h3><button class="help-btn" data-help="h-gen" aria-label="?">?</button></div>
+          <div class="help-box" id="h-gen"><strong data-i="help-gen-title">Como usar o Gerador?</strong><span data-i="help-gen-body">...</span></div>
           <p class="sub" data-i="gen-sub">Escolha seu método e filtros</p>
           <div class="modes">
             <label class="mode on"><input type="radio" name="gMode" value="random" checked><div class="mode-info"><strong data-i="mode-random">Surpresinha</strong><span data-i="mode-random-sub">100% aleatória</span></div></label>
             <label class="mode"><input type="radio" name="gMode" value="smart"><div class="mode-info"><strong data-i="mode-smart">Gerador Inteligente</strong><span data-i="mode-smart-sub">Aplica estatísticas</span></div></label>
             <label class="mode"><input type="radio" name="gMode" value="lucky"><div class="mode-info"><strong data-i="mode-lucky">Gerador da Sorte</strong><span data-i="mode-lucky-sub">Numerologia pessoal</span></div></label>
           </div>
-          <div class="sg" id="sgQty"><label data-i="qty-lbl">Quantidade de jogos:</label><div class="qty"><button class="qty-btn" id="qMinus">-</button><input type="number" id="qVal" value="1" min="1" max="10" readonly><button class="qty-btn" id="qPlus">+</button></div></div>
+          <div class="sg" id="sgQty"><label data-i="qty-lbl">Quantidade de jogos:</label><div class="qty"><button class="qty-btn" id="qMinus" aria-label="-">−</button><input type="number" id="qVal" value="1" min="1" max="10" readonly><button class="qty-btn" id="qPlus" aria-label="+">+</button></div></div>
           <div class="filt-box hidden" id="filtBox">
             <h4 data-i="filt-title">Filtros Avançados</h4>
-            <div class="chk"><label class="sw"><input type="checkbox" id="fOE" checked><span class="sl"></span></label><span class="chk-lbl" data-i="filt-oe">Equilíbrio Par/Ímpar</span></div>
-            <div class="chk"><label class="sw"><input type="checkbox" id="fCons" checked><span class="sl"></span></label><span class="chk-lbl" data-i="filt-cons">Sem Triplas Consecutivas</span></div>
-            <div class="chk"><label class="sw"><input type="checkbox" id="fSum" checked><span class="sl"></span></label><span class="chk-lbl" data-i="filt-sum">Soma Otimizada (150–220)</span></div>
-            <div class="chk"><label class="sw"><input type="checkbox" id="fFreq"><span class="sl"></span></label><span class="chk-lbl" data-i="filt-freq">Viés estatístico</span></div>
+            <label class="chk"><span class="sw"><input type="checkbox" id="fOE" checked><span class="sl"></span></span><span class="chk-lbl" data-i="filt-oe">Equilíbrio Par/Ímpar</span></label>
+            <label class="chk"><span class="sw"><input type="checkbox" id="fCons" checked><span class="sl"></span></span><span class="chk-lbl" data-i="filt-cons">Sem 3 números seguidos</span></label>
+            <label class="chk"><span class="sw"><input type="checkbox" id="fSum" checked><span class="sl"></span></span><span class="chk-lbl" data-i="filt-sum">Soma Otimizada (150–220)</span></label>
+            <label class="chk"><span class="sw"><input type="checkbox" id="fFreq"><span class="sl"></span></span><span class="chk-lbl" data-i="filt-freq">Viés estatístico</span></label>
           </div>
           <div class="luck-box hidden" id="luckBox">
             <h4 data-i="luck-title">Dados para Numerologia</h4>
-            <div class="inp-g"><label data-i="luck-name">Seu Nome:</label><input type="text" id="lName" placeholder="Ex: João Silva"></div>
-            <div class="inp-g"><label data-i="luck-birth">Data de Nascimento (DD/MM/AAAA):</label><input type="text" id="lBirth" placeholder="DD/MM/AAAA" maxlength="10" inputmode="numeric"></div>
+            <div class="inp-g"><label data-i="luck-name" for="lName">Seu Nome:</label><input type="text" id="lName" data-ip="ph-name" placeholder="Ex: João Silva" autocomplete="name"></div>
+            <div class="inp-g"><label data-i="luck-birth" for="lBirth">Data de Nascimento:</label><input type="text" id="lBirth" data-ip="ph-date" placeholder="DD/MM/AAAA" maxlength="10" inputmode="numeric"></div>
           </div>
           <button class="btn-p" id="btnGen"><span data-i="btn-gen">Gerar Jogos</span></button>
         </div>
         <div class="card out-card">
           <div class="out-hdr"><h3 data-i="gen-out-title">Jogos Gerados</h3><div class="out-acts hidden" id="genActs"><button class="btn-s" id="btnCopyGen" data-i="btn-copy">Copiar</button><button class="btn-s" id="btnDlGen" data-i="btn-export">Exportar</button></div></div>
-          <div class="empty" id="genEmpty"><div class="ring-wrap"><div class="ring"></div><div class="ph-balls"><span class="ph-ball">?</span><span class="ph-ball">?</span><span class="ph-ball">?</span></div></div><p data-i="gen-empty-txt">Escolha as opções e clique em <strong>Gerar Jogos</strong>!</p></div>
+          <div class="empty" id="genEmpty"><div class="ring-wrap"><div class="ring"></div><div class="ph-balls"><span class="ph-ball">?</span><span class="ph-ball">?</span><span class="ph-ball">?</span></div></div><p data-i="gen-empty-txt">Escolha as opções e toque em Gerar Jogos!</p></div>
           <div class="game-list" id="genList"></div>
         </div>
       </div>
@@ -399,24 +484,24 @@ footer .warn{color:var(--t3)}
     <div class="panel" id="p-fech">
       <div class="layout">
         <div class="card ctrl-card">
-          <div class="title-row"><h3 data-i="fech-title">Fechamento Matemático</h3><button class="help-btn" data-help="h-fech">?</button></div>
-          <div class="help-box" id="h-fech"><strong data-i="help-fech-title">O que é Fechamento?</strong><span data-i="help-fech-body">Estratégia que garante prêmios mínimos (Quadra ou Quina) se os números sorteados estiverem no seu grupo. Selecione o plano, marque as dezenas e clique em <b>Processar</b>.</span></div>
+          <div class="title-row"><h3 data-i="fech-title">Fechamento Matemático</h3><button class="help-btn" data-help="h-fech" aria-label="?">?</button></div>
+          <div class="help-box" id="h-fech"><strong data-i="help-fech-title">O que é Fechamento?</strong><span data-i="help-fech-body">...</span></div>
           <p class="sub" data-i="fech-sub">Garanta prêmios mínimos com matemática</p>
-          <div class="sg"><label data-i="fech-plan">Plano de garantia:</label>
+          <div class="sg"><label data-i="fech-plan" for="wForm">Plano de garantia:</label>
             <select class="sel" id="wForm">
-              <optgroup label="── Quadra Garantida ──">
-                <option value="q8" data-min="8">8 Números → Quadra Garantida — 6 Jogos</option>
-                <option value="q10a" data-min="10">10 Números → Quadra Garantida — 20 Jogos</option>
-                <option value="q12" data-min="12">12 Números → Quadra Garantida — 42 Jogos</option>
+              <optgroup data-il="og-quadra" label="Quadra">
+                <option value="q8" data-min="8" data-i="opt-q8">8 números → Quadra — 6 jogos</option>
+                <option value="q10a" data-min="10" data-i="opt-q10">10 números → Quadra — 20 jogos</option>
+                <option value="q12" data-min="12" data-i="opt-q12">12 números → Quadra — 42 jogos</option>
               </optgroup>
-              <optgroup label="── Quina Garantida ──">
-                <option value="n9" data-min="9">9 Números → Quina Garantida — 12 Jogos</option>
-                <option value="n10" data-min="10">10 Números → Quina Garantida — 20 Jogos</option>
+              <optgroup data-il="og-quina" label="Quina">
+                <option value="n9" data-min="9" data-i="opt-n9">9 números → Quina — 12 jogos</option>
+                <option value="n10" data-min="10" data-i="opt-n10">10 números → Quina — 20 jogos</option>
               </optgroup>
             </select>
           </div>
           <div class="grid-wrap">
-            <div class="grid-hdr"><span data-i="fech-sel">Selecionadas: <strong id="wCnt">0</strong></span><span class="grid-tgt" id="wTgt">Selecione 8 números</span></div>
+            <div class="grid-hdr"><span><span data-i="sel-lbl">Selecionados:</span> <strong id="wCnt">0</strong></span><span class="grid-tgt" id="wTgt">--</span></div>
             <div class="num-grid" id="wGrid"></div>
             <div class="g-acts"><button class="btn-s" id="wReset" data-i="btn-clear">Limpar</button><button class="btn-s" id="wAuto" data-i="btn-random">Aleatório</button></div>
           </div>
@@ -424,7 +509,7 @@ footer .warn{color:var(--t3)}
         </div>
         <div class="card out-card">
           <div class="out-hdr"><h3 data-i="fech-out-title">Combinações</h3><div class="out-acts hidden" id="wActs"><button class="btn-s" id="btnCopyW" data-i="btn-copy">Copiar</button><button class="btn-s" id="btnDlW" data-i="btn-export">Exportar</button></div></div>
-          <div class="empty" id="wEmpty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg><p data-i="fech-empty-txt">Selecione as dezenas e processe.</p></div>
+          <div class="empty" id="wEmpty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.35"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg><p data-i="fech-empty-txt">Selecione as dezenas e processe.</p></div>
           <div class="wheel-res hidden" id="wRes"><div class="info-row"><span class="ibadge" id="wGames">--</span><span class="ibadge" id="wPrice">R$ --</span></div><div class="game-list" id="wList"></div></div>
         </div>
       </div>
@@ -432,11 +517,11 @@ footer .warn{color:var(--t3)}
     <div class="panel" id="p-sim">
       <div class="layout">
         <div class="card ctrl-card">
-          <div class="title-row"><h3 data-i="sim-title">Simulador</h3><button class="help-btn" data-help="h-sim">?</button></div>
-          <div class="help-box" id="h-sim"><strong data-i="help-sim-title">Como usar o Simulador?</strong><span data-i="help-sim-body">Marque 6 números no volante e clique em <b>Conferir</b>. O app compara com o último resultado — acertos ficam em verde.</span></div>
+          <div class="title-row"><h3 data-i="sim-title">Simulador</h3><button class="help-btn" data-help="h-sim" aria-label="?">?</button></div>
+          <div class="help-box" id="h-sim"><strong data-i="help-sim-title">Como usar o Simulador?</strong><span data-i="help-sim-body">...</span></div>
           <p class="sub" data-i="sim-sub">Compare seu jogo com o último resultado</p>
           <div class="grid-wrap">
-            <div class="grid-hdr"><span data-i="sim-sel">Selecionados: <strong id="sCnt">0</strong></span><span class="grid-tgt" id="sTgt">Marque 6 números</span></div>
+            <div class="grid-hdr"><span><span data-i="sel-lbl">Selecionados:</span> <strong id="sCnt">0</strong></span><span class="grid-tgt" id="sTgt">--</span></div>
             <div class="num-grid" id="sGrid"></div>
             <div class="g-acts"><button class="btn-s" id="sReset" data-i="btn-clear">Limpar</button><button class="btn-s" id="sAuto" data-i="btn-random">Aleatório</button></div>
           </div>
@@ -444,7 +529,7 @@ footer .warn{color:var(--t3)}
         </div>
         <div class="card out-card">
           <div class="out-hdr"><h3 data-i="sim-out-title">Resultado da Conferência</h3></div>
-          <div class="empty" id="simEmpty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><p data-i="sim-empty-txt">Marque 6 números e clique em <strong>Conferir</strong>.</p></div>
+          <div class="empty" id="simEmpty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.35"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><p data-i="sim-empty-txt">Marque 6 números e toque em Conferir.</p></div>
           <div id="simRes"></div>
         </div>
       </div>
@@ -452,15 +537,15 @@ footer .warn{color:var(--t3)}
     <div class="panel" id="p-hist">
       <div class="layout">
         <div class="card ctrl-card">
-          <div class="title-row"><h3 data-i="myhist-title">Registrar Jogo</h3><button class="help-btn" data-help="h-hist">?</button></div>
-          <div class="help-box" id="h-hist"><strong data-i="help-hist-title">Como usar?</strong><span data-i="help-hist-body">Marque os números que você jogou e clique em <b>+ Adicionar</b>. O app compara com o último resultado automaticamente.</span></div>
+          <div class="title-row"><h3 data-i="myhist-title">Registrar Jogo</h3><button class="help-btn" data-help="h-hist" aria-label="?">?</button></div>
+          <div class="help-box" id="h-hist"><strong data-i="help-hist-title">Como usar?</strong><span data-i="help-hist-body">...</span></div>
           <p class="sub" data-i="myhist-sub">Marque os números que você jogou</p>
           <div class="grid-wrap">
-            <div class="grid-hdr"><span data-i="hist-sel">Selecionados: <strong id="hCnt">0</strong></span><span class="grid-tgt" id="hTgt">Marque 6 números</span></div>
+            <div class="grid-hdr"><span><span data-i="sel-lbl">Selecionados:</span> <strong id="hCnt">0</strong></span><span class="grid-tgt" id="hTgt">--</span></div>
             <div class="num-grid" id="hGrid"></div>
             <div class="g-acts"><button class="btn-s" id="hReset" data-i="btn-clear">Limpar</button><button class="btn-s" id="hAuto" data-i="btn-random">Aleatório</button></div>
           </div>
-          <div class="sg"><label data-i="hist-conc-lbl">Concurso (opcional):</label><input type="number" class="fi" id="hConc" placeholder="Ex: 3013" style="padding:8px 12px;border-radius:10px"></div>
+          <div class="sg"><label data-i="hist-conc-lbl" for="hConc">Concurso (opcional):</label><input type="number" class="fi" id="hConc" data-ip="ph-conc" placeholder="Ex: 3013" inputmode="numeric"></div>
           <button class="btn-p" id="btnAddH" disabled><span data-i="btn-add-hist">+ Adicionar Jogo</span></button>
         </div>
         <div class="card out-card">
@@ -470,49 +555,51 @@ footer .warn{color:var(--t3)}
       </div>
     </div>
     <div class="panel" id="p-res">
-      <div class="card fw-card">
-        <div class="tbl-hdr"><div><h3 data-i="res-title">Histórico de Concursos</h3><p class="sub" data-i="res-sub">Consulte qualquer sorteio</p></div><input class="srch" id="srch" placeholder="Pesquisar concurso..."></div>
-        <div class="tbl-wrap"><table><thead><tr><th data-i="th-conc">Concurso</th><th data-i="th-nums">Dezenas</th><th data-i="th-act">Ações</th></tr></thead><tbody id="tBody"><tr><td colspan="3" class="tbl-empty">Carregando...</td></tr></tbody></table></div>
+      <div class="card">
+        <div class="tbl-hdr"><div><h3 data-i="res-title">Histórico de Concursos</h3><p class="sub" style="margin-bottom:0" data-i="res-sub">Consulte qualquer sorteio</p></div><input class="srch" id="srch" type="search" inputmode="numeric" data-ip="ph-search" placeholder="Pesquisar concurso..."></div>
+        <div class="tbl-wrap"><table><thead><tr><th data-i="th-conc">Concurso</th><th data-i="th-nums">Dezenas</th><th></th></tr></thead><tbody id="tBody"><tr><td colspan="3" class="tbl-empty">...</td></tr></tbody></table></div>
         <div class="pag"><button class="btn-s" id="btnPrev" disabled data-i="btn-prev">Anterior</button><span class="pag-info" id="pagInfo">--</span><button class="btn-s" id="btnNext" disabled data-i="btn-next">Próximo</button></div>
       </div>
     </div>
     <div class="panel" id="p-cont">
-      <div class="card fw-card">
+      <div class="card">
         <h3 data-i="cont-title">Fale Conosco</h3>
         <p class="sub" data-i="cont-sub">Sugestões, bugs ou parcerias</p>
-        <div style="display:flex;flex-direction:column;gap:14px;margin-top:8px">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="mail-box">
+            <div><small data-i="cont-mail-lbl">E-mail oficial</small><a href="mailto:contato@duriup.com.br" id="mailLink">contato@duriup.com.br</a></div>
+            <button class="pix-copy" id="btnCopyMail" data-i="btn-copy">Copiar</button>
+          </div>
           <div class="contact-form">
-            <div class="fg"><label data-i="cont-tipo">Tipo</label><select class="fi" id="cTipo"><option value="sugestao">💡 Sugestão</option><option value="bug">🐛 Bug</option><option value="parceria">🤝 Parceria</option><option value="outro">💬 Outro</option></select></div>
-            <div class="fg"><label data-i="cont-nome">Nome</label><input type="text" class="fi" id="cNome" placeholder="Seu nome"></div>
-            <div class="fg"><label>E-mail</label><input type="email" class="fi" id="cEmail" placeholder="seu@email.com"></div>
-            <div class="fg"><label data-i="cont-msg">Mensagem</label><textarea class="fi" id="cMsg" placeholder="Conte tudo! Cada feedback nos ajuda..."></textarea></div>
-            <button class="btn-p" id="btnSend"><span data-i="btn-send">Enviar Mensagem</span></button>
-            <div id="cStatus" style="text-align:center;font-size:.78rem;margin-top:4px;display:none"></div>
+            <div class="fg"><label data-i="cont-tipo" for="cTipo">Tipo</label><select class="fi" id="cTipo"><option value="sugestao" data-i="ct-sug">💡 Sugestão</option><option value="bug" data-i="ct-bug">🐛 Bug</option><option value="parceria" data-i="ct-par">🤝 Parceria</option><option value="outro" data-i="ct-out">💬 Outro</option></select></div>
+            <div class="fg"><label data-i="cont-nome" for="cNome">Nome</label><input type="text" class="fi" id="cNome" data-ip="ph-yourname" placeholder="Seu nome" autocomplete="name"></div>
+            <div class="fg"><label data-i="cont-msg" for="cMsg">Mensagem</label><textarea class="fi" id="cMsg" data-ip="ph-msg" placeholder="..."></textarea></div>
+            <button class="btn-p" id="btnSend"><span data-i="btn-send">Enviar por e-mail</span></button>
+            <p style="font-size:.74rem;color:var(--t3);text-align:center" data-i="cont-note">Abre o seu app de e-mail com a mensagem pronta para contato@duriup.com.br</p>
           </div>
           <div class="don-card">
             <div style="font-size:1.5rem">☕</div>
             <h4 data-i="don-title">Gostou do SorteMax?</h4>
             <p data-i="don-desc">100% gratuito e feito com carinho. Se trouxe sorte extra, considere pagar um cafezinho!</p>
-            <div class="don-btn" style="cursor:default;justify-content:center">☕ <span data-i="don-btn">Pagar um cafezinho</span></div>
-            <div class="pix-row"><div><div style="font-size:.68rem;color:var(--t3);margin-bottom:2px">Chave PIX</div><div class="pix-key">ettikalaser@gmail.com</div></div><button class="pix-copy" id="btnPix" data-i="btn-pix">Copiar PIX</button></div>
+            <div class="pix-row"><div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px" data-i="pix-lbl">Chave PIX</div><div class="pix-key">ettikalaser@gmail.com</div></div><button class="pix-copy" id="btnPix" data-i="btn-pix">Copiar PIX</button></div>
           </div>
           <div>
-            <div style="font-size:.77rem;font-weight:600;color:var(--t2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em" data-i="channels-title">Nossos Canais</div>
+            <div class="sec-lbl" data-i="channels-title">Nossos Canais</div>
             <div class="social-list">
               <a class="slink" href="https://www.youtube.com/@Duriup" target="_blank" rel="noopener">
-                <img src="icons/duriup-yt.png" alt="Duriup">
-                <div><strong>Duriup</strong><span>Cripto e mercados financeiros</span></div>
+                <img src="icons/duriup-yt.png" alt="Duriup" width="40" height="40">
+                <div><strong>Duriup</strong><span data-i="ch-duriup">Cripto, ações e mercados financeiros</span></div>
               </a>
               <a class="slink" href="https://www.youtube.com/@sognodargento" target="_blank" rel="noopener">
-                <img src="https://yt3.ggpht.com/YJG6FUluNtYyUiEe6lu3ceB7Sw0NM9IWGizTJePffpjFCkbCMTJQi2Dl6_mvqUMd-9IKGGfW7A=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="Sogno d'Argento">
-                <div><strong>Sogno d'Argento</strong><span>Música italiana vintage</span></div>
+                <img src="https://yt3.ggpht.com/YJG6FUluNtYyUiEe6lu3ceB7Sw0NM9IWGizTJePffpjFCkbCMTJQi2Dl6_mvqUMd-9IKGGfW7A=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="Sogno d'Argento" width="40" height="40">
+                <div><strong>Sogno d'Argento</strong><span data-i="ch-sogno">Música italiana vintage dos anos 60</span></div>
               </a>
               <a class="slink" href="https://www.youtube.com/@CinemaBallad" target="_blank" rel="noopener">
-                <img src="https://yt3.ggpht.com/G4ih6JqDA6Q8c-nGfIcUmvvo4kAWDrUzW3YevYJsjJLsAL70CwLjmlTGEQyrt5MJuDVACFfu5wg=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="Cinema Ballad">
-                <div><strong>Cinema Ballad</strong><span>Baladas do cinema e TV</span></div>
+                <img src="icons/cinema-ballad.jpg" alt="Cinema Ballad" width="40" height="40">
+                <div><strong>Cinema Ballad</strong><span data-i="ch-cine">Pop dos anos 70 e 80</span></div>
               </a>
               <a class="slink" href="mailto:contato@duriup.com.br">
-                <div style="width:36px;height:36px;border-radius:10px;background:rgba(0,230,118,.12);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">✉️</div>
+                <div class="mail-ic">✉️</div>
                 <div><strong>E-mail</strong><span>contato@duriup.com.br</span></div>
               </a>
             </div>
@@ -521,62 +608,246 @@ footer .warn{color:var(--t3)}
       </div>
     </div>
   </main>
-  <footer><p>&copy; 2026 SorteMax Mega — Auxílio estatístico e entretenimento.</p><p class="warn" data-i="footer-warn">Sem vínculo com a Caixa Econômica Federal. Aposte com responsabilidade.</p></footer>
+  <footer>
+    <p>&copy; 2026 SorteMax Mega · <span id="ftVer">v0</span></p>
+    <p class="warn" data-i="footer-warn">Sem vínculo com a Caixa Econômica Federal. Aposte com responsabilidade.</p>
+    <p><button class="link-btn" id="btnShowWelcome" data-i="ft-welcome">Ver tela inicial</button></p>
+  </footer>
 </div>
+
+<!-- 결과 상세 -->
 <div class="modal hidden" id="modal">
-  <div class="card modal-box">
-    <div class="modal-hdr"><h3 id="mTitle">Detalhes</h3><button class="modal-close" id="mClose">&times;</button></div>
+  <div class="modal-box">
+    <div class="modal-hdr"><h3 id="mTitle">--</h3><button class="modal-close" id="mClose" aria-label="Fechar">&times;</button></div>
     <div class="modal-body" id="mBody"></div>
   </div>
 </div>
+<!-- 설정(언어·테마) -->
+<div class="modal hidden" id="setSheet">
+  <div class="modal-box">
+    <div class="modal-hdr"><h3 data-i="set-title">Configurações</h3><button class="modal-close" id="setClose" aria-label="Fechar">&times;</button></div>
+    <div class="modal-body">
+      <div class="sec-lbl" data-i="set-lang">Idioma</div>
+      <div class="opt-grid" id="langOpts">
+        <button class="opt" data-lang="pt">🇧🇷 Português</button>
+        <button class="opt" data-lang="es">🇪🇸 Español</button>
+        <button class="opt" data-lang="en">🇺🇸 English</button>
+        <button class="opt" data-lang="ko">🇰🇷 한국어</button>
+      </div>
+      <div class="sec-lbl" style="margin-top:6px" data-i="set-theme">Tema</div>
+      <div class="opt-grid three" id="themeOpts">
+        <button class="opt" data-theme="auto">🌓 <span data-i="th-auto">Sistema</span></button>
+        <button class="opt" data-theme="light">☀️ <span data-i="th-light">Claro</span></button>
+        <button class="opt" data-theme="dark">🌙 <span data-i="th-dark">Escuro</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
 <script>
 'use strict';
-var FORM_URL='https://formspree.io/f/xnjrkrkp';
+var APP_VERSION='2.0.0';
+var CONTACT_EMAIL='contato@duriup.com.br';
 var FALLBACK={"3013":[3,16,24,33,47,55],"3012":[8,19,27,35,42,58],"3011":[5,11,22,30,44,53],"3010":[2,14,26,38,46,59],"3009":[7,18,23,31,49,56],"3008":[1,12,25,37,43,52],"3007":[9,15,28,34,48,57],"3006":[4,13,21,36,45,60]};
 var pad=function(n){return n<10?'0'+n:String(n);};
 var brl=function(v){return isNaN(v)||v===null?'R$ 0,00':'R$ '+Number(v).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1.');};
 var el=function(id){return document.getElementById(id);};
-var ST={draws:{},latest:{},hotNums:[],coldNums:[],wSel:[],sSel:[],hSel:[],page:{cur:1,per:10,tot:1}};
+var ST={draws:{},latest:{},hotNums:[],coldNums:[],wSel:[],sSel:[],hSel:[],page:{cur:1,per:10,tot:1},sync:'sync'};
 var genGames=[],wheelGames=[],deferredPrompt=null;
+
+// ── 언어 ───────────────────────────────────────────────
+var LOCALE={pt:'pt-BR',es:'es-ES',en:'en-US',ko:'ko-KR'};
 var LANG={
-  pt:{'tab-gen':'Gerador','tab-fech':'Fechamento','tab-sim':'Simulador','tab-hist':'Histórico','tab-res':'Resultados','tab-cont':'Contato','gen-title':'Opções de Geração','gen-sub':'Escolha seu método e filtros','help-gen-title':'Como usar o Gerador?','help-gen-body':'Escolha Surpresinha (aleatório), Inteligente (filtros estatísticos) ou Sorte (numerologia). Defina a quantidade e clique em Gerar Jogos.','mode-random':'Surpresinha','mode-random-sub':'100% aleatória','mode-smart':'Gerador Inteligente','mode-smart-sub':'Aplica estatísticas','mode-lucky':'Gerador da Sorte','mode-lucky-sub':'Numerologia pessoal','qty-lbl':'Quantidade de jogos:','filt-title':'Filtros Avançados','filt-oe':'Equilíbrio Par/Ímpar','filt-cons':'Sem Triplas Consecutivas','filt-sum':'Soma Otimizada (150–220)','filt-freq':'Viés estatístico','luck-title':'Dados para Numerologia','luck-name':'Seu Nome:','luck-birth':'Data de Nascimento (DD/MM/AAAA):','btn-gen':'Gerar Jogos','gen-out-title':'Jogos Gerados','gen-empty-txt':'Escolha as opções e clique em Gerar Jogos!','fech-title':'Fechamento Matemático','fech-sub':'Garanta prêmios mínimos com matemática','fech-plan':'Plano de garantia:','help-fech-title':'O que é Fechamento?','help-fech-body':'Estratégia matemática que aumenta as chances de prêmios mínimos (Quadra ou Quina) se os números sorteados estiverem no seu grupo. Selecione o plano, marque as dezenas e clique em Processar.','fech-sel':'Selecionadas:','btn-fech':'Processar Fechamento','fech-out-title':'Combinações','fech-empty-txt':'Selecione as dezenas e processe.','sim-title':'Simulador','sim-sub':'Compare seu jogo com o último resultado','sim-sel':'Selecionados:','help-sim-title':'Como usar o Simulador?','help-sim-body':'Marque 6 números no volante e clique em Conferir. O app compara com o último resultado — acertos ficam em verde.','btn-sim':'Conferir Agora','sim-out-title':'Resultado da Conferência','sim-empty-txt':'Marque 6 números e clique em Conferir.','myhist-title':'Registrar Jogo','myhist-sub':'Marque os números que você jogou','hist-sel':'Selecionados:','help-hist-title':'Como usar?','help-hist-body':'Marque os números que você jogou e clique em + Adicionar. O app compara com o último resultado automaticamente.','hist-conc-lbl':'Concurso (opcional):','btn-add-hist':'+ Adicionar Jogo','mygames-title':'Meus Jogos','btn-clear-all':'Limpar Tudo','res-title':'Histórico de Concursos','res-sub':'Consulte qualquer sorteio','th-conc':'Concurso','th-nums':'Dezenas','th-act':'Ações','btn-prev':'Anterior','btn-next':'Próximo','cont-title':'Fale Conosco','cont-sub':'Sugestões, bugs ou parcerias','cont-tipo':'Tipo','cont-nome':'Nome','cont-msg':'Mensagem','btn-send':'Enviar Mensagem','don-title':'Gostou do SorteMax?','don-desc':'100% gratuito e feito com carinho. Se trouxe sorte extra, considere pagar um cafezinho!','don-btn':'Pagar um cafezinho','btn-pix':'Copiar PIX','channels-title':'Nossos Canais','btn-copy':'Copiar','btn-export':'Exportar','btn-clear':'Limpar','btn-random':'Aleatório','nd-lbl':'Próximo sorteio','bell-txt':'Lembrar','lbl-last':'ÚLTIMO RESULTADO','lbl-hist-sum':'Resumo Histórico','lbl-hist-sub':'Análise consolidada de todos os concursos','lbl-hot':'Mais Sorteados','lbl-cold':'Mais Atrasados','lbl-beh':'Comportamento','footer-warn':'Sem vínculo com a Caixa Econômica Federal. Aposte com responsabilidade.','hdr-sub':'Maximize sua sorte','pwa-txt':'Instale o SorteMax','lang-switch':'🇪🇸 ES'},
-  es:{'tab-gen':'Generador','tab-fech':'Combinación','tab-sim':'Simulador','tab-hist':'Historial','tab-res':'Resultados','tab-cont':'Contacto','gen-title':'Opciones de Generación','gen-sub':'Elige tu método y filtros','help-gen-title':'¿Cómo usar el Generador?','help-gen-body':'Elige Sorpresa (aleatorio), Inteligente (filtros estadísticos) o Suerte (numerología). Define la cantidad y haz clic en Generar.','mode-random':'Sorpresa','mode-random-sub':'100% aleatoria','mode-smart':'Generador Inteligente','mode-smart-sub':'Aplica estadísticas','mode-lucky':'Generador de Suerte','mode-lucky-sub':'Numerología personal','qty-lbl':'Cantidad de juegos:','filt-title':'Filtros Avanzados','filt-oe':'Equilibrio Par/Impar','filt-cons':'Sin Triples Consecutivos','filt-sum':'Suma Optimizada (150–220)','filt-freq':'Sesgo estadístico','luck-title':'Datos para Numerología','luck-name':'Tu Nombre:','luck-birth':'Fecha de Nacimiento (DD/MM/AAAA):','btn-gen':'Generar Juegos','gen-out-title':'Juegos Generados','gen-empty-txt':'Elige las opciones y haz clic en Generar!','fech-title':'Combinación Matemática','fech-sub':'Garantiza premios mínimos con matemáticas','fech-plan':'Plan de garantía:','help-fech-title':'¿Qué es Combinación?','help-fech-body':'Estrategia matemática que aumenta las probabilidades de premios mínimos (Cuadra o Quina) si los números sorteados están en tu grupo. Selecciona el plan, marca los números y haz clic en Procesar.','fech-sel':'Seleccionados:','btn-fech':'Procesar Combinación','fech-out-title':'Combinaciones','fech-empty-txt':'Selecciona los números y procesa.','sim-title':'Simulador','sim-sub':'Compara tu juego con el último resultado','sim-sel':'Seleccionados:','help-sim-title':'¿Cómo usar el Simulador?','help-sim-body':'Marca 6 números y haz clic en Verificar. La app compara con el último resultado — aciertos en verde.','btn-sim':'Verificar Ahora','sim-out-title':'Resultado de Verificación','sim-empty-txt':'Marca 6 números y haz clic en Verificar.','myhist-title':'Registrar Juego','myhist-sub':'Marca los números que jugaste','hist-sel':'Seleccionados:','help-hist-title':'¿Cómo usar?','help-hist-body':'Marca los números que jugaste y haz clic en + Agregar. La app compara con el último resultado automáticamente.','hist-conc-lbl':'Concurso (opcional):','btn-add-hist':'+ Agregar Juego','mygames-title':'Mis Juegos','btn-clear-all':'Borrar Todo','res-title':'Historial de Concursos','res-sub':'Consulta cualquier sorteo','th-conc':'Concurso','th-nums':'Números','th-act':'Acciones','btn-prev':'Anterior','btn-next':'Siguiente','cont-title':'Contáctenos','cont-sub':'Sugerencias, errores o alianzas','cont-tipo':'Tipo','cont-nome':'Nombre','cont-msg':'Mensaje','btn-send':'Enviar Mensaje','don-title':'¿Te gustó SorteMax?','don-desc':'100% gratuito y hecho con cariño. Si trajo suerte extra, ¡considera pagar un cafecito!','don-btn':'Pagar un cafecito','btn-pix':'Copiar PIX','channels-title':'Nuestros Canales','btn-copy':'Copiar','btn-export':'Exportar','btn-clear':'Limpiar','btn-random':'Aleatorio','nd-lbl':'Próximo sorteo','bell-txt':'Recordar','lbl-last':'ÚLTIMO RESULTADO','lbl-hist-sum':'Resumen Histórico','lbl-hist-sub':'Análisis consolidado de todos los concursos','lbl-hot':'Más Sorteados','lbl-cold':'Más Atrasados','lbl-beh':'Comportamiento','footer-warn':'Sin vinculación con la Caixa Econômica Federal. Apueste con responsabilidad.','hdr-sub':'Maximiza tu suerte','pwa-txt':'Instala SorteMax','lang-switch':'🇧🇷 PT'}
+pt:{
+'w-free':'100% GRÁTIS','w-sub':'Gere seus jogos da Mega-Sena em segundos. Abra e use — sem cadastro.','w-chip1':'✓ Sem cadastro','w-chip2':'✓ Sem login','w-chip3':'✓ Sem e-mail',
+'wf1':'Gerador','wf1s':'Jogos aleatórios ou com estatística','wf2':'Fechamento','wf2s':'Combinações com garantia mínima','wf3':'Simulador','wf3s':'Confira seu jogo no último sorteio','wf4':'Resultados','wf4s':'Todos os concursos, atualizados',
+'w-cta':'Começar grátis →','w-legal':'Ao continuar, você confirma ter 18+ anos e entende que o SorteMax é entretenimento e auxílio estatístico: não garante prêmios e não tem vínculo com a Caixa Econômica Federal. Jogue com responsabilidade.',
+'tab-gen':'Gerador','tab-fech':'Fechamento','tab-sim':'Simulador','tab-hist':'Meus Jogos','tab-res':'Resultados','tab-cont':'Contato',
+'gen-title':'Opções de Geração','gen-sub':'Escolha seu método e filtros','help-gen-title':'Como usar o Gerador?','help-gen-body':'Escolha Surpresinha (aleatório), Inteligente (filtros estatísticos) ou Sorte (numerologia). Defina a quantidade e toque em Gerar Jogos.',
+'mode-random':'Surpresinha','mode-random-sub':'100% aleatória','mode-smart':'Gerador Inteligente','mode-smart-sub':'Aplica estatísticas','mode-lucky':'Gerador da Sorte','mode-lucky-sub':'Numerologia pessoal',
+'qty-lbl':'Quantidade de jogos:','filt-title':'Filtros Avançados','filt-oe':'Equilíbrio Par/Ímpar','filt-cons':'Sem 3 números seguidos','filt-sum':'Soma Otimizada (150–220)','filt-freq':'Viés estatístico',
+'luck-title':'Dados para Numerologia','luck-name':'Seu Nome:','luck-birth':'Data de Nascimento:','ph-name':'Ex: João Silva','ph-date':'DD/MM/AAAA',
+'btn-gen':'Gerar Jogos','gen-out-title':'Jogos Gerados','gen-empty-txt':'Escolha as opções e toque em Gerar Jogos!',
+'fech-title':'Fechamento Matemático','fech-sub':'Garanta prêmios mínimos com matemática','fech-plan':'Plano de garantia:','help-fech-title':'O que é Fechamento?','help-fech-body':'Estratégia matemática que aumenta as chances de prêmios mínimos (Quadra ou Quina) se os números sorteados estiverem no seu grupo. Escolha o plano, marque as dezenas e toque em Processar.',
+'og-quadra':'Quadra garantida','og-quina':'Quina garantida','opt-q8':'8 números → Quadra — 6 jogos','opt-q10':'10 números → Quadra — 20 jogos','opt-q12':'12 números → Quadra — 42 jogos','opt-n9':'9 números → Quina — 12 jogos','opt-n10':'10 números → Quina — 20 jogos',
+'sel-lbl':'Selecionados:','btn-fech':'Processar Fechamento','fech-out-title':'Combinações','fech-empty-txt':'Selecione as dezenas e processe.',
+'sim-title':'Simulador','sim-sub':'Compare seu jogo com o último resultado','help-sim-title':'Como usar o Simulador?','help-sim-body':'Marque 6 números no volante e toque em Conferir. O app compara com o último resultado — acertos ficam em verde.','btn-sim':'Conferir Agora','sim-out-title':'Resultado da Conferência','sim-empty-txt':'Marque 6 números e toque em Conferir.',
+'myhist-title':'Registrar Jogo','myhist-sub':'Marque os números que você jogou','help-hist-title':'Como usar?','help-hist-body':'Marque os números que você jogou e toque em + Adicionar. O app compara com o último resultado automaticamente.','hist-conc-lbl':'Concurso (opcional):','ph-conc':'Ex: 3013','btn-add-hist':'+ Adicionar Jogo','mygames-title':'Meus Jogos','btn-clear-all':'Limpar Tudo',
+'res-title':'Histórico de Concursos','res-sub':'Consulte qualquer sorteio','ph-search':'Pesquisar concurso...','th-conc':'Concurso','th-nums':'Dezenas','btn-prev':'Anterior','btn-next':'Próximo',
+'cont-title':'Fale Conosco','cont-sub':'Sugestões, bugs ou parcerias','cont-mail-lbl':'E-mail oficial','cont-tipo':'Tipo','ct-sug':'💡 Sugestão','ct-bug':'🐛 Bug','ct-par':'🤝 Parceria','ct-out':'💬 Outro','cont-nome':'Nome','ph-yourname':'Seu nome','cont-msg':'Mensagem','ph-msg':'Conte tudo! Cada feedback nos ajuda...','btn-send':'Enviar por e-mail','cont-note':'Abre o seu app de e-mail com a mensagem pronta para contato@duriup.com.br',
+'don-title':'Gostou do SorteMax?','don-desc':'100% gratuito e feito com carinho. Se trouxe sorte extra, considere pagar um cafezinho!','pix-lbl':'Chave PIX','btn-pix':'Copiar PIX','channels-title':'Nossos Canais',
+'ch-duriup':'Cripto, ações e mercados financeiros','ch-sogno':'Música italiana vintage dos anos 60','ch-cine':'Pop dos anos 70 e 80',
+'btn-copy':'Copiar','btn-export':'Exportar','btn-clear':'Limpar','btn-random':'Aleatório',
+'nd-lbl':'Próximo sorteio','lbl-last':'ÚLTIMO RESULTADO','lbl-hist-sum':'Resumo Histórico','lbl-hist-sub':'Análise de todos os concursos','lbl-hot':'Mais Sorteados','lbl-cold':'Menos Sorteados','lbl-beh':'Comportamento','lbl-oe':'Par/Ímpar:','lbl-sum':'Soma ideal:',
+'footer-warn':'Sem vínculo com a Caixa Econômica Federal. Aposte com responsabilidade.','ft-welcome':'Ver tela inicial','pwa-txt':'Instale o SorteMax','pwa-txt2':'na sua tela inicial!','pwa-install':'Instalar',
+'set-title':'Configurações','set-lang':'Idioma','set-theme':'Tema','th-auto':'Sistema','th-light':'Claro','th-dark':'Escuro',
+'sync':'Sincronizando...','sync-ok':'Online','sync-off':'Offline','bell':'Lembrar','bell-on':'Ativo','no-notif':'Seu navegador não suporta notificações.','notif-blocked':'Notificações bloqueadas. Ative nas configurações do navegador.','notif-body':'Sorteio em 1 hora! Gere seus jogos agora.',
+'nd-at':'{d} às 20h','conc':'Concurso {n}','conc-hash':'Concurso #{n}','acum':'ACUMULOU!','won':'SAIU O PRÊMIO!','winners':'{g} ganhador(es) ({v})','bal':'Equil. {p}%',
+'game':'Jogo {n}','bet':'Aposta {n}','eo':'{e}P/{o}Í','save':'Salvar','limit':'Limite: {n} números.','ready':'Pronto! ✓','more':'Selecione mais {n}','games-n':'{n} jogos',
+'wait':'Aguardando dados...','official':'Resultado oficial:','yours':'Seu jogo:','sena-msg':'Parabéns! Acertou os 6!','quina-msg':'5 acertos — Quina!','quadra-msg':'4 acertos — Quadra!','hits':'{n} acerto(s)','no-hit':'Nenhum acerto desta vez.',
+'need6':'Selecione 6 números.','added':'✅ Adicionado!','hist-empty':'📋 Nenhum jogo registrado.<br>Gere jogos e salve com 💾','del':'Excluir','none':'Nenhum resultado encontrado.','view':'Ver','page':'Pág. {a}/{b}','loading':'Carregando...',
+'date':'Data:','acc':'Acumulado:','yes':'Sim','no':'Não','tier':'Faixa','win-h':'Ganhadores','prize':'Prêmio','mode':'Modo:',
+'fill-all':'Preencha nome e mensagem.','mail-open':'Abrindo seu app de e-mail…','copied':'Copiado! ✅','fill-lucky':'Preencha nome e data.','confirm-clear':'Apagar todos os jogos salvos?','theme-auto':'Tema: sistema','theme-light':'Tema: claro','theme-dark':'Tema: escuro','mail-subj':'[SorteMax] {t} de {n}'
+},
+es:{
+'w-free':'100% GRATIS','w-sub':'Genera tus juegos de la Mega-Sena en segundos. Abre y usa — sin registro.','w-chip1':'✓ Sin registro','w-chip2':'✓ Sin login','w-chip3':'✓ Sin e-mail',
+'wf1':'Generador','wf1s':'Juegos aleatorios o con estadística','wf2':'Combinación','wf2s':'Combinaciones con garantía mínima','wf3':'Simulador','wf3s':'Verifica tu juego en el último sorteo','wf4':'Resultados','wf4s':'Todos los concursos, actualizados',
+'w-cta':'Empezar gratis →','w-legal':'Al continuar, confirmas tener 18+ años y entiendes que SorteMax es entretenimiento y ayuda estadística: no garantiza premios y no tiene vínculo con la Caixa Econômica Federal. Juega con responsabilidad.',
+'tab-gen':'Generador','tab-fech':'Combinar','tab-sim':'Simulador','tab-hist':'Mis Juegos','tab-res':'Resultados','tab-cont':'Contacto',
+'gen-title':'Opciones de Generación','gen-sub':'Elige tu método y filtros','help-gen-title':'¿Cómo usar el Generador?','help-gen-body':'Elige Sorpresa (aleatorio), Inteligente (filtros estadísticos) o Suerte (numerología). Define la cantidad y toca Generar Juegos.',
+'mode-random':'Sorpresa','mode-random-sub':'100% aleatoria','mode-smart':'Generador Inteligente','mode-smart-sub':'Aplica estadísticas','mode-lucky':'Generador de la Suerte','mode-lucky-sub':'Numerología personal',
+'qty-lbl':'Cantidad de juegos:','filt-title':'Filtros Avanzados','filt-oe':'Equilibrio Par/Impar','filt-cons':'Sin 3 números seguidos','filt-sum':'Suma Optimizada (150–220)','filt-freq':'Sesgo estadístico',
+'luck-title':'Datos para Numerología','luck-name':'Tu Nombre:','luck-birth':'Fecha de Nacimiento:','ph-name':'Ej: Juan Pérez','ph-date':'DD/MM/AAAA',
+'btn-gen':'Generar Juegos','gen-out-title':'Juegos Generados','gen-empty-txt':'¡Elige las opciones y toca Generar Juegos!',
+'fech-title':'Combinación Matemática','fech-sub':'Garantiza premios mínimos con matemáticas','fech-plan':'Plan de garantía:','help-fech-title':'¿Qué es la Combinación?','help-fech-body':'Estrategia matemática que aumenta las probabilidades de premios mínimos (Quadra o Quina) si los números sorteados están en tu grupo. Elige el plan, marca los números y toca Procesar.',
+'og-quadra':'Quadra garantizada','og-quina':'Quina garantizada','opt-q8':'8 números → Quadra — 6 juegos','opt-q10':'10 números → Quadra — 20 juegos','opt-q12':'12 números → Quadra — 42 juegos','opt-n9':'9 números → Quina — 12 juegos','opt-n10':'10 números → Quina — 20 juegos',
+'sel-lbl':'Seleccionados:','btn-fech':'Procesar Combinación','fech-out-title':'Combinaciones','fech-empty-txt':'Selecciona los números y procesa.',
+'sim-title':'Simulador','sim-sub':'Compara tu juego con el último resultado','help-sim-title':'¿Cómo usar el Simulador?','help-sim-body':'Marca 6 números y toca Verificar. La app compara con el último resultado — los aciertos quedan en verde.','btn-sim':'Verificar Ahora','sim-out-title':'Resultado de la Verificación','sim-empty-txt':'Marca 6 números y toca Verificar.',
+'myhist-title':'Registrar Juego','myhist-sub':'Marca los números que jugaste','help-hist-title':'¿Cómo usar?','help-hist-body':'Marca los números que jugaste y toca + Agregar. La app compara con el último resultado automáticamente.','hist-conc-lbl':'Concurso (opcional):','ph-conc':'Ej: 3013','btn-add-hist':'+ Agregar Juego','mygames-title':'Mis Juegos','btn-clear-all':'Borrar Todo',
+'res-title':'Historial de Concursos','res-sub':'Consulta cualquier sorteo','ph-search':'Buscar concurso...','th-conc':'Concurso','th-nums':'Números','btn-prev':'Anterior','btn-next':'Siguiente',
+'cont-title':'Contáctanos','cont-sub':'Sugerencias, errores o alianzas','cont-mail-lbl':'E-mail oficial','cont-tipo':'Tipo','ct-sug':'💡 Sugerencia','ct-bug':'🐛 Error','ct-par':'🤝 Alianza','ct-out':'💬 Otro','cont-nome':'Nombre','ph-yourname':'Tu nombre','cont-msg':'Mensaje','ph-msg':'¡Cuéntanos todo! Cada comentario nos ayuda...','btn-send':'Enviar por e-mail','cont-note':'Abre tu app de e-mail con el mensaje listo para contato@duriup.com.br',
+'don-title':'¿Te gustó SorteMax?','don-desc':'100% gratuito y hecho con cariño. Si te trajo suerte extra, ¡considera invitarnos un cafecito!','pix-lbl':'Clave PIX','btn-pix':'Copiar PIX','channels-title':'Nuestros Canales',
+'ch-duriup':'Cripto, acciones y mercados financieros','ch-sogno':'Música italiana vintage de los años 60','ch-cine':'Pop de los años 70 y 80',
+'btn-copy':'Copiar','btn-export':'Exportar','btn-clear':'Limpiar','btn-random':'Aleatorio',
+'nd-lbl':'Próximo sorteo','lbl-last':'ÚLTIMO RESULTADO','lbl-hist-sum':'Resumen Histórico','lbl-hist-sub':'Análisis de todos los concursos','lbl-hot':'Más Sorteados','lbl-cold':'Menos Sorteados','lbl-beh':'Comportamiento','lbl-oe':'Par/Impar:','lbl-sum':'Suma ideal:',
+'footer-warn':'Sin vínculo con la Caixa Econômica Federal. Juega con responsabilidad.','ft-welcome':'Ver pantalla inicial','pwa-txt':'Instala SorteMax','pwa-txt2':'en tu pantalla de inicio!','pwa-install':'Instalar',
+'set-title':'Ajustes','set-lang':'Idioma','set-theme':'Tema','th-auto':'Sistema','th-light':'Claro','th-dark':'Oscuro',
+'sync':'Sincronizando...','sync-ok':'En línea','sync-off':'Sin conexión','bell':'Recordar','bell-on':'Activo','no-notif':'Tu navegador no admite notificaciones.','notif-blocked':'Notificaciones bloqueadas. Actívalas en la configuración del navegador.','notif-body':'¡Sorteo en 1 hora! Genera tus juegos ahora.',
+'nd-at':'{d} a las 20h (Brasilia)','conc':'Concurso {n}','conc-hash':'Concurso #{n}','acum':'¡ACUMULADO!','won':'¡HUBO GANADOR!','winners':'{g} ganador(es) ({v})','bal':'Equil. {p}%',
+'game':'Juego {n}','bet':'Apuesta {n}','eo':'{e}P/{o}I','save':'Guardar','limit':'Límite: {n} números.','ready':'¡Listo! ✓','more':'Selecciona {n} más','games-n':'{n} juegos',
+'wait':'Esperando datos...','official':'Resultado oficial:','yours':'Tu juego:','sena-msg':'¡Felicidades! ¡Acertaste los 6!','quina-msg':'5 aciertos — ¡Quina!','quadra-msg':'4 aciertos — ¡Quadra!','hits':'{n} acierto(s)','no-hit':'Ningún acierto esta vez.',
+'need6':'Selecciona 6 números.','added':'✅ ¡Agregado!','hist-empty':'📋 Ningún juego registrado.<br>Genera juegos y guárdalos con 💾','del':'Eliminar','none':'No se encontraron resultados.','view':'Ver','page':'Pág. {a}/{b}','loading':'Cargando...',
+'date':'Fecha:','acc':'Acumulado:','yes':'Sí','no':'No','tier':'Categoría','win-h':'Ganadores','prize':'Premio','mode':'Modo:',
+'fill-all':'Completa nombre y mensaje.','mail-open':'Abriendo tu app de e-mail…','copied':'¡Copiado! ✅','fill-lucky':'Completa nombre y fecha.','confirm-clear':'¿Borrar todos los juegos guardados?','theme-auto':'Tema: sistema','theme-light':'Tema: claro','theme-dark':'Tema: oscuro','mail-subj':'[SorteMax] {t} de {n}'
+},
+en:{
+'w-free':'100% FREE','w-sub':'Create your Mega-Sena games in seconds. Just open and play — no sign-up.','w-chip1':'✓ No sign-up','w-chip2':'✓ No login','w-chip3':'✓ No e-mail',
+'wf1':'Generator','wf1s':'Random or stats-based games','wf2':'Wheeling','wf2s':'Combinations with a minimum guarantee','wf3':'Simulator','wf3s':'Check your game against the last draw','wf4':'Results','wf4s':'Every draw, always up to date',
+'w-cta':'Start for free →','w-legal':'By continuing, you confirm you are 18+ and understand SorteMax is entertainment and a statistics aid: it does not guarantee prizes and is not affiliated with Caixa Econômica Federal. Play responsibly.',
+'tab-gen':'Generator','tab-fech':'Wheeling','tab-sim':'Simulator','tab-hist':'My Games','tab-res':'Results','tab-cont':'Contact',
+'gen-title':'Generation Options','gen-sub':'Choose your method and filters','help-gen-title':'How to use the Generator?','help-gen-body':'Choose Quick Pick (random), Smart (statistical filters) or Lucky (numerology). Set the quantity and tap Generate Games.',
+'mode-random':'Quick Pick','mode-random-sub':'100% random','mode-smart':'Smart Generator','mode-smart-sub':'Uses statistics','mode-lucky':'Lucky Generator','mode-lucky-sub':'Personal numerology',
+'qty-lbl':'Number of games:','filt-title':'Advanced Filters','filt-oe':'Even/Odd balance','filt-cons':'No 3 numbers in a row','filt-sum':'Optimized sum (150–220)','filt-freq':'Statistical bias',
+'luck-title':'Numerology Data','luck-name':'Your Name:','luck-birth':'Date of Birth:','ph-name':'e.g. John Smith','ph-date':'DD/MM/YYYY',
+'btn-gen':'Generate Games','gen-out-title':'Generated Games','gen-empty-txt':'Pick your options and tap Generate Games!',
+'fech-title':'Math Wheeling','fech-sub':'Lock in minimum prizes with math','fech-plan':'Guarantee plan:','help-fech-title':'What is Wheeling?','help-fech-body':'A math strategy that improves the odds of minimum prizes (Quadra or Quina) when the drawn numbers are in your group. Pick a plan, mark the numbers and tap Process.',
+'og-quadra':'Quadra guaranteed','og-quina':'Quina guaranteed','opt-q8':'8 numbers → Quadra — 6 games','opt-q10':'10 numbers → Quadra — 20 games','opt-q12':'12 numbers → Quadra — 42 games','opt-n9':'9 numbers → Quina — 12 games','opt-n10':'10 numbers → Quina — 20 games',
+'sel-lbl':'Selected:','btn-fech':'Process Wheel','fech-out-title':'Combinations','fech-empty-txt':'Select the numbers and process.',
+'sim-title':'Simulator','sim-sub':'Compare your game with the last result','help-sim-title':'How to use the Simulator?','help-sim-body':'Mark 6 numbers and tap Check. The app compares them with the last result — hits turn green.','btn-sim':'Check Now','sim-out-title':'Check Result','sim-empty-txt':'Mark 6 numbers and tap Check.',
+'myhist-title':'Log a Game','myhist-sub':'Mark the numbers you played','help-hist-title':'How to use?','help-hist-body':'Mark the numbers you played and tap + Add. The app compares them with the last result automatically.','hist-conc-lbl':'Draw no. (optional):','ph-conc':'e.g. 3013','btn-add-hist':'+ Add Game','mygames-title':'My Games','btn-clear-all':'Clear All',
+'res-title':'Draw History','res-sub':'Look up any draw','ph-search':'Search draw...','th-conc':'Draw','th-nums':'Numbers','btn-prev':'Previous','btn-next':'Next',
+'cont-title':'Contact Us','cont-sub':'Suggestions, bugs or partnerships','cont-mail-lbl':'Official e-mail','cont-tipo':'Type','ct-sug':'💡 Suggestion','ct-bug':'🐛 Bug','ct-par':'🤝 Partnership','ct-out':'💬 Other','cont-nome':'Name','ph-yourname':'Your name','cont-msg':'Message','ph-msg':'Tell us everything! Every bit of feedback helps...','btn-send':'Send by e-mail','cont-note':'Opens your e-mail app with the message ready for contato@duriup.com.br',
+'don-title':'Enjoying SorteMax?','don-desc':'100% free and made with care. If it brought you extra luck, consider buying us a coffee!','pix-lbl':'PIX key','btn-pix':'Copy PIX','channels-title':'Our Channels',
+'ch-duriup':'Crypto, stocks and financial markets','ch-sogno':'Vintage Italian music from the 60s','ch-cine':'70s & 80s pop hits',
+'btn-copy':'Copy','btn-export':'Export','btn-clear':'Clear','btn-random':'Random',
+'nd-lbl':'Next draw','lbl-last':'LATEST RESULT','lbl-hist-sum':'History Summary','lbl-hist-sub':'Analysis of every draw','lbl-hot':'Most Drawn','lbl-cold':'Least Drawn','lbl-beh':'Patterns','lbl-oe':'Even/Odd:','lbl-sum':'Ideal sum:',
+'footer-warn':'Not affiliated with Caixa Econômica Federal. Play responsibly.','ft-welcome':'Show welcome screen','pwa-txt':'Install SorteMax','pwa-txt2':'on your home screen!','pwa-install':'Install',
+'set-title':'Settings','set-lang':'Language','set-theme':'Theme','th-auto':'System','th-light':'Light','th-dark':'Dark',
+'sync':'Syncing...','sync-ok':'Online','sync-off':'Offline','bell':'Remind me','bell-on':'On','no-notif':'Your browser does not support notifications.','notif-blocked':'Notifications are blocked. Enable them in your browser settings.','notif-body':'Draw in 1 hour! Generate your games now.',
+'nd-at':'{d}, 8 PM (Brasília)','conc':'Draw {n}','conc-hash':'Draw #{n}','acum':'ROLLOVER!','won':'JACKPOT WON!','winners':'{g} winner(s) ({v})','bal':'Bal. {p}%',
+'game':'Game {n}','bet':'Bet {n}','eo':'{e}E/{o}O','save':'Save','limit':'Limit: {n} numbers.','ready':'Ready! ✓','more':'Select {n} more','games-n':'{n} games',
+'wait':'Waiting for data...','official':'Official result:','yours':'Your game:','sena-msg':'Congratulations! All 6 numbers!','quina-msg':'5 hits — Quina!','quadra-msg':'4 hits — Quadra!','hits':'{n} hit(s)','no-hit':'No hits this time.',
+'need6':'Select 6 numbers.','added':'✅ Added!','hist-empty':'📋 No games saved yet.<br>Generate games and save them with 💾','del':'Delete','none':'No results found.','view':'View','page':'Page {a}/{b}','loading':'Loading...',
+'date':'Date:','acc':'Rollover:','yes':'Yes','no':'No','tier':'Tier','win-h':'Winners','prize':'Prize','mode':'Mode:',
+'fill-all':'Please fill in your name and message.','mail-open':'Opening your e-mail app…','copied':'Copied! ✅','fill-lucky':'Please fill in name and date.','confirm-clear':'Delete all saved games?','theme-auto':'Theme: system','theme-light':'Theme: light','theme-dark':'Theme: dark','mail-subj':'[SorteMax] {t} from {n}'
+},
+ko:{
+'w-free':'100% 무료','w-sub':'메가세나 번호를 몇 초 만에 만들어 보세요. 가입 없이 바로 사용하세요.','w-chip1':'✓ 가입 없음','w-chip2':'✓ 로그인 없음','w-chip3':'✓ 이메일 없음',
+'wf1':'번호 생성','wf1s':'무작위 또는 통계 기반 번호','wf2':'조합(휠링)','wf2s':'최소 당첨을 보장하는 조합','wf3':'시뮬레이터','wf3s':'최근 추첨 결과와 비교','wf4':'당첨 결과','wf4s':'모든 회차, 항상 최신',
+'w-cta':'무료로 시작하기 →','w-legal':'계속하면 만 18세 이상임을 확인하며, SorteMax는 오락·통계 참고용으로 당첨을 보장하지 않고 Caixa Econômica Federal과 관련이 없음을 이해한 것으로 봅니다. 책임감 있게 즐기세요.',
+'tab-gen':'생성','tab-fech':'조합','tab-sim':'시뮬','tab-hist':'내 번호','tab-res':'결과','tab-cont':'문의',
+'gen-title':'생성 옵션','gen-sub':'방법과 필터를 고르세요','help-gen-title':'번호 생성은 어떻게 쓰나요?','help-gen-body':'자동(무작위), 스마트(통계 필터), 행운(수비학) 중 하나를 고르고 개수를 정한 뒤 번호 생성을 누르세요.',
+'mode-random':'자동 번호','mode-random-sub':'100% 무작위','mode-smart':'스마트 생성','mode-smart-sub':'통계 적용','mode-lucky':'행운 생성','mode-lucky-sub':'개인 수비학',
+'qty-lbl':'게임 수:','filt-title':'고급 필터','filt-oe':'짝/홀 균형','filt-cons':'연속 3개 번호 제외','filt-sum':'합계 최적화 (150–220)','filt-freq':'통계 가중치',
+'luck-title':'수비학 정보','luck-name':'이름:','luck-birth':'생년월일:','ph-name':'예: 홍길동','ph-date':'일/월/년 (DD/MM/YYYY)',
+'btn-gen':'번호 생성','gen-out-title':'생성된 번호','gen-empty-txt':'옵션을 고르고 번호 생성을 누르세요!',
+'fech-title':'수학적 조합','fech-sub':'수학으로 최소 당첨을 노리세요','fech-plan':'보장 플랜:','help-fech-title':'조합(휠링)이란?','help-fech-body':'추첨 번호가 고른 번호 안에 있으면 최소 당첨(Quadra 4개 또는 Quina 5개) 가능성을 높이는 수학 전략입니다. 플랜을 고르고 번호를 표시한 뒤 처리를 누르세요.',
+'og-quadra':'Quadra(4개) 보장','og-quina':'Quina(5개) 보장','opt-q8':'8개 번호 → Quadra — 6게임','opt-q10':'10개 번호 → Quadra — 20게임','opt-q12':'12개 번호 → Quadra — 42게임','opt-n9':'9개 번호 → Quina — 12게임','opt-n10':'10개 번호 → Quina — 20게임',
+'sel-lbl':'선택:','btn-fech':'조합 처리','fech-out-title':'조합 결과','fech-empty-txt':'번호를 고르고 처리하세요.',
+'sim-title':'시뮬레이터','sim-sub':'내 번호를 최근 결과와 비교','help-sim-title':'시뮬레이터는 어떻게 쓰나요?','help-sim-body':'번호 6개를 표시하고 확인을 누르세요. 최근 결과와 비교해 맞힌 번호는 초록색으로 보입니다.','btn-sim':'지금 확인','sim-out-title':'확인 결과','sim-empty-txt':'번호 6개를 표시하고 확인을 누르세요.',
+'myhist-title':'번호 기록','myhist-sub':'구매한 번호를 표시하세요','help-hist-title':'어떻게 쓰나요?','help-hist-body':'구매한 번호를 표시하고 + 추가를 누르세요. 최근 결과와 자동으로 비교합니다.','hist-conc-lbl':'회차 (선택):','ph-conc':'예: 3013','btn-add-hist':'+ 번호 추가','mygames-title':'내 번호','btn-clear-all':'전체 삭제',
+'res-title':'회차별 결과','res-sub':'원하는 회차를 찾아보세요','ph-search':'회차 검색...','th-conc':'회차','th-nums':'번호','btn-prev':'이전','btn-next':'다음',
+'cont-title':'문의하기','cont-sub':'제안, 오류 신고, 제휴','cont-mail-lbl':'공식 이메일','cont-tipo':'유형','ct-sug':'💡 제안','ct-bug':'🐛 오류','ct-par':'🤝 제휴','ct-out':'💬 기타','cont-nome':'이름','ph-yourname':'이름','cont-msg':'메시지','ph-msg':'무엇이든 알려 주세요! 모든 의견이 도움이 됩니다...','btn-send':'이메일로 보내기','cont-note':'메일 앱이 열리고 contato@duriup.com.br 로 보낼 내용이 채워집니다',
+'don-title':'SorteMax가 마음에 드세요?','don-desc':'100% 무료로 정성껏 만들었습니다. 행운이 따랐다면 커피 한 잔 후원해 주세요!','pix-lbl':'PIX 키','btn-pix':'PIX 복사','channels-title':'우리 채널',
+'ch-duriup':'코인·주식·금융 시장','ch-sogno':'60년대 이탈리아 빈티지 음악','ch-cine':'70·80년대 팝송',
+'btn-copy':'복사','btn-export':'내보내기','btn-clear':'지우기','btn-random':'무작위',
+'nd-lbl':'다음 추첨','lbl-last':'최근 결과','lbl-hist-sum':'통계 요약','lbl-hist-sub':'전체 회차 분석','lbl-hot':'많이 나온 번호','lbl-cold':'적게 나온 번호','lbl-beh':'패턴','lbl-oe':'짝/홀:','lbl-sum':'권장 합계:',
+'footer-warn':'Caixa Econômica Federal과 관련이 없습니다. 책임감 있게 즐기세요.','ft-welcome':'시작 화면 보기','pwa-txt':'SorteMax 설치','pwa-txt2':'홈 화면에 추가하세요!','pwa-install':'설치',
+'set-title':'설정','set-lang':'언어','set-theme':'테마','th-auto':'시스템','th-light':'밝게','th-dark':'어둡게',
+'sync':'동기화 중...','sync-ok':'온라인','sync-off':'오프라인','bell':'알림','bell-on':'켜짐','no-notif':'이 브라우저는 알림을 지원하지 않습니다.','notif-blocked':'알림이 차단되어 있습니다. 브라우저 설정에서 켜 주세요.','notif-body':'1시간 뒤 추첨! 지금 번호를 만들어 보세요.',
+'nd-at':'{d} 20시 (브라질리아)','conc':'{n}회','conc-hash':'{n}회차','acum':'이월!','won':'1등 당첨자 있음!','winners':'{g}명 ({v})','bal':'균형 {p}%',
+'game':'게임 {n}','bet':'조합 {n}','eo':'짝{e}/홀{o}','save':'저장','limit':'최대 {n}개까지 고를 수 있어요.','ready':'완료! ✓','more':'{n}개 더 고르세요','games-n':'{n}게임',
+'wait':'데이터를 기다리는 중...','official':'공식 결과:','yours':'내 번호:','sena-msg':'축하합니다! 6개 모두 맞혔어요!','quina-msg':'5개 일치 — Quina!','quadra-msg':'4개 일치 — Quadra!','hits':'{n}개 일치','no-hit':'이번엔 맞힌 번호가 없어요.',
+'need6':'번호 6개를 고르세요.','added':'✅ 추가됨!','hist-empty':'📋 저장된 번호가 없습니다.<br>번호를 만들고 💾 로 저장하세요','del':'삭제','none':'결과가 없습니다.','view':'보기','page':'{a}/{b} 페이지','loading':'불러오는 중...',
+'date':'날짜:','acc':'이월:','yes':'예','no':'아니오','tier':'등수','win-h':'당첨자','prize':'당첨금','mode':'모드:',
+'fill-all':'이름과 메시지를 입력하세요.','mail-open':'메일 앱을 여는 중…','copied':'복사됨! ✅','fill-lucky':'이름과 생년월일을 입력하세요.','confirm-clear':'저장한 번호를 모두 지울까요?','theme-auto':'테마: 시스템','theme-light':'테마: 밝게','theme-dark':'테마: 어둡게','mail-subj':'[SorteMax] {t} - {n}'
+}
 };
 var curLang='pt';
+function t(k,v){var s=(LANG[curLang]&&LANG[curLang][k]);if(s===undefined)s=LANG.pt[k];if(s===undefined)return k;if(v)Object.keys(v).forEach(function(x){s=s.split('{'+x+'}').join(v[x]);});return s;}
 function applyLang(lang){
+  if(!LANG[lang])lang='pt';
   curLang=lang;
-  var pack=LANG[lang];
-  document.querySelectorAll('[data-i]').forEach(function(e){var k=e.dataset.i;if(pack[k]!==undefined)e.textContent=pack[k];});
-  el('langBtn').textContent=pack['lang-switch'];
+  document.documentElement.lang=LOCALE[lang];
+  document.querySelectorAll('[data-i]').forEach(function(e){var s=LANG[lang][e.dataset.i];if(s!==undefined)e.textContent=s;});
+  document.querySelectorAll('[data-ip]').forEach(function(e){var s=LANG[lang][e.dataset.ip];if(s!==undefined)e.placeholder=s;});
+  document.querySelectorAll('[data-il]').forEach(function(e){var s=LANG[lang][e.dataset.il];if(s!==undefined)e.label=s;});
+  el('langCode').textContent=lang.toUpperCase();
+  document.querySelectorAll('[data-lang]').forEach(function(b){b.classList.toggle('on',b.dataset.lang===lang);});
   try{localStorage.setItem('sm_lang',lang);}catch(ex){}
+  refreshDynamic();
+}
+// 언어를 바꿀 때 이미 그려진 동적 화면도 다시 그림
+function refreshDynamic(){
+  syncUI(ST.sync);calcNextDraw();bellLabel();renderWidget();calcStats();renderTable();
+  if(genGames.length)renderGen();
+  if(wheelGames.length)renderWheel();
+  updateGridUI(ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);
+  updateGridUI(ST.sSel,'sCnt','sTgt','btnSim',6);
+  updateGridUI(ST.hSel,'hCnt','hTgt','btnAddH',6);
+  if(ST.sSel.length===6&&el('simRes').innerHTML)runSim(true);
+  renderHist();
 }
 function track(ev,p){if(typeof gtag==='function')gtag('event',ev,p||{});}
+function toast(msg){var x=el('toast');x.textContent=msg;x.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(function(){x.classList.remove('on');},1900);}
 
-// ── EMAIL GATE (수정됨: localStorage 강제 초기화) ────────
-function gateInit(){
-  var gate=el('gate'),btn=el('gBtn'),inp=el('gEmail'),err=el('gErr');
-  if(!gate)return;
-  try{
-    if(localStorage.getItem('sortemax_reg')){gate.style.display='none';return;}
-  }catch(e){}
-  gate.style.display='flex';
-  var agree=el('gAgree');
-  agree.onchange=function(){
-    btn.disabled=!agree.checked;
-    btn.style.opacity=agree.checked?'1':'0.4';
-    btn.style.cursor=agree.checked?'pointer':'not-allowed';
+// ── 테마 ───────────────────────────────────────────────
+var curTheme='auto';
+function applyTheme(th){
+  curTheme=(th==='light'||th==='dark')?th:'auto';
+  if(curTheme==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',curTheme);
+  try{localStorage.setItem('sm_theme',curTheme);}catch(e){}
+  el('themeBtn').textContent=curTheme==='light'?'☀️':curTheme==='dark'?'🌙':'🌓';
+  document.querySelectorAll('[data-theme]').forEach(function(b){if(b.classList.contains('opt'))b.classList.toggle('on',b.dataset.theme===curTheme);});
+  setTimeout(function(){el('metaTheme').setAttribute('content',getComputedStyle(document.body).backgroundColor);},50);
+}
+
+// ── 첫 화면 ─────────────────────────────────────────────
+function welcomeInit(){
+  var w=el('welcome');
+  var seen=false;try{seen=localStorage.getItem('sm_welcome')===APP_VERSION;}catch(e){}
+  if(!seen)showWelcome();
+  el('wStart').onclick=function(){
+    try{localStorage.setItem('sm_welcome',APP_VERSION);}catch(e){}
+    w.classList.add('out');
+    setTimeout(function(){w.classList.add('hidden');w.classList.remove('out');document.body.style.overflow='';},450);
+    track('welcome_start',{lang:curLang});
   };
-  btn.onclick=function(){
-    var email=inp.value.trim();
-    if(!email||email.indexOf('@')<1||email.indexOf('.')<0){err.style.display='block';return;}
-    err.style.display='none';
-    try{localStorage.setItem('sortemax_reg',email);}catch(e){}
-    gate.style.opacity='0';
-    setTimeout(function(){gate.style.display='none';},500);
-    try{fetch(FORM_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({_subject:'Novo usuário SorteMax',email:email})});}catch(e){}
-    track('sign_up',{method:'email'});
-  };
-  inp.onkeypress=function(e){if(e.key==='Enter')btn.onclick();};
+  el('btnShowWelcome').onclick=showWelcome;
+  document.querySelectorAll('.w-lang').forEach(function(b){b.onclick=function(){applyLang(b.dataset.lang);track('lang_switch',{lang:b.dataset.lang});};});
+}
+function showWelcome(){el('welcome').classList.remove('hidden');el('welcome').scrollTop=0;document.body.style.overflow='hidden';}
+
+function settingsInit(){
+  var sh=el('setSheet');
+  el('langBtn').onclick=function(){sh.classList.remove('hidden');};
+  el('setClose').onclick=function(){sh.classList.add('hidden');};
+  sh.onclick=function(e){if(e.target===sh)sh.classList.add('hidden');};
+  document.querySelectorAll('#langOpts .opt').forEach(function(b){b.onclick=function(){applyLang(b.dataset.lang);track('lang_switch',{lang:b.dataset.lang});};});
+  document.querySelectorAll('#themeOpts .opt').forEach(function(b){b.onclick=function(){applyTheme(b.dataset.theme);};});
+  el('themeBtn').onclick=function(){var n=curTheme==='auto'?'light':curTheme==='light'?'dark':'auto';applyTheme(n);toast(t('theme-'+n));track('theme_switch',{theme:n});};
+  if(window.matchMedia){var mq=window.matchMedia('(prefers-color-scheme: dark)');var fn=function(){if(curTheme==='auto')applyTheme('auto');};if(mq.addEventListener)mq.addEventListener('change',fn);else if(mq.addListener)mq.addListener(fn);}
 }
 
 function pwaInit(){
@@ -587,130 +858,129 @@ function pwaInit(){
 function calcNextDraw(){
   var now=new Date(),day=now.getDay();
   var days=day<=3?(3-day):day<=6?(6-day):3;
-  if(days===0&&now.getHours()>=20)days=day===3?4:3;
+  if(days===0&&now.getHours()>=20)days=day===3?3:4;
   var next=new Date(now);next.setDate(now.getDate()+days);
-  var wd=next.toLocaleDateString('pt-BR',{weekday:'long'});
-  var dt=next.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
-  el('ndVal').textContent=wd.charAt(0).toUpperCase()+wd.slice(1)+', '+dt+' às 20h';
+  var loc=LOCALE[curLang];
+  var wd=next.toLocaleDateString(loc,{weekday:'long'});
+  var dt=next.toLocaleDateString(loc,{day:'2-digit',month:'2-digit'});
+  el('ndVal').textContent=t('nd-at',{d:wd.charAt(0).toUpperCase()+wd.slice(1)+', '+dt});
 }
+function bellLabel(){var on=false;try{on=!!localStorage.getItem('sortemax_bell');}catch(e){}el('bellBtn').classList.toggle('on',on);el('bell-txt').textContent=on?t('bell-on'):t('bell');}
 function bellInit(){
   var btn=el('bellBtn');
-  try{if(localStorage.getItem('sortemax_bell')){btn.classList.add('on');el('bell-txt').textContent=curLang==='pt'?'Ativo':'Activo';}}catch(e){}
+  var enable=function(){scheduleNotifs();try{localStorage.setItem('sortemax_bell','1');}catch(e){}bellLabel();track('notification_enabled');};
   btn.onclick=function(){
-    if(!('Notification' in window)){alert('Seu navegador não suporta notificações.');return;}
-    if(Notification.permission==='granted'){scheduleNotifs();try{localStorage.setItem('sortemax_bell','1');}catch(e){}btn.classList.add('on');el('bell-txt').textContent=curLang==='pt'?'Ativo':'Activo';track('notification_enabled');}
-    else if(Notification.permission!=='denied'){Notification.requestPermission().then(function(p){if(p==='granted'){scheduleNotifs();try{localStorage.setItem('sortemax_bell','1');}catch(e){}btn.classList.add('on');el('bell-txt').textContent=curLang==='pt'?'Ativo':'Activo';track('notification_enabled');}});}
-    else alert('Notificações bloqueadas. Ative nas configurações do navegador.');
+    if(!('Notification' in window)){alert(t('no-notif'));return;}
+    if(Notification.permission==='granted')enable();
+    else if(Notification.permission!=='denied'){Notification.requestPermission().then(function(p){if(p==='granted')enable();});}
+    else alert(t('notif-blocked'));
   };
+  bellLabel();
 }
 function scheduleNotifs(){
   if(!('Notification' in window)||Notification.permission!=='granted')return;
-  [3,6].forEach(function(d){var now=new Date(),target=new Date(now);var diff=((d-now.getDay())+7)%7||7;target.setDate(now.getDate()+diff);target.setHours(19,0,0,0);var ms=target-now;if(ms>0)setTimeout(function(){new Notification('🍀 SorteMax Mega',{body:'Sorteio em 1 hora! Gere seus jogos agora.',icon:'/icons/icon-192.png'});},ms);});
+  [3,6].forEach(function(d){var now=new Date(),target=new Date(now);var diff=((d-now.getDay())+7)%7||7;target.setDate(now.getDate()+diff);target.setHours(19,0,0,0);var ms=target-now;if(ms>0&&ms<2147483647)setTimeout(function(){try{new Notification('🍀 SorteMax Mega',{body:t('notif-body'),icon:'/icons/icon-192.png'});}catch(e){}},ms);});
 }
 var adIdx=0;
 function adTick(){el('ad'+adIdx).classList.remove('on');el('d'+adIdx).classList.remove('on');adIdx=(adIdx+1)%3;el('ad'+adIdx).classList.add('on');el('d'+adIdx).classList.add('on');}
 function tabInit(){
-  document.querySelectorAll('.tab').forEach(function(btn){btn.onclick=function(){document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});btn.classList.add('on');var t=btn.dataset.t;el(t).classList.add('on');el('dash').classList.toggle('on',t==='p-gen');if(t==='p-hist')renderHist();if(t==='p-res')renderTable();track('tab_view',{tab:t});};});
+  document.querySelectorAll('.tab').forEach(function(btn){btn.onclick=function(){document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});btn.classList.add('on');var tg=btn.dataset.t;el(tg).classList.add('on');el('dash').classList.toggle('on',tg==='p-gen');if(tg==='p-hist')renderHist();if(tg==='p-res')renderTable();window.scrollTo({top:0,behavior:'smooth'});track('tab_view',{tab:tg});};});
   el('dash').classList.add('on');
 }
 function helpInit(){
   document.querySelectorAll('.help-btn').forEach(function(btn){btn.onclick=function(e){e.stopPropagation();var box=el(btn.dataset.help);if(box)box.classList.toggle('on');};});
   document.addEventListener('click',function(){document.querySelectorAll('.help-box.on').forEach(function(b){b.classList.remove('on');});});
 }
-function syncUI(s,t){el('sDot').className='dot '+(s==='ok'?'g':s==='sync'?'y':'r');el('sTxt').textContent=t;}
+function syncUI(s){ST.sync=s;el('sDot').className='dot '+(s==='ok'?'g':s==='sync'?'y':'r');el('sTxt').textContent=s==='ok'?t('sync-ok'):s==='sync'?t('sync'):t('sync-off');}
 function loadDB(){
-  syncUI('sync','Sincronizando...');
+  syncUI('sync');
   var cached;try{cached=localStorage.getItem('ms_hist');}catch(e){}
-  if(cached){try{ST.draws=JSON.parse(cached);syncUI('ok','Banco pronto');calcStats();renderTable();}catch(e){ST.draws=Object.assign({},FALLBACK);}}
+  if(cached){try{ST.draws=JSON.parse(cached);syncUI('ok');calcStats();renderTable();}catch(e){ST.draws=Object.assign({},FALLBACK);}}
   else ST.draws=Object.assign({},FALLBACK);
   fetch('https://raw.githubusercontent.com/guilhermeasn/loteria.json/master/data/megasena.json')
   .then(function(r){if(!r.ok)throw 0;return r.json();})
-  .then(function(d){ST.draws=d;try{localStorage.setItem('ms_hist',JSON.stringify(d));}catch(e){}syncUI('ok','Conexão estabelecida');calcStats();renderTable();})
-  .catch(function(){syncUI('r','Modo Offline');calcStats();renderTable();});
+  .then(function(d){ST.draws=d;try{localStorage.setItem('ms_hist',JSON.stringify(d));}catch(e){}syncUI('ok');calcStats();renderTable();})
+  .catch(function(){if(!cached)syncUI('off');calcStats();renderTable();});
   fetch('https://servicebus2.caixa.gov.br/portaldeloterias/api/megasena')
   .then(function(r){if(!r.ok)throw 0;return r.json();})
-  .then(function(d){ST.latest={concurso:d.numero,data:d.dataApuracao,dezenas:d.listaDezenas,acumulou:d.acumulado,valEst:d.valorEstimadoProximoConcurso||0,prem:d.listaRateioPremio?d.listaRateioPremio.map(function(p){return{desc:p.descricaoFaixa,g:p.numeroDeGanhadores,v:p.valorPremio};}):[]};if(!ST.draws[ST.latest.concurso]){ST.draws[ST.latest.concurso]=ST.latest.dezenas.map(Number);try{localStorage.setItem('ms_hist',JSON.stringify(ST.draws));}catch(e){}calcStats();renderTable();}renderWidget();})
-  .catch(function(){var k=Object.keys(ST.draws).sort(function(a,b){return Number(b)-Number(a);})[0];if(k){ST.latest={concurso:Number(k),data:'Offline',dezenas:ST.draws[k]||[],acumulou:true,valEst:0,prem:[{g:0,v:0},{g:0,v:0},{g:0,v:0}]};renderWidget();}});
+  .then(function(d){ST.latest={concurso:d.numero,data:d.dataApuracao,dezenas:d.listaDezenas,acumulou:d.acumulado,valEst:d.valorEstimadoProximoConcurso||0,prem:d.listaRateioPremio?d.listaRateioPremio.map(function(p){return{desc:p.descricaoFaixa,g:p.numeroDeGanhadores,v:p.valorPremio};}):[]};if(!ST.draws[ST.latest.concurso]){ST.draws[ST.latest.concurso]=ST.latest.dezenas.map(Number);try{localStorage.setItem('ms_hist',JSON.stringify(ST.draws));}catch(e){}calcStats();renderTable();}renderWidget();renderHist();})
+  .catch(function(){var k=Object.keys(ST.draws).sort(function(a,b){return Number(b)-Number(a);})[0];if(k){ST.latest={concurso:Number(k),data:'Offline',dezenas:ST.draws[k]||[],acumulou:true,valEst:0,offline:true,prem:[]};renderWidget();renderHist();}});
 }
 function renderWidget(){
   var d=ST.latest;if(!d||!d.concurso)return;
-  el('cMeta').textContent='Concurso '+d.concurso+' ('+d.data+')';
+  el('cMeta').textContent=t('conc',{n:d.concurso})+' · '+(d.offline?t('sync-off'):d.data);
   el('cBalls').innerHTML='';
   var nums=[].concat(d.dezenas).map(Number).sort(function(a,b){return a-b;});
   nums.forEach(function(n){var b=document.createElement('div');b.className='ball'+(n<=10?' gld':'');b.textContent=pad(n);el('cBalls').appendChild(b);});
-  if(d.acumulou){el('cBadge').className='prize-badge';el('cBadge').textContent='ACUMULOU!';el('cAmt').textContent=brl(d.valEst);}
-  else{el('cBadge').className='prize-badge ok';el('cBadge').textContent='SAIU O PRÊMIO!';el('cAmt').textContent=brl(d.prem[0]?d.prem[0].v:0);}
-  if(d.prem&&d.prem.length>=3){el('wSena').textContent=d.prem[0].g+' ganhador(es) ('+brl(d.prem[0].v)+')';el('wQuina').textContent=d.prem[1].g+' ganhador(es) ('+brl(d.prem[1].v)+')';el('wQuadra').textContent=d.prem[2].g+' ganhador(es) ('+brl(d.prem[2].v)+')';}
+  if(d.acumulou){el('cBadge').className='prize-badge';el('cBadge').textContent=t('acum');el('cAmt').textContent=d.offline?'R$ ---':brl(d.valEst);}
+  else{el('cBadge').className='prize-badge ok';el('cBadge').textContent=t('won');el('cAmt').textContent=brl(d.prem[0]?d.prem[0].v:0);}
+  if(d.prem&&d.prem.length>=3){el('wSena').textContent=t('winners',{g:d.prem[0].g,v:brl(d.prem[0].v)});el('wQuina').textContent=t('winners',{g:d.prem[1].g,v:brl(d.prem[1].v)});el('wQuadra').textContent=t('winners',{g:d.prem[2].g,v:brl(d.prem[2].v)});}
 }
 function calcStats(){
   var freq=new Array(61).fill(0);
   var all=Object.entries(ST.draws).sort(function(a,b){return Number(a[0])-Number(b[0]);});
   if(!all.length)return;
-  all.forEach(function(e){e[1].forEach(function(n){var v=Number(n);if(v>=1&&v<=60)freq[v]++;});});
+  all.forEach(function(e){(e[1]||[]).forEach(function(n){var v=Number(n);if(v>=1&&v<=60)freq[v]++;});});
   var tot=all.length;
   var fp=freq.map(function(f,i){return{n:i,c:f};}).slice(1).sort(function(a,b){return b.c-a.c;});
   ST.hotNums=fp.slice(0,15).map(function(x){return x.n;});
   ST.coldNums=fp.slice().reverse().slice(0,15).map(function(x){return x.n;});
   el('hotMini').innerHTML='';ST.hotNums.slice(0,3).forEach(function(n){var s=document.createElement('span');s.className='mball';s.textContent=pad(n);el('hotMini').appendChild(s);});
   el('coldMini').innerHTML='';ST.coldNums.slice(0,3).forEach(function(n){var s=document.createElement('span');s.className='mball c';s.textContent=pad(n);el('coldMini').appendChild(s);});
-  var bal=0;all.forEach(function(e){var ev=e[1].filter(function(n){return Number(n)%2===0;}).length;if(ev>=2&&ev<=4)bal++;});
-  el('avgOE').textContent='Bal. '+((bal/tot)*100).toFixed(1)+'%';
+  var bal=0;all.forEach(function(e){var ev=(e[1]||[]).filter(function(n){return Number(n)%2===0;}).length;if(ev>=2&&ev<=4)bal++;});
+  el('avgOE').textContent=t('bal',{p:((bal/tot)*100).toFixed(1)});
 }
 function genRandom(){var p=Array.from({length:60},function(_,i){return i+1;}),g=[];for(var i=0;i<6;i++)g.push(p.splice(Math.floor(Math.random()*p.length),1)[0]);return g.sort(function(a,b){return a-b;});}
 function genSmart(){
   var fe=el('fOE').checked,fc=el('fCons').checked,fs=el('fSum').checked,ff=el('fFreq').checked;
   for(var a=0;a<2000;a++){
     var g=[];
-    if(ff&&ST.hotNums.length){var hp=ST.hotNums.slice(),cp=ST.coldNums.slice(),np=Array.from({length:60},function(_,i){return i+1;}).filter(function(n){return!hp.includes(n)&&!cp.includes(n);});for(var i=0;i<3&&hp.length;i++)g.push(hp.splice(Math.floor(Math.random()*hp.length),1)[0]);for(var i=0;i<2&&np.length;i++)g.push(np.splice(Math.floor(Math.random()*np.length),1)[0]);if(cp.length)g.push(cp.splice(Math.floor(Math.random()*cp.length),1)[0]);g=g.filter(Boolean);while(g.length<6){var x=Math.floor(Math.random()*60)+1;if(!g.includes(x))g.push(x);}}else g=genRandom();
+    if(ff&&ST.hotNums.length){var hp=ST.hotNums.slice(),cp=ST.coldNums.slice(),np=Array.from({length:60},function(_,i){return i+1;}).filter(function(n){return!hp.includes(n)&&!cp.includes(n);});for(var i=0;i<3&&hp.length;i++)g.push(hp.splice(Math.floor(Math.random()*hp.length),1)[0]);for(var j=0;j<2&&np.length;j++)g.push(np.splice(Math.floor(Math.random()*np.length),1)[0]);if(cp.length)g.push(cp.splice(Math.floor(Math.random()*cp.length),1)[0]);g=g.filter(Boolean);while(g.length<6){var x=Math.floor(Math.random()*60)+1;if(!g.includes(x))g.push(x);}}else g=genRandom();
     g.sort(function(a,b){return a-b;});
     if(fe){var ev=g.filter(function(n){return n%2===0;}).length;if(ev<2||ev>4)continue;}
-    if(fc){var run=1,mx=1;for(var j=0;j<g.length-1;j++){if(g[j+1]===g[j]+1){run++;if(run>mx)mx=run;}else run=1;}if(mx>=3)continue;}
+    if(fc){var run=1,mx=1;for(var k=0;k<g.length-1;k++){if(g[k+1]===g[k]+1){run++;if(run>mx)mx=run;}else run=1;}if(mx>=3)continue;}
     if(fs){var s=g.reduce(function(a,v){return a+v;},0);if(s<150||s>220)continue;}
     return g;
   }
   return genRandom();
 }
 function genLucky(name,bd){
-  var nv=0,cn=name.toLowerCase().replace(/[^a-z]/g,'');for(var i=0;i<cn.length;i++)nv+=(cn.charCodeAt(i)-96);if(!nv)nv=7;
-  var dd=bd.replace(/[^0-9]/g,''),dv=0;for(var i=0;i<dd.length;i++)dv+=parseInt(dd[i]);if(!dv)dv=12;
+  var nv=0,cn=name.toLowerCase().normalize('NFD').replace(/[^a-z]/g,'');for(var i=0;i<cn.length;i++)nv+=(cn.charCodeAt(i)-96);
+  if(!nv){for(var q=0;q<name.length;q++)nv+=name.charCodeAt(q)%97;}if(!nv)nv=7;
+  var dd=bd.replace(/[^0-9]/g,''),dv=0;for(var j=0;j<dd.length;j++)dv+=parseInt(dd[j]);if(!dv)dv=12;
   var g=[],c=1;while(g.length<6){var seed=(nv*dv*(c+3)+(c*7))%60+1;if(!g.includes(seed))g.push(seed);c++;if(c>100){var r=Math.floor(Math.random()*60)+1;if(!g.includes(r))g.push(r);}}
   return g.sort(function(a,b){return a-b;});
 }
 function renderGen(){
   el('genEmpty').classList.add('hidden');el('genActs').classList.remove('hidden');el('genList').innerHTML='';
   genGames.forEach(function(game,idx){
-    var row=document.createElement('div');row.className='game-row';row.style.animationDelay=(idx*.08)+'s';
-    var lbl=document.createElement('span');lbl.className='game-lbl';lbl.textContent='JOGO '+(idx+1);
+    var row=document.createElement('div');row.className='game-row';row.style.animationDelay=(idx*.06)+'s';
+    var lbl=document.createElement('span');lbl.className='game-lbl';lbl.textContent=t('game',{n:idx+1}).toUpperCase();
     var balls=document.createElement('div');balls.className='gballs';
     game.forEach(function(n){var b=document.createElement('span');b.className='gball';b.textContent=pad(n);balls.appendChild(b);});
     var tags=document.createElement('div');tags.className='tags';
     var ev=game.filter(function(n){return n%2===0;}).length;
-    var t1=document.createElement('span');t1.className='tag'+(ev===3?' hi':'');t1.textContent=ev+'P/'+(6-ev)+'Í';
+    var t1=document.createElement('span');t1.className='tag'+(ev===3?' hi':'');t1.textContent=t('eo',{e:ev,o:6-ev});
     var sm=game.reduce(function(a,b){return a+b;},0);
-    var t2=document.createElement('span');t2.className='tag'+(sm>=150&&sm<=220?' hi':'');t2.textContent='Σ'+sm;
+    var t2=document.createElement('span');t2.className='tag'+(sm>=150&&sm<=220?' hi':'');t2.textContent='Σ '+sm;
     tags.appendChild(t1);tags.appendChild(t2);
-    var sv=document.createElement('button');sv.className='btn-s';sv.textContent='💾';sv.title='Salvar';
+    var sv=document.createElement('button');sv.className='btn-s';sv.textContent='💾 '+t('save');
     sv.onclick=function(){quickSave(game);sv.textContent='✅';sv.disabled=true;};
-    row.appendChild(lbl);row.appendChild(balls);row.appendChild(tags);row.appendChild(sv);
+    row.appendChild(lbl);row.appendChild(sv);row.appendChild(balls);row.appendChild(tags);
     el('genList').appendChild(row);
   });
 }
 function buildGrid(containerId,selArr,cntId,tgtId,btnId,maxFn){
   var container=el(containerId);container.innerHTML='';
-  for(var i=1;i<=60;i++){(function(num){var b=document.createElement('button');b.className='num-btn';b.textContent=pad(num);b.dataset.n=num;b.onclick=function(){var max=typeof maxFn==='function'?maxFn():maxFn;var idx=selArr.indexOf(num);if(idx!==-1){selArr.splice(idx,1);b.classList.remove('on');}else if(selArr.length<max){selArr.push(num);b.classList.add('on');}else{alert('Limite: '+max+' números.');}updateGridUI(selArr,cntId,tgtId,btnId,maxFn);};container.appendChild(b);})(i);}
+  for(var i=1;i<=60;i++){(function(num){var b=document.createElement('button');b.className='num-btn';b.textContent=pad(num);b.dataset.n=num;b.onclick=function(){var max=typeof maxFn==='function'?maxFn():maxFn;var idx=selArr.indexOf(num);if(idx!==-1){selArr.splice(idx,1);b.classList.remove('on');}else if(selArr.length<max){selArr.push(num);b.classList.add('on');}else{toast(t('limit',{n:max}));}updateGridUI(selArr,cntId,tgtId,btnId,maxFn);};container.appendChild(b);})(i);}
   updateGridUI(selArr,cntId,tgtId,btnId,maxFn);
 }
 function updateGridUI(selArr,cntId,tgtId,btnId,maxFn){
   var max=typeof maxFn==='function'?maxFn():maxFn;
   var c=selArr.length,btn=el(btnId),tgt=el(tgtId),cntEl=el(cntId);
-  if(cntEl)cntEl.textContent=c;
-  if(c===max){
-    if(tgt){tgt.textContent='Pronto! ✓';tgt.style.color='var(--green)';}
-    if(btn){btn.disabled=false;btn.style.opacity='1';btn.style.pointerEvents='auto';}
-  }else{
-    if(tgt){tgt.textContent='Selecione mais '+(max-c)+' números';tgt.style.color='var(--gold)';}
-    if(btn){btn.disabled=true;btn.style.opacity='';btn.style.pointerEvents='';}
-  }
+  if(cntEl)cntEl.textContent=c+'/'+max;
+  if(c===max){if(tgt){tgt.textContent=t('ready');tgt.style.color='var(--green)';}if(btn)btn.disabled=false;}
+  else{if(tgt){tgt.textContent=t('more',{n:max-c});tgt.style.color='var(--gold)';}if(btn)btn.disabled=true;}
 }
 function resetGrid(cId,selArr,cntId,tgtId,btnId,maxFn){selArr.length=0;document.querySelectorAll('#'+cId+' .num-btn').forEach(function(b){b.classList.remove('on');});updateGridUI(selArr,cntId,tgtId,btnId,maxFn);}
 function autoGrid(cId,selArr,cntId,tgtId,btnId,maxFn){
@@ -721,57 +991,68 @@ function autoGrid(cId,selArr,cntId,tgtId,btnId,maxFn){
   updateGridUI(selArr,cntId,tgtId,btnId,maxFn);
 }
 function wLimitFn(){var opt=el('wForm').options[el('wForm').selectedIndex];return opt?parseInt(opt.dataset.min)||8:8;}
-function combs(arr,sz){var r=[];function h(t,s){if(t.length===sz){r.push(t.slice());return;}for(var i=s;i<arr.length;i++){t.push(arr[i]);h(t,i+1);t.pop();}}h([],0);return r;}
-function fechCover(nums,k,t,mx){
-  var sub=combs(nums,t),pool=combs(nums,k);
-  var gs=pool.map(function(g){return{game:g,subs:combs(g,t).map(function(s){return s.join(',');})};});
+function combs(arr,sz){var r=[];function h(tt,s){if(tt.length===sz){r.push(tt.slice());return;}for(var i=s;i<arr.length;i++){tt.push(arr[i]);h(tt,i+1);tt.pop();}}h([],0);return r;}
+function fechCover(nums,k,tt,mx){
+  var sub=combs(nums,tt),pool=combs(nums,k);
+  var gs=pool.map(function(g){return{game:g,subs:combs(g,tt).map(function(s){return s.join(',');})};});
   var unc=new Set(sub.map(function(s){return s.join(',');})),sel=[];
   while(unc.size>0&&sel.length<mx){var best=null,bc=-1,bi=-1;for(var i=0;i<gs.length;i++){var cc=gs[i].subs.filter(function(s){return unc.has(s);}).length;if(cc>bc){bc=cc;best=gs[i].game;bi=i;}}if(bc<=0||!best)break;sel.push(best);gs[bi].subs.forEach(function(s){unc.delete(s);});gs.splice(bi,1);}
   return sel;
 }
 function renderWheel(){
   el('wEmpty').classList.add('hidden');el('wRes').classList.remove('hidden');el('wActs').classList.remove('hidden');el('wList').innerHTML='';
-  el('wGames').textContent=wheelGames.length+' Jogos';el('wPrice').textContent='R$ '+(wheelGames.length*5).toFixed(2).replace('.',',');
-  wheelGames.forEach(function(game,idx){var row=document.createElement('div');row.className='game-row';row.style.animationDelay=(idx*.05)+'s';var lbl=document.createElement('span');lbl.className='game-lbl';lbl.textContent='Aposta '+(idx+1);var balls=document.createElement('div');balls.className='gballs';game.forEach(function(n){var b=document.createElement('span');b.className='gball';b.textContent=pad(n);balls.appendChild(b);});row.appendChild(lbl);row.appendChild(balls);el('wList').appendChild(row);});
+  el('wGames').textContent=t('games-n',{n:wheelGames.length});el('wPrice').textContent=brl(wheelGames.length*5);
+  wheelGames.forEach(function(game,idx){var row=document.createElement('div');row.className='game-row';row.style.animationDelay=(idx*.04)+'s';var lbl=document.createElement('span');lbl.className='game-lbl';lbl.textContent=t('bet',{n:idx+1}).toUpperCase();var balls=document.createElement('div');balls.className='gballs';game.forEach(function(n){var b=document.createElement('span');b.className='gball';b.textContent=pad(n);balls.appendChild(b);});row.appendChild(lbl);row.appendChild(balls);el('wList').appendChild(row);});
 }
-function runSim(){
+function runSim(silent){
   var nums=ST.sSel.slice().sort(function(a,b){return a-b;});
   el('simEmpty').classList.add('hidden');
-  if(!ST.latest||!ST.latest.dezenas||!ST.latest.dezenas.length){el('simRes').innerHTML='<div style="color:var(--t2);padding:8px;font-size:.8rem">Aguardando dados...</div>';return;}
+  if(!ST.latest||!ST.latest.dezenas||!ST.latest.dezenas.length){el('simRes').innerHTML='<div style="color:var(--t2);padding:8px;font-size:.85rem">'+t('wait')+'</div>';return;}
   var drawn=ST.latest.dezenas.map(Number);
   var hc=nums.filter(function(n){return drawn.includes(n);}).length;
   var badge,bc,msg;
-  if(hc===6){badge='🏆 SENA!';bc='sena';msg='Parabéns! Acertou todos os 6!';}
-  else if(hc===5){badge='⭐ QUINA';bc='quina';msg='5 acertos — Quina premiada!';}
-  else if(hc===4){badge='✅ QUADRA';bc='quadra';msg='4 acertos — Quadra premiada!';}
-  else{badge=hc+' acerto'+(hc!==1?'s':'');bc='miss';msg=hc===0?'Nenhum acerto desta vez.':hc+' número(s) acertado(s)';}
-  el('simRes').innerHTML='<div class="sim-card"><div style="font-family:Outfit,sans-serif;font-size:.88rem;font-weight:700;margin-bottom:9px;color:var(--t1)">Concurso '+ST.latest.concurso+' — '+ST.latest.data+'</div><div style="font-size:.72rem;color:var(--t2);margin-bottom:6px">Resultado oficial:</div><div class="sim-balls">'+drawn.sort(function(a,b){return a-b;}).map(function(n){return'<div class="sball'+(nums.includes(n)?' hit':'')+'">'+pad(n)+'</div>';}).join('')+'</div><div style="font-size:.72rem;color:var(--t2);margin:8px 0 6px">Seu jogo:</div><div class="sim-balls">'+nums.map(function(n){return'<div class="sball'+(drawn.includes(n)?' hit':'')+'">'+pad(n)+'</div>';}).join('')+'</div><div style="margin-top:9px"><span class="sbadge '+bc+'">'+badge+'</span></div><div style="font-size:.76rem;color:var(--t2);margin-top:7px">'+msg+'</div></div>';
-  track('simulate',{hits:hc});
+  if(hc===6){badge='🏆 SENA!';bc='sena';msg=t('sena-msg');}
+  else if(hc===5){badge='⭐ QUINA';bc='quina';msg=t('quina-msg');}
+  else if(hc===4){badge='✅ QUADRA';bc='quadra';msg=t('quadra-msg');}
+  else{badge=t('hits',{n:hc});bc='miss';msg=hc===0?t('no-hit'):t('hits',{n:hc});}
+  el('simRes').innerHTML='<div class="sim-card"><div style="font-family:Outfit,sans-serif;font-size:.95rem;font-weight:700;margin-bottom:9px;color:var(--t1)">'+t('conc',{n:ST.latest.concurso})+' — '+(ST.latest.offline?t('sync-off'):ST.latest.data)+'</div><div style="font-size:.78rem;color:var(--t2);margin-bottom:6px">'+t('official')+'</div><div class="sim-balls">'+drawn.slice().sort(function(a,b){return a-b;}).map(function(n){return'<div class="sball'+(nums.includes(n)?' hit':'')+'">'+pad(n)+'</div>';}).join('')+'</div><div style="font-size:.78rem;color:var(--t2);margin:8px 0 6px">'+t('yours')+'</div><div class="sim-balls">'+nums.map(function(n){return'<div class="sball'+(drawn.includes(n)?' hit':'')+'">'+pad(n)+'</div>';}).join('')+'</div><div style="margin-top:9px"><span class="sbadge '+bc+'">'+badge+'</span></div><div style="font-size:.84rem;color:var(--t2);margin-top:7px">'+msg+'</div></div>';
+  if(!silent)track('simulate',{hits:hc});
 }
 function getH(){try{return JSON.parse(localStorage.getItem('sm_hist'))||[];}catch(e){return[];}}
 function setH(l){try{localStorage.setItem('sm_hist',JSON.stringify(l));}catch(e){}}
-function quickSave(game){var l=getH();l.unshift({id:Date.now(),c:ST.latest.concurso||'--',nums:game,dt:new Date().toLocaleDateString('pt-BR')});setH(l);}
+function today(){return new Date().toLocaleDateString(LOCALE[curLang]);}
+function quickSave(game){var l=getH();l.unshift({id:Date.now(),c:ST.latest.concurso||'--',nums:game,dt:today()});setH(l);}
 function addHist(){
-  if(ST.hSel.length!==6){alert('Selecione 6 números.');return;}
+  if(ST.hSel.length!==6){toast(t('need6'));return;}
   var conc=parseInt(el('hConc').value)||ST.latest.concurso||'--';
-  var l=getH();l.unshift({id:Date.now(),c:conc,nums:ST.hSel.slice().sort(function(a,b){return a-b;}),dt:new Date().toLocaleDateString('pt-BR')});
+  var l=getH();l.unshift({id:Date.now(),c:conc,nums:ST.hSel.slice().sort(function(a,b){return a-b;}),dt:today()});
   setH(l);resetGrid('hGrid',ST.hSel,'hCnt','hTgt','btnAddH',6);el('hConc').value='';renderHist();
-  var btn=el('btnAddH');btn.innerHTML='<span>✅ Adicionado!</span>';setTimeout(function(){btn.innerHTML='<span data-i="btn-add-hist">+ Adicionar Jogo</span>';},1500);
+  toast(t('added'));
 }
 function renderHist(){
   var list=getH(),cont=el('histList');
-  if(!list.length){cont.innerHTML='<div class="hist-empty">📋 Nenhum jogo registrado.<br>Gere jogos e salve com 💾</div>';return;}
+  if(!list.length){cont.innerHTML='<div class="hist-empty">'+t('hist-empty')+'</div>';return;}
   var drawn=ST.latest&&ST.latest.dezenas?ST.latest.dezenas.map(Number):[];
   cont.innerHTML='';
   list.forEach(function(item){
     var hc=drawn.length?item.nums.filter(function(n){return drawn.includes(n);}).length:0;
-    var rc='miss',rl=hc+' acerto'+(hc!==1?'s':'');
+    var rc='miss',rl=t('hits',{n:hc});
     if(hc===6){rc='sena';rl='🏆 SENA!';}else if(hc===5){rc='quina';rl='⭐ Quina';}else if(hc===4){rc='quadra';rl='✅ Quadra';}
-    var div=document.createElement('div');div.className='hist-item';var id=item.id;
-    div.innerHTML='<div class="hist-hdr"><span class="hist-conc">Concurso '+item.c+'</span><span class="hist-date">'+item.dt+'</span></div><div class="hist-balls">'+item.nums.map(function(n){return'<div class="hball'+(drawn.includes(n)?' hit':'')+'">'+pad(n)+'</div>';}).join('')+'</div><div class="hist-ft"><span class="hbadge '+rc+'">'+rl+'</span><button class="btn-d" data-id="'+id+'">Excluir</button></div>';
+    var div=document.createElement('div');div.className='hist-item';
+    var hdr=document.createElement('div');hdr.className='hist-hdr';
+    var hcEl=document.createElement('span');hcEl.className='hist-conc';hcEl.textContent=t('conc',{n:item.c});
+    var hdEl=document.createElement('span');hdEl.className='hist-date';hdEl.textContent=item.dt;
+    hdr.appendChild(hcEl);hdr.appendChild(hdEl);
+    var bl=document.createElement('div');bl.className='hist-balls';
+    item.nums.forEach(function(n){var b=document.createElement('div');b.className='hball'+(drawn.includes(n)?' hit':'');b.textContent=pad(n);bl.appendChild(b);});
+    var ft=document.createElement('div');ft.className='hist-ft';
+    var bd=document.createElement('span');bd.className='hbadge '+rc;bd.textContent=rl;
+    var del=document.createElement('button');del.className='btn-d';del.textContent=t('del');
+    del.onclick=function(){setH(getH().filter(function(x){return x.id!==item.id;}));renderHist();};
+    ft.appendChild(bd);ft.appendChild(del);
+    div.appendChild(hdr);div.appendChild(bl);div.appendChild(ft);
     cont.appendChild(div);
   });
-  cont.querySelectorAll('.btn-d').forEach(function(btn){btn.onclick=function(){var l=getH().filter(function(x){return x.id!==parseInt(btn.dataset.id);});setH(l);renderHist();};});
 }
 function renderTable(){
   var sv=el('srch').value.trim().toLowerCase();
@@ -781,7 +1062,7 @@ function renderTable(){
   if(ST.page.cur>ST.page.tot)ST.page.cur=ST.page.tot;
   var si=(ST.page.cur-1)*ST.page.per,items=res.slice(si,si+ST.page.per);
   var tb=el('tBody');tb.innerHTML='';
-  if(!items.length){tb.innerHTML='<tr><td colspan="3" class="tbl-empty">Nenhum resultado encontrado.</td></tr>';el('btnPrev').disabled=true;el('btnNext').disabled=true;el('pagInfo').textContent='0/0';return;}
+  if(!items.length){tb.innerHTML='<tr><td colspan="3" class="tbl-empty">'+t('none')+'</td></tr>';el('btnPrev').disabled=true;el('btnNext').disabled=true;el('pagInfo').textContent='0/0';return;}
   items.forEach(function(item){
     var nums=Array.isArray(item.d)?item.d:[];
     var tr=document.createElement('tr');
@@ -789,68 +1070,84 @@ function renderTable(){
     var t2=document.createElement('td');var bc=document.createElement('div');bc.className='tballs';
     nums.map(Number).sort(function(a,b){return a-b;}).forEach(function(n){var s=document.createElement('span');s.className='tball';s.textContent=pad(n);bc.appendChild(s);});
     t2.appendChild(bc);tr.appendChild(t2);
-    var t3=document.createElement('td');var btn=document.createElement('button');btn.className='btn-s';btn.textContent='Ver';btn.onclick=function(){openModal(item.c);};t3.appendChild(btn);tr.appendChild(t3);
+    var t3=document.createElement('td');var btn=document.createElement('button');btn.className='btn-s';btn.textContent=t('view');btn.onclick=function(){openModal(item.c);};t3.appendChild(btn);tr.appendChild(t3);
     tb.appendChild(tr);
   });
   el('btnPrev').disabled=ST.page.cur===1;el('btnNext').disabled=ST.page.cur===ST.page.tot;
-  el('pagInfo').textContent='Pág. '+ST.page.cur+'/'+ST.page.tot;
+  el('pagInfo').textContent=t('page',{a:ST.page.cur,b:ST.page.tot});
 }
 function openModal(num){
-  el('mTitle').textContent='Concurso #'+num;el('mBody').innerHTML='<div class="tbl-empty">Carregando...</div>';el('modal').classList.remove('hidden');
+  el('mTitle').textContent=t('conc-hash',{n:num});el('mBody').innerHTML='<div class="tbl-empty">'+t('loading')+'</div>';el('modal').classList.remove('hidden');
   fetch('https://servicebus2.caixa.gov.br/portaldeloterias/api/megasena/'+num)
   .then(function(r){if(!r.ok)throw 0;return r.json();})
-  .then(function(d){var pr=d.listaRateioPremio?d.listaRateioPremio.map(function(p){return{desc:p.descricaoFaixa,g:p.numeroDeGanhadores,v:p.valorPremio};}):[];el('mBody').innerHTML='<div class="mrow"><span>Data:</span><strong style="color:var(--t1)">'+d.dataApuracao+'</strong></div><div class="mrow"><span>Acumulado:</span><strong style="color:'+(d.acumulado?'var(--red)':'var(--green)')+'">'+( d.acumulado?'Sim':'Não')+'</strong></div><div class="balls-row" style="justify-content:center;margin:10px 0">'+d.listaDezenas.map(Number).sort(function(a,b){return a-b;}).map(function(n){return'<div class="ball">'+pad(n)+'</div>';}).join('')+'</div>'+(pr.length?'<table><thead><tr><th>Faixa</th><th>Ganhadores</th><th>Prêmio</th></tr></thead><tbody>'+pr.map(function(p){return'<tr><td>'+p.desc+'</td><td>'+p.g+'</td><td style="color:var(--gold)">'+brl(p.v)+'</td></tr>';}).join('')+'</tbody></table>':'');})
-  .catch(function(){var dz=ST.draws[num]||[];el('mBody').innerHTML='<div class="mrow"><span>Modo:</span><strong style="color:var(--gold)">Offline</strong></div><div class="balls-row" style="justify-content:center;margin:10px 0">'+dz.map(Number).sort(function(a,b){return a-b;}).map(function(n){return'<div class="ball">'+pad(n)+'</div>';}).join('')+'</div>';});
+  .then(function(d){var pr=d.listaRateioPremio?d.listaRateioPremio.map(function(p){return{desc:p.descricaoFaixa,g:p.numeroDeGanhadores,v:p.valorPremio};}):[];el('mBody').innerHTML='<div class="mrow"><span>'+t('date')+'</span><strong style="color:var(--t1)">'+d.dataApuracao+'</strong></div><div class="mrow"><span>'+t('acc')+'</span><strong style="color:'+(d.acumulado?'var(--red)':'var(--green)')+'">'+(d.acumulado?t('yes'):t('no'))+'</strong></div><div class="balls-row">'+d.listaDezenas.map(Number).sort(function(a,b){return a-b;}).map(function(n){return'<div class="ball">'+pad(n)+'</div>';}).join('')+'</div>'+(pr.length?'<table><thead><tr><th>'+t('tier')+'</th><th>'+t('win-h')+'</th><th>'+t('prize')+'</th></tr></thead><tbody>'+pr.map(function(p){return'<tr><td>'+p.desc+'</td><td>'+p.g+'</td><td style="color:var(--gold)">'+brl(p.v)+'</td></tr>';}).join('')+'</tbody></table>':'');})
+  .catch(function(){var dz=ST.draws[num]||[];el('mBody').innerHTML='<div class="mrow"><span>'+t('mode')+'</span><strong style="color:var(--gold)">'+t('sync-off')+'</strong></div><div class="balls-row">'+dz.map(Number).sort(function(a,b){return a-b;}).map(function(n){return'<div class="ball">'+pad(n)+'</div>';}).join('')+'</div>';});
 }
+// 문의: 메일 앱을 열어 contato@duriup.com.br 로 바로 보냄
 function sendContact(){
-  var tipo=el('cTipo').value,nome=el('cNome').value.trim(),email=el('cEmail').value.trim(),msg=el('cMsg').value.trim();
-  if(!nome||!email||!msg){alert('Preencha todos os campos.');return;}
-  var st=el('cStatus');st.style.display='block';st.style.color='var(--gold)';st.textContent='Enviando...';el('btnSend').disabled=true;
-  fetch(FORM_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'[SorteMax] '+tipo+' de '+nome,tipo:tipo,nome:nome,email:email,mensagem:msg,data:new Date().toLocaleString('pt-BR')})})
-  .then(function(r){if(r.ok){st.style.color='var(--green)';st.textContent='✅ Enviado! Obrigado.';el('cNome').value='';el('cEmail').value='';el('cMsg').value='';}else{st.style.color='var(--red)';st.textContent='❌ Erro. Tente: contato@duriup.com.br';}el('btnSend').disabled=false;})
-  .catch(function(){st.style.color='var(--red)';st.textContent='❌ Erro de conexão.';el('btnSend').disabled=false;});
+  var sel=el('cTipo'),tipo=sel.options[sel.selectedIndex].textContent.replace(/^[^\wÀ-ÿ가-힣]+/,'').trim();
+  var nome=el('cNome').value.trim(),msg=el('cMsg').value.trim();
+  if(!nome||!msg){toast(t('fill-all'));return;}
+  var subj=t('mail-subj',{t:tipo,n:nome});
+  var body=msg+'\n\n— '+nome+'\nSorteMax v'+APP_VERSION+' ('+curLang+')';
+  toast(t('mail-open'));
+  track('contact_mail',{tipo:sel.value});
+  location.href='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
 }
-function copyTxt(t){if(!t)return;navigator.clipboard.writeText(t).then(function(){alert('Copiado! ✅');}).catch(function(){});}
+function copyTxt(txt){
+  if(!txt)return;
+  var done=function(){toast(t('copied'));};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(function(){fallbackCopy(txt);done();});}
+  else{fallbackCopy(txt);done();}
+}
+function fallbackCopy(txt){var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);}
 function dlTxt(c,fn){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:'text/plain;charset=utf-8'}));a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);}
 
 window.onload=function(){
-  var savedLang;try{savedLang=localStorage.getItem('sm_lang');}catch(e){}
-  if(savedLang&&LANG[savedLang])applyLang(savedLang);
-  el('langBtn').onclick=function(){applyLang(curLang==='pt'?'es':'pt');track('lang_switch',{lang:curLang});};
-  gateInit();pwaInit();tabInit();helpInit();calcNextDraw();bellInit();
-  setInterval(adTick,5000);loadDB();
-  document.querySelectorAll('input[name="gMode"]').forEach(function(m){m.onchange=function(){document.querySelectorAll('.mode').forEach(function(o){o.classList.remove('on');});m.closest('.mode').classList.add('on');var v=m.value;el('filtBox').classList.toggle('hidden',v!=='smart');el('luckBox').classList.toggle('hidden',v!=='lucky');el('sgQty').classList.toggle('hidden',v==='lucky');};});
-  el('qMinus').onclick=function(){var v=parseInt(el('qVal').value);if(v>1)el('qVal').value=v-1;};
-  el('qPlus').onclick=function(){var v=parseInt(el('qVal').value);if(v<10)el('qVal').value=v+1;};
-  el('lBirth').oninput=function(){var v=this.value.replace(/\D/g,'');if(v.length>=3)v=v.slice(0,2)+'/'+v.slice(2);if(v.length>=6)v=v.slice(0,5)+'/'+v.slice(5,9);this.value=v;};
-  el('btnGen').onclick=function(){var mode=document.querySelector('input[name="gMode"]:checked').value,qty=parseInt(el('qVal').value);genGames=[];if(mode==='lucky'){var n=el('lName').value.trim(),b=el('lBirth').value;if(!n||!b){alert('Preencha nome e data.');return;}genGames.push(genLucky(n,b));}else for(var i=0;i<qty;i++)genGames.push(mode==='smart'?genSmart():genRandom());renderGen();track('generate_games',{mode:mode,qty:genGames.length});};
-  el('btnCopyGen').onclick=function(){copyTxt(genGames.map(function(g){return g.join(' ');}).join('\n'));};
-  el('btnDlGen').onclick=function(){dlTxt(genGames.map(function(g,i){return'Jogo '+(i+1)+': '+g.map(pad).join(' - ');}).join('\n'),'sortemax-jogos.txt');};
+  var v='v'+APP_VERSION;el('wVer').textContent=v;el('hdrVer').textContent=v;el('ftVer').textContent=v;
+  var th='auto';try{th=localStorage.getItem('sm_theme')||'auto';}catch(e){}
+  applyTheme(th);
+  welcomeInit();settingsInit();pwaInit();tabInit();helpInit();bellInit();
   buildGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);
+  buildGrid('sGrid',ST.sSel,'sCnt','sTgt','btnSim',6);
+  buildGrid('hGrid',ST.hSel,'hCnt','hTgt','btnAddH',6);
+  var savedLang;try{savedLang=localStorage.getItem('sm_lang');}catch(e){}
+  applyLang(savedLang&&LANG[savedLang]?savedLang:'pt');
+  setInterval(adTick,5000);loadDB();
+  document.querySelectorAll('input[name="gMode"]').forEach(function(m){m.onchange=function(){document.querySelectorAll('.mode').forEach(function(o){o.classList.remove('on');});m.closest('.mode').classList.add('on');var val=m.value;el('filtBox').classList.toggle('hidden',val!=='smart');el('luckBox').classList.toggle('hidden',val!=='lucky');el('sgQty').classList.toggle('hidden',val==='lucky');};});
+  el('qMinus').onclick=function(){var q=parseInt(el('qVal').value);if(q>1)el('qVal').value=q-1;};
+  el('qPlus').onclick=function(){var q=parseInt(el('qVal').value);if(q<10)el('qVal').value=q+1;};
+  el('lBirth').oninput=function(){var q=this.value.replace(/\D/g,'');if(q.length>=3)q=q.slice(0,2)+'/'+q.slice(2);if(q.length>=6)q=q.slice(0,5)+'/'+q.slice(5,9);this.value=q;};
+  el('btnGen').onclick=function(){var mode=document.querySelector('input[name="gMode"]:checked').value,qty=parseInt(el('qVal').value);if(mode==='lucky'){var n=el('lName').value.trim(),b=el('lBirth').value;if(!n||!b){toast(t('fill-lucky'));return;}genGames=[genLucky(n,b)];}else{genGames=[];for(var i=0;i<qty;i++)genGames.push(mode==='smart'?genSmart():genRandom());}renderGen();el('genList').scrollIntoView({behavior:'smooth',block:'nearest'});track('generate_games',{mode:mode,qty:genGames.length});};
+  el('btnCopyGen').onclick=function(){copyTxt(genGames.map(function(g){return g.map(pad).join(' ');}).join('\n'));};
+  el('btnDlGen').onclick=function(){dlTxt(genGames.map(function(g,i){return t('game',{n:i+1})+': '+g.map(pad).join(' - ');}).join('\n'),'sortemax-jogos.txt');};
   el('wForm').onchange=function(){resetGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);};
   el('wReset').onclick=function(){resetGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);};
   el('wAuto').onclick=function(){autoGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);};
-  el('btnFech').onclick=function(){var f=el('wForm').value,sel=ST.wSel.slice().sort(function(a,b){return a-b;}),t=4,mx=6;if(f==='q8'){t=4;mx=6;}else if(f==='q10a'){t=4;mx=20;}else if(f==='q12'){t=4;mx=42;}else if(f==='n9'){t=5;mx=12;}else if(f==='n10'){t=5;mx=20;}wheelGames=fechCover(sel,6,t,mx);renderWheel();track('fechamento',{plan:f});};
-  el('btnCopyW').onclick=function(){copyTxt(wheelGames.map(function(g){return g.join(' ');}).join('\n'));};
-  el('btnDlW').onclick=function(){dlTxt(wheelGames.map(function(g,i){return'Jogo '+(i+1)+': '+g.map(pad).join(' - ');}).join('\n'),'sortemax-fechamento.txt');};
-  buildGrid('sGrid',ST.sSel,'sCnt','sTgt','btnSim',6);
+  el('btnFech').onclick=function(){var f=el('wForm').value,sel=ST.wSel.slice().sort(function(a,b){return a-b;}),tt=4,mx=6;if(f==='q8'){tt=4;mx=6;}else if(f==='q10a'){tt=4;mx=20;}else if(f==='q12'){tt=4;mx=42;}else if(f==='n9'){tt=5;mx=12;}else if(f==='n10'){tt=5;mx=20;}wheelGames=fechCover(sel,6,tt,mx);renderWheel();el('wRes').scrollIntoView({behavior:'smooth',block:'nearest'});track('fechamento',{plan:f});};
+  el('btnCopyW').onclick=function(){copyTxt(wheelGames.map(function(g){return g.map(pad).join(' ');}).join('\n'));};
+  el('btnDlW').onclick=function(){dlTxt(wheelGames.map(function(g,i){return t('bet',{n:i+1})+': '+g.map(pad).join(' - ');}).join('\n'),'sortemax-fechamento.txt');};
   el('sReset').onclick=function(){resetGrid('sGrid',ST.sSel,'sCnt','sTgt','btnSim',6);el('simEmpty').classList.remove('hidden');el('simRes').innerHTML='';};
   el('sAuto').onclick=function(){autoGrid('sGrid',ST.sSel,'sCnt','sTgt','btnSim',6);};
-  el('btnSim').onclick=runSim;
-  buildGrid('hGrid',ST.hSel,'hCnt','hTgt','btnAddH',6);
+  el('btnSim').onclick=function(){runSim();el('simRes').scrollIntoView({behavior:'smooth',block:'nearest'});};
   el('hReset').onclick=function(){resetGrid('hGrid',ST.hSel,'hCnt','hTgt','btnAddH',6);};
   el('hAuto').onclick=function(){autoGrid('hGrid',ST.hSel,'hCnt','hTgt','btnAddH',6);};
   el('btnAddH').onclick=addHist;
-  el('btnClrH').onclick=function(){if(confirm('Apagar tudo?')){try{localStorage.removeItem('sm_hist');}catch(e){}renderHist();}};
-  renderHist();
+  el('btnClrH').onclick=function(){if(confirm(t('confirm-clear'))){try{localStorage.removeItem('sm_hist');}catch(e){}renderHist();}};
   el('srch').oninput=function(){ST.page.cur=1;renderTable();};
   el('btnPrev').onclick=function(){if(ST.page.cur>1){ST.page.cur--;renderTable();}};
   el('btnNext').onclick=function(){if(ST.page.cur<ST.page.tot){ST.page.cur++;renderTable();}};
   el('mClose').onclick=function(){el('modal').classList.add('hidden');};
   el('modal').onclick=function(e){if(e.target===el('modal'))el('modal').classList.add('hidden');};
   el('btnSend').onclick=sendContact;
-  el('btnPix').onclick=function(){copyTxt('ettikalaser@gmail.com');el('btnPix').textContent='✅ Copiado!';setTimeout(function(){el('btnPix').textContent=LANG[curLang]['btn-pix'];},2000);};
-  if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').then(function(reg){console.log('SW registered:',reg.scope);}).catch(function(err){console.log('SW error:',err);});}
+  el('btnCopyMail').onclick=function(){copyTxt(CONTACT_EMAIL);};
+  el('btnPix').onclick=function(){copyTxt('ettikalaser@gmail.com');};
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){el('modal').classList.add('hidden');el('setSheet').classList.add('hidden');}});
+  if('serviceWorker' in navigator){
+    var hadCtrl=!!navigator.serviceWorker.controller,reloaded=false;
+    navigator.serviceWorker.addEventListener('controllerchange',function(){if(hadCtrl&&!reloaded){reloaded=true;location.reload();}});
+    navigator.serviceWorker.register('/sw.js').catch(function(err){console.log('SW error:',err);});
+  }
 };
 </script>
 </body>

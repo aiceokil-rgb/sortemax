@@ -3,7 +3,7 @@
 - 사이트: https://sortemax.duriup.com.br (GitHub Pages 자동 배포)
 
 ## 내용 규칙
-- 앱 화면 글은 포르투갈어(브라질)만 쓴다.
+- 앱 화면 글의 기본 언어는 포르투갈어(브라질). 화면에서 스페인어·영어·한국어로 바꿀 수 있다(4개 언어 모두 함께 고친다).
 - 이름·링크는 Duriup 만 쓴다. Mix Mania, mixmania, Caçador de Mercados, cacadordemercados 는 쓰지 않는다.
 - 문의 이메일: contato@duriup.com.br
 - 비밀번호·키는 저장소에 넣지 않는다.
