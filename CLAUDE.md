@@ -21,3 +21,8 @@
 - `data/megasena.json`, `data/latest.json` 은 GitHub Actions(`.github/workflows/update-data.yml`)가 Caixa 에서 받아 자동으로 갱신한다. 손으로 고치지 않는다.
 - 앱에 가짜·예시 당첨 번호를 넣지 않는다. 최신 결과를 못 받으면 경고를 띄운다.
 - 조합(fechamento) 표를 바꾸면 모든 6개 추첨 경우를 전수 검사해 보장을 확인한다.
+
+## 채널 정보가 바뀔 때
+- 3채널(소노·시네·두리업) 이름·주제·로고가 바뀌면 같이 고친다: 앱 배너·채널 목록(4개 언어), `/baixar/` 페이지, 공유 문구.
+- KIL 의 claude.ai 사용자 기본 설정(Settings → 개인 선호사항)은 내가 못 고친다. 바뀐 내용을 넣은 **설정 전체 문구**를 보고에 붙여서 그대로 바꿔 넣을 수 있게 준다.
+- 현재 채널: 소노 @sognodargento(이탈리아 60년대 음악) · 시네 @CinemaBallad(영화 음악) · 두리업 @Duriup(코인·주식, 브라질).
