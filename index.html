@@ -723,7 +723,7 @@ footer .warn{color:var(--t3)}
 
 <script>
 'use strict';
-var APP_VERSION='2.2.2';
+var APP_VERSION='2.3.0';
 var CONTACT_EMAIL='contato@duriup.com.br';
 var pad=function(n){return n<10?'0'+n:String(n);};
 var brl=function(v){return isNaN(v)||v===null?'R$ 0,00':'R$ '+Number(v).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1.');};
@@ -974,7 +974,16 @@ function settingsInit(){
 function pwaInit(){
   window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;el('pwaBanner').classList.add('on');});
   el('pwaBtnInstall').onclick=function(){if(!deferredPrompt)return;deferredPrompt.prompt();deferredPrompt.userChoice.then(function(r){if(r.outcome==='accepted')track('pwa_install');deferredPrompt=null;el('pwaBanner').classList.remove('on');});};
-  el('pwaBtnClose').onclick=function(){el('pwaBanner').classList.remove('on');};
+  el('pwaBtnClose').onclick=function(){el('pwaBanner').classList.remove('on');try{localStorage.setItem('sm_pwa_hide',String(Date.now()));}catch(e){}};
+  // 크롬이 아닌 안드로이드(삼성 등)·아이폰: 설치 버튼 → 설치 페이지가 알아서 크롬을 열거나 아이폰 안내를 띄움
+  var ua=navigator.userAgent||'',standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+  var isIOS=/iPhone|iPad|iPod/.test(ua),isAndroid=/Android/i.test(ua);
+  var canHere=isAndroid&&/Chrome\/\d/.test(ua)&&!/SamsungBrowser|OPR|MiuiBrowser|YaBrowser|Firefox|UCBrowser|HuaweiBrowser|HeyTapBrowser|; wv\)|FBAN|FBAV|Instagram|Line\//.test(ua);
+  var hid=0;try{hid=+localStorage.getItem('sm_pwa_hide')||0;}catch(e){}
+  if(!standalone&&Date.now()-hid>3*86400000&&(isIOS||(isAndroid&&!canHere))){
+    el('pwaBanner').classList.add('on');
+    el('pwaBtnInstall').onclick=function(){track('pwa_banner_click',{os:isIOS?'ios':'android'});location.href=isIOS?'/baixar/?ios=1':'intent://sortemax.duriup.com.br/baixar/?auto=1#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent('https://sortemax.duriup.com.br/baixar/?semchrome=1')+';end';};
+  }
 }
 // 추첨 시각(브라질리아): 일요일 11h, 그 외 21h. 브라질은 서머타임 없음(UTC-3)
 function parseBR(s){var m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(s||'');return m?{d:+m[1],m:+m[2],y:+m[3]}:null;}

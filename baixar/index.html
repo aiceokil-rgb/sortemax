@@ -77,6 +77,18 @@ h2{font-family:'Outfit',sans-serif;font-size:1.6rem;letter-spacing:-.02em;margin
 .sam ol{margin:8px 0 0 20px;font-size:.92rem;color:var(--t1)}
 .sam li{margin:4px 0}
 .btn-chrome{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;margin-top:12px;border-radius:14px;background:#1a73e8;color:#fff;font-weight:700;text-decoration:none}
+.ov{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);display:none;align-items:flex-end;justify-content:center}
+.ov.on{display:flex}
+.ov-box{width:100%;max-width:480px;background:var(--card);color:var(--t1);border-radius:24px 24px 0 0;padding:22px 18px calc(24px + var(--sab));text-align:center;box-shadow:0 -10px 40px rgba(0,0,0,.4)}
+.ov-box h3{font-family:'Outfit',sans-serif;font-size:1.4rem;margin-bottom:6px}
+.ov-box p{color:var(--t2);font-size:.95rem}
+.ov-box .btn{margin-top:16px;width:100%}
+.ov-steps{text-align:left;margin:12px 0 0;display:grid;gap:8px}
+.ov-steps div{display:flex;gap:10px;align-items:center;font-size:1rem;font-weight:600}
+.ov-steps .num{width:30px;height:30px;font-size:.9rem}
+.ov-close{background:none;border:none;color:var(--t3);font-size:.9rem;margin-top:12px;cursor:pointer;padding:8px}
+.ios-arrow{font-size:2.4rem;line-height:1;margin-top:10px;animation:bounce 1s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
 .qr-box{display:none;gap:16px;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px;margin-top:12px;box-shadow:var(--sh)}
 .qr-box img{width:132px;height:132px;background:#fff;border-radius:10px;padding:6px;flex-shrink:0}
 .qr-box p{font-size:.9rem;color:var(--t2)}
@@ -231,6 +243,28 @@ footer .ch img{width:28px;height:28px;border-radius:50%;background:#fff}
   <p style="margin-top:8px" data-i="legal">SorteMax é entretenimento e auxílio estatístico. Não garante prêmios e não tem vínculo com a Caixa Econômica Federal. Jogue com responsabilidade. +18.</p>
   <p style="margin-top:8px">© 2026 SorteMax Mega · Duriup</p>
 </footer>
+<div class="ov" id="ovAndroid" role="dialog" aria-modal="true">
+  <div class="ov-box">
+    <div style="font-size:2.4rem">📲</div>
+    <h3 data-i="ov-t">Quase pronto!</h3>
+    <p data-i="ov-p">Toque no botão abaixo e depois em “Instalar”.</p>
+    <button class="btn btn-main" id="ovBtn"><span id="ovBtnTxt" data-i="ov-btn">Instalar agora</span></button>
+    <p id="ovFail" style="display:none;margin-top:12px" data-i="ov-fail">Se nada aparecer: toque no menu ⋮ do navegador (no alto, à direita) e escolha “Instalar app”.</p>
+    <button class="ov-close" data-close data-i="close">Fechar</button>
+  </div>
+</div>
+<div class="ov" id="ovIOS" role="dialog" aria-modal="true">
+  <div class="ov-box">
+    <h3 data-i="ios-t">Instalar no iPhone</h3>
+    <div class="ov-steps">
+      <div><span class="num">1</span><span data-i="ios-1">Toque em Compartilhar ⬆︎ (na barra de baixo)</span></div>
+      <div><span class="num">2</span><span data-i="ios-2">Escolha “Adicionar à Tela de Início”</span></div>
+      <div><span class="num">3</span><span data-i="ios-3">Toque em “Adicionar”</span></div>
+    </div>
+    <div class="ios-arrow">⬇︎</div>
+    <button class="ov-close" data-close data-i="close">Fechar</button>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -285,12 +319,21 @@ Object.assign(L.pt,{"sm-p": "No Samsung Internet a instalação pode falhar (“
 Object.assign(L.es,{"sm-p": "En Samsung Internet la instalación puede fallar (“No se puede instalar la app web”) o Google Play Protect puede mostrar “App no segura bloqueada”. Es cosa del navegador, no de SorteMax. Usa uno de estos caminos:", "q7": "¿Apareció “No se puede instalar” o “App no segura bloqueada”?", "r7": "Solo pasa en el navegador Samsung Internet: crea la app en un formato antiguo de Android y Google Play Protect la bloquea. SorteMax es seguro. Abre sortemax.duriup.com.br en Google Chrome y toca “Instalar”, o en Samsung Internet usa el menú ≡ → “Agregar página a” → “Pantalla de inicio”."});
 Object.assign(L.en,{"sm-p": "On Samsung Internet, installing may fail (“Can’t install web app”) or Google Play Protect may show “Unsafe app blocked”. That comes from the browser, not from SorteMax. Use one of these options:", "q7": "Saw “Can’t install” or “Unsafe app blocked”?", "r7": "This only happens in the Samsung Internet browser: it builds the app in an old Android format and Google Play Protect blocks it. SorteMax is safe. Open sortemax.duriup.com.br in Google Chrome and tap “Install”, or in Samsung Internet use the ≡ menu → “Add page to” → “Home screen”."});
 Object.assign(L.ko,{"sm-p": "삼성 인터넷에서는 설치가 실패하거나(“웹 앱을 설치할 수 없음”) Google Play 프로텍트가 “안전하지 않은 앱 차단됨”을 띄울 수 있어요. 삼성 브라우저 문제이고 SorteMax 문제가 아니에요. 아래 방법 중 하나를 쓰세요:", "q7": "“설치할 수 없음” 또는 “안전하지 않은 앱 차단됨”이 나왔나요?", "r7": "삼성 인터넷 브라우저에서만 생겨요. 삼성 브라우저가 앱을 오래된 안드로이드 형식으로 만들어서 Google Play 프로텍트가 막는 거예요. SorteMax 는 안전해요. 크롬에서 sortemax.duriup.com.br 을 열어 “설치”를 누르거나, 삼성 인터넷 메뉴 ≡ → “현재 페이지 추가” → “홈 화면”을 쓰세요."});
+Object.assign(L.pt,{"ov-t": "Quase pronto!", "ov-p": "Toque no botão abaixo e depois em “Instalar”.", "ov-btn": "Instalar agora", "ov-wait": "Preparando…", "ov-fail": "Se nada aparecer: toque no menu ⋮ do navegador (no alto, à direita) e escolha “Instalar app”.", "ios-t": "Instalar no iPhone", "ios-1": "Toque em Compartilhar ⬆︎ (na barra de baixo)", "ios-2": "Escolha “Adicionar à Tela de Início”", "ios-3": "Toque em “Adicionar”", "close": "Fechar", "nochrome": "Não foi possível abrir o instalador. Siga os 3 passos abaixo para criar o ícone do app."});
+Object.assign(L.es,{"ov-t": "¡Casi listo!", "ov-p": "Toca el botón de abajo y luego “Instalar”.", "ov-btn": "Instalar ahora", "ov-wait": "Preparando…", "ov-fail": "Si no aparece nada: toca el menú ⋮ del navegador (arriba a la derecha) y elige “Instalar app”.", "ios-t": "Instalar en iPhone", "ios-1": "Toca Compartir ⬆︎ (en la barra de abajo)", "ios-2": "Elige “Agregar a pantalla de inicio”", "ios-3": "Toca “Agregar”", "close": "Cerrar", "nochrome": "No fue posible abrir el instalador. Sigue los 3 pasos de abajo para crear el ícono de la app."});
+Object.assign(L.en,{"ov-t": "Almost there!", "ov-p": "Tap the button below and then “Install”.", "ov-btn": "Install now", "ov-wait": "Getting ready…", "ov-fail": "If nothing shows up: tap the browser ⋮ menu (top right) and choose “Install app”.", "ios-t": "Install on iPhone", "ios-1": "Tap Share ⬆︎ (in the bottom bar)", "ios-2": "Choose “Add to Home Screen”", "ios-3": "Tap “Add”", "close": "Close", "nochrome": "The installer could not be opened. Follow the 3 steps below to create the app icon."});
+Object.assign(L.ko,{"ov-t": "거의 다 됐어요!", "ov-p": "아래 버튼을 누른 뒤 “설치”를 누르세요.", "ov-btn": "지금 설치", "ov-wait": "준비 중…", "ov-fail": "아무것도 안 뜨면: 브라우저 오른쪽 위 메뉴 ⋮ → “앱 설치”를 누르세요.", "ios-t": "아이폰에 설치하기", "ios-1": "아래쪽 공유 버튼 ⬆︎ 누르기", "ios-2": "“홈 화면에 추가” 고르기", "ios-3": "“추가” 누르기", "close": "닫기", "nochrome": "설치 화면을 열지 못했어요. 아래 3단계로 앱 아이콘을 만드세요."});
 var cur='pt',deferred=null,showSam=false;
 var $=function(s){return document.querySelector(s);};
 var ua=navigator.userAgent||'';
 var isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 var isAndroid=/Android/i.test(ua);
 var isSamsung=/SamsungBrowser/i.test(ua);
+// 설치 창을 직접 띄울 수 있는 안드로이드 브라우저: 크롬·엣지. 나머지(삼성·샤오미·앱 안 브라우저 등)는 크롬으로 넘긴다
+var canInstallHere=isAndroid&&/Chrome\/\d/.test(ua)&&!/SamsungBrowser|OPR|MiuiBrowser|YaBrowser|Firefox|UCBrowser|HuaweiBrowser|HeyTapBrowser|; wv\)|FBAN|FBAV|Instagram|Line\//.test(ua);
+var needsChrome=isAndroid&&!canInstallHere;
+var qs=new URLSearchParams(location.search);
+var CHROME_INTENT='intent://sortemax.duriup.com.br/baixar/?auto=1#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent('https://sortemax.duriup.com.br/baixar/?semchrome=1')+';end';
 var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
 function tr(k){return (L[cur]&&L[cur][k])||L.pt[k]||k;}
 function setLang(l){
@@ -313,10 +356,24 @@ function updBtn(){
   var t=standalone?tr('installed'):tr('install');
   document.querySelectorAll('#installTxt').forEach(function(e){e.textContent=t;});
 }
+function ga(n,p){if(typeof gtag==='function')gtag('event',n,p||{});}
+function openOv(id){document.getElementById(id).classList.add('on');}
+function androidOverlay(){
+  openOv('ovAndroid');
+  var t0=Date.now();
+  (function wait(){
+    if(deferred){$('#ovBtnTxt').textContent=tr('ov-btn');return;}
+    if(Date.now()-t0>6000){$('#ovFail').style.display='block';$('#ovBtnTxt').textContent=tr('ov-btn');return;}
+    $('#ovBtnTxt').textContent=tr('ov-wait');setTimeout(wait,300);
+  })();
+}
 function install(){
   if(standalone){location.href='/';return;}
-  if(isSamsung){showOS('android');$('#samBox').scrollIntoView({behavior:'smooth',block:'center'});toast(tr('sam-hint'));return;}
+  // 크롬이 아닌 안드로이드 브라우저: 버튼 한 번으로 크롬을 열어 설치 화면으로
+  if(needsChrome){ga('install_open_chrome',{ua:isSamsung?'samsung':'other'});location.href=CHROME_INTENT;return;}
+  if(isIOS){openOv('ovIOS');ga('install_ios_guide');return;}
   if(deferred){deferred.prompt();deferred.userChoice.then(function(r){if(typeof gtag==='function')gtag('event',r.outcome==='accepted'?'pwa_install':'pwa_install_dismiss',{from:'baixar'});deferred=null;});return;}
+  if(canInstallHere){androidOverlay();return;}
   // 자동 설치를 못 쓰는 브라우저: 해당 기기 순서를 보여줌
   showOS(isIOS?'ios':isAndroid?'android':'pc');
   document.getElementById('instalar').scrollIntoView({behavior:'smooth'});
@@ -324,6 +381,9 @@ function install(){
   if(typeof gtag==='function')gtag('event','install_steps',{os:isIOS?'ios':isAndroid?'android':'pc'});
 }
 window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;});
+$('#ovBtn').onclick=function(){if(!deferred){$('#ovFail').style.display='block';return;}deferred.prompt();deferred.userChoice.then(function(r){ga(r.outcome==='accepted'?'pwa_install':'pwa_install_dismiss',{from:'baixar_auto'});deferred=null;if(r.outcome==='accepted')document.getElementById('ovAndroid').classList.remove('on');});};
+document.querySelectorAll('[data-close]').forEach(function(b){b.onclick=function(){b.closest('.ov').classList.remove('on');};});
+document.querySelectorAll('.ov').forEach(function(o){o.addEventListener('click',function(e){if(e.target===o)o.classList.remove('on');});});
 window.addEventListener('appinstalled',function(){standalone=true;updBtn();});
 document.querySelectorAll('.lang').forEach(function(b){b.onclick=function(){setLang(b.dataset.lang);};});
 document.querySelectorAll('.st-tab').forEach(function(b){b.onclick=function(){showOS(b.dataset.os);};});
@@ -333,6 +393,10 @@ var nav=(navigator.language||'pt').slice(0,2).toLowerCase();
 setLang(saved||(L[nav]?nav:'pt'));
 showOS(isIOS?'ios':isAndroid?'android':'pc');
 if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(function(){});
+// 크롬으로 넘어온 경우 바로 설치 안내, 크롬이 없어 돌아온 경우 홈 화면 추가 안내
+if(!standalone&&qs.get('auto')==='1'&&canInstallHere)androidOverlay();
+if(qs.get('semchrome')==='1'){showSam=true;showOS('android');setTimeout(function(){$('#samBox').scrollIntoView({behavior:'smooth',block:'center'});toast(tr('nochrome'));},300);}
+if(qs.get('ios')==='1'&&isIOS&&!standalone)openOv('ovIOS');
 </script>
 </body>
 </html>
