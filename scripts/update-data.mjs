@@ -113,7 +113,11 @@ async function main() {
   Object.keys(hist.draws).map(Number).sort((a, b) => a - b).forEach(k => { sorted[k] = hist.draws[k]; });
   await writeFile(HIST, JSON.stringify({ ultimo: latest.concurso, total: count, faltando: missing, draws: sorted }) + '\n');
   latest.dezenas = latest.dezenas.slice();
-  latest.verificadoEm = now;
+  // 내용이 그대로면 시각만 바꾸지 않음(쓸데없는 커밋 방지)
+  let prev = null;
+  try { prev = JSON.parse(await readFile(LATEST, 'utf8')); } catch { }
+  const same = prev && JSON.stringify({ ...prev, verificadoEm: 0, fonte: 0 }) === JSON.stringify({ ...latest, verificadoEm: 0, fonte: 0 });
+  latest.verificadoEm = same ? prev.verificadoEm : now;
   await writeFile(LATEST, JSON.stringify(latest, null, 1) + '\n');
   console.log(`ok: ${count} concursos, +${added} novos, faltando ${missing.length}`);
   if (missing.length) console.log('faltando:', missing.slice(0, 50).join(','));

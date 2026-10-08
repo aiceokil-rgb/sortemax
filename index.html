@@ -276,6 +276,28 @@ footer .warn{color:var(--t3)}
 .opt.on{border-color:var(--green);background:var(--greenT);color:var(--green)}
 .toast{position:fixed;left:50%;bottom:calc(84px + var(--sab));transform:translate(-50%,20px);background:var(--t1);color:var(--bg);font-size:.84rem;font-weight:600;padding:10px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:all .25s;z-index:3000;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
+.alert{display:flex;align-items:flex-start;gap:10px;border-radius:16px;padding:12px 14px;border:1.5px solid var(--gold);background:var(--goldT);color:var(--t1)}
+.alert.err{border-color:var(--red);background:var(--redT)}
+.alert .al-ic{font-size:1.3rem;line-height:1.2}
+.alert .al-txt{flex:1;font-size:.82rem;line-height:1.45}
+.alert .al-txt strong{display:block;font-size:.9rem;margin-bottom:2px}
+.alert .btn-s{flex-shrink:0;align-self:center}
+.upd{font-size:.72rem;color:var(--t3);margin-top:8px;text-align:right}
+.nd-est{font-size:.76rem;color:var(--t2);margin-top:2px}
+.nd-est b{color:var(--gold)}
+.warn-ic{font-size:2.4rem;text-align:center}
+.warn-msg{font-size:.92rem;color:var(--t1);line-height:1.6;text-align:center}
+.warn-acts{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.caixa-link{display:block;text-align:center;color:var(--green);font-size:.84rem;font-weight:600;text-decoration:none;padding:8px}
+.guar{font-size:.8rem;color:var(--t2);background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;line-height:1.5}
+.guar b{color:var(--green)}
+.cost{font-size:.8rem;color:var(--t2)}.cost b{color:var(--gold)}
+.hist-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.hs{background:var(--surf);border:1px solid var(--bd);border-radius:10px;padding:8px 4px;text-align:center}
+.hs b{display:block;font-family:'Outfit',sans-serif;font-size:1.1rem}
+.hs span{font-size:.68rem;color:var(--t2)}
+.row2{display:flex;gap:8px;align-items:flex-end}
+.row2 .sg{flex:1}
 .pwa-banner{display:none;align-items:center;gap:8px;background:var(--greenT);border:1px solid var(--greenB);border-radius:16px;padding:10px 12px;font-size:.82rem}
 .pwa-banner.on{display:flex}
 .pwa-banner p{color:var(--t2);flex:1}.pwa-banner strong{color:var(--green)}
@@ -391,13 +413,18 @@ footer .warn{color:var(--t3)}
       <button class="icon-btn" id="langBtn" aria-label="Idioma">🌐 <span id="langCode">PT</span></button>
     </div>
   </header>
+  <div class="alert hidden" id="dataAlert" role="alert">
+    <div class="al-ic" id="alIc">⚠️</div>
+    <div class="al-txt"><strong id="alTitle"></strong><span id="alMsg"></span></div>
+    <button class="btn-s" id="alRetry" data-i="retry">Tentar de novo</button>
+  </div>
   <div class="pwa-banner" id="pwaBanner">
     <p>📱 <strong data-i="pwa-txt">Instale o SorteMax</strong> <span data-i="pwa-txt2">na sua tela inicial!</span></p>
     <button class="btn-s" id="pwaBtnInstall" data-i="pwa-install">Instalar</button>
     <button class="btn-s" id="pwaBtnClose" aria-label="Fechar">✕</button>
   </div>
   <div class="next-draw" id="nextDraw">
-    <div><div class="nd-lbl" data-i="nd-lbl">Próximo sorteio</div><div class="nd-val" id="ndVal">...</div></div>
+    <div><div class="nd-lbl" id="ndLbl">--</div><div class="nd-val" id="ndVal">...</div><div class="nd-est" id="ndEst"></div></div>
     <button class="nd-bell" id="bellBtn">🔔 <span id="bell-txt">Lembrar</span></button>
   </div>
   <div class="ad-banner">
@@ -422,19 +449,21 @@ footer .warn{color:var(--t3)}
         <div class="ball ph">-</div><div class="ball ph">-</div><div class="ball ph">-</div>
         <div class="ball ph">-</div><div class="ball ph">-</div><div class="ball ph">-</div>
       </div>
-      <div class="prize-row"><span class="prize-badge" id="cBadge">--</span><span class="prize-amt" id="cAmt">R$ ---</span></div>
+      <div class="prize-row" id="prizeRow"><span class="prize-badge" id="cBadge">--</span><span class="prize-amt" id="cAmt"></span></div>
       <div class="w-table">
         <div class="w-row"><span class="lbl">Sena (6):</span><strong class="val" id="wSena">--</strong></div>
         <div class="w-row"><span class="lbl">Quina (5):</span><strong class="val" id="wQuina">--</strong></div>
         <div class="w-row"><span class="lbl">Quadra (4):</span><strong class="val" id="wQuadra">--</strong></div>
       </div>
+      <div class="upd" id="cUpd"></div>
     </div>
     <div class="card">
       <h3 data-i="lbl-hist-sum">Resumo Histórico</h3>
-      <p class="sub" data-i="lbl-hist-sub">Análise de todos os concursos</p>
+      <p class="sub" id="histSub">--</p>
       <div class="mini-grid">
         <div class="mini-card"><span class="mini-lbl" data-i="lbl-hot">Mais Sorteados</span><div class="mini-balls" id="hotMini"><span class="mball">--</span><span class="mball">--</span><span class="mball">--</span></div></div>
         <div class="mini-card"><span class="mini-lbl" data-i="lbl-cold">Menos Sorteados</span><div class="mini-balls" id="coldMini"><span class="mball c">--</span><span class="mball c">--</span><span class="mball c">--</span></div></div>
+        <div class="mini-card"><span class="mini-lbl" data-i="lbl-late">Mais Atrasados</span><div class="mini-balls" id="lateMini"><span class="mball c">--</span><span class="mball c">--</span><span class="mball c">--</span></div></div>
         <div class="mini-card"><span class="mini-lbl" data-i="lbl-beh">Comportamento</span><div class="mini-stats"><div><span data-i="lbl-oe">Par/Ímpar:</span><strong id="avgOE">--</strong></div><div><span data-i="lbl-sum">Soma ideal:</span><strong>150–220</strong></div></div></div>
       </div>
     </div>
@@ -478,6 +507,7 @@ footer .warn{color:var(--t3)}
           <div class="out-hdr"><h3 data-i="gen-out-title">Jogos Gerados</h3><div class="out-acts hidden" id="genActs"><button class="btn-s" id="btnCopyGen" data-i="btn-copy">Copiar</button><button class="btn-s" id="btnDlGen" data-i="btn-export">Exportar</button></div></div>
           <div class="empty" id="genEmpty"><div class="ring-wrap"><div class="ring"></div><div class="ph-balls"><span class="ph-ball">?</span><span class="ph-ball">?</span><span class="ph-ball">?</span></div></div><p data-i="gen-empty-txt">Escolha as opções e toque em Gerar Jogos!</p></div>
           <div class="game-list" id="genList"></div>
+          <p class="cost hidden" id="genCost" style="margin-top:10px"></p>
         </div>
       </div>
     </div>
@@ -488,18 +518,9 @@ footer .warn{color:var(--t3)}
           <div class="help-box" id="h-fech"><strong data-i="help-fech-title">O que é Fechamento?</strong><span data-i="help-fech-body">...</span></div>
           <p class="sub" data-i="fech-sub">Garanta prêmios mínimos com matemática</p>
           <div class="sg"><label data-i="fech-plan" for="wForm">Plano de garantia:</label>
-            <select class="sel" id="wForm">
-              <optgroup data-il="og-quadra" label="Quadra">
-                <option value="q8" data-min="8" data-i="opt-q8">8 números → Quadra — 6 jogos</option>
-                <option value="q10a" data-min="10" data-i="opt-q10">10 números → Quadra — 20 jogos</option>
-                <option value="q12" data-min="12" data-i="opt-q12">12 números → Quadra — 42 jogos</option>
-              </optgroup>
-              <optgroup data-il="og-quina" label="Quina">
-                <option value="n9" data-min="9" data-i="opt-n9">9 números → Quina — 12 jogos</option>
-                <option value="n10" data-min="10" data-i="opt-n10">10 números → Quina — 20 jogos</option>
-              </optgroup>
-            </select>
+            <select class="sel" id="wForm"></select>
           </div>
+          <div class="guar" id="wGuar"></div>
           <div class="grid-wrap">
             <div class="grid-hdr"><span><span data-i="sel-lbl">Selecionados:</span> <strong id="wCnt">0</strong></span><span class="grid-tgt" id="wTgt">--</span></div>
             <div class="num-grid" id="wGrid"></div>
@@ -525,12 +546,14 @@ footer .warn{color:var(--t3)}
             <div class="num-grid" id="sGrid"></div>
             <div class="g-acts"><button class="btn-s" id="sReset" data-i="btn-clear">Limpar</button><button class="btn-s" id="sAuto" data-i="btn-random">Aleatório</button></div>
           </div>
+          <div class="sg"><label data-i="sim-conc-lbl" for="sConc">Conferir no concurso:</label><input type="number" class="fi" id="sConc" inputmode="numeric"></div>
           <button class="btn-p" id="btnSim" disabled><span data-i="btn-sim">Conferir Agora</span></button>
         </div>
         <div class="card out-card">
           <div class="out-hdr"><h3 data-i="sim-out-title">Resultado da Conferência</h3></div>
           <div class="empty" id="simEmpty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.35"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><p data-i="sim-empty-txt">Marque 6 números e toque em Conferir.</p></div>
           <div id="simRes"></div>
+          <div id="simAll"></div>
         </div>
       </div>
     </div>
@@ -545,7 +568,7 @@ footer .warn{color:var(--t3)}
             <div class="num-grid" id="hGrid"></div>
             <div class="g-acts"><button class="btn-s" id="hReset" data-i="btn-clear">Limpar</button><button class="btn-s" id="hAuto" data-i="btn-random">Aleatório</button></div>
           </div>
-          <div class="sg"><label data-i="hist-conc-lbl" for="hConc">Concurso (opcional):</label><input type="number" class="fi" id="hConc" data-ip="ph-conc" placeholder="Ex: 3013" inputmode="numeric"></div>
+          <div class="sg"><label data-i="hist-conc-lbl" for="hConc">Concurso (opcional):</label><input type="number" class="fi" id="hConc" inputmode="numeric"></div>
           <button class="btn-p" id="btnAddH" disabled><span data-i="btn-add-hist">+ Adicionar Jogo</span></button>
         </div>
         <div class="card out-card">
@@ -643,17 +666,31 @@ footer .warn{color:var(--t3)}
     </div>
   </div>
 </div>
+<!-- 데이터 경고 창 -->
+<div class="modal hidden" id="warnModal" role="alertdialog" aria-labelledby="wmTitle">
+  <div class="modal-box">
+    <div class="modal-body">
+      <div class="warn-ic" id="wmIc">📡</div>
+      <h3 id="wmTitle" style="text-align:center"></h3>
+      <p class="warn-msg" id="wmMsg"></p>
+      <div class="warn-acts">
+        <button class="btn-p" id="wmRetry"><span data-i="retry">Tentar de novo</span></button>
+        <button class="btn-s" id="wmOk" style="min-height:46px" data-i="ok">Entendi</button>
+        <a class="caixa-link" href="https://loterias.caixa.gov.br/Paginas/Mega-Sena.aspx" target="_blank" rel="noopener" data-i="caixa-site">Ver no site oficial da Caixa ↗</a>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
 'use strict';
-var APP_VERSION='2.0.0';
+var APP_VERSION='2.1.0';
 var CONTACT_EMAIL='contato@duriup.com.br';
-var FALLBACK={"3013":[3,16,24,33,47,55],"3012":[8,19,27,35,42,58],"3011":[5,11,22,30,44,53],"3010":[2,14,26,38,46,59],"3009":[7,18,23,31,49,56],"3008":[1,12,25,37,43,52],"3007":[9,15,28,34,48,57],"3006":[4,13,21,36,45,60]};
 var pad=function(n){return n<10?'0'+n:String(n);};
 var brl=function(v){return isNaN(v)||v===null?'R$ 0,00':'R$ '+Number(v).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1.');};
 var el=function(id){return document.getElementById(id);};
-var ST={draws:{},latest:{},hotNums:[],coldNums:[],wSel:[],sSel:[],hSel:[],page:{cur:1,per:10,tot:1},sync:'sync'};
+var ST={draws:{},latest:null,state:null,netOk:false,hotNums:[],coldNums:[],wSel:[],sSel:[],hSel:[],page:{cur:1,per:10,tot:1},sync:'sync'};
 var genGames=[],wheelGames=[],deferredPrompt=null;
 
 // ── 언어 ───────────────────────────────────────────────
@@ -673,7 +710,7 @@ pt:{
 'og-quadra':'Quadra garantida','og-quina':'Quina garantida','opt-q8':'8 números → Quadra — 6 jogos','opt-q10':'10 números → Quadra — 20 jogos','opt-q12':'12 números → Quadra — 42 jogos','opt-n9':'9 números → Quina — 12 jogos','opt-n10':'10 números → Quina — 20 jogos',
 'sel-lbl':'Selecionados:','btn-fech':'Processar Fechamento','fech-out-title':'Combinações','fech-empty-txt':'Selecione as dezenas e processe.',
 'sim-title':'Simulador','sim-sub':'Compare seu jogo com o último resultado','help-sim-title':'Como usar o Simulador?','help-sim-body':'Marque 6 números no volante e toque em Conferir. O app compara com o último resultado — acertos ficam em verde.','btn-sim':'Conferir Agora','sim-out-title':'Resultado da Conferência','sim-empty-txt':'Marque 6 números e toque em Conferir.',
-'myhist-title':'Registrar Jogo','myhist-sub':'Marque os números que você jogou','help-hist-title':'Como usar?','help-hist-body':'Marque os números que você jogou e toque em + Adicionar. O app compara com o último resultado automaticamente.','hist-conc-lbl':'Concurso (opcional):','ph-conc':'Ex: 3013','btn-add-hist':'+ Adicionar Jogo','mygames-title':'Meus Jogos','btn-clear-all':'Limpar Tudo',
+'myhist-title':'Registrar Jogo','myhist-sub':'Marque os números que você jogou','help-hist-title':'Como usar?','help-hist-body':'Marque os números que você jogou e toque em + Adicionar. O app compara com o último resultado automaticamente.','hist-conc-lbl':'Concurso (opcional):','ph-conc':'Ex: {n}','btn-add-hist':'+ Adicionar Jogo','mygames-title':'Meus Jogos','btn-clear-all':'Limpar Tudo',
 'res-title':'Histórico de Concursos','res-sub':'Consulte qualquer sorteio','ph-search':'Pesquisar concurso...','th-conc':'Concurso','th-nums':'Dezenas','btn-prev':'Anterior','btn-next':'Próximo',
 'cont-title':'Fale Conosco','cont-sub':'Sugestões, bugs ou parcerias','cont-mail-lbl':'E-mail oficial','cont-tipo':'Tipo','ct-sug':'💡 Sugestão','ct-bug':'🐛 Bug','ct-par':'🤝 Parceria','ct-out':'💬 Outro','cont-nome':'Nome','ph-yourname':'Seu nome','cont-msg':'Mensagem','ph-msg':'Conte tudo! Cada feedback nos ajuda...','btn-send':'Enviar por e-mail','cont-note':'Abre o seu app de e-mail com a mensagem pronta para contato@duriup.com.br',
 'don-title':'Gostou do SorteMax?','don-desc':'100% gratuito e feito com carinho. Se trouxe sorte extra, considere pagar um cafezinho!','pix-lbl':'Chave PIX','btn-pix':'Copiar PIX','channels-title':'Nossos Canais',
@@ -683,7 +720,7 @@ pt:{
 'footer-warn':'Sem vínculo com a Caixa Econômica Federal. Aposte com responsabilidade.','ft-welcome':'Ver tela inicial','pwa-txt':'Instale o SorteMax','pwa-txt2':'na sua tela inicial!','pwa-install':'Instalar',
 'set-title':'Configurações','set-lang':'Idioma','set-theme':'Tema','th-auto':'Sistema','th-light':'Claro','th-dark':'Escuro',
 'sync':'Sincronizando...','sync-ok':'Online','sync-off':'Offline','bell':'Lembrar','bell-on':'Ativo','no-notif':'Seu navegador não suporta notificações.','notif-blocked':'Notificações bloqueadas. Ative nas configurações do navegador.','notif-body':'Sorteio em 1 hora! Gere seus jogos agora.',
-'nd-at':'{d} às 20h','conc':'Concurso {n}','conc-hash':'Concurso #{n}','acum':'ACUMULOU!','won':'SAIU O PRÊMIO!','winners':'{g} ganhador(es) ({v})','bal':'Equil. {p}%',
+'nd-at':'{d} às {h}h (Brasília)','conc':'Concurso {n}','conc-hash':'Concurso #{n}','acum':'ACUMULOU!','won':'SAIU O PRÊMIO!','winners':'{g} ganhador(es) ({v})','bal':'Equil. {p}%',
 'game':'Jogo {n}','bet':'Aposta {n}','eo':'{e}P/{o}Í','save':'Salvar','limit':'Limite: {n} números.','ready':'Pronto! ✓','more':'Selecione mais {n}','games-n':'{n} jogos',
 'wait':'Aguardando dados...','official':'Resultado oficial:','yours':'Seu jogo:','sena-msg':'Parabéns! Acertou os 6!','quina-msg':'5 acertos — Quina!','quadra-msg':'4 acertos — Quadra!','hits':'{n} acerto(s)','no-hit':'Nenhum acerto desta vez.',
 'need6':'Selecione 6 números.','added':'✅ Adicionado!','hist-empty':'📋 Nenhum jogo registrado.<br>Gere jogos e salve com 💾','del':'Excluir','none':'Nenhum resultado encontrado.','view':'Ver','page':'Pág. {a}/{b}','loading':'Carregando...',
@@ -704,7 +741,7 @@ es:{
 'og-quadra':'Quadra garantizada','og-quina':'Quina garantizada','opt-q8':'8 números → Quadra — 6 juegos','opt-q10':'10 números → Quadra — 20 juegos','opt-q12':'12 números → Quadra — 42 juegos','opt-n9':'9 números → Quina — 12 juegos','opt-n10':'10 números → Quina — 20 juegos',
 'sel-lbl':'Seleccionados:','btn-fech':'Procesar Combinación','fech-out-title':'Combinaciones','fech-empty-txt':'Selecciona los números y procesa.',
 'sim-title':'Simulador','sim-sub':'Compara tu juego con el último resultado','help-sim-title':'¿Cómo usar el Simulador?','help-sim-body':'Marca 6 números y toca Verificar. La app compara con el último resultado — los aciertos quedan en verde.','btn-sim':'Verificar Ahora','sim-out-title':'Resultado de la Verificación','sim-empty-txt':'Marca 6 números y toca Verificar.',
-'myhist-title':'Registrar Juego','myhist-sub':'Marca los números que jugaste','help-hist-title':'¿Cómo usar?','help-hist-body':'Marca los números que jugaste y toca + Agregar. La app compara con el último resultado automáticamente.','hist-conc-lbl':'Concurso (opcional):','ph-conc':'Ej: 3013','btn-add-hist':'+ Agregar Juego','mygames-title':'Mis Juegos','btn-clear-all':'Borrar Todo',
+'myhist-title':'Registrar Juego','myhist-sub':'Marca los números que jugaste','help-hist-title':'¿Cómo usar?','help-hist-body':'Marca los números que jugaste y toca + Agregar. La app compara con el último resultado automáticamente.','hist-conc-lbl':'Concurso (opcional):','ph-conc':'Ej: {n}','btn-add-hist':'+ Agregar Juego','mygames-title':'Mis Juegos','btn-clear-all':'Borrar Todo',
 'res-title':'Historial de Concursos','res-sub':'Consulta cualquier sorteo','ph-search':'Buscar concurso...','th-conc':'Concurso','th-nums':'Números','btn-prev':'Anterior','btn-next':'Siguiente',
 'cont-title':'Contáctanos','cont-sub':'Sugerencias, errores o alianzas','cont-mail-lbl':'E-mail oficial','cont-tipo':'Tipo','ct-sug':'💡 Sugerencia','ct-bug':'🐛 Error','ct-par':'🤝 Alianza','ct-out':'💬 Otro','cont-nome':'Nombre','ph-yourname':'Tu nombre','cont-msg':'Mensaje','ph-msg':'¡Cuéntanos todo! Cada comentario nos ayuda...','btn-send':'Enviar por e-mail','cont-note':'Abre tu app de e-mail con el mensaje listo para contato@duriup.com.br',
 'don-title':'¿Te gustó SorteMax?','don-desc':'100% gratuito y hecho con cariño. Si te trajo suerte extra, ¡considera invitarnos un cafecito!','pix-lbl':'Clave PIX','btn-pix':'Copiar PIX','channels-title':'Nuestros Canales',
@@ -714,7 +751,7 @@ es:{
 'footer-warn':'Sin vínculo con la Caixa Econômica Federal. Juega con responsabilidad.','ft-welcome':'Ver pantalla inicial','pwa-txt':'Instala SorteMax','pwa-txt2':'en tu pantalla de inicio!','pwa-install':'Instalar',
 'set-title':'Ajustes','set-lang':'Idioma','set-theme':'Tema','th-auto':'Sistema','th-light':'Claro','th-dark':'Oscuro',
 'sync':'Sincronizando...','sync-ok':'En línea','sync-off':'Sin conexión','bell':'Recordar','bell-on':'Activo','no-notif':'Tu navegador no admite notificaciones.','notif-blocked':'Notificaciones bloqueadas. Actívalas en la configuración del navegador.','notif-body':'¡Sorteo en 1 hora! Genera tus juegos ahora.',
-'nd-at':'{d} a las 20h (Brasilia)','conc':'Concurso {n}','conc-hash':'Concurso #{n}','acum':'¡ACUMULADO!','won':'¡HUBO GANADOR!','winners':'{g} ganador(es) ({v})','bal':'Equil. {p}%',
+'nd-at':'{d} a las {h}h (Brasilia)','conc':'Concurso {n}','conc-hash':'Concurso #{n}','acum':'¡ACUMULADO!','won':'¡HUBO GANADOR!','winners':'{g} ganador(es) ({v})','bal':'Equil. {p}%',
 'game':'Juego {n}','bet':'Apuesta {n}','eo':'{e}P/{o}I','save':'Guardar','limit':'Límite: {n} números.','ready':'¡Listo! ✓','more':'Selecciona {n} más','games-n':'{n} juegos',
 'wait':'Esperando datos...','official':'Resultado oficial:','yours':'Tu juego:','sena-msg':'¡Felicidades! ¡Acertaste los 6!','quina-msg':'5 aciertos — ¡Quina!','quadra-msg':'4 aciertos — ¡Quadra!','hits':'{n} acierto(s)','no-hit':'Ningún acierto esta vez.',
 'need6':'Selecciona 6 números.','added':'✅ ¡Agregado!','hist-empty':'📋 Ningún juego registrado.<br>Genera juegos y guárdalos con 💾','del':'Eliminar','none':'No se encontraron resultados.','view':'Ver','page':'Pág. {a}/{b}','loading':'Cargando...',
@@ -735,7 +772,7 @@ en:{
 'og-quadra':'Quadra guaranteed','og-quina':'Quina guaranteed','opt-q8':'8 numbers → Quadra — 6 games','opt-q10':'10 numbers → Quadra — 20 games','opt-q12':'12 numbers → Quadra — 42 games','opt-n9':'9 numbers → Quina — 12 games','opt-n10':'10 numbers → Quina — 20 games',
 'sel-lbl':'Selected:','btn-fech':'Process Wheel','fech-out-title':'Combinations','fech-empty-txt':'Select the numbers and process.',
 'sim-title':'Simulator','sim-sub':'Compare your game with the last result','help-sim-title':'How to use the Simulator?','help-sim-body':'Mark 6 numbers and tap Check. The app compares them with the last result — hits turn green.','btn-sim':'Check Now','sim-out-title':'Check Result','sim-empty-txt':'Mark 6 numbers and tap Check.',
-'myhist-title':'Log a Game','myhist-sub':'Mark the numbers you played','help-hist-title':'How to use?','help-hist-body':'Mark the numbers you played and tap + Add. The app compares them with the last result automatically.','hist-conc-lbl':'Draw no. (optional):','ph-conc':'e.g. 3013','btn-add-hist':'+ Add Game','mygames-title':'My Games','btn-clear-all':'Clear All',
+'myhist-title':'Log a Game','myhist-sub':'Mark the numbers you played','help-hist-title':'How to use?','help-hist-body':'Mark the numbers you played and tap + Add. The app compares them with the last result automatically.','hist-conc-lbl':'Draw no. (optional):','ph-conc':'e.g. {n}','btn-add-hist':'+ Add Game','mygames-title':'My Games','btn-clear-all':'Clear All',
 'res-title':'Draw History','res-sub':'Look up any draw','ph-search':'Search draw...','th-conc':'Draw','th-nums':'Numbers','btn-prev':'Previous','btn-next':'Next',
 'cont-title':'Contact Us','cont-sub':'Suggestions, bugs or partnerships','cont-mail-lbl':'Official e-mail','cont-tipo':'Type','ct-sug':'💡 Suggestion','ct-bug':'🐛 Bug','ct-par':'🤝 Partnership','ct-out':'💬 Other','cont-nome':'Name','ph-yourname':'Your name','cont-msg':'Message','ph-msg':'Tell us everything! Every bit of feedback helps...','btn-send':'Send by e-mail','cont-note':'Opens your e-mail app with the message ready for contato@duriup.com.br',
 'don-title':'Enjoying SorteMax?','don-desc':'100% free and made with care. If it brought you extra luck, consider buying us a coffee!','pix-lbl':'PIX key','btn-pix':'Copy PIX','channels-title':'Our Channels',
@@ -745,7 +782,7 @@ en:{
 'footer-warn':'Not affiliated with Caixa Econômica Federal. Play responsibly.','ft-welcome':'Show welcome screen','pwa-txt':'Install SorteMax','pwa-txt2':'on your home screen!','pwa-install':'Install',
 'set-title':'Settings','set-lang':'Language','set-theme':'Theme','th-auto':'System','th-light':'Light','th-dark':'Dark',
 'sync':'Syncing...','sync-ok':'Online','sync-off':'Offline','bell':'Remind me','bell-on':'On','no-notif':'Your browser does not support notifications.','notif-blocked':'Notifications are blocked. Enable them in your browser settings.','notif-body':'Draw in 1 hour! Generate your games now.',
-'nd-at':'{d}, 8 PM (Brasília)','conc':'Draw {n}','conc-hash':'Draw #{n}','acum':'ROLLOVER!','won':'JACKPOT WON!','winners':'{g} winner(s) ({v})','bal':'Bal. {p}%',
+'nd-at':'{d}, {h12} (Brasília)','conc':'Draw {n}','conc-hash':'Draw #{n}','acum':'ROLLOVER!','won':'JACKPOT WON!','winners':'{g} winner(s) ({v})','bal':'Bal. {p}%',
 'game':'Game {n}','bet':'Bet {n}','eo':'{e}E/{o}O','save':'Save','limit':'Limit: {n} numbers.','ready':'Ready! ✓','more':'Select {n} more','games-n':'{n} games',
 'wait':'Waiting for data...','official':'Official result:','yours':'Your game:','sena-msg':'Congratulations! All 6 numbers!','quina-msg':'5 hits — Quina!','quadra-msg':'4 hits — Quadra!','hits':'{n} hit(s)','no-hit':'No hits this time.',
 'need6':'Select 6 numbers.','added':'✅ Added!','hist-empty':'📋 No games saved yet.<br>Generate games and save them with 💾','del':'Delete','none':'No results found.','view':'View','page':'Page {a}/{b}','loading':'Loading...',
@@ -766,7 +803,7 @@ ko:{
 'og-quadra':'Quadra(4개) 보장','og-quina':'Quina(5개) 보장','opt-q8':'8개 번호 → Quadra — 6게임','opt-q10':'10개 번호 → Quadra — 20게임','opt-q12':'12개 번호 → Quadra — 42게임','opt-n9':'9개 번호 → Quina — 12게임','opt-n10':'10개 번호 → Quina — 20게임',
 'sel-lbl':'선택:','btn-fech':'조합 처리','fech-out-title':'조합 결과','fech-empty-txt':'번호를 고르고 처리하세요.',
 'sim-title':'시뮬레이터','sim-sub':'내 번호를 최근 결과와 비교','help-sim-title':'시뮬레이터는 어떻게 쓰나요?','help-sim-body':'번호 6개를 표시하고 확인을 누르세요. 최근 결과와 비교해 맞힌 번호는 초록색으로 보입니다.','btn-sim':'지금 확인','sim-out-title':'확인 결과','sim-empty-txt':'번호 6개를 표시하고 확인을 누르세요.',
-'myhist-title':'번호 기록','myhist-sub':'구매한 번호를 표시하세요','help-hist-title':'어떻게 쓰나요?','help-hist-body':'구매한 번호를 표시하고 + 추가를 누르세요. 최근 결과와 자동으로 비교합니다.','hist-conc-lbl':'회차 (선택):','ph-conc':'예: 3013','btn-add-hist':'+ 번호 추가','mygames-title':'내 번호','btn-clear-all':'전체 삭제',
+'myhist-title':'번호 기록','myhist-sub':'구매한 번호를 표시하세요','help-hist-title':'어떻게 쓰나요?','help-hist-body':'구매한 번호를 표시하고 + 추가를 누르세요. 최근 결과와 자동으로 비교합니다.','hist-conc-lbl':'회차 (선택):','ph-conc':'예: {n}','btn-add-hist':'+ 번호 추가','mygames-title':'내 번호','btn-clear-all':'전체 삭제',
 'res-title':'회차별 결과','res-sub':'원하는 회차를 찾아보세요','ph-search':'회차 검색...','th-conc':'회차','th-nums':'번호','btn-prev':'이전','btn-next':'다음',
 'cont-title':'문의하기','cont-sub':'제안, 오류 신고, 제휴','cont-mail-lbl':'공식 이메일','cont-tipo':'유형','ct-sug':'💡 제안','ct-bug':'🐛 오류','ct-par':'🤝 제휴','ct-out':'💬 기타','cont-nome':'이름','ph-yourname':'이름','cont-msg':'메시지','ph-msg':'무엇이든 알려 주세요! 모든 의견이 도움이 됩니다...','btn-send':'이메일로 보내기','cont-note':'메일 앱이 열리고 contato@duriup.com.br 로 보낼 내용이 채워집니다',
 'don-title':'SorteMax가 마음에 드세요?','don-desc':'100% 무료로 정성껏 만들었습니다. 행운이 따랐다면 커피 한 잔 후원해 주세요!','pix-lbl':'PIX 키','btn-pix':'PIX 복사','channels-title':'우리 채널',
@@ -776,7 +813,7 @@ ko:{
 'footer-warn':'Caixa Econômica Federal과 관련이 없습니다. 책임감 있게 즐기세요.','ft-welcome':'시작 화면 보기','pwa-txt':'SorteMax 설치','pwa-txt2':'홈 화면에 추가하세요!','pwa-install':'설치',
 'set-title':'설정','set-lang':'언어','set-theme':'테마','th-auto':'시스템','th-light':'밝게','th-dark':'어둡게',
 'sync':'동기화 중...','sync-ok':'온라인','sync-off':'오프라인','bell':'알림','bell-on':'켜짐','no-notif':'이 브라우저는 알림을 지원하지 않습니다.','notif-blocked':'알림이 차단되어 있습니다. 브라우저 설정에서 켜 주세요.','notif-body':'1시간 뒤 추첨! 지금 번호를 만들어 보세요.',
-'nd-at':'{d} 20시 (브라질리아)','conc':'{n}회','conc-hash':'{n}회차','acum':'이월!','won':'1등 당첨자 있음!','winners':'{g}명 ({v})','bal':'균형 {p}%',
+'nd-at':'{d} {h}시 (브라질리아)','conc':'{n}회','conc-hash':'{n}회차','acum':'이월!','won':'1등 당첨자 있음!','winners':'{g}명 ({v})','bal':'균형 {p}%',
 'game':'게임 {n}','bet':'조합 {n}','eo':'짝{e}/홀{o}','save':'저장','limit':'최대 {n}개까지 고를 수 있어요.','ready':'완료! ✓','more':'{n}개 더 고르세요','games-n':'{n}게임',
 'wait':'데이터를 기다리는 중...','official':'공식 결과:','yours':'내 번호:','sena-msg':'축하합니다! 6개 모두 맞혔어요!','quina-msg':'5개 일치 — Quina!','quadra-msg':'4개 일치 — Quadra!','hits':'{n}개 일치','no-hit':'이번엔 맞힌 번호가 없어요.',
 'need6':'번호 6개를 고르세요.','added':'✅ 추가됨!','hist-empty':'📋 저장된 번호가 없습니다.<br>번호를 만들고 💾 로 저장하세요','del':'삭제','none':'결과가 없습니다.','view':'보기','page':'{a}/{b} 페이지','loading':'불러오는 중...',
@@ -784,6 +821,15 @@ ko:{
 'fill-all':'이름과 메시지를 입력하세요.','mail-open':'메일 앱을 여는 중…','copied':'복사됨! ✅','fill-lucky':'이름과 생년월일을 입력하세요.','confirm-clear':'저장한 번호를 모두 지울까요?','theme-auto':'테마: 시스템','theme-light':'테마: 밝게','theme-dark':'테마: 어둡게','mail-subj':'[SorteMax] {t} - {n}'
 }
 };
+// 2.1 추가 문구
+Object.assign(LANG.pt,{"retry": "Tentar de novo", "ok": "Entendi", "caixa-site": "Ver no site oficial da Caixa ↗", "lbl-late": "Mais Atrasados", "hist-sub": "{n} concursos analisados (1 a {m})", "nd-next": "Próximo sorteio · Concurso {n}", "nd-wait": "Aguardando resultado", "nd-drawn": "Sorteado: {d}", "nd-est": "Prêmio estimado: {v}", "src-caixa": "Fonte: Caixa (ao vivo)", "src-file": "Fonte: Caixa, via SorteMax", "src-cache": "Dados salvos neste aparelho", "checked": "atualizado {d}", "st-ok": "Atualizado", "st-stale": "Desatualizado", "no-data": "Sem resultados carregados", "w-off-t": "Sem conexão com a internet", "w-off-m": "Não foi possível buscar o resultado mais recente. Mostrando o último resultado salvo: concurso {n} ({d}).", "w-off-m2": " O concurso {p} já foi sorteado ({pd}) — confira quando a conexão voltar.", "w-nodata-m": "Conecte-se à internet para carregar os resultados da Mega-Sena. Ainda não há resultados salvos neste aparelho.", "w-err-t": "Não foi possível carregar os resultados", "w-err-m": "Os servidores de resultados não responderam. Tente de novo em alguns minutos.", "w-stale-t": "Resultado mais recente ainda não disponível", "w-stale-m": "O concurso {p} foi sorteado ({pd}), mas o resultado ainda não chegou ao app. Mostrando o concurso {n} ({d}). Tente de novo em alguns minutos ou confira no site da Caixa.", "cost": "{n} aposta(s) × {p} = {t}", "new-combo": "nunca sorteado", "old-combo": "já foi sorteado", "saved-for": "Salvo para o concurso {n}", "opt-plan": "{n} números → {k} — {g} jogo(s) · {c}", "guar": "Se as 6 dezenas sorteadas estiverem entre as suas {n}, você acerta no mínimo uma {k} em pelo menos um dos {g} jogos.", "guar-cost": "Custo: {g} × {p} = {t}", "guar-odds": "Chance de as 6 sorteadas estarem entre as suas {n}: 1 em {x}.", "sim-conc-lbl": "Conferir no concurso:", "sim-all-t": "Este jogo em todo o histórico ({n} concursos):", "sim-all-sena": "⚠️ Esta combinação exata já foi sorteada!", "conc-nf": "Concurso {n} não encontrado.", "h-wait": "⏳ Aguardando sorteio", "modal-off": "Detalhes de premiação indisponíveis sem conexão.", "help-fech-body": "Se as 6 dezenas sorteadas estiverem entre as que você marcou, o fechamento garante pelo menos o prêmio do plano (Quadra ou Quina). Escolha o plano, marque as dezenas e toque em Processar.", "og-quadra": "Quadra garantida", "og-quina": "Quina garantida", "notif-body": "Sorteio da Mega-Sena em 1 hora! Gere seus jogos agora."});
+Object.assign(LANG.es,{"retry": "Intentar de nuevo", "ok": "Entendido", "caixa-site": "Ver en el sitio oficial de la Caixa ↗", "lbl-late": "Más Atrasados", "hist-sub": "{n} concursos analizados (1 a {m})", "nd-next": "Próximo sorteo · Concurso {n}", "nd-wait": "Esperando resultado", "nd-drawn": "Sorteado: {d}", "nd-est": "Premio estimado: {v}", "src-caixa": "Fuente: Caixa (en vivo)", "src-file": "Fuente: Caixa, vía SorteMax", "src-cache": "Datos guardados en este dispositivo", "checked": "actualizado {d}", "st-ok": "Actualizado", "st-stale": "Desactualizado", "no-data": "Sin resultados cargados", "w-off-t": "Sin conexión a internet", "w-off-m": "No fue posible obtener el resultado más reciente. Mostrando el último resultado guardado: concurso {n} ({d}).", "w-off-m2": " El concurso {p} ya fue sorteado ({pd}) — revisa cuando vuelva la conexión.", "w-nodata-m": "Conéctate a internet para cargar los resultados de la Mega-Sena. Aún no hay resultados guardados en este dispositivo.", "w-err-t": "No fue posible cargar los resultados", "w-err-m": "Los servidores de resultados no respondieron. Intenta de nuevo en unos minutos.", "w-stale-t": "Resultado más reciente aún no disponible", "w-stale-m": "El concurso {p} ya fue sorteado ({pd}), pero el resultado aún no llegó a la app. Mostrando el concurso {n} ({d}). Intenta de nuevo en unos minutos o revisa el sitio de la Caixa.", "cost": "{n} apuesta(s) × {p} = {t}", "new-combo": "nunca sorteado", "old-combo": "ya fue sorteado", "saved-for": "Guardado para el concurso {n}", "opt-plan": "{n} números → {k} — {g} juego(s) · {c}", "guar": "Si las 6 dezenas sorteadas están entre tus {n}, aciertas como mínimo una {k} en al menos uno de los {g} juegos.", "guar-cost": "Costo: {g} × {p} = {t}", "guar-odds": "Probabilidad de que las 6 sorteadas estén entre tus {n}: 1 en {x}.", "sim-conc-lbl": "Verificar en el concurso:", "sim-all-t": "Este juego en todo el historial ({n} concursos):", "sim-all-sena": "⚠️ ¡Esta combinación exacta ya fue sorteada!", "conc-nf": "Concurso {n} no encontrado.", "h-wait": "⏳ Esperando sorteo", "modal-off": "Detalles de premios no disponibles sin conexión.", "help-fech-body": "Si las 6 dezenas sorteadas están entre las que marcaste, la combinación garantiza al menos el premio del plan (Quadra o Quina). Elige el plan, marca los números y toca Procesar.", "og-quadra": "Quadra garantizada", "og-quina": "Quina garantizada", "notif-body": "¡Sorteo de la Mega-Sena en 1 hora! Genera tus juegos ahora."});
+Object.assign(LANG.en,{"retry": "Try again", "ok": "Got it", "caixa-site": "See on the official Caixa site ↗", "lbl-late": "Most Overdue", "hist-sub": "{n} draws analyzed (1 to {m})", "nd-next": "Next draw · Draw {n}", "nd-wait": "Waiting for result", "nd-drawn": "Drawn: {d}", "nd-est": "Estimated prize: {v}", "src-caixa": "Source: Caixa (live)", "src-file": "Source: Caixa, via SorteMax", "src-cache": "Data saved on this device", "checked": "updated {d}", "st-ok": "Up to date", "st-stale": "Outdated", "no-data": "No results loaded", "w-off-t": "No internet connection", "w-off-m": "Could not fetch the latest result. Showing the last saved result: draw {n} ({d}).", "w-off-m2": " Draw {p} has already taken place ({pd}) — check again when you are back online.", "w-nodata-m": "Connect to the internet to load Mega-Sena results. No results are saved on this device yet.", "w-err-t": "Could not load results", "w-err-m": "The results servers did not respond. Please try again in a few minutes.", "w-stale-t": "Latest result not available yet", "w-stale-m": "Draw {p} has taken place ({pd}), but its result has not reached the app yet. Showing draw {n} ({d}). Try again in a few minutes or check the Caixa website.", "cost": "{n} bet(s) × {p} = {t}", "new-combo": "never drawn", "old-combo": "already drawn", "saved-for": "Saved for draw {n}", "opt-plan": "{n} numbers → {k} — {g} game(s) · {c}", "guar": "If the 6 drawn numbers are among your {n}, you get at least a {k} in at least one of the {g} games.", "guar-cost": "Cost: {g} × {p} = {t}", "guar-odds": "Chance that all 6 drawn numbers are among your {n}: 1 in {x}.", "sim-conc-lbl": "Check against draw:", "sim-all-t": "This game across the whole history ({n} draws):", "sim-all-sena": "⚠️ This exact combination has already been drawn!", "conc-nf": "Draw {n} not found.", "h-wait": "⏳ Waiting for draw", "modal-off": "Prize details unavailable offline.", "help-fech-body": "If the 6 drawn numbers are among the ones you marked, the wheel guarantees at least the plan prize (Quadra or Quina). Pick a plan, mark the numbers and tap Process.", "og-quadra": "Quadra guaranteed", "og-quina": "Quina guaranteed", "notif-body": "Mega-Sena draw in 1 hour! Generate your games now."});
+Object.assign(LANG.ko,{"retry": "다시 시도", "ok": "확인", "caixa-site": "Caixa 공식 사이트에서 보기 ↗", "lbl-late": "오래 안 나온 번호", "hist-sub": "{n}개 회차 분석 (1~{m}회)", "nd-next": "다음 추첨 · {n}회", "nd-wait": "결과 기다리는 중", "nd-drawn": "추첨일: {d}", "nd-est": "예상 당첨금: {v}", "src-caixa": "출처: Caixa (실시간)", "src-file": "출처: Caixa (SorteMax 경유)", "src-cache": "이 기기에 저장된 데이터", "checked": "업데이트 {d}", "st-ok": "최신", "st-stale": "지난 정보", "no-data": "불러온 결과가 없습니다", "w-off-t": "인터넷에 연결되어 있지 않아요", "w-off-m": "최신 결과를 가져오지 못했어요. 마지막으로 저장된 결과({n}회, {d})를 보여드려요.", "w-off-m2": " {p}회는 이미 추첨됐어요({pd}). 연결되면 다시 확인하세요.", "w-nodata-m": "메가세나 결과를 불러오려면 인터넷에 연결하세요. 이 기기에 저장된 결과가 아직 없어요.", "w-err-t": "결과를 불러오지 못했어요", "w-err-m": "결과 서버가 응답하지 않아요. 몇 분 뒤 다시 시도하세요.", "w-stale-t": "최신 결과가 아직 없어요", "w-stale-m": "{p}회는 추첨됐지만({pd}) 결과가 아직 앱에 들어오지 않았어요. {n}회({d}) 결과를 보여드려요. 몇 분 뒤 다시 시도하거나 Caixa 사이트에서 확인하세요.", "cost": "{n}게임 × {p} = {t}", "new-combo": "1등 나온 적 없음", "old-combo": "1등 나온 조합", "saved-for": "{n}회 번호로 저장했어요", "opt-plan": "{n}개 번호 → {k} — {g}게임 · {c}", "guar": "추첨된 6개 번호가 고른 {n}개 안에 모두 있으면, {g}게임 중 적어도 하나는 최소 {k}입니다.", "guar-cost": "비용: {g} × {p} = {t}", "guar-odds": "추첨 6개가 고른 {n}개 안에 모두 들어갈 확률: {x}분의 1.", "sim-conc-lbl": "비교할 회차:", "sim-all-t": "이 번호를 전체 기록({n}회)에 대 보면:", "sim-all-sena": "⚠️ 이 조합은 이미 1등으로 나온 적이 있어요!", "conc-nf": "{n}회를 찾을 수 없어요.", "h-wait": "⏳ 추첨 전", "modal-off": "연결이 없어 당첨 상세를 볼 수 없어요.", "help-fech-body": "추첨된 6개 번호가 표시한 번호 안에 모두 있으면, 조합이 플랜의 최소 당첨(Quadra 4개 또는 Quina 5개)을 보장합니다. 플랜을 고르고 번호를 표시한 뒤 처리를 누르세요.", "og-quadra": "Quadra(4개) 보장", "og-quina": "Quina(5개) 보장", "notif-body": "1시간 뒤 메가세나 추첨! 지금 번호를 만들어 보세요."});
+Object.assign(LANG.pt,{"help-gen-body": "Escolha Surpresinha (aleatório), Inteligente (filtros estatísticos) ou Sorte (numerologia). Defina a quantidade e toque em Gerar Jogos. Importante: no sorteio todos os números têm a mesma chance — os filtros só evitam combinações com padrões raros.", "odds": "Chance de Sena por aposta simples: 1 em 50.063.860."});
+Object.assign(LANG.es,{"help-gen-body": "Elige Sorpresa (aleatorio), Inteligente (filtros estadísticos) o Suerte (numerología). Define la cantidad y toca Generar Juegos. Importante: en el sorteo todos los números tienen la misma probabilidad — los filtros solo evitan combinaciones con patrones raros.", "odds": "Probabilidad de Sena por apuesta simple: 1 en 50.063.860."});
+Object.assign(LANG.en,{"help-gen-body": "Choose Quick Pick (random), Smart (statistical filters) or Lucky (numerology). Set the quantity and tap Generate Games. Note: every number has the same chance in the draw — filters only avoid combinations with rare patterns.", "odds": "Jackpot odds per simple bet: 1 in 50,063,860."});
+Object.assign(LANG.ko,{"help-gen-body": "자동(무작위), 스마트(통계 필터), 행운(수비학) 중 하나를 고르고 개수를 정한 뒤 번호 생성을 누르세요. 참고: 추첨에서 모든 번호의 확률은 같아요. 필터는 드문 패턴의 조합을 피할 뿐이에요.", "odds": "1게임당 1등(Sena) 확률: 50,063,860분의 1."});
 var curLang='pt';
 function t(k,v){var s=(LANG[curLang]&&LANG[curLang][k]);if(s===undefined)s=LANG.pt[k];if(s===undefined)return k;if(v)Object.keys(v).forEach(function(x){s=s.split('{'+x+'}').join(v[x]);});return s;}
 function applyLang(lang){
@@ -800,15 +846,17 @@ function applyLang(lang){
 }
 // 언어를 바꿀 때 이미 그려진 동적 화면도 다시 그림
 function refreshDynamic(){
-  syncUI(ST.sync);calcNextDraw();bellLabel();renderWidget();calcStats();renderTable();
+  syncUI(ST.sync);bellLabel();renderAll();buildPlans();
+  if(ST.state)showDataAlertText();
   if(genGames.length)renderGen();
   if(wheelGames.length)renderWheel();
   updateGridUI(ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);
   updateGridUI(ST.sSel,'sCnt','sTgt','btnSim',6);
   updateGridUI(ST.hSel,'hCnt','hTgt','btnAddH',6);
   if(ST.sSel.length===6&&el('simRes').innerHTML)runSim(true);
-  renderHist();
 }
+// 언어만 바뀌었을 때는 경고 문구만 다시 씀(창을 다시 띄우지 않음)
+function showDataAlertText(){var m=el('warnModal'),open=!m.classList.contains('hidden');try{var k=sessionStorage.getItem('sm_warn');}catch(e){}showDataAlert(false);if(!open)m.classList.add('hidden');}
 function track(ev,p){if(typeof gtag==='function')gtag('event',ev,p||{});}
 function toast(msg){var x=el('toast');x.textContent=msg;x.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(function(){x.classList.remove('on');},1900);}
 
@@ -855,15 +903,26 @@ function pwaInit(){
   el('pwaBtnInstall').onclick=function(){if(!deferredPrompt)return;deferredPrompt.prompt();deferredPrompt.userChoice.then(function(r){if(r.outcome==='accepted')track('pwa_install');deferredPrompt=null;el('pwaBanner').classList.remove('on');});};
   el('pwaBtnClose').onclick=function(){el('pwaBanner').classList.remove('on');};
 }
+// 추첨 시각(브라질리아): 일요일 11h, 그 외 21h. 브라질은 서머타임 없음(UTC-3)
+function parseBR(s){var m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(s||'');return m?{d:+m[1],m:+m[2],y:+m[3]}:null;}
+function drawTime(s){var p=parseBR(s);if(!p)return null;var dow=new Date(Date.UTC(p.y,p.m-1,p.d)).getUTCDay();var h=dow===0?11:21;return new Date(Date.UTC(p.y,p.m-1,p.d,h+3,0,0));}
+function fmtDay(s,withTime){var dt=drawTime(s);if(!dt)return s||'--';var loc=LOCALE[curLang];var wd=dt.toLocaleDateString(loc,{weekday:'long',timeZone:'America/Sao_Paulo'});var dd=dt.toLocaleDateString(loc,{day:'2-digit',month:'2-digit',timeZone:'America/Sao_Paulo'});var txt=wd.charAt(0).toUpperCase()+wd.slice(1)+', '+dd;if(withTime){var h=(dt.getUTCHours()+21)%24;txt=t('nd-at',{d:txt,h:h,h12:h===11?'11 AM':'9 PM'});}return txt;}
+function fmtStamp(iso){if(!iso)return '';var d=new Date(iso);if(isNaN(d))return '';return d.toLocaleString(LOCALE[curLang],{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});}
+// 최신 결과 다음 회차가 이미 추첨됐는데(3시간 여유) 결과가 없으면 "지난 데이터"
+function isOverdue(l){if(!l||!l.proximo)return false;var dt=drawTime(l.proximo.data);if(!dt)return false;return Date.now()>dt.getTime()+3*3600*1000;}
 function calcNextDraw(){
-  var now=new Date(),day=now.getDay();
-  var days=day<=3?(3-day):day<=6?(6-day):3;
-  if(days===0&&now.getHours()>=20)days=day===3?3:4;
-  var next=new Date(now);next.setDate(now.getDate()+days);
-  var loc=LOCALE[curLang];
-  var wd=next.toLocaleDateString(loc,{weekday:'long'});
-  var dt=next.toLocaleDateString(loc,{day:'2-digit',month:'2-digit'});
-  el('ndVal').textContent=t('nd-at',{d:wd.charAt(0).toUpperCase()+wd.slice(1)+', '+dt});
+  var l=ST.latest;
+  if(!l){el('ndLbl').textContent=t('nd-lbl');el('ndVal').textContent='--';el('ndEst').textContent='';return;}
+  var p=l.proximo||{concurso:l.concurso+1};
+  if(isOverdue(l)){
+    el('ndLbl').textContent=t('conc',{n:p.concurso});
+    el('ndVal').textContent=t('nd-wait');
+    el('ndEst').textContent=t('nd-drawn',{d:fmtDay(p.data,false)});
+  }else{
+    el('ndLbl').textContent=t('nd-next',{n:p.concurso});
+    el('ndVal').textContent=p.data?fmtDay(p.data,true):'--';
+    el('ndEst').innerHTML=p.estimativa?t('nd-est',{v:'<b>'+brl(p.estimativa)+'</b>'}):'';
+  }
 }
 function bellLabel(){var on=false;try{on=!!localStorage.getItem('sortemax_bell');}catch(e){}el('bellBtn').classList.toggle('on',on);el('bell-txt').textContent=on?t('bell-on'):t('bell');}
 function bellInit(){
@@ -877,9 +936,15 @@ function bellInit(){
   };
   bellLabel();
 }
+var notifTimer=null;
 function scheduleNotifs(){
   if(!('Notification' in window)||Notification.permission!=='granted')return;
-  [3,6].forEach(function(d){var now=new Date(),target=new Date(now);var diff=((d-now.getDay())+7)%7||7;target.setDate(now.getDate()+diff);target.setHours(19,0,0,0);var ms=target-now;if(ms>0&&ms<2147483647)setTimeout(function(){try{new Notification('🍀 SorteMax Mega',{body:t('notif-body'),icon:'/icons/icon-192.png'});}catch(e){}},ms);});
+  var on=false;try{on=!!localStorage.getItem('sortemax_bell');}catch(e){}
+  if(!on||!ST.latest||!ST.latest.proximo)return;
+  var dt=drawTime(ST.latest.proximo.data);if(!dt)return;
+  var ms=dt.getTime()-3600*1000-Date.now();
+  clearTimeout(notifTimer);
+  if(ms>0&&ms<2147483647)notifTimer=setTimeout(function(){try{new Notification('🍀 SorteMax Mega',{body:t('notif-body'),icon:'/icons/icon-192.png'});}catch(e){}},ms);
 }
 var adIdx=0;
 function adTick(){el('ad'+adIdx).classList.remove('on');el('d'+adIdx).classList.remove('on');adIdx=(adIdx+1)%3;el('ad'+adIdx).classList.add('on');el('d'+adIdx).classList.add('on');}
@@ -891,51 +956,144 @@ function helpInit(){
   document.querySelectorAll('.help-btn').forEach(function(btn){btn.onclick=function(e){e.stopPropagation();var box=el(btn.dataset.help);if(box)box.classList.toggle('on');};});
   document.addEventListener('click',function(){document.querySelectorAll('.help-box.on').forEach(function(b){b.classList.remove('on');});});
 }
-function syncUI(s){ST.sync=s;el('sDot').className='dot '+(s==='ok'?'g':s==='sync'?'y':'r');el('sTxt').textContent=s==='ok'?t('sync-ok'):s==='sync'?t('sync'):t('sync-off');}
-function loadDB(){
+function syncUI(s){ST.sync=s;el('sDot').className='dot '+(s==='ok'?'g':(s==='sync'||s==='stale')?'y':'r');el('sTxt').textContent=s==='ok'?t('st-ok'):s==='sync'?t('sync'):s==='stale'?t('st-stale'):t('sync-off');}
+var CAIXA_API='https://servicebus2.caixa.gov.br/portaldeloterias/api/megasena';
+function fetchJSON(url,ms){
+  return new Promise(function(res,rej){
+    var done=false,ctl=window.AbortController?new AbortController():null;
+    var tm=setTimeout(function(){if(done)return;done=true;if(ctl)ctl.abort();rej(new Error('timeout'));},ms||10000);
+    fetch(url,{cache:'no-store',signal:ctl?ctl.signal:undefined}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(j){if(done)return;done=true;clearTimeout(tm);res(j);},function(e){if(done)return;done=true;clearTimeout(tm);rej(e);});
+  });
+}
+function validNums(z){return Array.isArray(z)&&z.length===6&&z.every(function(n){n=Number(n);return n>=1&&n<=60&&Math.floor(n)===n;})&&new Set(z.map(Number)).size===6;}
+function fromCaixa(d){
+  if(!d||!d.numero||!validNums(d.listaDezenas))throw new Error('formato');
+  return{concurso:Number(d.numero),data:d.dataApuracao,dezenas:d.listaDezenas.map(Number),acumulado:!!d.acumulado,
+    rateio:(d.listaRateioPremio||[]).map(function(p){return{faixa:p.descricaoFaixa,ganhadores:p.numeroDeGanhadores,premio:p.valorPremio};}),
+    proximo:{concurso:Number(d.numeroConcursoProximo)||Number(d.numero)+1,data:d.dataProximoConcurso||null,estimativa:d.valorEstimadoProximoConcurso||0},
+    fonte:'caixa',verificadoEm:new Date().toISOString()};
+}
+function takeLatest(l,src){
+  if(!l||!l.concurso||!validNums(l.dezenas))return;
+  ST.draws[l.concurso]=l.dezenas.map(Number).sort(function(a,b){return a-b;});
+  if(!ST.latest||l.concurso>ST.latest.concurso||(l.concurso===ST.latest.concurso&&src!=='cache')){l.src=src;ST.latest=l;}
+}
+function mergeDraws(d){Object.keys(d).forEach(function(k){if(validNums(d[k]))ST.draws[k]=d[k].map(Number).sort(function(a,b){return a-b;});});}
+function saveCache(){try{localStorage.setItem('sm_data2',JSON.stringify({draws:ST.draws,latest:ST.latest,savedAt:new Date().toISOString()}));localStorage.removeItem('ms_hist');}catch(e){}}
+function readCache(){try{var c=JSON.parse(localStorage.getItem('sm_data2'));if(c&&c.latest&&c.draws)return c;}catch(e){}return null;}
+var loading=false;
+function loadDB(manual){
+  if(loading)return;loading=true;
   syncUI('sync');
-  var cached;try{cached=localStorage.getItem('ms_hist');}catch(e){}
-  if(cached){try{ST.draws=JSON.parse(cached);syncUI('ok');calcStats();renderTable();}catch(e){ST.draws=Object.assign({},FALLBACK);}}
-  else ST.draws=Object.assign({},FALLBACK);
-  fetch('https://raw.githubusercontent.com/guilhermeasn/loteria.json/master/data/megasena.json')
-  .then(function(r){if(!r.ok)throw 0;return r.json();})
-  .then(function(d){ST.draws=d;try{localStorage.setItem('ms_hist',JSON.stringify(d));}catch(e){}syncUI('ok');calcStats();renderTable();})
-  .catch(function(){if(!cached)syncUI('off');calcStats();renderTable();});
-  fetch('https://servicebus2.caixa.gov.br/portaldeloterias/api/megasena')
-  .then(function(r){if(!r.ok)throw 0;return r.json();})
-  .then(function(d){ST.latest={concurso:d.numero,data:d.dataApuracao,dezenas:d.listaDezenas,acumulou:d.acumulado,valEst:d.valorEstimadoProximoConcurso||0,prem:d.listaRateioPremio?d.listaRateioPremio.map(function(p){return{desc:p.descricaoFaixa,g:p.numeroDeGanhadores,v:p.valorPremio};}):[]};if(!ST.draws[ST.latest.concurso]){ST.draws[ST.latest.concurso]=ST.latest.dezenas.map(Number);try{localStorage.setItem('ms_hist',JSON.stringify(ST.draws));}catch(e){}calcStats();renderTable();}renderWidget();renderHist();})
-  .catch(function(){var k=Object.keys(ST.draws).sort(function(a,b){return Number(b)-Number(a);})[0];if(k){ST.latest={concurso:Number(k),data:'Offline',dezenas:ST.draws[k]||[],acumulou:true,valEst:0,offline:true,prem:[]};renderWidget();renderHist();}});
+  if(!ST.latest){var c=readCache();if(c){mergeDraws(c.draws);takeLatest(c.latest,'cache');ST.latest.src='cache';renderAll();}}
+  var stamp=Date.now();
+  // 1) 이 사이트에 매일 자동으로 갱신되는 결과 파일
+  var pFile=fetchJSON('data/latest.json?t='+stamp,12000).then(function(l){
+    if(!l||!validNums(l.dezenas))throw new Error('latest');
+    var known=Object.keys(ST.draws).length;
+    var need=known<l.concurso-3;
+    return (need?fetchJSON('data/megasena.json?t='+stamp,25000):Promise.resolve(null)).then(function(h){if(h&&h.draws)mergeDraws(h.draws);takeLatest(l,'file');});
+  });
+  // 2) Caixa 공식 서버(브라질 접속에서 가장 최신)
+  var pCaixa=fetchJSON(CAIXA_API,9000).then(function(d){takeLatest(fromCaixa(d),'caixa');});
+  Promise.all([pFile.then(function(){return true;},function(){return false;}),pCaixa.then(function(){return true;},function(){return false;})]).then(function(r){
+    return fillGaps().then(function(){return r;});
+  }).then(function(r){
+    loading=false;
+    ST.netOk=r[0]||r[1];
+    evaluateData(manual);
+    if(ST.netOk)saveCache();
+    renderAll();
+  });
+}
+// 결과 파일보다 Caixa 가 더 최신이면 사이 회차를 Caixa 에서 채움
+function fillGaps(){
+  if(!ST.latest)return Promise.resolve();
+  var miss=[];for(var n=ST.latest.concurso-1;n>0&&n>=ST.latest.concurso-15;n--)if(!ST.draws[n])miss.push(n);
+  if(!miss.length||Object.keys(ST.draws).length<100)return Promise.resolve();
+  return Promise.all(miss.map(function(n){return fetchJSON(CAIXA_API+'/'+n,9000).then(function(d){var x=fromCaixa(d);ST.draws[x.concurso]=x.dezenas.slice().sort(function(a,b){return a-b;});},function(){});}));
+}
+function evaluateData(manual){
+  var off=(navigator.onLine===false)||!ST.netOk;
+  var st;
+  if(!ST.latest)st=off?'nodata-off':'nodata-err';
+  else if(isOverdue(ST.latest))st=off?'stale-off':'stale';
+  else st=off?'ok-off':'ok';
+  ST.state=st;
+  syncUI(st==='ok'?'ok':(st==='stale'?'stale':(st==='ok-off'?'off':'off')));
+  showDataAlert(manual);
+}
+function showDataAlert(manual){
+  var st=ST.state,l=ST.latest,box=el('dataAlert');
+  var title='',msg='',err=false;
+  var p=l&&l.proximo?l.proximo:null;
+  var extra=p&&isOverdue(l)?t('w-off-m2',{p:p.concurso,pd:fmtDay(p.data,false)}):'';
+  if(st==='nodata-off'){title=t('w-off-t');msg=t('w-nodata-m');err=true;}
+  else if(st==='nodata-err'){title=t('w-err-t');msg=t('w-err-m');err=true;}
+  else if(st==='stale-off'){title=t('w-off-t');msg=t('w-off-m',{n:l.concurso,d:l.data})+extra;err=true;}
+  else if(st==='ok-off'){title=t('w-off-t');msg=t('w-off-m',{n:l.concurso,d:l.data});err=true;}
+  else if(st==='stale'){title=t('w-stale-t');msg=t('w-stale-m',{p:p.concurso,pd:fmtDay(p.data,false),n:l.concurso,d:l.data});}
+  if(!title){box.classList.add('hidden');el('warnModal').classList.add('hidden');return;}
+  box.classList.remove('hidden');box.classList.toggle('err',err);
+  el('alIc').textContent=err?'📡':'⏳';el('alTitle').textContent=title;el('alMsg').textContent=msg;
+  // 같은 상황에서는 한 번만 경고 창(다시 시도해도 같으면 창은 다시 띄움)
+  var key=st+':'+(l?l.concurso:0),seen=null;try{seen=sessionStorage.getItem('sm_warn');}catch(e){}
+  if(manual||seen!==key){
+    el('wmIc').textContent=err?'📡':'⏳';el('wmTitle').textContent=title;el('wmMsg').textContent=msg;
+    el('warnModal').classList.remove('hidden');
+    try{sessionStorage.setItem('sm_warn',key);}catch(e){}
+  }
+}
+function renderAll(){
+  calcNextDraw();renderWidget();calcStats();renderTable();renderHist();scheduleNotifs();
+  var l=ST.latest;
+  if(l){el('hConc').placeholder=t('ph-conc',{n:nextConc()});if(!el('sConc').value)el('sConc').value=l.concurso;el('sConc').max=l.concurso;}
 }
 function renderWidget(){
-  var d=ST.latest;if(!d||!d.concurso)return;
-  el('cMeta').textContent=t('conc',{n:d.concurso})+' · '+(d.offline?t('sync-off'):d.data);
+  var d=ST.latest;
+  if(!d){el('cMeta').textContent=t('no-data');el('cBadge').className='prize-badge';el('cBadge').textContent='--';el('cAmt').textContent='';el('cUpd').textContent='';return;}
+  el('cMeta').textContent=t('conc',{n:d.concurso})+' · '+d.data;
   el('cBalls').innerHTML='';
-  var nums=[].concat(d.dezenas).map(Number).sort(function(a,b){return a-b;});
-  nums.forEach(function(n){var b=document.createElement('div');b.className='ball'+(n<=10?' gld':'');b.textContent=pad(n);el('cBalls').appendChild(b);});
-  if(d.acumulou){el('cBadge').className='prize-badge';el('cBadge').textContent=t('acum');el('cAmt').textContent=d.offline?'R$ ---':brl(d.valEst);}
-  else{el('cBadge').className='prize-badge ok';el('cBadge').textContent=t('won');el('cAmt').textContent=brl(d.prem[0]?d.prem[0].v:0);}
-  if(d.prem&&d.prem.length>=3){el('wSena').textContent=t('winners',{g:d.prem[0].g,v:brl(d.prem[0].v)});el('wQuina').textContent=t('winners',{g:d.prem[1].g,v:brl(d.prem[1].v)});el('wQuadra').textContent=t('winners',{g:d.prem[2].g,v:brl(d.prem[2].v)});}
+  d.dezenas.map(Number).sort(function(a,b){return a-b;}).forEach(function(n){var b=document.createElement('div');b.className='ball';b.textContent=pad(n);el('cBalls').appendChild(b);});
+  var r=d.rateio||[];
+  if(d.acumulado){el('cBadge').className='prize-badge';el('cBadge').textContent=t('acum');el('cAmt').textContent=d.proximo&&d.proximo.estimativa?brl(d.proximo.estimativa):'';}
+  else{el('cBadge').className='prize-badge ok';el('cBadge').textContent=t('won');el('cAmt').textContent=r[0]?brl(r[0].premio):'';}
+  var ids=['wSena','wQuina','wQuadra'];
+  ids.forEach(function(id,i){el(id).textContent=r[i]?t('winners',{g:r[i].ganhadores,v:brl(r[i].premio)}):'--';});
+  var src=d.src==='caixa'?t('src-caixa'):d.src==='cache'?t('src-cache'):t('src-file');
+  var when=fmtStamp(d.verificadoEm);
+  el('cUpd').textContent=src+(when?' · '+t('checked',{d:when}):'');
 }
 function calcStats(){
-  var freq=new Array(61).fill(0);
-  var all=Object.entries(ST.draws).sort(function(a,b){return Number(a[0])-Number(b[0]);});
-  if(!all.length)return;
-  all.forEach(function(e){(e[1]||[]).forEach(function(n){var v=Number(n);if(v>=1&&v<=60)freq[v]++;});});
-  var tot=all.length;
-  var fp=freq.map(function(f,i){return{n:i,c:f};}).slice(1).sort(function(a,b){return b.c-a.c;});
-  ST.hotNums=fp.slice(0,15).map(function(x){return x.n;});
-  ST.coldNums=fp.slice().reverse().slice(0,15).map(function(x){return x.n;});
-  el('hotMini').innerHTML='';ST.hotNums.slice(0,3).forEach(function(n){var s=document.createElement('span');s.className='mball';s.textContent=pad(n);el('hotMini').appendChild(s);});
-  el('coldMini').innerHTML='';ST.coldNums.slice(0,3).forEach(function(n){var s=document.createElement('span');s.className='mball c';s.textContent=pad(n);el('coldMini').appendChild(s);});
-  var bal=0;all.forEach(function(e){var ev=(e[1]||[]).filter(function(n){return Number(n)%2===0;}).length;if(ev>=2&&ev<=4)bal++;});
-  el('avgOE').textContent=t('bal',{p:((bal/tot)*100).toFixed(1)});
+  var all=Object.keys(ST.draws).map(Number).sort(function(a,b){return a-b;});
+  ST.pastSet=new Set();
+  if(!all.length){el('histSub').textContent=t('no-data');return;}
+  var freq=new Array(61).fill(0),last=new Array(61).fill(0);
+  all.forEach(function(c){var z=ST.draws[c];ST.pastSet.add(z.join(','));z.forEach(function(n){freq[n]++;last[n]=c;});});
+  var maxC=all[all.length-1];
+  var fp=[];for(var i=1;i<=60;i++)fp.push({n:i,c:freq[i],late:maxC-last[i]});
+  var byF=fp.slice().sort(function(a,b){return b.c-a.c||a.n-b.n;});
+  ST.hotNums=byF.slice(0,15).map(function(x){return x.n;});
+  ST.coldNums=byF.slice().reverse().slice(0,15).map(function(x){return x.n;});
+  var byL=fp.slice().sort(function(a,b){return b.late-a.late||a.n-b.n;});
+  var fill=function(id,arr,cls,tip){el(id).innerHTML='';arr.slice(0,3).forEach(function(x){var s=document.createElement('span');s.className='mball'+cls;s.textContent=pad(x.n);s.title=tip(x);el(id).appendChild(s);});};
+  fill('hotMini',byF,'',function(x){return x.c+'×';});
+  fill('coldMini',byF.slice().reverse(),' c',function(x){return x.c+'×';});
+  fill('lateMini',byL,' c',function(x){return x.late;});
+  var bal=0;all.forEach(function(c){var ev=ST.draws[c].filter(function(n){return n%2===0;}).length;if(ev>=2&&ev<=4)bal++;});
+  el('avgOE').textContent=t('bal',{p:((bal/all.length)*100).toFixed(1)});
+  el('histSub').textContent=t('hist-sub',{n:all.length.toLocaleString(LOCALE[curLang]),m:maxC});
 }
-function genRandom(){var p=Array.from({length:60},function(_,i){return i+1;}),g=[];for(var i=0;i<6;i++)g.push(p.splice(Math.floor(Math.random()*p.length),1)[0]);return g.sort(function(a,b){return a-b;});}
+function rnd(n){if(window.crypto&&crypto.getRandomValues){var a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%n;}return Math.floor(Math.random()*n);}
+function genRandom(){var p=Array.from({length:60},function(_,i){return i+1;}),g=[];for(var i=0;i<6;i++)g.push(p.splice(rnd(p.length),1)[0]);return g.sort(function(a,b){return a-b;});}
+// 이미 1등이 나온 조합과 같은 묶음 안 중복은 다시 뽑음
+function genUnique(fn,batch){for(var i=0;i<50;i++){var g=fn(),k=g.join(',');if(ST.pastSet&&ST.pastSet.has(k))continue;if(batch.some(function(b){return b.join(',')===k;}))continue;return g;}return fn();}
 function genSmart(){
   var fe=el('fOE').checked,fc=el('fCons').checked,fs=el('fSum').checked,ff=el('fFreq').checked;
-  for(var a=0;a<2000;a++){
+  for(var a=0;a<3000;a++){
     var g=[];
-    if(ff&&ST.hotNums.length){var hp=ST.hotNums.slice(),cp=ST.coldNums.slice(),np=Array.from({length:60},function(_,i){return i+1;}).filter(function(n){return!hp.includes(n)&&!cp.includes(n);});for(var i=0;i<3&&hp.length;i++)g.push(hp.splice(Math.floor(Math.random()*hp.length),1)[0]);for(var j=0;j<2&&np.length;j++)g.push(np.splice(Math.floor(Math.random()*np.length),1)[0]);if(cp.length)g.push(cp.splice(Math.floor(Math.random()*cp.length),1)[0]);g=g.filter(Boolean);while(g.length<6){var x=Math.floor(Math.random()*60)+1;if(!g.includes(x))g.push(x);}}else g=genRandom();
+    if(ff&&ST.hotNums.length){var hp=ST.hotNums.slice(),cp=ST.coldNums.slice(),np=Array.from({length:60},function(_,i){return i+1;}).filter(function(n){return!hp.includes(n)&&!cp.includes(n);});for(var i=0;i<3;i++)g.push(hp.splice(rnd(hp.length),1)[0]);for(var j=0;j<2;j++)g.push(np.splice(rnd(np.length),1)[0]);g.push(cp.splice(rnd(cp.length),1)[0]);}else g=genRandom();
     g.sort(function(a,b){return a-b;});
     if(fe){var ev=g.filter(function(n){return n%2===0;}).length;if(ev<2||ev>4)continue;}
     if(fc){var run=1,mx=1;for(var k=0;k<g.length-1;k++){if(g[k+1]===g[k]+1){run++;if(run>mx)mx=run;}else run=1;}if(mx>=3)continue;}
@@ -960,15 +1118,18 @@ function renderGen(){
     game.forEach(function(n){var b=document.createElement('span');b.className='gball';b.textContent=pad(n);balls.appendChild(b);});
     var tags=document.createElement('div');tags.className='tags';
     var ev=game.filter(function(n){return n%2===0;}).length;
-    var t1=document.createElement('span');t1.className='tag'+(ev===3?' hi':'');t1.textContent=t('eo',{e:ev,o:6-ev});
+    var t1=document.createElement('span');t1.className='tag'+(ev>=2&&ev<=4?' hi':'');t1.textContent=t('eo',{e:ev,o:6-ev});
     var sm=game.reduce(function(a,b){return a+b;},0);
     var t2=document.createElement('span');t2.className='tag'+(sm>=150&&sm<=220?' hi':'');t2.textContent='Σ '+sm;
     tags.appendChild(t1);tags.appendChild(t2);
+    if(ST.pastSet&&ST.pastSet.size){var nw=!ST.pastSet.has(game.join(','));var t3=document.createElement('span');t3.className='tag'+(nw?' hi':'');t3.textContent=nw?'✓ '+t('new-combo'):'⚠ '+t('old-combo');tags.appendChild(t3);}
     var sv=document.createElement('button');sv.className='btn-s';sv.textContent='💾 '+t('save');
-    sv.onclick=function(){quickSave(game);sv.textContent='✅';sv.disabled=true;};
+    sv.onclick=function(){quickSave(game);sv.textContent='✅';sv.disabled=true;toast(t('saved-for',{n:nextConc()}));};
     row.appendChild(lbl);row.appendChild(sv);row.appendChild(balls);row.appendChild(tags);
     el('genList').appendChild(row);
   });
+  el('genCost').classList.remove('hidden');
+  el('genCost').innerHTML=t('cost',{n:genGames.length,p:brl(PRICE),t:'<b>'+brl(genGames.length*PRICE)+'</b>'})+'<br><span style="color:var(--t3)">'+t('odds')+'</span>';
 }
 function buildGrid(containerId,selArr,cntId,tgtId,btnId,maxFn){
   var container=el(containerId);container.innerHTML='';
@@ -990,61 +1151,95 @@ function autoGrid(cId,selArr,cntId,tgtId,btnId,maxFn){
   for(var i=0;i<max;i++){var r=Math.floor(Math.random()*pool.length),p=pool.splice(r,1)[0];selArr.push(p);var b=el(cId).querySelector('[data-n="'+p+'"]');if(b)b.classList.add('on');}
   updateGridUI(selArr,cntId,tgtId,btnId,maxFn);
 }
-function wLimitFn(){var opt=el('wForm').options[el('wForm').selectedIndex];return opt?parseInt(opt.dataset.min)||8:8;}
+var PRICE=6; // R$ 6,00 por aposta simples (valor da Caixa desde jul/2025)
+// 검증된 조합표: 키 'n-k' = n개 번호로 k개(4=Quadra,5=Quina) 보장. 각 게임은 고른 번호의 위치(16진수)
+var WHEELS=/*WHEELS*/{"8-4":["234567"],"9-4":["025678","034678","012357"],"10-4":["012347","036789","124568"],"11-4":["12679a","034568","13789a","234589","012457"],"12-4":["0178ab","013468","3467ab","245679","012478","015689","2359ab"],"8-5":["014567","012367","012456","234567"],"9-5":["012368","012348","013468","234567","124567","024678","013578"],"10-5":["012569","014589","045678","013679","023689","012348","012357","125789","345789","134568","234569","024789","023678","124679"],"11-5":["03458a","012457","123679","02347a","12459a","013489","01789a","12568a","14678a","012348","13579a","034679","245789","05679a","23678a","023589","34689a","012389","01236a","014569","135678","025678","23456a","24689a"]};
+function curPlan(){var o=el('wForm').options[el('wForm').selectedIndex];if(!o)return null;var p=o.value.split('-');return{key:o.value,n:+p[0],k:+p[1],games:WHEELS[o.value]};}
+function wLimitFn(){var p=curPlan();return p?p.n:8;}
+function C(n,k){var r=1;for(var i=1;i<=k;i++)r=r*(n-k+i)/i;return Math.round(r);}
+function buildPlans(){
+  var sel=el('wForm'),cur=sel.value;sel.innerHTML='';
+  [4,5].forEach(function(k){
+    var og=document.createElement('optgroup');og.label=t(k===4?'og-quadra':'og-quina');
+    Object.keys(WHEELS).filter(function(x){return +x.split('-')[1]===k;}).sort(function(a,b){return +a.split('-')[0]-(+b.split('-')[0]);}).forEach(function(key){
+      var n=+key.split('-')[0],g=WHEELS[key].length;
+      if(n<=6)return;
+      var o=document.createElement('option');o.value=key;o.textContent=t('opt-plan',{n:n,k:k===4?'Quadra':'Quina',g:g,c:brl(g*PRICE)});og.appendChild(o);
+    });
+    sel.appendChild(og);
+  });
+  if(cur&&WHEELS[cur])sel.value=cur;else if(WHEELS['10-4'])sel.value='10-4';
+  updGuar();
+}
+function updGuar(){
+  var p=curPlan();if(!p){el('wGuar').textContent='';return;}
+  var g=p.games.length;
+  el('wGuar').innerHTML=t('guar',{n:'<b>'+p.n+'</b>',k:'<b>'+(p.k===4?'Quadra':'Quina')+'</b>',g:g})+'<br>'+t('guar-cost',{g:g,p:brl(PRICE),t:'<b>'+brl(g*PRICE)+'</b>'})+'<br><span style="color:var(--t3)">'+t('guar-odds',{n:p.n,x:Math.round(C(60,6)/C(p.n,6)).toLocaleString(LOCALE[curLang])})+'</span>';
+}
 function combs(arr,sz){var r=[];function h(tt,s){if(tt.length===sz){r.push(tt.slice());return;}for(var i=s;i<arr.length;i++){tt.push(arr[i]);h(tt,i+1);tt.pop();}}h([],0);return r;}
-function fechCover(nums,k,tt,mx){
-  var sub=combs(nums,tt),pool=combs(nums,k);
-  var gs=pool.map(function(g){return{game:g,subs:combs(g,tt).map(function(s){return s.join(',');})};});
-  var unc=new Set(sub.map(function(s){return s.join(',');})),sel=[];
-  while(unc.size>0&&sel.length<mx){var best=null,bc=-1,bi=-1;for(var i=0;i<gs.length;i++){var cc=gs[i].subs.filter(function(s){return unc.has(s);}).length;if(cc>bc){bc=cc;best=gs[i].game;bi=i;}}if(bc<=0||!best)break;sel.push(best);gs[bi].subs.forEach(function(s){unc.delete(s);});gs.splice(bi,1);}
-  return sel;
+function fechCover(nums,plan){
+  var s=nums.slice().sort(function(a,b){return a-b;});
+  return plan.games.map(function(code){return code.split('').map(function(h){return s[parseInt(h,16)];});});
 }
 function renderWheel(){
   el('wEmpty').classList.add('hidden');el('wRes').classList.remove('hidden');el('wActs').classList.remove('hidden');el('wList').innerHTML='';
-  el('wGames').textContent=t('games-n',{n:wheelGames.length});el('wPrice').textContent=brl(wheelGames.length*5);
-  wheelGames.forEach(function(game,idx){var row=document.createElement('div');row.className='game-row';row.style.animationDelay=(idx*.04)+'s';var lbl=document.createElement('span');lbl.className='game-lbl';lbl.textContent=t('bet',{n:idx+1}).toUpperCase();var balls=document.createElement('div');balls.className='gballs';game.forEach(function(n){var b=document.createElement('span');b.className='gball';b.textContent=pad(n);balls.appendChild(b);});row.appendChild(lbl);row.appendChild(balls);el('wList').appendChild(row);});
+  el('wGames').textContent=t('games-n',{n:wheelGames.length});el('wPrice').textContent=brl(wheelGames.length*PRICE);
+  wheelGames.forEach(function(game,idx){var row=document.createElement('div');row.className='game-row';row.style.animationDelay=(idx*.04)+'s';var lbl=document.createElement('span');lbl.className='game-lbl';lbl.textContent=t('bet',{n:idx+1}).toUpperCase();var sv=document.createElement('button');sv.className='btn-s';sv.textContent='💾';sv.onclick=function(){quickSave(game);sv.textContent='✅';sv.disabled=true;};var balls=document.createElement('div');balls.className='gballs';game.forEach(function(n){var b=document.createElement('span');b.className='gball';b.textContent=pad(n);balls.appendChild(b);});row.appendChild(lbl);row.appendChild(sv);row.appendChild(balls);el('wList').appendChild(row);});
 }
 function runSim(silent){
   var nums=ST.sSel.slice().sort(function(a,b){return a-b;});
   el('simEmpty').classList.add('hidden');
-  if(!ST.latest||!ST.latest.dezenas||!ST.latest.dezenas.length){el('simRes').innerHTML='<div style="color:var(--t2);padding:8px;font-size:.85rem">'+t('wait')+'</div>';return;}
-  var drawn=ST.latest.dezenas.map(Number);
+  if(!ST.latest){el('simRes').innerHTML='<div style="color:var(--t2);padding:8px;font-size:.85rem">'+t('no-data')+'</div>';el('simAll').innerHTML='';return;}
+  var c=parseInt(el('sConc').value)||ST.latest.concurso;
+  var drawnArr=ST.draws[c];
+  if(!drawnArr){if(!silent)toast(t('conc-nf',{n:c}));c=ST.latest.concurso;el('sConc').value=c;drawnArr=ST.draws[c];}
+  var drawn=drawnArr.map(Number);
   var hc=nums.filter(function(n){return drawn.includes(n);}).length;
   var badge,bc,msg;
   if(hc===6){badge='🏆 SENA!';bc='sena';msg=t('sena-msg');}
   else if(hc===5){badge='⭐ QUINA';bc='quina';msg=t('quina-msg');}
   else if(hc===4){badge='✅ QUADRA';bc='quadra';msg=t('quadra-msg');}
   else{badge=t('hits',{n:hc});bc='miss';msg=hc===0?t('no-hit'):t('hits',{n:hc});}
-  el('simRes').innerHTML='<div class="sim-card"><div style="font-family:Outfit,sans-serif;font-size:.95rem;font-weight:700;margin-bottom:9px;color:var(--t1)">'+t('conc',{n:ST.latest.concurso})+' — '+(ST.latest.offline?t('sync-off'):ST.latest.data)+'</div><div style="font-size:.78rem;color:var(--t2);margin-bottom:6px">'+t('official')+'</div><div class="sim-balls">'+drawn.slice().sort(function(a,b){return a-b;}).map(function(n){return'<div class="sball'+(nums.includes(n)?' hit':'')+'">'+pad(n)+'</div>';}).join('')+'</div><div style="font-size:.78rem;color:var(--t2);margin:8px 0 6px">'+t('yours')+'</div><div class="sim-balls">'+nums.map(function(n){return'<div class="sball'+(drawn.includes(n)?' hit':'')+'">'+pad(n)+'</div>';}).join('')+'</div><div style="margin-top:9px"><span class="sbadge '+bc+'">'+badge+'</span></div><div style="font-size:.84rem;color:var(--t2);margin-top:7px">'+msg+'</div></div>';
+  var dateTxt=(c===ST.latest.concurso&&ST.latest.data)?' — '+ST.latest.data:'';
+  el('simRes').innerHTML='<div class="sim-card"><div style="font-family:Outfit,sans-serif;font-size:.95rem;font-weight:700;margin-bottom:9px;color:var(--t1)">'+t('conc',{n:c})+dateTxt+'</div><div style="font-size:.78rem;color:var(--t2);margin-bottom:6px">'+t('official')+'</div><div class="sim-balls">'+drawn.slice().sort(function(a,b){return a-b;}).map(function(n){return'<div class="sball'+(nums.includes(n)?' hit':'')+'">'+pad(n)+'</div>';}).join('')+'</div><div style="font-size:.78rem;color:var(--t2);margin:8px 0 6px">'+t('yours')+'</div><div class="sim-balls">'+nums.map(function(n){return'<div class="sball'+(drawn.includes(n)?' hit':'')+'">'+pad(n)+'</div>';}).join('')+'</div><div style="margin-top:9px"><span class="sbadge '+bc+'">'+badge+'</span></div><div style="font-size:.84rem;color:var(--t2);margin-top:7px">'+msg+'</div></div>';
+  // 전체 이력에서 이 번호가 몇 번 당첨됐을지
+  var cnt={6:0,5:0,4:0},keys=Object.keys(ST.draws);
+  keys.forEach(function(k){var z=ST.draws[k],h=0;for(var i=0;i<6;i++)if(nums.indexOf(z[i])!==-1)h++;if(h>=4)cnt[h]++;});
+  el('simAll').innerHTML='<div class="sim-card" style="margin-top:10px"><div style="font-size:.82rem;color:var(--t2)">'+t('sim-all-t',{n:keys.length.toLocaleString(LOCALE[curLang])})+'</div><div class="hist-stats"><div class="hs"><b style="color:var(--gold)">'+cnt[6]+'</b><span>Sena</span></div><div class="hs"><b style="color:var(--green)">'+cnt[5]+'</b><span>Quina</span></div><div class="hs"><b style="color:var(--blue)">'+cnt[4]+'</b><span>Quadra</span></div></div>'+(cnt[6]?'<div style="margin-top:8px;font-size:.82rem;color:var(--gold);font-weight:700">'+t('sim-all-sena')+'</div>':'')+'</div>';
   if(!silent)track('simulate',{hits:hc});
 }
 function getH(){try{return JSON.parse(localStorage.getItem('sm_hist'))||[];}catch(e){return[];}}
 function setH(l){try{localStorage.setItem('sm_hist',JSON.stringify(l));}catch(e){}}
 function today(){return new Date().toLocaleDateString(LOCALE[curLang]);}
-function quickSave(game){var l=getH();l.unshift({id:Date.now(),c:ST.latest.concurso||'--',nums:game,dt:today()});setH(l);}
+function nextConc(){var l=ST.latest;return l?((l.proximo&&l.proximo.concurso)||l.concurso+1):'--';}
+function quickSave(game){var l=getH();l.unshift({id:Date.now()+Math.random(),c:nextConc(),nums:game.slice(),dt:today()});setH(l);}
 function addHist(){
   if(ST.hSel.length!==6){toast(t('need6'));return;}
-  var conc=parseInt(el('hConc').value)||ST.latest.concurso||'--';
-  var l=getH();l.unshift({id:Date.now(),c:conc,nums:ST.hSel.slice().sort(function(a,b){return a-b;}),dt:today()});
+  var conc=parseInt(el('hConc').value)||nextConc();
+  var l=getH();l.unshift({id:Date.now()+Math.random(),c:conc,nums:ST.hSel.slice().sort(function(a,b){return a-b;}),dt:today()});
   setH(l);resetGrid('hGrid',ST.hSel,'hCnt','hTgt','btnAddH',6);el('hConc').value='';renderHist();
   toast(t('added'));
 }
 function renderHist(){
   var list=getH(),cont=el('histList');
   if(!list.length){cont.innerHTML='<div class="hist-empty">'+t('hist-empty')+'</div>';return;}
-  var drawn=ST.latest&&ST.latest.dezenas?ST.latest.dezenas.map(Number):[];
   cont.innerHTML='';
+  var latestC=ST.latest?ST.latest.concurso:0;
   list.forEach(function(item){
-    var hc=drawn.length?item.nums.filter(function(n){return drawn.includes(n);}).length:0;
-    var rc='miss',rl=t('hits',{n:hc});
-    if(hc===6){rc='sena';rl='🏆 SENA!';}else if(hc===5){rc='quina';rl='⭐ Quina';}else if(hc===4){rc='quadra';rl='✅ Quadra';}
+    var cn=parseInt(item.c),drawn=ST.draws[cn]||null;
+    var rc='miss',rl;
+    if(drawn){
+      var hc=item.nums.filter(function(n){return drawn.includes(n);}).length;
+      rl=t('hits',{n:hc});
+      if(hc===6){rc='sena';rl='🏆 SENA!';}else if(hc===5){rc='quina';rl='⭐ Quina';}else if(hc===4){rc='quadra';rl='✅ Quadra';}
+    }else rl=(!cn||cn>latestC)?t('h-wait'):'--';
     var div=document.createElement('div');div.className='hist-item';
     var hdr=document.createElement('div');hdr.className='hist-hdr';
-    var hcEl=document.createElement('span');hcEl.className='hist-conc';hcEl.textContent=t('conc',{n:item.c});
+    var hcEl=document.createElement('span');hcEl.className='hist-conc';hcEl.textContent=cn?t('conc',{n:cn}):'--';
     var hdEl=document.createElement('span');hdEl.className='hist-date';hdEl.textContent=item.dt;
     hdr.appendChild(hcEl);hdr.appendChild(hdEl);
     var bl=document.createElement('div');bl.className='hist-balls';
-    item.nums.forEach(function(n){var b=document.createElement('div');b.className='hball'+(drawn.includes(n)?' hit':'');b.textContent=pad(n);bl.appendChild(b);});
+    item.nums.forEach(function(n){var b=document.createElement('div');b.className='hball'+(drawn&&drawn.includes(n)?' hit':'');b.textContent=pad(n);bl.appendChild(b);});
     var ft=document.createElement('div');ft.className='hist-ft';
     var bd=document.createElement('span');bd.className='hbadge '+rc;bd.textContent=rl;
     var del=document.createElement('button');del.className='btn-d';del.textContent=t('del');
@@ -1078,12 +1273,17 @@ function renderTable(){
 }
 function openModal(num){
   el('mTitle').textContent=t('conc-hash',{n:num});el('mBody').innerHTML='<div class="tbl-empty">'+t('loading')+'</div>';el('modal').classList.remove('hidden');
-  fetch('https://servicebus2.caixa.gov.br/portaldeloterias/api/megasena/'+num)
-  .then(function(r){if(!r.ok)throw 0;return r.json();})
-  .then(function(d){var pr=d.listaRateioPremio?d.listaRateioPremio.map(function(p){return{desc:p.descricaoFaixa,g:p.numeroDeGanhadores,v:p.valorPremio};}):[];el('mBody').innerHTML='<div class="mrow"><span>'+t('date')+'</span><strong style="color:var(--t1)">'+d.dataApuracao+'</strong></div><div class="mrow"><span>'+t('acc')+'</span><strong style="color:'+(d.acumulado?'var(--red)':'var(--green)')+'">'+(d.acumulado?t('yes'):t('no'))+'</strong></div><div class="balls-row">'+d.listaDezenas.map(Number).sort(function(a,b){return a-b;}).map(function(n){return'<div class="ball">'+pad(n)+'</div>';}).join('')+'</div>'+(pr.length?'<table><thead><tr><th>'+t('tier')+'</th><th>'+t('win-h')+'</th><th>'+t('prize')+'</th></tr></thead><tbody>'+pr.map(function(p){return'<tr><td>'+p.desc+'</td><td>'+p.g+'</td><td style="color:var(--gold)">'+brl(p.v)+'</td></tr>';}).join('')+'</tbody></table>':'');})
-  .catch(function(){var dz=ST.draws[num]||[];el('mBody').innerHTML='<div class="mrow"><span>'+t('mode')+'</span><strong style="color:var(--gold)">'+t('sync-off')+'</strong></div><div class="balls-row">'+dz.map(Number).sort(function(a,b){return a-b;}).map(function(n){return'<div class="ball">'+pad(n)+'</div>';}).join('')+'</div>';});
+  var balls=function(z){return'<div class="balls-row">'+z.map(Number).sort(function(a,b){return a-b;}).map(function(n){return'<div class="ball">'+pad(n)+'</div>';}).join('')+'</div>';};
+  fetchJSON(CAIXA_API+'/'+num,9000).then(function(d){
+    var x=fromCaixa(d);
+    var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+    el('mBody').innerHTML='<div class="mrow"><span>'+t('date')+'</span><strong style="color:var(--t1)">'+esc(x.data)+'</strong></div><div class="mrow"><span>'+t('acc')+'</span><strong style="color:'+(x.acumulado?'var(--red)':'var(--green)')+'">'+(x.acumulado?t('yes'):t('no'))+'</strong></div>'+balls(x.dezenas)+(x.rateio.length?'<table><thead><tr><th>'+t('tier')+'</th><th>'+t('win-h')+'</th><th>'+t('prize')+'</th></tr></thead><tbody>'+x.rateio.map(function(p){return'<tr><td>'+esc(p.faixa)+'</td><td>'+esc(p.ganhadores)+'</td><td style="color:var(--gold)">'+brl(p.premio)+'</td></tr>';}).join('')+'</tbody></table>':'');
+  }).catch(function(){
+    var dz=ST.draws[num]||[];
+    var info=(ST.latest&&ST.latest.concurso===num)?'<div class="mrow"><span>'+t('date')+'</span><strong style="color:var(--t1)">'+ST.latest.data+'</strong></div>':'';
+    el('mBody').innerHTML=info+balls(dz)+'<p style="font-size:.8rem;color:var(--t3);text-align:center">'+t('modal-off')+'</p>';
+  });
 }
-// 문의: 메일 앱을 열어 contato@duriup.com.br 로 바로 보냄
 function sendContact(){
   var sel=el('cTipo'),tipo=sel.options[sel.selectedIndex].textContent.replace(/^[^\wÀ-ÿ가-힣]+/,'').trim();
   var nome=el('cNome').value.trim(),msg=el('cMsg').value.trim();
@@ -1108,23 +1308,24 @@ window.onload=function(){
   var th='auto';try{th=localStorage.getItem('sm_theme')||'auto';}catch(e){}
   applyTheme(th);
   welcomeInit();settingsInit();pwaInit();tabInit();helpInit();bellInit();
+  buildPlans();
   buildGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);
   buildGrid('sGrid',ST.sSel,'sCnt','sTgt','btnSim',6);
   buildGrid('hGrid',ST.hSel,'hCnt','hTgt','btnAddH',6);
   var savedLang;try{savedLang=localStorage.getItem('sm_lang');}catch(e){}
   applyLang(savedLang&&LANG[savedLang]?savedLang:'pt');
-  setInterval(adTick,5000);loadDB();
+  setInterval(adTick,5000);ST.lastLoad=Date.now();loadDB(false);
   document.querySelectorAll('input[name="gMode"]').forEach(function(m){m.onchange=function(){document.querySelectorAll('.mode').forEach(function(o){o.classList.remove('on');});m.closest('.mode').classList.add('on');var val=m.value;el('filtBox').classList.toggle('hidden',val!=='smart');el('luckBox').classList.toggle('hidden',val!=='lucky');el('sgQty').classList.toggle('hidden',val==='lucky');};});
   el('qMinus').onclick=function(){var q=parseInt(el('qVal').value);if(q>1)el('qVal').value=q-1;};
   el('qPlus').onclick=function(){var q=parseInt(el('qVal').value);if(q<10)el('qVal').value=q+1;};
   el('lBirth').oninput=function(){var q=this.value.replace(/\D/g,'');if(q.length>=3)q=q.slice(0,2)+'/'+q.slice(2);if(q.length>=6)q=q.slice(0,5)+'/'+q.slice(5,9);this.value=q;};
-  el('btnGen').onclick=function(){var mode=document.querySelector('input[name="gMode"]:checked').value,qty=parseInt(el('qVal').value);if(mode==='lucky'){var n=el('lName').value.trim(),b=el('lBirth').value;if(!n||!b){toast(t('fill-lucky'));return;}genGames=[genLucky(n,b)];}else{genGames=[];for(var i=0;i<qty;i++)genGames.push(mode==='smart'?genSmart():genRandom());}renderGen();el('genList').scrollIntoView({behavior:'smooth',block:'nearest'});track('generate_games',{mode:mode,qty:genGames.length});};
+  el('btnGen').onclick=function(){var mode=document.querySelector('input[name="gMode"]:checked').value,qty=parseInt(el('qVal').value);if(mode==='lucky'){var n=el('lName').value.trim(),b=el('lBirth').value;if(!n||!b){toast(t('fill-lucky'));return;}genGames=[genLucky(n,b)];}else{genGames=[];for(var i=0;i<qty;i++)genGames.push(genUnique(mode==='smart'?genSmart:genRandom,genGames));}renderGen();el('genList').scrollIntoView({behavior:'smooth',block:'nearest'});track('generate_games',{mode:mode,qty:genGames.length});};
   el('btnCopyGen').onclick=function(){copyTxt(genGames.map(function(g){return g.map(pad).join(' ');}).join('\n'));};
   el('btnDlGen').onclick=function(){dlTxt(genGames.map(function(g,i){return t('game',{n:i+1})+': '+g.map(pad).join(' - ');}).join('\n'),'sortemax-jogos.txt');};
-  el('wForm').onchange=function(){resetGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);};
+  el('wForm').onchange=function(){resetGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);updGuar();};
   el('wReset').onclick=function(){resetGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);};
   el('wAuto').onclick=function(){autoGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);};
-  el('btnFech').onclick=function(){var f=el('wForm').value,sel=ST.wSel.slice().sort(function(a,b){return a-b;}),tt=4,mx=6;if(f==='q8'){tt=4;mx=6;}else if(f==='q10a'){tt=4;mx=20;}else if(f==='q12'){tt=4;mx=42;}else if(f==='n9'){tt=5;mx=12;}else if(f==='n10'){tt=5;mx=20;}wheelGames=fechCover(sel,6,tt,mx);renderWheel();el('wRes').scrollIntoView({behavior:'smooth',block:'nearest'});track('fechamento',{plan:f});};
+  el('btnFech').onclick=function(){var p=curPlan();if(!p||ST.wSel.length!==p.n)return;wheelGames=fechCover(ST.wSel,p);renderWheel();el('wRes').scrollIntoView({behavior:'smooth',block:'nearest'});track('fechamento',{plan:p.key});};
   el('btnCopyW').onclick=function(){copyTxt(wheelGames.map(function(g){return g.map(pad).join(' ');}).join('\n'));};
   el('btnDlW').onclick=function(){dlTxt(wheelGames.map(function(g,i){return t('bet',{n:i+1})+': '+g.map(pad).join(' - ');}).join('\n'),'sortemax-fechamento.txt');};
   el('sReset').onclick=function(){resetGrid('sGrid',ST.sSel,'sCnt','sTgt','btnSim',6);el('simEmpty').classList.remove('hidden');el('simRes').innerHTML='';};
@@ -1142,7 +1343,15 @@ window.onload=function(){
   el('btnSend').onclick=sendContact;
   el('btnCopyMail').onclick=function(){copyTxt(CONTACT_EMAIL);};
   el('btnPix').onclick=function(){copyTxt('ettikalaser@gmail.com');};
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'){el('modal').classList.add('hidden');el('setSheet').classList.add('hidden');}});
+  el('alRetry').onclick=function(){loadDB(true);};
+  el('wmRetry').onclick=function(){el('warnModal').classList.add('hidden');loadDB(true);};
+  el('wmOk').onclick=function(){el('warnModal').classList.add('hidden');};
+  el('warnModal').onclick=function(e){if(e.target===el('warnModal'))el('warnModal').classList.add('hidden');};
+  window.addEventListener('online',function(){loadDB(false);});
+  window.addEventListener('offline',function(){if(ST.latest||ST.state){ST.netOk=false;evaluateData(false);}});
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&Date.now()-(ST.lastLoad||0)>10*60*1000){ST.lastLoad=Date.now();loadDB(false);}});
+  setInterval(function(){if(document.visibilityState==='visible'&&ST.latest&&isOverdue(ST.latest))loadDB(false);},5*60*1000);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){el('modal').classList.add('hidden');el('setSheet').classList.add('hidden');el('warnModal').classList.add('hidden');}});
   if('serviceWorker' in navigator){
     var hadCtrl=!!navigator.serviceWorker.controller,reloaded=false;
     navigator.serviceWorker.addEventListener('controllerchange',function(){if(hadCtrl&&!reloaded){reloaded=true;location.reload();}});

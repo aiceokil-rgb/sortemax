@@ -1,4 +1,4 @@
-const CACHE = 'sortemax-v2';
+const CACHE = 'sortemax-v3';
 const ASSETS = [
   '/',
   '/index.html',
@@ -36,8 +36,9 @@ self.addEventListener('activate', function(e) {
 self.addEventListener('fetch', function(e) {
   var url = e.request.url;
   if (e.request.method !== 'GET') return;
-  // API·통계 요청은 캐시 안 함
-  if (url.includes('servicebus2.caixa.gov.br') ||
+  // 결과 데이터·API·통계 요청은 캐시 안 함(항상 최신, 실패는 앱이 직접 처리)
+  if (url.includes('/data/') ||
+      url.includes('servicebus2.caixa.gov.br') ||
       url.includes('raw.githubusercontent.com') ||
       url.includes('googletagmanager.com') ||
       url.includes('google-analytics.com')) {

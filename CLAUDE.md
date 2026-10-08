@@ -16,3 +16,8 @@
 ## 보고 방식
 - 채팅·보고는 한국어로 짧게.
 - 잘 된 것은 한 줄, 안 된 것·조심할 것만 번호로 적는다.
+
+## 결과 데이터
+- `data/megasena.json`, `data/latest.json` 은 GitHub Actions(`.github/workflows/update-data.yml`)가 Caixa 에서 받아 자동으로 갱신한다. 손으로 고치지 않는다.
+- 앱에 가짜·예시 당첨 번호를 넣지 않는다. 최신 결과를 못 받으면 경고를 띄운다.
+- 조합(fechamento) 표를 바꾸면 모든 6개 추첨 경우를 전수 검사해 보장을 확인한다.
