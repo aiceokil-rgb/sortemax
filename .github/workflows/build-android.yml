@@ -3,12 +3,9 @@ name: Build Android (Play)
 # 서명하지 않은 AAB 를 만든다. 서명은 비공개 키로 따로 한다(키는 저장소에 넣지 않음).
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['android/**', '.github/workflows/build-android.yml']
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -31,3 +28,15 @@ jobs:
           name: sortemax-unsigned-aab
           path: android/app/build/outputs/bundle/release/*.aab
           retention-days: 30
+      - name: Publicar AAB sem assinatura no ramo android-build
+        run: |
+          cp android/app/build/outputs/bundle/release/app-release.aab /tmp/app-release-unsigned.aab
+          git config user.name "sortemax-bot"
+          git config user.email "contato@duriup.com.br"
+          git checkout --orphan android-build
+          git rm -rf --quiet .
+          cp /tmp/app-release-unsigned.aab app-release-unsigned.aab
+          echo "${GITHUB_SHA}" > source-commit.txt
+          git add app-release-unsigned.aab source-commit.txt
+          git commit -m "AAB sem assinatura de ${GITHUB_SHA::7}"
+          git push -f origin android-build
