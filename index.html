@@ -634,7 +634,7 @@ footer .warn{color:var(--t3)}
   <footer>
     <p>&copy; 2026 SorteMax Mega · <span id="ftVer">v0</span></p>
     <p class="warn" data-i="footer-warn">Sem vínculo com a Caixa Econômica Federal. Aposte com responsabilidade.</p>
-    <p><button class="link-btn" id="btnShowWelcome" data-i="ft-welcome">Ver tela inicial</button></p>
+    <p><button class="link-btn" id="btnShowWelcome" data-i="ft-welcome">Ver tela inicial</button> · <a class="link-btn" href="/baixar/" data-i="ft-install">Como instalar o app</a></p>
   </footer>
 </div>
 
@@ -830,6 +830,10 @@ Object.assign(LANG.pt,{"help-gen-body": "Escolha Surpresinha (aleatório), Intel
 Object.assign(LANG.es,{"help-gen-body": "Elige Sorpresa (aleatorio), Inteligente (filtros estadísticos) o Suerte (numerología). Define la cantidad y toca Generar Juegos. Importante: en el sorteo todos los números tienen la misma probabilidad — los filtros solo evitan combinaciones con patrones raros.", "odds": "Probabilidad de Sena por apuesta simple: 1 en 50.063.860."});
 Object.assign(LANG.en,{"help-gen-body": "Choose Quick Pick (random), Smart (statistical filters) or Lucky (numerology). Set the quantity and tap Generate Games. Note: every number has the same chance in the draw — filters only avoid combinations with rare patterns.", "odds": "Jackpot odds per simple bet: 1 in 50,063,860."});
 Object.assign(LANG.ko,{"help-gen-body": "자동(무작위), 스마트(통계 필터), 행운(수비학) 중 하나를 고르고 개수를 정한 뒤 번호 생성을 누르세요. 참고: 추첨에서 모든 번호의 확률은 같아요. 필터는 드문 패턴의 조합을 피할 뿐이에요.", "odds": "1게임당 1등(Sena) 확률: 50,063,860분의 1."});
+Object.assign(LANG.pt,{"ft-install": "Como instalar o app"});
+Object.assign(LANG.es,{"ft-install": "Cómo instalar la app"});
+Object.assign(LANG.en,{"ft-install": "How to install the app"});
+Object.assign(LANG.ko,{"ft-install": "앱 설치 방법"});
 var curLang='pt';
 function t(k,v){var s=(LANG[curLang]&&LANG[curLang][k]);if(s===undefined)s=LANG.pt[k];if(s===undefined)return k;if(v)Object.keys(v).forEach(function(x){s=s.split('{'+x+'}').join(v[x]);});return s;}
 function applyLang(lang){
