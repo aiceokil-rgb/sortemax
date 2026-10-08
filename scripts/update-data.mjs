@@ -1,6 +1,6 @@
 // Mega-Sena 결과를 받아 data/megasena.json, data/latest.json 을 최신으로 맞춤.
 // 실행: node scripts/update-data.mjs  (GitHub Actions 에서 자동 실행)
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 
 const HIST = 'data/megasena.json';
 const LATEST = 'data/latest.json';
@@ -104,6 +104,7 @@ async function main() {
       else console.log(`  conferido concurso ${n}: ok`);
     } catch (e) { console.log('  conferência falhou', e.message); }
   }
+  await mkdir('data', { recursive: true });
   const count = Object.keys(hist.draws).length;
   const missing = [];
   for (let n = 1; n <= latest.concurso; n++) if (!hist.draws[n]) missing.push(n);
