@@ -246,7 +246,7 @@ textarea.fi{resize:vertical;min-height:96px}
 .mail-box{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--greenT);border:1px solid var(--greenB);border-radius:14px;padding:12px 14px}
 .mail-box a{color:var(--green);font-weight:700;font-size:.95rem;text-decoration:none;word-break:break-all}
 .mail-box small{display:block;color:var(--t2);font-size:.72rem}
-.pix-copy{background:var(--greenT);border:1px solid var(--greenB);color:var(--green);font-size:.78rem;font-weight:700;min-height:38px;padding:4px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.copy-btn{background:var(--greenT);border:1px solid var(--greenB);color:var(--green);font-size:.78rem;font-weight:700;min-height:38px;padding:4px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}
 .sec-lbl{font-size:.78rem;font-weight:700;color:var(--t2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
 .tbl-hdr{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;border-bottom:1px solid var(--bd);padding-bottom:12px}
 .tbl-wrap{width:100%;overflow-x:auto}
@@ -624,7 +624,7 @@ footer .warn{color:var(--t3)}
       </div>
           <div class="mail-box">
             <div><small data-i="cont-mail-lbl">E-mail oficial</small><a href="mailto:contato@duriup.com.br" id="mailLink">contato@duriup.com.br</a></div>
-            <button class="pix-copy" id="btnCopyMail" data-i="btn-copy">Copiar</button>
+            <button class="copy-btn" id="btnCopyMail" data-i="btn-copy">Copiar</button>
           </div>
           <div class="contact-form">
             <div class="fg"><label data-i="cont-tipo" for="cTipo">Tipo</label><select class="fi" id="cTipo"><option value="sugestao" data-i="ct-sug">💡 Sugestão</option><option value="bug" data-i="ct-bug">🐛 Bug</option><option value="parceria" data-i="ct-par">🤝 Parceria</option><option value="outro" data-i="ct-out">💬 Outro</option></select></div>
@@ -712,7 +712,7 @@ footer .warn{color:var(--t3)}
 
 <script>
 'use strict';
-var APP_VERSION='2.3.2';
+var APP_VERSION='2.3.3';
 var CONTACT_EMAIL='contato@duriup.com.br';
 var pad=function(n){return n<10?'0'+n:String(n);};
 var brl=function(v){return isNaN(v)||v===null?'R$ 0,00':'R$ '+Number(v).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1.');};
