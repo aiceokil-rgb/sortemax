@@ -1,10 +1,12 @@
-const CACHE = 'sortemax-v5';
+const CACHE = 'sortemax-v6';
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
+  '/icons/maskable-192.png',
+  '/icons/maskable-512.png',
   '/icons/duriup-yt.png',
   '/icons/cinema-ballad.jpg',
   '/icons/qr-baixar.svg'
