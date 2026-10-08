@@ -6,7 +6,12 @@
 <meta name="description" content="Instale grátis o SorteMax Mega no seu celular: gerador de jogos, fechamentos com garantia, simulador e resultados oficiais da Mega-Sena. Sem cadastro.">
 <meta name="theme-color" content="#06180e">
 <link rel="canonical" href="https://sortemax.duriup.com.br/baixar/">
-<link rel="manifest" href="/manifest.json">
+<script>
+// 삼성 인터넷은 자체 앱(WebAPK)을 오래된 안드로이드 기준으로 만들어 Google Play 프로텍트가 막는다.
+// 그래서 삼성 인터넷에는 설치용 manifest 를 주지 않고 "홈 화면에 추가"(바로가기)로 안내한다.
+(function(){if(/SamsungBrowser/i.test(navigator.userAgent))return;var l=document.createElement('link');l.rel='manifest';l.href='/manifest.json';document.head.appendChild(l);})();
+</script>
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
 <link rel="icon" href="/icons/icon-192.png">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -159,7 +164,7 @@ footer .ch img{width:28px;height:28px;border-radius:50%;background:#fff}
     </div>
     <div class="sam" id="samBox">
       <h3 data-i="sm-t">Usa o Samsung Internet? 🔵</h3>
-      <p data-i="sm-p">Se aparecer “Não é possível instalar o app web”, use um destes caminhos:</p>
+      <p data-i="sm-p">No Samsung Internet a instalação pode falhar (“Não é possível instalar o app web”) ou o Google Play Protect pode mostrar “App não seguro bloqueado”. Isso é do navegador, não do SorteMax. Use um destes caminhos:</p>
       <a class="btn-chrome" id="chromeBtn" href="intent://sortemax.duriup.com.br/baixar/#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.android.chrome;end" data-i="sm-chrome">Abrir no Chrome e instalar</a>
       <p style="margin-top:12px"><b data-i="sm-or">Ou, no próprio Samsung Internet:</b></p>
       <ol><li data-i="sm-1">Toque no menu ≡ (canto inferior direito).</li><li data-i="sm-2">Toque em “Adicionar página a”.</li><li data-i="sm-3">Escolha “Tela inicial”. O ícone do SorteMax funciona igual a um app.</li></ol>
@@ -205,7 +210,7 @@ footer .ch img{width:28px;height:28px;border-radius:50%;background:#fff}
     <details><summary data-i="q3">Os resultados são oficiais?</summary><p data-i="r3">Sim. Os resultados vêm da Caixa e são atualizados automaticamente após cada sorteio. Se não for possível atualizar (por exemplo, sem internet), o app avisa.</p></details>
     <details><summary data-i="q4">O app aumenta minhas chances?</summary><p data-i="r4">Não existe método que garanta prêmio: todos os números têm a mesma chance. O SorteMax ajuda a organizar e conferir seus jogos, e os fechamentos garantem o prêmio mínimo apenas se as 6 dezenas sorteadas estiverem entre as escolhidas.</p></details>
     <details><summary data-i="q5">Funciona sem internet?</summary><p data-i="r5">Sim, com os últimos dados salvos. Para ver um resultado novo é preciso conexão.</p></details>
-    <details><summary data-i="q7">Apareceu “Não é possível instalar o app”?</summary><p data-i="r7">Isso acontece em alguns celulares com o navegador Samsung Internet. Abra sortemax.duriup.com.br no Google Chrome e toque em “Instalar”, ou no Samsung Internet use o menu ≡ → “Adicionar página a” → “Tela inicial”.</p></details>
+    <details><summary data-i="q7">Apareceu “Não é possível instalar” ou “App não seguro bloqueado”?</summary><p data-i="r7">Isso acontece em alguns celulares com o navegador Samsung Internet. Abra sortemax.duriup.com.br no Google Chrome e toque em “Instalar”, ou no Samsung Internet use o menu ≡ → “Adicionar página a” → “Tela inicial”.</p></details>
     <details><summary data-i="q6">Tem vínculo com a Caixa?</summary><p data-i="r6">Não. O SorteMax é independente e não tem vínculo com a Caixa Econômica Federal. As apostas são feitas apenas nas lotéricas ou nos canais oficiais da Caixa. Proibido para menores de 18 anos.</p></details>
   </div>
 </section>
@@ -276,6 +281,10 @@ Object.assign(L.pt,{"sm-t": "Usa o Samsung Internet? 🔵", "sm-p": "Se aparecer
 Object.assign(L.es,{"sm-t": "¿Usas Samsung Internet? 🔵", "sm-p": "Si aparece “No se puede instalar la app web”, usa uno de estos caminos:", "sm-chrome": "Abrir en Chrome e instalar", "sm-or": "O, en el mismo Samsung Internet:", "sm-1": "Toca el menú ≡ (abajo a la derecha).", "sm-2": "Toca “Agregar página a”.", "sm-3": "Elige “Pantalla de inicio”. El ícono de SorteMax funciona igual que una app.", "q7": "¿Apareció “No se puede instalar la app”?", "r7": "Pasa en algunos celulares con el navegador Samsung Internet. Abre sortemax.duriup.com.br en Google Chrome y toca “Instalar”, o en Samsung Internet usa el menú ≡ → “Agregar página a” → “Pantalla de inicio”.", "sam-hint": "En Samsung Internet: si la instalación falla, usa “Abrir en Chrome” o el menú ≡ → “Agregar página a” → “Pantalla de inicio”."});
 Object.assign(L.en,{"sm-t": "Using Samsung Internet? 🔵", "sm-p": "If you see “Can’t install web app”, use one of these options:", "sm-chrome": "Open in Chrome and install", "sm-or": "Or, in Samsung Internet itself:", "sm-1": "Tap the ≡ menu (bottom right).", "sm-2": "Tap “Add page to”.", "sm-3": "Choose “Home screen”. The SorteMax icon works just like an app.", "q7": "Saw “Can’t install web app”?", "r7": "This happens on some phones with the Samsung Internet browser. Open sortemax.duriup.com.br in Google Chrome and tap “Install”, or in Samsung Internet use the ≡ menu → “Add page to” → “Home screen”.", "sam-hint": "On Samsung Internet: if installing fails, use “Open in Chrome” or the ≡ menu → “Add page to” → “Home screen”."});
 Object.assign(L.ko,{"sm-t": "삼성 인터넷을 쓰시나요? 🔵", "sm-p": "“웹 앱을 설치할 수 없음”이 나오면 아래 방법 중 하나를 쓰세요:", "sm-chrome": "크롬에서 열어 설치하기", "sm-or": "또는 삼성 인터넷에서 바로:", "sm-1": "오른쪽 아래 메뉴 ≡ 를 누르세요.", "sm-2": "“현재 페이지 추가”를 누르세요.", "sm-3": "“홈 화면”을 고르세요. SorteMax 아이콘이 앱처럼 열려요.", "q7": "“웹 앱을 설치할 수 없음”이 나왔나요?", "r7": "삼성 인터넷 브라우저에서 일부 휴대폰에 생기는 문제예요. 크롬에서 sortemax.duriup.com.br 을 열어 “설치”를 누르거나, 삼성 인터넷 메뉴 ≡ → “현재 페이지 추가” → “홈 화면”을 쓰세요.", "sam-hint": "삼성 인터넷: 설치가 안 되면 “크롬에서 열기” 또는 메뉴 ≡ → “현재 페이지 추가” → “홈 화면”을 쓰세요."});
+Object.assign(L.pt,{"sm-p": "No Samsung Internet a instalação pode falhar (“Não é possível instalar o app web”) ou o Google Play Protect pode mostrar “App não seguro bloqueado”. Isso é do navegador, não do SorteMax. Use um destes caminhos:", "q7": "Apareceu “Não é possível instalar” ou “App não seguro bloqueado”?", "r7": "Isso acontece só no navegador Samsung Internet: ele cria o app num formato antigo do Android e o Google Play Protect bloqueia. O SorteMax é seguro. Abra sortemax.duriup.com.br no Google Chrome e toque em “Instalar”, ou no Samsung Internet use o menu ≡ → “Adicionar página a” → “Tela inicial”."});
+Object.assign(L.es,{"sm-p": "En Samsung Internet la instalación puede fallar (“No se puede instalar la app web”) o Google Play Protect puede mostrar “App no segura bloqueada”. Es cosa del navegador, no de SorteMax. Usa uno de estos caminos:", "q7": "¿Apareció “No se puede instalar” o “App no segura bloqueada”?", "r7": "Solo pasa en el navegador Samsung Internet: crea la app en un formato antiguo de Android y Google Play Protect la bloquea. SorteMax es seguro. Abre sortemax.duriup.com.br en Google Chrome y toca “Instalar”, o en Samsung Internet usa el menú ≡ → “Agregar página a” → “Pantalla de inicio”."});
+Object.assign(L.en,{"sm-p": "On Samsung Internet, installing may fail (“Can’t install web app”) or Google Play Protect may show “Unsafe app blocked”. That comes from the browser, not from SorteMax. Use one of these options:", "q7": "Saw “Can’t install” or “Unsafe app blocked”?", "r7": "This only happens in the Samsung Internet browser: it builds the app in an old Android format and Google Play Protect blocks it. SorteMax is safe. Open sortemax.duriup.com.br in Google Chrome and tap “Install”, or in Samsung Internet use the ≡ menu → “Add page to” → “Home screen”."});
+Object.assign(L.ko,{"sm-p": "삼성 인터넷에서는 설치가 실패하거나(“웹 앱을 설치할 수 없음”) Google Play 프로텍트가 “안전하지 않은 앱 차단됨”을 띄울 수 있어요. 삼성 브라우저 문제이고 SorteMax 문제가 아니에요. 아래 방법 중 하나를 쓰세요:", "q7": "“설치할 수 없음” 또는 “안전하지 않은 앱 차단됨”이 나왔나요?", "r7": "삼성 인터넷 브라우저에서만 생겨요. 삼성 브라우저가 앱을 오래된 안드로이드 형식으로 만들어서 Google Play 프로텍트가 막는 거예요. SorteMax 는 안전해요. 크롬에서 sortemax.duriup.com.br 을 열어 “설치”를 누르거나, 삼성 인터넷 메뉴 ≡ → “현재 페이지 추가” → “홈 화면”을 쓰세요."});
 var cur='pt',deferred=null,showSam=false;
 var $=function(s){return document.querySelector(s);};
 var ua=navigator.userAgent||'';
@@ -306,7 +315,7 @@ function updBtn(){
 }
 function install(){
   if(standalone){location.href='/';return;}
-  if(isSamsung){showOS('android');}
+  if(isSamsung){showOS('android');$('#samBox').scrollIntoView({behavior:'smooth',block:'center'});toast(tr('sam-hint'));return;}
   if(deferred){deferred.prompt();deferred.userChoice.then(function(r){if(typeof gtag==='function')gtag('event',r.outcome==='accepted'?'pwa_install':'pwa_install_dismiss',{from:'baixar'});deferred=null;});return;}
   // 자동 설치를 못 쓰는 브라우저: 해당 기기 순서를 보여줌
   showOS(isIOS?'ios':isAndroid?'android':'pc');

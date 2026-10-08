@@ -8,7 +8,12 @@
 <meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="manifest.json">
+<script>
+// 삼성 인터넷은 자체 앱(WebAPK)을 오래된 안드로이드 기준으로 만들어 Google Play 프로텍트가 막는다.
+// 그래서 삼성 인터넷에는 설치용 manifest 를 주지 않고 "홈 화면에 추가"(바로가기)로 안내한다.
+(function(){if(/SamsungBrowser/i.test(navigator.userAgent))return;var l=document.createElement('link');l.rel='manifest';l.href='manifest.json';document.head.appendChild(l);})();
+</script>
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -718,7 +723,7 @@ footer .warn{color:var(--t3)}
 
 <script>
 'use strict';
-var APP_VERSION='2.2.1';
+var APP_VERSION='2.2.2';
 var CONTACT_EMAIL='contato@duriup.com.br';
 var pad=function(n){return n<10?'0'+n:String(n);};
 var brl=function(v){return isNaN(v)||v===null?'R$ 0,00':'R$ '+Number(v).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1.');};
