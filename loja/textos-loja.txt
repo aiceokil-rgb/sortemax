@@ -1,0 +1,47 @@
+=== NOME DO APP (máx. 30) ===
+SorteMax Mega: Gerador Grátis
+
+=== DESCRIÇÃO CURTA (máx. 80) ===
+Gere jogos da Mega-Sena, faça fechamentos e veja os resultados oficiais. Grátis!
+
+=== DESCRIÇÃO COMPLETA ===
+🍀 SorteMax Mega é o app 100% grátis para quem joga na Mega-Sena. Sem cadastro, sem login e sem e-mail: abra e use.
+
+📊 RESULTADOS OFICIAIS
+• Último resultado, ganhadores e prêmios de cada faixa
+• Próximo sorteio com data, horário e prêmio estimado
+• Histórico completo de todos os concursos, atualizado automaticamente
+• Aviso claro quando não for possível atualizar (sem internet)
+
+🎲 GERADOR DE JOGOS
+• Surpresinha 100% aleatória
+• Gerador Inteligente com filtros: equilíbrio par/ímpar, soma, sem 3 números seguidos
+• Gerador da Sorte por numerologia (nome e data de nascimento)
+• Evita combinações que já saíram e mostra o custo das apostas
+
+🧮 FECHAMENTOS COM GARANTIA
+• Planos de Quadra e Quina verificados matematicamente
+• Menor número de jogos possível e custo exato
+• Explicação clara de quando a garantia vale
+
+🎯 SIMULADOR
+• Confira seu jogo em qualquer concurso
+• Veja quantas vezes ele teria sido premiado em toda a história
+
+💾 MEUS JOGOS
+• Salve suas apostas; o app confere sozinho quando sai o resultado
+
+🌐 Português, Español, English e 한국어 · Tema claro, escuro ou automático
+
+⚠️ Importante: o SorteMax é entretenimento e auxílio estatístico. Não vende apostas, não garante prêmios e não tem vínculo com a Caixa Econômica Federal. Todos os números têm a mesma chance de sair. Apostas só nas lotéricas ou nos canais oficiais da Caixa. Proibido para menores de 18 anos. Jogue com responsabilidade.
+
+Contato: contato@duriup.com.br
+
+=== NOTAS DA VERSÃO 1.0.0 ===
+Primeira versão do SorteMax Mega na Google Play.
+
+=== OUTROS CAMPOS ===
+Categoria: Ferramentas (Tools)   ·   Tipo: App   ·   Gratuito
+E-mail: contato@duriup.com.br
+Site: https://sortemax.duriup.com.br
+Política de privacidade: https://sortemax.duriup.com.br/privacidade/
