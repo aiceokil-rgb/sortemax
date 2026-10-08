@@ -298,6 +298,13 @@ footer .warn{color:var(--t3)}
 .hs span{font-size:.68rem;color:var(--t2)}
 .row2{display:flex;gap:8px;align-items:flex-end}
 .row2 .sg{flex:1}
+.share-card{text-align:center}
+.share-card .qr{width:168px;height:168px;margin:6px auto 10px;background:#fff;border-radius:16px;padding:10px;border:1px solid var(--bd);display:block}
+.share-msg{text-align:left;font-size:.84rem;color:var(--t1);background:var(--surf2);border:1px dashed var(--greenB);border-radius:12px;padding:10px 12px;margin:10px 0;white-space:pre-line;word-break:break-word}
+.share-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.share-acts .btn-p{grid-column:1/-1}
+.btn-wa{background:#25d366;color:#04140b;border:none;font-weight:700;min-height:46px;border-radius:13px;font-size:.92rem;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.share-link{font-size:.78rem;color:var(--green);word-break:break-all;font-weight:600}
 .pwa-banner{display:none;align-items:center;gap:8px;background:var(--greenT);border:1px solid var(--greenB);border-radius:16px;padding:10px 12px;font-size:.82rem}
 .pwa-banner.on{display:flex}
 .pwa-banner p{color:var(--t2);flex:1}.pwa-banner strong{color:var(--green)}
@@ -438,7 +445,7 @@ footer .warn{color:var(--t3)}
     </a>
     <a class="ad-slide" id="ad2" href="https://www.youtube.com/@CinemaBallad" target="_blank" rel="noopener">
       <img src="icons/cinema-ballad.jpg" alt="Cinema Ballad" width="46" height="46">
-      <div><strong>Cinema Ballad</strong><span data-i="ch-cine">Pop dos anos 70 e 80</span></div>
+      <div><strong>Cinema Ballad</strong><span data-i="ch-cine">Trilhas sonoras do cinema</span></div>
     </a>
     <div class="ad-dots"><div class="ad-dot on" id="d0"></div><div class="ad-dot" id="d1"></div><div class="ad-dot" id="d2"></div></div>
   </div>
@@ -467,6 +474,19 @@ footer .warn{color:var(--t3)}
         <div class="mini-card"><span class="mini-lbl" data-i="lbl-beh">Comportamento</span><div class="mini-stats"><div><span data-i="lbl-oe">Par/Ímpar:</span><strong id="avgOE">--</strong></div><div><span data-i="lbl-sum">Soma ideal:</span><strong>150–220</strong></div></div></div>
       </div>
     </div>
+    <div class="card share-card" data-share>
+        <h3 data-i="sh-title">Indique o SorteMax para um amigo</h3>
+        <p class="sub" style="margin-bottom:4px" data-i="sh-sub">Para baixar o app, aponte a câmera do celular para o QR code:</p>
+        <img class="qr" src="icons/qr-baixar.svg" alt="QR code" width="168" height="168">
+        <div class="share-link">sortemax.duriup.com.br/baixar</div>
+        <p class="sub" style="margin:12px 0 0" data-i="sh-or">Ou envie o convite pelo WhatsApp ou outro app. Esta é a mensagem que seu amigo vai receber:</p>
+        <div class="share-msg" data-share-msg></div>
+        <div class="share-acts">
+          <button class="btn-p" data-share-copy><span data-i="sh-copy">📋 Copiar convite</span></button>
+          <a class="btn-wa" data-share-wa href="#" target="_blank" rel="noopener"><span data-i="sh-wa">WhatsApp</span></a>
+          <button class="btn-s" style="min-height:46px" data-share-native><span data-i="sh-more">📤 Outros apps</span></button>
+        </div>
+      </div>
   </div>
   <nav class="tabs">
     <button class="tab on" data-t="p-gen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/></svg><span data-i="tab-gen">Gerador</span></button>
@@ -589,6 +609,19 @@ footer .warn{color:var(--t3)}
         <h3 data-i="cont-title">Fale Conosco</h3>
         <p class="sub" data-i="cont-sub">Sugestões, bugs ou parcerias</p>
         <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="share-card" style="background:var(--surf2);border:1px solid var(--bd);border-radius:16px;padding:14px" data-share>
+        <h3 data-i="sh-title">Indique o SorteMax para um amigo</h3>
+        <p class="sub" style="margin-bottom:4px" data-i="sh-sub">Para baixar o app, aponte a câmera do celular para o QR code:</p>
+        <img class="qr" src="icons/qr-baixar.svg" alt="QR code" width="168" height="168">
+        <div class="share-link">sortemax.duriup.com.br/baixar</div>
+        <p class="sub" style="margin:12px 0 0" data-i="sh-or">Ou envie o convite pelo WhatsApp ou outro app. Esta é a mensagem que seu amigo vai receber:</p>
+        <div class="share-msg" data-share-msg></div>
+        <div class="share-acts">
+          <button class="btn-p" data-share-copy><span data-i="sh-copy">📋 Copiar convite</span></button>
+          <a class="btn-wa" data-share-wa href="#" target="_blank" rel="noopener"><span data-i="sh-wa">WhatsApp</span></a>
+          <button class="btn-s" style="min-height:46px" data-share-native><span data-i="sh-more">📤 Outros apps</span></button>
+        </div>
+      </div>
           <div class="mail-box">
             <div><small data-i="cont-mail-lbl">E-mail oficial</small><a href="mailto:contato@duriup.com.br" id="mailLink">contato@duriup.com.br</a></div>
             <button class="pix-copy" id="btnCopyMail" data-i="btn-copy">Copiar</button>
@@ -619,7 +652,7 @@ footer .warn{color:var(--t3)}
               </a>
               <a class="slink" href="https://www.youtube.com/@CinemaBallad" target="_blank" rel="noopener">
                 <img src="icons/cinema-ballad.jpg" alt="Cinema Ballad" width="40" height="40">
-                <div><strong>Cinema Ballad</strong><span data-i="ch-cine">Pop dos anos 70 e 80</span></div>
+                <div><strong>Cinema Ballad</strong><span data-i="ch-cine">Trilhas sonoras do cinema</span></div>
               </a>
               <a class="slink" href="mailto:contato@duriup.com.br">
                 <div class="mail-ic">✉️</div>
@@ -685,7 +718,7 @@ footer .warn{color:var(--t3)}
 
 <script>
 'use strict';
-var APP_VERSION='2.1.0';
+var APP_VERSION='2.2.0';
 var CONTACT_EMAIL='contato@duriup.com.br';
 var pad=function(n){return n<10?'0'+n:String(n);};
 var brl=function(v){return isNaN(v)||v===null?'R$ 0,00':'R$ '+Number(v).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1.');};
@@ -714,7 +747,7 @@ pt:{
 'res-title':'Histórico de Concursos','res-sub':'Consulte qualquer sorteio','ph-search':'Pesquisar concurso...','th-conc':'Concurso','th-nums':'Dezenas','btn-prev':'Anterior','btn-next':'Próximo',
 'cont-title':'Fale Conosco','cont-sub':'Sugestões, bugs ou parcerias','cont-mail-lbl':'E-mail oficial','cont-tipo':'Tipo','ct-sug':'💡 Sugestão','ct-bug':'🐛 Bug','ct-par':'🤝 Parceria','ct-out':'💬 Outro','cont-nome':'Nome','ph-yourname':'Seu nome','cont-msg':'Mensagem','ph-msg':'Conte tudo! Cada feedback nos ajuda...','btn-send':'Enviar por e-mail','cont-note':'Abre o seu app de e-mail com a mensagem pronta para contato@duriup.com.br',
 'don-title':'Gostou do SorteMax?','don-desc':'100% gratuito e feito com carinho. Se trouxe sorte extra, considere pagar um cafezinho!','pix-lbl':'Chave PIX','btn-pix':'Copiar PIX','channels-title':'Nossos Canais',
-'ch-duriup':'Cripto, ações e mercados financeiros','ch-sogno':'Música italiana vintage dos anos 60','ch-cine':'Pop dos anos 70 e 80',
+'ch-duriup':'Cripto, ações e mercados financeiros','ch-sogno':'Música italiana vintage dos anos 60','ch-cine':'Trilhas sonoras do cinema',
 'btn-copy':'Copiar','btn-export':'Exportar','btn-clear':'Limpar','btn-random':'Aleatório',
 'nd-lbl':'Próximo sorteio','lbl-last':'ÚLTIMO RESULTADO','lbl-hist-sum':'Resumo Histórico','lbl-hist-sub':'Análise de todos os concursos','lbl-hot':'Mais Sorteados','lbl-cold':'Menos Sorteados','lbl-beh':'Comportamento','lbl-oe':'Par/Ímpar:','lbl-sum':'Soma ideal:',
 'footer-warn':'Sem vínculo com a Caixa Econômica Federal. Aposte com responsabilidade.','ft-welcome':'Ver tela inicial','pwa-txt':'Instale o SorteMax','pwa-txt2':'na sua tela inicial!','pwa-install':'Instalar',
@@ -745,7 +778,7 @@ es:{
 'res-title':'Historial de Concursos','res-sub':'Consulta cualquier sorteo','ph-search':'Buscar concurso...','th-conc':'Concurso','th-nums':'Números','btn-prev':'Anterior','btn-next':'Siguiente',
 'cont-title':'Contáctanos','cont-sub':'Sugerencias, errores o alianzas','cont-mail-lbl':'E-mail oficial','cont-tipo':'Tipo','ct-sug':'💡 Sugerencia','ct-bug':'🐛 Error','ct-par':'🤝 Alianza','ct-out':'💬 Otro','cont-nome':'Nombre','ph-yourname':'Tu nombre','cont-msg':'Mensaje','ph-msg':'¡Cuéntanos todo! Cada comentario nos ayuda...','btn-send':'Enviar por e-mail','cont-note':'Abre tu app de e-mail con el mensaje listo para contato@duriup.com.br',
 'don-title':'¿Te gustó SorteMax?','don-desc':'100% gratuito y hecho con cariño. Si te trajo suerte extra, ¡considera invitarnos un cafecito!','pix-lbl':'Clave PIX','btn-pix':'Copiar PIX','channels-title':'Nuestros Canales',
-'ch-duriup':'Cripto, acciones y mercados financieros','ch-sogno':'Música italiana vintage de los años 60','ch-cine':'Pop de los años 70 y 80',
+'ch-duriup':'Cripto, acciones y mercados financieros','ch-sogno':'Música italiana vintage de los años 60','ch-cine':'Bandas sonoras del cine',
 'btn-copy':'Copiar','btn-export':'Exportar','btn-clear':'Limpiar','btn-random':'Aleatorio',
 'nd-lbl':'Próximo sorteo','lbl-last':'ÚLTIMO RESULTADO','lbl-hist-sum':'Resumen Histórico','lbl-hist-sub':'Análisis de todos los concursos','lbl-hot':'Más Sorteados','lbl-cold':'Menos Sorteados','lbl-beh':'Comportamiento','lbl-oe':'Par/Impar:','lbl-sum':'Suma ideal:',
 'footer-warn':'Sin vínculo con la Caixa Econômica Federal. Juega con responsabilidad.','ft-welcome':'Ver pantalla inicial','pwa-txt':'Instala SorteMax','pwa-txt2':'en tu pantalla de inicio!','pwa-install':'Instalar',
@@ -776,7 +809,7 @@ en:{
 'res-title':'Draw History','res-sub':'Look up any draw','ph-search':'Search draw...','th-conc':'Draw','th-nums':'Numbers','btn-prev':'Previous','btn-next':'Next',
 'cont-title':'Contact Us','cont-sub':'Suggestions, bugs or partnerships','cont-mail-lbl':'Official e-mail','cont-tipo':'Type','ct-sug':'💡 Suggestion','ct-bug':'🐛 Bug','ct-par':'🤝 Partnership','ct-out':'💬 Other','cont-nome':'Name','ph-yourname':'Your name','cont-msg':'Message','ph-msg':'Tell us everything! Every bit of feedback helps...','btn-send':'Send by e-mail','cont-note':'Opens your e-mail app with the message ready for contato@duriup.com.br',
 'don-title':'Enjoying SorteMax?','don-desc':'100% free and made with care. If it brought you extra luck, consider buying us a coffee!','pix-lbl':'PIX key','btn-pix':'Copy PIX','channels-title':'Our Channels',
-'ch-duriup':'Crypto, stocks and financial markets','ch-sogno':'Vintage Italian music from the 60s','ch-cine':'70s & 80s pop hits',
+'ch-duriup':'Crypto, stocks and financial markets','ch-sogno':'Vintage Italian music from the 60s','ch-cine':'Movie soundtracks',
 'btn-copy':'Copy','btn-export':'Export','btn-clear':'Clear','btn-random':'Random',
 'nd-lbl':'Next draw','lbl-last':'LATEST RESULT','lbl-hist-sum':'History Summary','lbl-hist-sub':'Analysis of every draw','lbl-hot':'Most Drawn','lbl-cold':'Least Drawn','lbl-beh':'Patterns','lbl-oe':'Even/Odd:','lbl-sum':'Ideal sum:',
 'footer-warn':'Not affiliated with Caixa Econômica Federal. Play responsibly.','ft-welcome':'Show welcome screen','pwa-txt':'Install SorteMax','pwa-txt2':'on your home screen!','pwa-install':'Install',
@@ -807,7 +840,7 @@ ko:{
 'res-title':'회차별 결과','res-sub':'원하는 회차를 찾아보세요','ph-search':'회차 검색...','th-conc':'회차','th-nums':'번호','btn-prev':'이전','btn-next':'다음',
 'cont-title':'문의하기','cont-sub':'제안, 오류 신고, 제휴','cont-mail-lbl':'공식 이메일','cont-tipo':'유형','ct-sug':'💡 제안','ct-bug':'🐛 오류','ct-par':'🤝 제휴','ct-out':'💬 기타','cont-nome':'이름','ph-yourname':'이름','cont-msg':'메시지','ph-msg':'무엇이든 알려 주세요! 모든 의견이 도움이 됩니다...','btn-send':'이메일로 보내기','cont-note':'메일 앱이 열리고 contato@duriup.com.br 로 보낼 내용이 채워집니다',
 'don-title':'SorteMax가 마음에 드세요?','don-desc':'100% 무료로 정성껏 만들었습니다. 행운이 따랐다면 커피 한 잔 후원해 주세요!','pix-lbl':'PIX 키','btn-pix':'PIX 복사','channels-title':'우리 채널',
-'ch-duriup':'코인·주식·금융 시장','ch-sogno':'60년대 이탈리아 빈티지 음악','ch-cine':'70·80년대 팝송',
+'ch-duriup':'코인·주식·금융 시장','ch-sogno':'60년대 이탈리아 빈티지 음악','ch-cine':'영화 음악',
 'btn-copy':'복사','btn-export':'내보내기','btn-clear':'지우기','btn-random':'무작위',
 'nd-lbl':'다음 추첨','lbl-last':'최근 결과','lbl-hist-sum':'통계 요약','lbl-hist-sub':'전체 회차 분석','lbl-hot':'많이 나온 번호','lbl-cold':'적게 나온 번호','lbl-beh':'패턴','lbl-oe':'짝/홀:','lbl-sum':'권장 합계:',
 'footer-warn':'Caixa Econômica Federal과 관련이 없습니다. 책임감 있게 즐기세요.','ft-welcome':'시작 화면 보기','pwa-txt':'SorteMax 설치','pwa-txt2':'홈 화면에 추가하세요!','pwa-install':'설치',
@@ -834,6 +867,10 @@ Object.assign(LANG.pt,{"ft-install": "Como instalar o app"});
 Object.assign(LANG.es,{"ft-install": "Cómo instalar la app"});
 Object.assign(LANG.en,{"ft-install": "How to install the app"});
 Object.assign(LANG.ko,{"ft-install": "앱 설치 방법"});
+Object.assign(LANG.pt,{"sh-title": "Indique o SorteMax para um amigo", "sh-sub": "Para baixar o app, aponte a câmera do celular para o QR code:", "sh-or": "Ou envie o convite pelo WhatsApp ou outro app. Esta é a mensagem que seu amigo vai receber:", "sh-copy": "📋 Copiar convite", "sh-wa": "WhatsApp", "sh-more": "📤 Outros apps", "sh-copied": "Convite copiado! Agora cole no WhatsApp ou em outro app e envie.", "sh-text": "🍀 Conheça o SorteMax Mega: app GRÁTIS da Mega-Sena!\n✅ Gera jogos, faz fechamentos e mostra os resultados oficiais\n✅ Sem cadastro, sem login\n\n📲 Baixe aqui: {u}"});
+Object.assign(LANG.es,{"sh-title": "Recomienda SorteMax a un amigo", "sh-sub": "Para descargar la app, apunta la cámara del celular al código QR:", "sh-or": "O envía la invitación por WhatsApp u otra app. Este es el mensaje que recibirá tu amigo:", "sh-copy": "📋 Copiar invitación", "sh-wa": "WhatsApp", "sh-more": "📤 Otras apps", "sh-copied": "¡Invitación copiada! Ahora pégala en WhatsApp u otra app y envíala.", "sh-text": "🍀 Conoce SorteMax Mega: ¡app GRATIS de la Mega-Sena!\n✅ Genera juegos, arma combinaciones y muestra los resultados oficiales\n✅ Sin registro, sin login\n\n📲 Descárgala aquí: {u}"});
+Object.assign(LANG.en,{"sh-title": "Share SorteMax with a friend", "sh-sub": "To download the app, point your phone camera at the QR code:", "sh-or": "Or send the invite via WhatsApp or another app. This is the message your friend will get:", "sh-copy": "📋 Copy invite", "sh-wa": "WhatsApp", "sh-more": "📤 Other apps", "sh-copied": "Invite copied! Now paste it into WhatsApp or another app and send.", "sh-text": "🍀 Check out SorteMax Mega: a FREE Mega-Sena app!\n✅ Creates games, builds wheels and shows official results\n✅ No sign-up, no login\n\n📲 Download here: {u}"});
+Object.assign(LANG.ko,{"sh-title": "친구에게 SorteMax 알려주기", "sh-sub": "앱을 받으려면 휴대폰 카메라로 QR 코드를 비추세요:", "sh-or": "또는 왓츠앱이나 다른 앱으로 초대 메시지를 보내세요. 친구가 받게 될 메시지예요:", "sh-copy": "📋 초대 메시지 복사", "sh-wa": "왓츠앱", "sh-more": "📤 다른 앱", "sh-copied": "초대 메시지를 복사했어요! 왓츠앱이나 다른 앱에 붙여 넣어 보내세요.", "sh-text": "🍀 메가세나 무료 앱 SorteMax Mega 를 써 보세요!\n✅ 번호 생성, 조합, 공식 결과 확인\n✅ 가입·로그인 없음\n\n📲 여기서 받기: {u}"});
 var curLang='pt';
 function t(k,v){var s=(LANG[curLang]&&LANG[curLang][k]);if(s===undefined)s=LANG.pt[k];if(s===undefined)return k;if(v)Object.keys(v).forEach(function(x){s=s.split('{'+x+'}').join(v[x]);});return s;}
 function applyLang(lang){
@@ -850,6 +887,7 @@ function applyLang(lang){
 }
 // 언어를 바꿀 때 이미 그려진 동적 화면도 다시 그림
 function refreshDynamic(){
+  if(document.querySelector('[data-share-msg]'))renderShare();
   syncUI(ST.sync);bellLabel();renderAll();buildPlans();
   if(ST.state)showDataAlertText();
   if(genGames.length)renderGen();
@@ -864,6 +902,32 @@ function showDataAlertText(){var m=el('warnModal'),open=!m.classList.contains('h
 function track(ev,p){if(typeof gtag==='function')gtag('event',ev,p||{});}
 function toast(msg){var x=el('toast');x.textContent=msg;x.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(function(){x.classList.remove('on');},1900);}
 
+// ── 친구에게 공유 ──────────────────────────────────────
+var SHARE_URL='https://sortemax.duriup.com.br/baixar/';
+function shareText(){return t('sh-text',{u:SHARE_URL});}
+function renderShare(){
+  var txt=shareText();
+  document.querySelectorAll('[data-share-msg]').forEach(function(e){e.textContent=txt;});
+  document.querySelectorAll('[data-share-wa]').forEach(function(a){a.href='https://wa.me/?text='+encodeURIComponent(txt);});
+  var can=!!navigator.share;
+  document.querySelectorAll('[data-share-native]').forEach(function(b){b.style.display=can?'':'none';});
+  document.querySelectorAll('[data-share-wa]').forEach(function(a){a.style.gridColumn=can?'':'1/-1';});
+}
+function shareInit(){
+  document.querySelectorAll('[data-share-copy]').forEach(function(b){b.onclick=function(){
+    var txt=shareText(),done=function(){toastLong(t('sh-copied'));};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done).catch(function(){fallbackCopy(txt);done();});
+    else{fallbackCopy(txt);done();}
+    track('share_copy',{lang:curLang});
+  };});
+  document.querySelectorAll('[data-share-wa]').forEach(function(a){a.addEventListener('click',function(){track('share_whatsapp',{lang:curLang});});});
+  document.querySelectorAll('[data-share-native]').forEach(function(b){b.onclick=function(){
+    if(!navigator.share)return;
+    navigator.share({title:'SorteMax Mega',text:shareText()}).then(function(){track('share_native',{lang:curLang});}).catch(function(){});
+  };});
+  renderShare();
+}
+function toastLong(msg){var x=el('toast');x.textContent=msg;x.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(function(){x.classList.remove('on');},3500);}
 // ── 테마 ───────────────────────────────────────────────
 var curTheme='auto';
 function applyTheme(th){
@@ -878,7 +942,7 @@ function applyTheme(th){
 // ── 첫 화면 ─────────────────────────────────────────────
 function welcomeInit(){
   var w=el('welcome');
-  var seen=false;try{seen=localStorage.getItem('sm_welcome')===APP_VERSION;}catch(e){}
+  var seen=false;try{seen=!!localStorage.getItem('sm_welcome');}catch(e){}
   if(!seen)showWelcome();
   el('wStart').onclick=function(){
     try{localStorage.setItem('sm_welcome',APP_VERSION);}catch(e){}
@@ -1311,7 +1375,7 @@ window.onload=function(){
   var v='v'+APP_VERSION;el('wVer').textContent=v;el('hdrVer').textContent=v;el('ftVer').textContent=v;
   var th='auto';try{th=localStorage.getItem('sm_theme')||'auto';}catch(e){}
   applyTheme(th);
-  welcomeInit();settingsInit();pwaInit();tabInit();helpInit();bellInit();
+  welcomeInit();settingsInit();shareInit();pwaInit();tabInit();helpInit();bellInit();
   buildPlans();
   buildGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);
   buildGrid('sGrid',ST.sSel,'sCnt','sTgt','btnSim',6);

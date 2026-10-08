@@ -1,4 +1,4 @@
-const CACHE = 'sortemax-v4';
+const CACHE = 'sortemax-v5';
 const ASSETS = [
   '/',
   '/index.html',
@@ -6,7 +6,8 @@ const ASSETS = [
   '/icons/icon-192.png',
   '/icons/icon-512.png',
   '/icons/duriup-yt.png',
-  '/icons/cinema-ballad.jpg'
+  '/icons/cinema-ballad.jpg',
+  '/icons/qr-baixar.svg'
 ];
 const FONT_CSS = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap';
 
