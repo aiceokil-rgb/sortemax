@@ -97,7 +97,7 @@
 3. 도메인·DNS: duriup.com.br 는 Hostinger 에서 관리한다. CNAME `sortemax` 가 `aiceokil-rgb.github.io` 를 가리킨다(바꾸지 않는다).
 4. 이메일: contato@duriup.com.br 는 Hostinger 사서함이고, aiceokil@gmail.com 으로 사본이 전달된다.
 5. 외부 데이터: Caixa API `servicebus2.caixa.gov.br/portaldeloterias/api/megasena`. 예비로 guidi·heroku 미러를 쓴다.
-6. 코드 안의 공개 값(비밀 아님): Google 애널리틱스 `G-7KKRM14D7Y`, Formspree 주소(`index.html` 의 `FORM_URL`).
+6. 코드 안의 공개 값(비밀 아님): Google 애널리틱스 `G-7KKRM14D7Y` 만 있다(이메일 등록 폼·Formspree 는 1008 무료화 때 제거).
 7. 서명키 `sortemax-upload.jks` 와 비밀번호 안내 txt: Drive `확장프로그램/SorteMax`. 저장소에는 없다.
 8. Google Play Console: 개발자 계정 aiceokil@gmail.com, 패키지 `br.com.duriup.sortemax`.
 9. 다른 채널 폴더:
