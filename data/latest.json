@@ -1,13 +1,13 @@
 {
- "concurso": 3072,
- "data": "20/10/2026",
+ "concurso": 3073,
+ "data": "22/10/2026",
  "dezenas": [
-  2,
-  6,
-  9,
-  16,
-  31,
-  40
+  4,
+  13,
+  23,
+  28,
+  41,
+  58
  ],
  "acumulado": true,
  "rateio": [
@@ -18,20 +18,20 @@
   },
   {
    "faixa": "5 acertos",
-   "ganhadores": 140,
-   "premio": 38295.72
+   "ganhadores": 203,
+   "premio": 23138.67
   },
   {
    "faixa": "4 acertos",
-   "ganhadores": 9261,
-   "premio": 954.26
+   "ganhadores": 13143,
+   "premio": 510.55
   }
  ],
  "proximo": {
-  "concurso": 3073,
-  "data": "22/10/2026",
-  "estimativa": 200000000
+  "concurso": 3074,
+  "data": "24/10/2026",
+  "estimativa": 230000000
  },
  "fonte": "caixa",
- "verificadoEm": "2026-10-21T05:04:45.936Z"
+ "verificadoEm": "2026-10-23T05:06:04.626Z"
 }
