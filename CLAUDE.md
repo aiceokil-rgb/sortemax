@@ -6,11 +6,11 @@
 ## 이 앱이 무엇인가
 - **SorteMax Mega**: 브라질 Mega-Sena 번호 생성·통계·조합(fechamento)·모의추첨 무료 PWA다. 4개 언어를 지원하고, Duriup 브랜드로 운영한다.
 - 사이트는 https://sortemax.duriup.com.br 이다(GitHub Pages 자동 배포). 소개와 설치 안내는 `/baixar/` 에 있다.
-- **지금 상태 (2026-10-12)**:
+- **지금 상태 (2026-10-28)**:
   - 웹앱 v2.3.3 이 운영 중이다(sw 캐시 v11).
-  - 결과는 자동으로 갱신되고 있다(최근 3069회).
+  - 결과는 자동으로 갱신되고 있다(최근 3075회).
   - Android 앱(TWA)은 서명한 AAB와 스토어 자료까지 준비했다.
-  - Play 개발자 계정은 만들었고, Google 신원 확인(신분증)을 기다리는 중이다.
+  - Play 개발자 계정: 신원 인증은 이의 신청 끝에 10월27일 통과했다. **전화번호 인증만 남았다**. 그때까지 계정은 "Restricted"이고 앱을 올릴 수 없다. 앱은 아직 만들지 않았다.
 
 ## 폴더 구조
 - `index.html`: 앱 본체 한 파일. 4개 언어 문구 `LANG` 과 조합표 `WHEELS` 가 들어 있다.
@@ -77,7 +77,7 @@
 - 클라우드 작업 환경에서는 Actions 결과물(blob)과 큰 파일의 Drive 업로드가 막혀 있다. 그래서 `android-build`·`play-release` 브랜치의 raw 링크로 받는다.
 
 ## 남은 일 (다음에 할 것부터)
-1. 신원 확인이 승인되면 전화번호 인증을 하고 앱을 만든다.
+1. KIL 이 Play Console 에서 전화번호 인증을 한다(문자 인증, KIL 휴대폰). 끝나면 Restricted 가 풀렸는지 메일·홈 화면으로 확인하고 앱을 만든다.
    - 이름 "SorteMax Mega: Gerador Grátis", pt-BR, 앱, 무료
 2. 앱 설정을 채운다.
    - 개인정보 URL `/privacidade/`
