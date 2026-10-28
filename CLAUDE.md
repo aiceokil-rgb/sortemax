@@ -31,7 +31,7 @@
   1. `android/app/build.gradle` 의 versionCode·versionName 을 올린다.
   2. Actions → "Build Android (Play)" 를 실행한다.
   3. `android-build` 브랜치에서 `app-release-unsigned.aab` 를 받는다.
-  4. `jarsigner -keystore sortemax-upload.jks <aab> sortemax` 로 서명한다. 키 비밀번호는 저장소 비밀번호와 같은 것을 쓴다(PKCS12, 1028 실측). PC 의 jarsigner: `C:\Program Files\Microsoft\jdk-21.0.13.21-hotspotin`.
+  4. `jarsigner -keystore sortemax-upload.jks <aab> sortemax` 로 서명한다. 키 비밀번호는 저장소 비밀번호와 같은 것을 쓴다(PKCS12, 1028 실측). PC 의 jarsigner: `C:\Program Files\Microsoft\jdk-21.0.13.21-hotspot\bin`.
      - Play 자동 보호가 켜져 있어 minSdk 는 24 이상이어야 한다(23 은 1028 거절됨).
   5. Play Console 에 올린다.
 
