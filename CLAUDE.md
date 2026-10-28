@@ -9,7 +9,7 @@
 - **지금 상태 (2026-10-28)**:
   - 웹앱 v2.3.3 이 운영 중이다(sw 캐시 v12).
   - 결과는 자동으로 갱신되고 있다(최근 3075회).
-  - Android 앱(TWA)은 서명한 AAB와 스토어 자료까지 준비했다.
+  - Android 앱(TWA) 1.0.1(versionCode 2, minSdk 24)을 비공개 테스트 트랙(Alpha)에 올려 임시 저장했다. 테스터 넣기·검토 제출이 남았다.
   - Play 개발자 계정: 신원·전화·이메일 인증이 모두 끝났다(10월28일 확인, 정책 문제 없음).
   - Play 앱을 10월28일 만들었다(앱 ID 4975761106023721567). 앱 설정과 스토어 등록정보를 모두 저장했다(콘텐츠 등급 전체이용가·PEGI 3). 다음은 비공개 테스트다.
 
@@ -31,7 +31,8 @@
   1. `android/app/build.gradle` 의 versionCode·versionName 을 올린다.
   2. Actions → "Build Android (Play)" 를 실행한다.
   3. `android-build` 브랜치에서 `app-release-unsigned.aab` 를 받는다.
-  4. `jarsigner -keystore sortemax-upload.jks <aab> sortemax` 로 서명한다.
+  4. `jarsigner -keystore sortemax-upload.jks <aab> sortemax` 로 서명한다. 키 비밀번호는 저장소 비밀번호와 같은 것을 쓴다(PKCS12, 1028 실측). PC 의 jarsigner: `C:\Program Files\Microsoft\jdk-21.0.13.21-hotspotin`.
+     - Play 자동 보호가 켜져 있어 minSdk 는 24 이상이어야 한다(23 은 1028 거절됨).
   5. Play Console 에 올린다.
 
 ## 내용 규칙
@@ -83,8 +84,8 @@
    - 개인정보 URL `/privacidade/`, 로그인 없음, 광고 없음, 광고 ID 안 씀, 18+, 정부·금융·건강 아님, 카테고리 도구
    - 데이터 보안: 대략적 위치·앱 상호작용·기기 ID 를 애널리틱스용으로 수집(공유 없음, 임시 아님, 필수), 전송 암호화, 계정 없음
 3. (끝남 1028) 스토어 등록정보: `SorteMax-loja.zip` 의 글·아이콘·그래픽 이미지·스크린샷 7장(0~6 순서). 아이콘·그래픽 이미지는 AI 생성 라벨(Claude 제작), 스크린샷은 실제 화면이라 라벨 없음. 이미지 올리기는 Claude in Chrome 의 파일 올리기로 했다(내장 브라우저는 파일 선택 창을 못 다룸).
-4. 비공개 테스트에 AAB 를 올리고 테스터 12명 이상(목표 14~15명)을 넣는다. 14일 뒤 정식 공개를 신청한다.
-5. 첫 업로드 뒤 앱 무결성 화면에서 **앱 서명 키 SHA-256** 을 받는다. 이것을 `assetlinks.json` 에 추가하고, sw 캐시를 올려 main 에 배포한다.
+4. 비공개 테스트: 1.0.1 AAB 는 1028 올려 임시 저장. KIL 이 테스터 Gmail 을 모으면 테스터 목록·국가를 넣고 검토로 보낸다(보내기 전 KIL 확인). 통과 뒤 참여 링크를 KIL 에게 준다. 부탁글은 `_로컬/Play제출/테스터-부탁글.md`. 12명 이상이 14일 뒤 정식 공개 신청.
+5. (끝남 1028) 앱 서명 키 SHA-256(E1:81:CC…75:FA)을 `assetlinks.json` 에 추가, sw v12 배포, Google 애셋 링크 검사 linked=true. 설치 뒤 주소창이 없는지 테스트 기기에서 확인이 남았다.
 6. 옛 주소 폐기는 KIL 이 따로 정한다.
 
 ## 공용 자원을 건드리는 것
@@ -97,7 +98,7 @@
 4. 이메일: contato@duriup.com.br 는 Hostinger 사서함이고, aiceokil@gmail.com 으로 사본이 전달된다.
 5. 외부 데이터: Caixa API `servicebus2.caixa.gov.br/portaldeloterias/api/megasena`. 예비로 guidi·heroku 미러를 쓴다.
 6. 코드 안의 공개 값(비밀 아님): Google 애널리틱스 `G-7KKRM14D7Y` 만 있다(이메일 등록 폼·Formspree 는 1008 무료화 때 제거).
-7. 서명키 `sortemax-upload.jks` 와 비밀번호 안내 txt: Drive `확장프로그램/SorteMax`. 저장소에는 없다.
+7. 서명키 `sortemax-upload.jks` 와 비밀번호 안내 txt: PC `D:\ZZ-Local\앱개발\SorteMax\_로컬\서명키\`(git 제외), 백업은 Drive `확장프로그램/SorteMax`. 저장소에는 없다.
 8. Google Play Console: 개발자 계정 aiceokil@gmail.com, 패키지 `br.com.duriup.sortemax`.
 9. 다른 채널 폴더:
    - 두리업 로고를 `icons/duriup-yt.png` 로 한 번 복사했다.
