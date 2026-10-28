@@ -5,7 +5,8 @@
       "namespace": "android_app",
       "package_name": "br.com.duriup.sortemax",
       "sha256_cert_fingerprints": [
-        "A8:AD:E9:35:17:15:20:F9:A5:DE:FB:FB:5C:D6:1D:CF:19:AD:17:F9:0C:C6:09:7A:90:D5:62:06:C2:9A:57:CD"
+        "A8:AD:E9:35:17:15:20:F9:A5:DE:FB:FB:5C:D6:1D:CF:19:AD:17:F9:0C:C6:09:7A:90:D5:62:06:C2:9A:57:CD",
+        "E1:81:CC:05:D6:0D:F4:17:94:F8:A4:EA:54:DE:E7:EE:A6:0A:1A:3E:39:37:46:E3:A0:87:75:B6:DD:39:75:FA"
       ]
     }
   }
