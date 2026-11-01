@@ -1,4 +1,4 @@
-const CACHE = 'sortemax-v13';
+const CACHE = 'sortemax-v14';
 const ASSETS = [
   '/',
   '/index.html',

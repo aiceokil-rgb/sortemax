@@ -306,6 +306,13 @@ footer .warn{color:var(--t3)}
 .share-acts .btn-p{grid-column:1/-1}
 .btn-wa{background:#25d366;color:#04140b;border:none;font-weight:700;min-height:46px;border-radius:13px;font-size:.92rem;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
 .share-link{font-size:.78rem;color:var(--green);word-break:break-all;font-weight:600}
+.notify-row{display:flex;gap:8px;margin-top:10px}
+.notify-row .fi{flex:1;min-width:0}
+.notify-row .btn-p{width:auto;min-height:46px;padding:10px 16px;font-size:.88rem;white-space:nowrap}
+.notify-note{font-size:.74rem;color:var(--t3);margin-top:8px}
+.notify-done{display:none;margin-top:10px;font-size:.88rem;color:var(--green);font-weight:600}
+[data-notify].done .notify-row,[data-notify].done .notify-note{display:none}
+[data-notify].done .notify-done{display:block}
 .pwa-banner{display:none;align-items:center;gap:8px;background:var(--greenT);border:1px solid var(--greenB);border-radius:16px;padding:10px 12px;font-size:.82rem}
 .pwa-banner.on{display:flex}
 .pwa-banner p{color:var(--t2);flex:1}.pwa-banner strong{color:var(--green)}
@@ -488,6 +495,16 @@ footer .warn{color:var(--t3)}
           <button class="btn-s" style="min-height:46px" data-share-native><span data-i="sh-more">📤 Outros apps</span></button>
         </div>
       </div>
+    <div class="card" data-notify>
+      <h3 data-i="nt-title">🔔 Avisos de novidades</h3>
+      <p class="sub" style="margin-bottom:0" data-i="nt-sub">Quer saber quando sair uma versão nova ou uma novidade do SorteMax? Deixe seu e-mail uma vez só.</p>
+      <div class="notify-row">
+        <input type="email" class="fi" data-notify-email data-ip="nt-ph" placeholder="seu@email.com" autocomplete="email" inputmode="email">
+        <button class="btn-p" data-notify-btn><span data-i="nt-btn">Quero avisos</span></button>
+      </div>
+      <p class="notify-note" data-i="nt-note">Opcional. Só avisos de novidades do app, sem spam. Para sair, escreva para contato@duriup.com.br.</p>
+      <p class="notify-done" data-i="nt-done">✅ Pronto! Vamos te avisar das novidades.</p>
+    </div>
   </div>
   <nav class="tabs">
     <button class="tab on" data-t="p-gen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/></svg><span data-i="tab-gen">Gerador</span></button>
@@ -623,6 +640,16 @@ footer .warn{color:var(--t3)}
           <button class="btn-s" style="min-height:46px" data-share-native><span data-i="sh-more">📤 Outros apps</span></button>
         </div>
       </div>
+          <div style="background:var(--surf2);border:1px solid var(--bd);border-radius:16px;padding:14px" data-notify>
+            <h3 data-i="nt-title">🔔 Avisos de novidades</h3>
+            <p class="sub" style="margin-bottom:0" data-i="nt-sub">Quer saber quando sair uma versão nova ou uma novidade do SorteMax? Deixe seu e-mail uma vez só.</p>
+            <div class="notify-row">
+              <input type="email" class="fi" data-notify-email data-ip="nt-ph" placeholder="seu@email.com" autocomplete="email" inputmode="email">
+              <button class="btn-p" data-notify-btn><span data-i="nt-btn">Quero avisos</span></button>
+            </div>
+            <p class="notify-note" data-i="nt-note">Opcional. Só avisos de novidades do app, sem spam. Para sair, escreva para contato@duriup.com.br.</p>
+            <p class="notify-done" data-i="nt-done">✅ Pronto! Vamos te avisar das novidades.</p>
+          </div>
           <div class="mail-box">
             <div><small data-i="cont-mail-lbl">E-mail oficial</small><a href="mailto:contato@duriup.com.br" id="mailLink">contato@duriup.com.br</a></div>
             <button class="copy-btn" id="btnCopyMail" data-i="btn-copy">Copiar</button>
@@ -870,6 +897,10 @@ Object.assign(LANG.pt,{"ft-priv": "Privacidade"});
 Object.assign(LANG.es,{"ft-priv": "Privacidad"});
 Object.assign(LANG.en,{"ft-priv": "Privacy"});
 Object.assign(LANG.ko,{"ft-priv": "개인정보"});
+Object.assign(LANG.pt,{"nt-title": "🔔 Avisos de novidades", "nt-sub": "Quer saber quando sair uma versão nova ou uma novidade do SorteMax? Deixe seu e-mail uma vez só.", "nt-ph": "seu@email.com", "nt-btn": "Quero avisos", "nt-note": "Opcional. Só avisos de novidades do app, sem spam. Para sair, escreva para contato@duriup.com.br.", "nt-done": "✅ Pronto! Vamos te avisar das novidades.", "nt-bad": "Confira o e-mail digitado.", "nt-fail": "Não foi possível enviar agora. Verifique a internet e tente de novo."});
+Object.assign(LANG.es,{"nt-title": "🔔 Avisos de novedades", "nt-sub": "¿Quieres saber cuándo sale una nueva versión o novedad de SorteMax? Deja tu correo una sola vez.", "nt-ph": "tu@email.com", "nt-btn": "Quiero avisos", "nt-note": "Opcional. Solo avisos de novedades de la app, sin spam. Para salir, escribe a contato@duriup.com.br.", "nt-done": "✅ ¡Listo! Te avisaremos de las novedades.", "nt-bad": "Revisa el correo que escribiste.", "nt-fail": "No se pudo enviar ahora. Revisa tu internet e inténtalo de nuevo."});
+Object.assign(LANG.en,{"nt-title": "🔔 Update notices", "nt-sub": "Want to know when a new version or feature of SorteMax comes out? Leave your email just once.", "nt-ph": "you@email.com", "nt-btn": "Notify me", "nt-note": "Optional. Only app news, no spam. To unsubscribe, write to contato@duriup.com.br.", "nt-done": "✅ Done! We'll let you know about updates.", "nt-bad": "Please check the email you typed.", "nt-fail": "Couldn't send right now. Check your internet and try again."});
+Object.assign(LANG.ko,{"nt-title": "🔔 새 소식 알림", "nt-sub": "SorteMax 새 버전이나 새 기능이 나오면 알려 드릴까요? 이메일을 한 번만 남겨 주세요.", "nt-ph": "이메일 주소", "nt-btn": "알림 받기", "nt-note": "선택 사항이에요. 앱 새 소식만 보내고 스팸은 없어요. 그만 받으려면 contato@duriup.com.br 로 알려 주세요.", "nt-done": "✅ 등록했어요! 새 소식이 있으면 알려 드릴게요.", "nt-bad": "입력한 이메일을 확인해 주세요.", "nt-fail": "지금은 보낼 수 없어요. 인터넷을 확인하고 다시 해 주세요."});
 var curLang='pt';
 function t(k,v){var s=(LANG[curLang]&&LANG[curLang][k]);if(s===undefined)s=LANG.pt[k];if(s===undefined)return k;if(v)Object.keys(v).forEach(function(x){s=s.split('{'+x+'}').join(v[x]);});return s;}
 function applyLang(lang){
@@ -925,6 +956,29 @@ function shareInit(){
     navigator.share({title:'SorteMax Mega',text:shareText()}).then(function(){track('share_native',{lang:curLang});}).catch(function(){});
   };});
   renderShare();
+}
+// ── 새 소식 알림 받기(원하는 사람만 이메일 한 번) ─────────────
+var NOTIFY_URL='https://formspree.io/f/xnjrkrkp';
+function notifyMark(){document.querySelectorAll('[data-notify]').forEach(function(b){b.classList.add('done');});}
+function notifyInit(){
+  try{if(localStorage.getItem('sm_notify'))notifyMark();}catch(e){}
+  document.querySelectorAll('[data-notify]').forEach(function(box){
+    var inp=box.querySelector('[data-notify-email]'),btn=box.querySelector('[data-notify-btn]');
+    var send=function(){
+      var mail=(inp.value||'').trim();
+      if(!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(mail)){toastLong(t('nt-bad'));inp.focus();return;}
+      btn.disabled=true;
+      fetch(NOTIFY_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({email:mail,_subject:'SorteMax — avisos de novidades',origem:'app',idioma:curLang})})
+      .then(function(r){if(!r.ok)throw new Error(r.status);
+        try{localStorage.setItem('sm_notify','1');}catch(e){}
+        notifyMark();track('notify_signup',{lang:curLang});})
+      .catch(function(){toastLong(t('nt-fail'));})
+      .then(function(){btn.disabled=false;});
+    };
+    btn.onclick=send;
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter')send();});
+  });
 }
 function toastLong(msg){var x=el('toast');x.textContent=msg;x.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(function(){x.classList.remove('on');},3500);}
 // ── 테마 ───────────────────────────────────────────────
@@ -1383,7 +1437,7 @@ window.onload=function(){
   var v='v'+APP_VERSION;el('wVer').textContent=v;el('hdrVer').textContent=v;el('ftVer').textContent=v;
   var th='auto';try{th=localStorage.getItem('sm_theme')||'auto';}catch(e){}
   applyTheme(th);
-  welcomeInit();settingsInit();shareInit();pwaInit();tabInit();helpInit();bellInit();
+  welcomeInit();settingsInit();shareInit();notifyInit();pwaInit();tabInit();helpInit();bellInit();
   buildPlans();
   buildGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);
   buildGrid('sGrid',ST.sSel,'sCnt','sTgt','btnSim',6);

@@ -7,7 +7,7 @@
 - **SorteMax Mega**: 브라질 Mega-Sena 번호 생성·통계·조합(fechamento)·모의추첨 무료 PWA다. 4개 언어를 지원하고, Duriup 브랜드로 운영한다.
 - 사이트는 https://sortemax.duriup.com.br 이다(GitHub Pages 자동 배포). 소개와 설치 안내는 `/baixar/` 에 있다.
 - **지금 상태 (2026-10-28)**:
-  - 웹앱 v2.3.3 이 운영 중이다(sw 캐시 v13).
+  - 웹앱 v2.3.3 이 운영 중이다(sw 캐시 v14).
   - 결과는 자동으로 갱신되고 있다(최근 3075회).
   - Android 앱(TWA) 1.0.1(versionCode 2, minSdk 24) 비공개 테스트(Alpha)를 10월30일 Google 검토로 제출했다(테스터 14명, 국가 브라질·대한민국, 관리형 게시 꺼짐 = 통과하면 바로 열림).
   - Play 개발자 계정: 신원·전화·이메일 인증이 모두 끝났다(10월28일 확인, 정책 문제 없음).
@@ -43,7 +43,7 @@
 
 ## 배포 규칙
 - 작업은 main 에 바로 반영한다. 브랜치로 올렸다면 main 에 합친 뒤 사이트 확인까지 한다.
-- 코드를 고쳐 올릴 때마다 `sw.js` 캐시 이름을 하나 올린다(지금 v13 → v14…). 안 올리면 설치한 사람에게 새 버전이 안 보인다.
+- 코드를 고쳐 올릴 때마다 `sw.js` 캐시 이름을 하나 올린다(지금 v14 → v15…). 안 올리면 설치한 사람에게 새 버전이 안 보인다.
 - main 에 push 한 직후 다른 브랜치를 같이 push 하지 않는다(그때 Pages 배포가 두 번 실패함). 배포가 실패하면 "pages build and deployment" 를 한 번 다시 돌린다.
 - 올린 뒤 1~2분 기다렸다가 사이트에서 바뀐 것이 보이는지 직접 확인하고 보고한다.
 
@@ -66,7 +66,7 @@
   - mixmania.blog 도메인은 연장하지 않고 기한이 지나면 없어지게 둔다(지우지 않음).
 - [KIL 1031] Google Search Console 에 새 주소(https://sortemax.duriup.com.br/)와 옛 주소를 등록했다(애널리틱스로 자동 소유 확인, gtag 를 지우면 확인이 풀린다). `sitemap.xml`·`robots.txt` 를 만들어 제출했고, 옛 주소 → 새 주소 "주소 변경"을 11월1일 시작으로 알렸다.
 - [KIL 1031] 옛 사이트의 Formspree 폼은 지우지 않고 나중에 다시 쓴다.
-- [KIL 1031] 다음 버전에 "업데이트 알림 받기"(원하는 사람만, 한 번만 이메일 등록)를 넣는다. 들어올 때마다 막는 이메일 화면은 다시 넣지 않는다.
+- [KIL 1031] "새 소식 알림 받기"(원하는 사람만, 한 번만 이메일 등록)를 넣었다(1031, 첫 화면 공유 카드 아래 + Contato 탭, 옛 Formspree 폼으로 보냄, 등록하면 `sm_notify` 로 다시 안 보임, GA 이벤트 `notify_signup`). 들어올 때마다 막는 이메일 화면은 다시 넣지 않는다. 개인정보 처리방침 1·8번을 4개 언어로 고쳤고, Play 데이터 보안에 "이메일 주소(선택, 개발자 커뮤니케이션)"를 더해야 한다.
 - [KIL 1031] 옛 사이트에서 이메일을 남긴 사람들에게는 Play 정식 공개 뒤에 Play 에서 설치하라는 안내 메일을 보낸다(주소 목록은 저장소에 넣지 않는다).
 - [KIL 1008] 이메일 등록 없이 무료로 쓰게 한다. 환영 화면에 버전 번호를 작게 표시하고, 테마는 시스템을 따르며 라이트·다크 토글을 둔다.
 - [KIL 1008] "가짜 번호라던가 모두 지우고 만약에 caixa 에서 얻어 오지 못할경우에는 경고창을 뛰워 주던가 해줘"
@@ -106,7 +106,7 @@
 3. 도메인·DNS: duriup.com.br 는 Hostinger 에서 관리한다. CNAME `sortemax` 가 `aiceokil-rgb.github.io` 를 가리킨다(바꾸지 않는다).
 4. 이메일: contato@duriup.com.br 는 Hostinger 사서함이고, aiceokil@gmail.com 으로 사본이 전달된다.
 5. 외부 데이터: Caixa API `servicebus2.caixa.gov.br/portaldeloterias/api/megasena`. 예비로 guidi·heroku 미러를 쓴다.
-6. 코드 안의 공개 값(비밀 아님): Google 애널리틱스 `G-7KKRM14D7Y` 만 있다(이메일 등록 폼·Formspree 는 1008 무료화 때 제거).
+6. 코드 안의 공개 값(비밀 아님): Google 애널리틱스 `G-7KKRM14D7Y`, 새 소식 알림용 Formspree 폼 주소(1031 다시 넣음, 무료 요금제 월 접수 한도 있음).
 7. 서명키 `sortemax-upload.jks` 와 비밀번호 안내 txt: PC `D:\ZZ-Local\앱개발\SorteMax\_로컬\서명키\`(git 제외), 백업은 Drive `확장프로그램/SorteMax`. 저장소에는 없다.
 8. Google Play Console: 개발자 계정 aiceokil@gmail.com, 패키지 `br.com.duriup.sortemax`.
 9. 다른 채널 폴더:
