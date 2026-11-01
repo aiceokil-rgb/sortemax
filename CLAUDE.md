@@ -105,6 +105,7 @@
 2. 결과 갱신 봇: `update-data.yml` 이 UTC 기준 하루 10회 `data/` 를 push 한다. Windows 예약 작업은 없다.
 3. 도메인·DNS: duriup.com.br 는 Hostinger 에서 관리한다. CNAME `sortemax` 가 `aiceokil-rgb.github.io` 를 가리킨다(바꾸지 않는다).
 4. 이메일: contato@duriup.com.br 는 Hostinger 사서함이고, aiceokil@gmail.com 으로 사본이 전달된다.
+   - 새 소식 알림 신청(Formspree, 받는 주소 info@mixmania.blog → aiceokil@gmail.com)은 Gmail 필터가 받은편지함을 건너뛰고 라벨 "SorteMax 알림신청"에 모은다(1031). 이 메일들이 알림 명단 원본이니 지우지 않는다.
 5. 외부 데이터: Caixa API `servicebus2.caixa.gov.br/portaldeloterias/api/megasena`. 예비로 guidi·heroku 미러를 쓴다.
 6. 코드 안의 공개 값(비밀 아님): Google 애널리틱스 `G-7KKRM14D7Y`, 새 소식 알림용 Formspree 폼 주소(1031 다시 넣음, 무료 요금제 월 접수 한도 있음).
 7. 서명키 `sortemax-upload.jks` 와 비밀번호 안내 txt: PC `D:\ZZ-Local\앱개발\SorteMax\_로컬\서명키\`(git 제외), 백업은 Drive `확장프로그램/SorteMax`. 저장소에는 없다.
