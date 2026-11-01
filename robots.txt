@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sortemax.duriup.com.br/sitemap.xml
