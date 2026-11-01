@@ -59,7 +59,7 @@
   - 유튜브 링크 → @Duriup
   - 배너 이름과 썸네일 → Duriup
 - [KIL 1007] 옛 주소는 건드리지 않는다(폐기는 따로 정한다).
-- [KIL 1031] 옛 주소를 새 주소로 넘긴다(301). 옛 사이트를 1031에 37명가량이 다시 찾아와(구글 검색·직접 링크, 메가세나 이월 시기) 결정했다.
+- [KIL 1031] 옛 주소를 새 주소로 넘긴다(301). 1031 하루 옛 사이트에 56세션(구글 검색 27·직접 29)이 들어오고 33명이 이메일을 남겨(메가세나 이월 시기) 결정했다.
   - sortemax.mixmania.blog → https://sortemax.duriup.com.br/ (옛 서버의 `.htaccess`). 옛 `sw.js` 는 지우지 않고 "캐시를 비우고 새 주소로 보내는" 내용으로 바꿨다(옛 앱을 설치한 폰도 넘어오게).
   - mixmania.blog → https://duriup.com.br/ (워드프레스 `.htaccess` 맨 위 줄, 원본은 서버에 `.htaccess.bk-1031`).
   - 둘 다 `?utm_source=mixmania&utm_medium=redirect` 를 붙여 애널리틱스에서 넘어온 사람을 구분한다. hPanel 리디렉션 도구는 "Redirect source must belong to the selected website" 오류로 저장되지 않았다.
