@@ -64,6 +64,7 @@
   - mixmania.blog → https://duriup.com.br/ (워드프레스 `.htaccess` 맨 위 줄, 원본은 서버에 `.htaccess.bk-1031`).
   - 둘 다 `?utm_source=mixmania&utm_medium=redirect` 를 붙여 애널리틱스에서 넘어온 사람을 구분한다. hPanel 리디렉션 도구는 "Redirect source must belong to the selected website" 오류로 저장되지 않았다.
   - mixmania.blog 도메인은 연장하지 않고 기한이 지나면 없어지게 둔다(지우지 않음).
+- [KIL 1031] Google Search Console 에 새 주소(https://sortemax.duriup.com.br/)와 옛 주소를 등록했다(애널리틱스로 자동 소유 확인, gtag 를 지우면 확인이 풀린다). `sitemap.xml`·`robots.txt` 를 만들어 제출했고, 옛 주소 → 새 주소 "주소 변경"을 11월1일 시작으로 알렸다.
 - [KIL 1031] 옛 사이트의 Formspree 폼은 지우지 않고 나중에 다시 쓴다.
 - [KIL 1031] 다음 버전에 "업데이트 알림 받기"(원하는 사람만, 한 번만 이메일 등록)를 넣는다. 들어올 때마다 막는 이메일 화면은 다시 넣지 않는다.
 - [KIL 1031] 옛 사이트에서 이메일을 남긴 사람들에게는 Play 정식 공개 뒤에 Play 에서 설치하라는 안내 메일을 보낸다(주소 목록은 저장소에 넣지 않는다).
@@ -94,7 +95,7 @@
 3. (끝남 1028) 스토어 등록정보: `SorteMax-loja.zip` 의 글·아이콘·그래픽 이미지·스크린샷 7장(0~6 순서). 아이콘·그래픽 이미지는 AI 생성 라벨(Claude 제작), 스크린샷은 실제 화면이라 라벨 없음. 이미지 올리기는 Claude in Chrome 의 파일 올리기로 했다(내장 브라우저는 파일 선택 창을 못 다룸).
 4. 비공개 테스트: 1030 검토 제출(테스터 목록 "SorteMax testadores" 14명, 명단은 `_로컬/Play제출/테스터-명단-1030.txt`). 통과하면 테스터 탭의 참여 링크를 2차 부탁글에 넣어 KIL 에게 준다. 부탁글은 `_로컬/Play제출/테스터-부탁글.md`. 12명 이상이 14일 뒤 정식 공개 신청.
 5. (끝남 1028) 앱 서명 키 SHA-256(E1:81:CC…75:FA)을 `assetlinks.json` 에 추가, sw v12 배포, Google 애셋 링크 검사 linked=true. 설치 뒤 주소창이 없는지 테스트 기기에서 확인이 남았다.
-6. (1031) 옛 주소 두 곳은 새 주소로 넘김. 정식 공개 뒤 옛 사이트 방문자에게 Play 설치 안내 메일, 다음 버전에 "업데이트 알림 받기".
+6. (1031) 옛 주소 두 곳은 새 주소로 넘김. 며칠 뒤 Search Console 에서 사이트맵 "성공"과 검색어(어떤 말로 찾아오는지)를 확인한다. 정식 공개 뒤 옛 사이트 방문자에게 Play 설치 안내 메일, 다음 버전에 "업데이트 알림 받기".
 
 ## 공용 자원을 건드리는 것
 1. GitHub 저장소: https://github.com/aiceokil-rgb/sortemax (공개). 브랜치는 다음과 같다.
