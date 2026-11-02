@@ -292,6 +292,14 @@ footer .warn{color:var(--t3)}
 .caixa-link{display:block;text-align:center;color:var(--green);font-size:.84rem;font-weight:600;text-decoration:none;padding:8px}
 .guar{font-size:.8rem;color:var(--t2);background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;line-height:1.5}
 .guar b{color:var(--green)}
+.plan-grp{font-size:.76rem;font-weight:700;color:var(--t2);margin:10px 0 6px;letter-spacing:.03em}
+.plan-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.plan-card{background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:4px;transition:var(--tf)}
+.plan-card.on{border-color:var(--green);background:var(--greenT);box-shadow:inset 0 0 0 1px var(--green)}
+.plan-card .pl1{font-weight:700;color:var(--t1);font-size:.92rem}
+.plan-card .pl2{font-size:.78rem;color:var(--t2)}
+.plan-card button{margin-top:4px;min-height:38px;border-radius:10px;border:1px solid var(--greenB);background:var(--surf);color:var(--green);font-weight:700;cursor:pointer;font-size:.84rem}
+.plan-card.on button{background:var(--green);color:var(--onAccent);border-color:var(--green)}
 .cost{font-size:.8rem;color:var(--t2)}.cost b{color:var(--gold)}
 .hist-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
 .hs{background:var(--surf);border:1px solid var(--bd);border-radius:10px;padding:8px 4px;text-align:center}
@@ -305,10 +313,16 @@ footer .warn{color:var(--t3)}
 .share-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .share-acts .btn-p{grid-column:1/-1}
 .btn-wa{background:#25d366;color:#04140b;border:none;font-weight:700;min-height:46px;border-radius:13px;font-size:.92rem;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
-.share-link{font-size:.78rem;color:var(--green);word-break:break-all;font-weight:600}
-.notify-row{display:flex;gap:8px;margin-top:10px}
-.notify-row .fi{flex:1;min-width:0}
-.notify-row .btn-p{width:auto;min-height:46px;padding:10px 16px;font-size:.88rem;white-space:nowrap}
+.share-link{font-size:.78rem;color:var(--green);word-break:break-all;font-weight:600;text-decoration:underline;display:inline-block}
+.share-msg a{color:var(--green);font-weight:600;text-decoration:underline;word-break:break-all}
+.notify-row{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.notify-row .fi{width:100%;min-height:54px;font-size:1.05rem;padding:12px 14px}
+.notify-row .btn-p{min-height:52px}
+.notify-sug{display:none;flex-direction:column;background:var(--surf);border:1px solid var(--greenB);border-radius:12px;overflow:hidden;margin-top:-4px}
+.notify-sug.on{display:flex}
+.notify-sug button{border:none;border-bottom:1px solid var(--bd);background:transparent;color:var(--t1);text-align:left;padding:12px 14px;font-size:1rem;min-height:46px;cursor:pointer}
+.notify-sug button:last-child{border-bottom:none}
+.notify-sug button b{color:var(--green)}
 .notify-note{font-size:.74rem;color:var(--t3);margin-top:8px}
 .notify-done{display:none;margin-top:10px;font-size:.88rem;color:var(--green);font-weight:600}
 [data-notify].done .notify-row,[data-notify].done .notify-note{display:none}
@@ -394,7 +408,7 @@ footer .warn{color:var(--t3)}
       </div>
       <div class="w-feats">
         <div class="w-feat"><div class="ic">🎲</div><strong data-i="wf1">Gerador</strong><span data-i="wf1s">Jogos aleatórios ou com estatística</span></div>
-        <div class="w-feat"><div class="ic">🧮</div><strong data-i="wf2">Fechamento</strong><span data-i="wf2s">Combinações com garantia mínima</span></div>
+        <div class="w-feat"><div class="ic">🧮</div><strong data-i="wf2">Fechamento</strong><span data-i="wf2s">Combinações com cobertura matemática</span></div>
         <div class="w-feat"><div class="ic">🎯</div><strong data-i="wf3">Simulador</strong><span data-i="wf3s">Confira seu jogo no último sorteio</span></div>
         <div class="w-feat"><div class="ic">📊</div><strong data-i="wf4">Resultados</strong><span data-i="wf4s">Todos os concursos, atualizados</span></div>
       </div>
@@ -486,7 +500,7 @@ footer .warn{color:var(--t3)}
         <h3 data-i="sh-title">Indique o SorteMax para um amigo</h3>
         <p class="sub" style="margin-bottom:4px" data-i="sh-sub">Para baixar o app, aponte a câmera do celular para o QR code:</p>
         <img class="qr" src="icons/qr-baixar.svg" alt="QR code" width="168" height="168">
-        <div class="share-link">sortemax.duriup.com.br/baixar</div>
+        <a class="share-link" href="https://sortemax.duriup.com.br/baixar/" target="_blank" rel="noopener">sortemax.duriup.com.br/baixar</a>
         <p class="sub" style="margin:12px 0 0" data-i="sh-or">Ou envie o convite pelo WhatsApp ou outro app. Esta é a mensagem que seu amigo vai receber:</p>
         <div class="share-msg" data-share-msg></div>
         <div class="share-acts">
@@ -499,7 +513,8 @@ footer .warn{color:var(--t3)}
       <h3 data-i="nt-title">🔔 Avisos de novidades</h3>
       <p class="sub" style="margin-bottom:0" data-i="nt-sub">Quer saber quando sair uma versão nova ou uma novidade do SorteMax? Deixe seu e-mail uma vez só.</p>
       <div class="notify-row">
-        <input type="email" class="fi" data-notify-email data-ip="nt-ph" placeholder="seu@email.com" autocomplete="email" inputmode="email">
+        <input type="email" class="fi" data-notify-email data-ip="nt-ph" placeholder="seu@email.com" autocomplete="email" inputmode="email" autocapitalize="none" autocorrect="off" spellcheck="false">
+        <div class="notify-sug" data-notify-sug></div>
         <button class="btn-p" data-notify-btn><span data-i="nt-btn">Quero avisos</span></button>
       </div>
       <p class="notify-note" data-i="nt-note">Opcional. Só avisos de novidades do app, sem spam. Para sair, escreva para contato@duriup.com.br.</p>
@@ -554,9 +569,10 @@ footer .warn{color:var(--t3)}
         <div class="card ctrl-card">
           <div class="title-row"><h3 data-i="fech-title">Fechamento Matemático</h3><button class="help-btn" data-help="h-fech" aria-label="?">?</button></div>
           <div class="help-box" id="h-fech"><strong data-i="help-fech-title">O que é Fechamento?</strong><span data-i="help-fech-body">...</span></div>
-          <p class="sub" data-i="fech-sub">Garanta prêmios mínimos com matemática</p>
-          <div class="sg"><label data-i="fech-plan" for="wForm">Plano de garantia:</label>
-            <select class="sel" id="wForm"></select>
+          <p class="sub" data-i="fech-sub">Distribua suas dezenas com cobertura matemática</p>
+          <div class="sg"><label data-i="fech-plan" for="wForm">Plano de cobertura:</label>
+            <select class="sel" id="wForm" hidden aria-hidden="true"></select>
+            <div id="wPlans"></div>
           </div>
           <div class="guar" id="wGuar"></div>
           <div class="grid-wrap">
@@ -631,7 +647,7 @@ footer .warn{color:var(--t3)}
         <h3 data-i="sh-title">Indique o SorteMax para um amigo</h3>
         <p class="sub" style="margin-bottom:4px" data-i="sh-sub">Para baixar o app, aponte a câmera do celular para o QR code:</p>
         <img class="qr" src="icons/qr-baixar.svg" alt="QR code" width="168" height="168">
-        <div class="share-link">sortemax.duriup.com.br/baixar</div>
+        <a class="share-link" href="https://sortemax.duriup.com.br/baixar/" target="_blank" rel="noopener">sortemax.duriup.com.br/baixar</a>
         <p class="sub" style="margin:12px 0 0" data-i="sh-or">Ou envie o convite pelo WhatsApp ou outro app. Esta é a mensagem que seu amigo vai receber:</p>
         <div class="share-msg" data-share-msg></div>
         <div class="share-acts">
@@ -644,7 +660,8 @@ footer .warn{color:var(--t3)}
             <h3 data-i="nt-title">🔔 Avisos de novidades</h3>
             <p class="sub" style="margin-bottom:0" data-i="nt-sub">Quer saber quando sair uma versão nova ou uma novidade do SorteMax? Deixe seu e-mail uma vez só.</p>
             <div class="notify-row">
-              <input type="email" class="fi" data-notify-email data-ip="nt-ph" placeholder="seu@email.com" autocomplete="email" inputmode="email">
+              <input type="email" class="fi" data-notify-email data-ip="nt-ph" placeholder="seu@email.com" autocomplete="email" inputmode="email" autocapitalize="none" autocorrect="off" spellcheck="false">
+        <div class="notify-sug" data-notify-sug></div>
               <button class="btn-p" data-notify-btn><span data-i="nt-btn">Quero avisos</span></button>
             </div>
             <p class="notify-note" data-i="nt-note">Opcional. Só avisos de novidades do app, sem spam. Para sair, escreva para contato@duriup.com.br.</p>
@@ -753,7 +770,7 @@ var LOCALE={pt:'pt-BR',es:'es-ES',en:'en-US',ko:'ko-KR'};
 var LANG={
 pt:{
 'w-free':'100% GRÁTIS','w-sub':'Gere seus jogos da Mega-Sena em segundos. Abra e use — sem cadastro.','w-chip1':'✓ Sem cadastro','w-chip2':'✓ Sem login','w-chip3':'✓ Sem e-mail',
-'wf1':'Gerador','wf1s':'Jogos aleatórios ou com estatística','wf2':'Fechamento','wf2s':'Combinações com garantia mínima','wf3':'Simulador','wf3s':'Confira seu jogo no último sorteio','wf4':'Resultados','wf4s':'Todos os concursos, atualizados',
+'wf1':'Gerador','wf1s':'Jogos aleatórios ou com estatística','wf2':'Fechamento','wf2s':'Combinações com cobertura matemática','wf3':'Simulador','wf3s':'Confira seu jogo no último sorteio','wf4':'Resultados','wf4s':'Todos os concursos, atualizados',
 'w-cta':'Começar grátis →','w-legal':'Ao continuar, você confirma ter 18+ anos e entende que o SorteMax é entretenimento e auxílio estatístico: não garante prêmios e não tem vínculo com a Caixa Econômica Federal. Jogue com responsabilidade.',
 'tab-gen':'Gerador','tab-fech':'Fechamento','tab-sim':'Simulador','tab-hist':'Meus Jogos','tab-res':'Resultados','tab-cont':'Contato',
 'gen-title':'Opções de Geração','gen-sub':'Escolha seu método e filtros','help-gen-title':'Como usar o Gerador?','help-gen-body':'Escolha Surpresinha (aleatório), Inteligente (filtros estatísticos) ou Sorte (numerologia). Defina a quantidade e toque em Gerar Jogos.',
@@ -761,8 +778,8 @@ pt:{
 'qty-lbl':'Quantidade de jogos:','filt-title':'Filtros Avançados','filt-oe':'Equilíbrio Par/Ímpar','filt-cons':'Sem 3 números seguidos','filt-sum':'Soma Otimizada (150–220)','filt-freq':'Viés estatístico',
 'luck-title':'Dados para Numerologia','luck-name':'Seu Nome:','luck-birth':'Data de Nascimento:','ph-name':'Ex: João Silva','ph-date':'DD/MM/AAAA',
 'btn-gen':'Gerar Jogos','gen-out-title':'Jogos Gerados','gen-empty-txt':'Escolha as opções e toque em Gerar Jogos!',
-'fech-title':'Fechamento Matemático','fech-sub':'Garanta prêmios mínimos com matemática','fech-plan':'Plano de garantia:','help-fech-title':'O que é Fechamento?','help-fech-body':'Estratégia matemática que aumenta as chances de prêmios mínimos (Quadra ou Quina) se os números sorteados estiverem no seu grupo. Escolha o plano, marque as dezenas e toque em Processar.',
-'og-quadra':'Quadra garantida','og-quina':'Quina garantida','opt-q8':'8 números → Quadra — 6 jogos','opt-q10':'10 números → Quadra — 20 jogos','opt-q12':'12 números → Quadra — 42 jogos','opt-n9':'9 números → Quina — 12 jogos','opt-n10':'10 números → Quina — 20 jogos',
+'fech-title':'Fechamento Matemático','fech-sub':'Distribua suas dezenas com cobertura matemática','fech-plan':'Plano de cobertura:','help-fech-title':'O que é Fechamento?','help-fech-body':'Estratégia matemática que aumenta as chances de prêmios mínimos (Quadra ou Quina) se os números sorteados estiverem no seu grupo. Escolha o plano, marque as dezenas e toque em Processar.',
+'og-quadra':'Cobertura de Quadra','og-quina':'Cobertura de Quina','opt-q8':'8 números → Quadra — 6 jogos','opt-q10':'10 números → Quadra — 20 jogos','opt-q12':'12 números → Quadra — 42 jogos','opt-n9':'9 números → Quina — 12 jogos','opt-n10':'10 números → Quina — 20 jogos',
 'sel-lbl':'Selecionados:','btn-fech':'Processar Fechamento','fech-out-title':'Combinações','fech-empty-txt':'Selecione as dezenas e processe.',
 'sim-title':'Simulador','sim-sub':'Compare seu jogo com o último resultado','help-sim-title':'Como usar o Simulador?','help-sim-body':'Marque 6 números no volante e toque em Conferir. O app compara com o último resultado — acertos ficam em verde.','btn-sim':'Conferir Agora','sim-out-title':'Resultado da Conferência','sim-empty-txt':'Marque 6 números e toque em Conferir.',
 'myhist-title':'Registrar Jogo','myhist-sub':'Marque os números que você jogou','help-hist-title':'Como usar?','help-hist-body':'Marque os números que você jogou e toque em + Adicionar. O app compara com o último resultado automaticamente.','hist-conc-lbl':'Concurso (opcional):','ph-conc':'Ex: {n}','btn-add-hist':'+ Adicionar Jogo','mygames-title':'Meus Jogos','btn-clear-all':'Limpar Tudo',
@@ -784,7 +801,7 @@ pt:{
 },
 es:{
 'w-free':'100% GRATIS','w-sub':'Genera tus juegos de la Mega-Sena en segundos. Abre y usa — sin registro.','w-chip1':'✓ Sin registro','w-chip2':'✓ Sin login','w-chip3':'✓ Sin e-mail',
-'wf1':'Generador','wf1s':'Juegos aleatorios o con estadística','wf2':'Combinación','wf2s':'Combinaciones con garantía mínima','wf3':'Simulador','wf3s':'Verifica tu juego en el último sorteo','wf4':'Resultados','wf4s':'Todos los concursos, actualizados',
+'wf1':'Generador','wf1s':'Juegos aleatorios o con estadística','wf2':'Combinación','wf2s':'Combinaciones con cobertura matemática','wf3':'Simulador','wf3s':'Verifica tu juego en el último sorteo','wf4':'Resultados','wf4s':'Todos los concursos, actualizados',
 'w-cta':'Empezar gratis →','w-legal':'Al continuar, confirmas tener 18+ años y entiendes que SorteMax es entretenimiento y ayuda estadística: no garantiza premios y no tiene vínculo con la Caixa Econômica Federal. Juega con responsabilidad.',
 'tab-gen':'Generador','tab-fech':'Combinar','tab-sim':'Simulador','tab-hist':'Mis Juegos','tab-res':'Resultados','tab-cont':'Contacto',
 'gen-title':'Opciones de Generación','gen-sub':'Elige tu método y filtros','help-gen-title':'¿Cómo usar el Generador?','help-gen-body':'Elige Sorpresa (aleatorio), Inteligente (filtros estadísticos) o Suerte (numerología). Define la cantidad y toca Generar Juegos.',
@@ -792,8 +809,8 @@ es:{
 'qty-lbl':'Cantidad de juegos:','filt-title':'Filtros Avanzados','filt-oe':'Equilibrio Par/Impar','filt-cons':'Sin 3 números seguidos','filt-sum':'Suma Optimizada (150–220)','filt-freq':'Sesgo estadístico',
 'luck-title':'Datos para Numerología','luck-name':'Tu Nombre:','luck-birth':'Fecha de Nacimiento:','ph-name':'Ej: Juan Pérez','ph-date':'DD/MM/AAAA',
 'btn-gen':'Generar Juegos','gen-out-title':'Juegos Generados','gen-empty-txt':'¡Elige las opciones y toca Generar Juegos!',
-'fech-title':'Combinación Matemática','fech-sub':'Garantiza premios mínimos con matemáticas','fech-plan':'Plan de garantía:','help-fech-title':'¿Qué es la Combinación?','help-fech-body':'Estrategia matemática que aumenta las probabilidades de premios mínimos (Quadra o Quina) si los números sorteados están en tu grupo. Elige el plan, marca los números y toca Procesar.',
-'og-quadra':'Quadra garantizada','og-quina':'Quina garantizada','opt-q8':'8 números → Quadra — 6 juegos','opt-q10':'10 números → Quadra — 20 juegos','opt-q12':'12 números → Quadra — 42 juegos','opt-n9':'9 números → Quina — 12 juegos','opt-n10':'10 números → Quina — 20 juegos',
+'fech-title':'Combinación Matemática','fech-sub':'Distribuye tus números con cobertura matemática','fech-plan':'Plan de cobertura:','help-fech-title':'¿Qué es la Combinación?','help-fech-body':'Estrategia matemática que aumenta las probabilidades de premios mínimos (Quadra o Quina) si los números sorteados están en tu grupo. Elige el plan, marca los números y toca Procesar.',
+'og-quadra':'Cobertura de Quadra','og-quina':'Cobertura de Quina','opt-q8':'8 números → Quadra — 6 juegos','opt-q10':'10 números → Quadra — 20 juegos','opt-q12':'12 números → Quadra — 42 juegos','opt-n9':'9 números → Quina — 12 juegos','opt-n10':'10 números → Quina — 20 juegos',
 'sel-lbl':'Seleccionados:','btn-fech':'Procesar Combinación','fech-out-title':'Combinaciones','fech-empty-txt':'Selecciona los números y procesa.',
 'sim-title':'Simulador','sim-sub':'Compara tu juego con el último resultado','help-sim-title':'¿Cómo usar el Simulador?','help-sim-body':'Marca 6 números y toca Verificar. La app compara con el último resultado — los aciertos quedan en verde.','btn-sim':'Verificar Ahora','sim-out-title':'Resultado de la Verificación','sim-empty-txt':'Marca 6 números y toca Verificar.',
 'myhist-title':'Registrar Juego','myhist-sub':'Marca los números que jugaste','help-hist-title':'¿Cómo usar?','help-hist-body':'Marca los números que jugaste y toca + Agregar. La app compara con el último resultado automáticamente.','hist-conc-lbl':'Concurso (opcional):','ph-conc':'Ej: {n}','btn-add-hist':'+ Agregar Juego','mygames-title':'Mis Juegos','btn-clear-all':'Borrar Todo',
@@ -815,7 +832,7 @@ es:{
 },
 en:{
 'w-free':'100% FREE','w-sub':'Create your Mega-Sena games in seconds. Just open and play — no sign-up.','w-chip1':'✓ No sign-up','w-chip2':'✓ No login','w-chip3':'✓ No e-mail',
-'wf1':'Generator','wf1s':'Random or stats-based games','wf2':'Wheeling','wf2s':'Combinations with a minimum guarantee','wf3':'Simulator','wf3s':'Check your game against the last draw','wf4':'Results','wf4s':'Every draw, always up to date',
+'wf1':'Generator','wf1s':'Random or stats-based games','wf2':'Wheeling','wf2s':'Combinations with math coverage','wf3':'Simulator','wf3s':'Check your game against the last draw','wf4':'Results','wf4s':'Every draw, always up to date',
 'w-cta':'Start for free →','w-legal':'By continuing, you confirm you are 18+ and understand SorteMax is entertainment and a statistics aid: it does not guarantee prizes and is not affiliated with Caixa Econômica Federal. Play responsibly.',
 'tab-gen':'Generator','tab-fech':'Wheeling','tab-sim':'Simulator','tab-hist':'My Games','tab-res':'Results','tab-cont':'Contact',
 'gen-title':'Generation Options','gen-sub':'Choose your method and filters','help-gen-title':'How to use the Generator?','help-gen-body':'Choose Quick Pick (random), Smart (statistical filters) or Lucky (numerology). Set the quantity and tap Generate Games.',
@@ -823,8 +840,8 @@ en:{
 'qty-lbl':'Number of games:','filt-title':'Advanced Filters','filt-oe':'Even/Odd balance','filt-cons':'No 3 numbers in a row','filt-sum':'Optimized sum (150–220)','filt-freq':'Statistical bias',
 'luck-title':'Numerology Data','luck-name':'Your Name:','luck-birth':'Date of Birth:','ph-name':'e.g. John Smith','ph-date':'DD/MM/YYYY',
 'btn-gen':'Generate Games','gen-out-title':'Generated Games','gen-empty-txt':'Pick your options and tap Generate Games!',
-'fech-title':'Math Wheeling','fech-sub':'Lock in minimum prizes with math','fech-plan':'Guarantee plan:','help-fech-title':'What is Wheeling?','help-fech-body':'A math strategy that improves the odds of minimum prizes (Quadra or Quina) when the drawn numbers are in your group. Pick a plan, mark the numbers and tap Process.',
-'og-quadra':'Quadra guaranteed','og-quina':'Quina guaranteed','opt-q8':'8 numbers → Quadra — 6 games','opt-q10':'10 numbers → Quadra — 20 games','opt-q12':'12 numbers → Quadra — 42 games','opt-n9':'9 numbers → Quina — 12 games','opt-n10':'10 numbers → Quina — 20 games',
+'fech-title':'Math Wheeling','fech-sub':'Spread your numbers with math coverage','fech-plan':'Coverage plan:','help-fech-title':'What is Wheeling?','help-fech-body':'A math strategy that improves the odds of minimum prizes (Quadra or Quina) when the drawn numbers are in your group. Pick a plan, mark the numbers and tap Process.',
+'og-quadra':'Quadra coverage','og-quina':'Quina coverage','opt-q8':'8 numbers → Quadra — 6 games','opt-q10':'10 numbers → Quadra — 20 games','opt-q12':'12 numbers → Quadra — 42 games','opt-n9':'9 numbers → Quina — 12 games','opt-n10':'10 numbers → Quina — 20 games',
 'sel-lbl':'Selected:','btn-fech':'Process Wheel','fech-out-title':'Combinations','fech-empty-txt':'Select the numbers and process.',
 'sim-title':'Simulator','sim-sub':'Compare your game with the last result','help-sim-title':'How to use the Simulator?','help-sim-body':'Mark 6 numbers and tap Check. The app compares them with the last result — hits turn green.','btn-sim':'Check Now','sim-out-title':'Check Result','sim-empty-txt':'Mark 6 numbers and tap Check.',
 'myhist-title':'Log a Game','myhist-sub':'Mark the numbers you played','help-hist-title':'How to use?','help-hist-body':'Mark the numbers you played and tap + Add. The app compares them with the last result automatically.','hist-conc-lbl':'Draw no. (optional):','ph-conc':'e.g. {n}','btn-add-hist':'+ Add Game','mygames-title':'My Games','btn-clear-all':'Clear All',
@@ -846,7 +863,7 @@ en:{
 },
 ko:{
 'w-free':'100% 무료','w-sub':'메가세나 번호를 몇 초 만에 만들어 보세요. 가입 없이 바로 사용하세요.','w-chip1':'✓ 가입 없음','w-chip2':'✓ 로그인 없음','w-chip3':'✓ 이메일 없음',
-'wf1':'번호 생성','wf1s':'무작위 또는 통계 기반 번호','wf2':'조합(휠링)','wf2s':'최소 당첨을 보장하는 조합','wf3':'시뮬레이터','wf3s':'최근 추첨 결과와 비교','wf4':'당첨 결과','wf4s':'모든 회차, 항상 최신',
+'wf1':'번호 생성','wf1s':'무작위 또는 통계 기반 번호','wf2':'조합(휠링)','wf2s':'수학적으로 짜인 조합','wf3':'시뮬레이터','wf3s':'최근 추첨 결과와 비교','wf4':'당첨 결과','wf4s':'모든 회차, 항상 최신',
 'w-cta':'무료로 시작하기 →','w-legal':'계속하면 만 18세 이상임을 확인하며, SorteMax는 오락·통계 참고용으로 당첨을 보장하지 않고 Caixa Econômica Federal과 관련이 없음을 이해한 것으로 봅니다. 책임감 있게 즐기세요.',
 'tab-gen':'생성','tab-fech':'조합','tab-sim':'시뮬','tab-hist':'내 번호','tab-res':'결과','tab-cont':'문의',
 'gen-title':'생성 옵션','gen-sub':'방법과 필터를 고르세요','help-gen-title':'번호 생성은 어떻게 쓰나요?','help-gen-body':'자동(무작위), 스마트(통계 필터), 행운(수비학) 중 하나를 고르고 개수를 정한 뒤 번호 생성을 누르세요.',
@@ -854,8 +871,8 @@ ko:{
 'qty-lbl':'게임 수:','filt-title':'고급 필터','filt-oe':'짝/홀 균형','filt-cons':'연속 3개 번호 제외','filt-sum':'합계 최적화 (150–220)','filt-freq':'통계 가중치',
 'luck-title':'수비학 정보','luck-name':'이름:','luck-birth':'생년월일:','ph-name':'예: 홍길동','ph-date':'일/월/년 (DD/MM/YYYY)',
 'btn-gen':'번호 생성','gen-out-title':'생성된 번호','gen-empty-txt':'옵션을 고르고 번호 생성을 누르세요!',
-'fech-title':'수학적 조합','fech-sub':'수학으로 최소 당첨을 노리세요','fech-plan':'보장 플랜:','help-fech-title':'조합(휠링)이란?','help-fech-body':'추첨 번호가 고른 번호 안에 있으면 최소 당첨(Quadra 4개 또는 Quina 5개) 가능성을 높이는 수학 전략입니다. 플랜을 고르고 번호를 표시한 뒤 처리를 누르세요.',
-'og-quadra':'Quadra(4개) 보장','og-quina':'Quina(5개) 보장','opt-q8':'8개 번호 → Quadra — 6게임','opt-q10':'10개 번호 → Quadra — 20게임','opt-q12':'12개 번호 → Quadra — 42게임','opt-n9':'9개 번호 → Quina — 12게임','opt-n10':'10개 번호 → Quina — 20게임',
+'fech-title':'수학적 조합','fech-sub':'수학으로 최소 당첨을 노리세요','fech-plan':'조합 플랜:','help-fech-title':'조합(휠링)이란?','help-fech-body':'추첨 번호가 고른 번호 안에 있으면 최소 당첨(Quadra 4개 또는 Quina 5개) 가능성을 높이는 수학 전략입니다. 플랜을 고르고 번호를 표시한 뒤 처리를 누르세요.',
+'og-quadra':'4개 맞춤(Quadra)','og-quina':'5개 맞춤(Quina)','opt-q8':'8개 번호 → Quadra — 6게임','opt-q10':'10개 번호 → Quadra — 20게임','opt-q12':'12개 번호 → Quadra — 42게임','opt-n9':'9개 번호 → Quina — 12게임','opt-n10':'10개 번호 → Quina — 20게임',
 'sel-lbl':'선택:','btn-fech':'조합 처리','fech-out-title':'조합 결과','fech-empty-txt':'번호를 고르고 처리하세요.',
 'sim-title':'시뮬레이터','sim-sub':'내 번호를 최근 결과와 비교','help-sim-title':'시뮬레이터는 어떻게 쓰나요?','help-sim-body':'번호 6개를 표시하고 확인을 누르세요. 최근 결과와 비교해 맞힌 번호는 초록색으로 보입니다.','btn-sim':'지금 확인','sim-out-title':'확인 결과','sim-empty-txt':'번호 6개를 표시하고 확인을 누르세요.',
 'myhist-title':'번호 기록','myhist-sub':'구매한 번호를 표시하세요','help-hist-title':'어떻게 쓰나요?','help-hist-body':'구매한 번호를 표시하고 + 추가를 누르세요. 최근 결과와 자동으로 비교합니다.','hist-conc-lbl':'회차 (선택):','ph-conc':'예: {n}','btn-add-hist':'+ 번호 추가','mygames-title':'내 번호','btn-clear-all':'전체 삭제',
@@ -877,10 +894,10 @@ ko:{
 }
 };
 // 2.1 추가 문구
-Object.assign(LANG.pt,{"retry": "Tentar de novo", "ok": "Entendi", "caixa-site": "Ver no site oficial da Caixa ↗", "lbl-late": "Mais Atrasados", "hist-sub": "{n} concursos analisados (1 a {m})", "nd-next": "Próximo sorteio · Concurso {n}", "nd-wait": "Aguardando resultado", "nd-drawn": "Sorteado: {d}", "nd-est": "Prêmio estimado: {v}", "src-caixa": "Fonte: Caixa (ao vivo)", "src-file": "Fonte: Caixa, via SorteMax", "src-cache": "Dados salvos neste aparelho", "checked": "atualizado {d}", "st-ok": "Atualizado", "st-stale": "Desatualizado", "no-data": "Sem resultados carregados", "w-off-t": "Sem conexão com a internet", "w-off-m": "Não foi possível buscar o resultado mais recente. Mostrando o último resultado salvo: concurso {n} ({d}).", "w-off-m2": " O concurso {p} já foi sorteado ({pd}) — confira quando a conexão voltar.", "w-nodata-m": "Conecte-se à internet para carregar os resultados da Mega-Sena. Ainda não há resultados salvos neste aparelho.", "w-err-t": "Não foi possível carregar os resultados", "w-err-m": "Os servidores de resultados não responderam. Tente de novo em alguns minutos.", "w-stale-t": "Resultado mais recente ainda não disponível", "w-stale-m": "O concurso {p} foi sorteado ({pd}), mas o resultado ainda não chegou ao app. Mostrando o concurso {n} ({d}). Tente de novo em alguns minutos ou confira no site da Caixa.", "cost": "{n} aposta(s) × {p} = {t}", "new-combo": "nunca sorteado", "old-combo": "já foi sorteado", "saved-for": "Salvo para o concurso {n}", "opt-plan": "{n} números → {k} — {g} jogo(s) · {c}", "guar": "Se as 6 dezenas sorteadas estiverem entre as suas {n}, você acerta no mínimo uma {k} em pelo menos um dos {g} jogos.", "guar-cost": "Custo: {g} × {p} = {t}", "guar-odds": "Chance de as 6 sorteadas estarem entre as suas {n}: 1 em {x}.", "sim-conc-lbl": "Conferir no concurso:", "sim-all-t": "Este jogo em todo o histórico ({n} concursos):", "sim-all-sena": "⚠️ Esta combinação exata já foi sorteada!", "conc-nf": "Concurso {n} não encontrado.", "h-wait": "⏳ Aguardando sorteio", "modal-off": "Detalhes de premiação indisponíveis sem conexão.", "help-fech-body": "Se as 6 dezenas sorteadas estiverem entre as que você marcou, o fechamento garante pelo menos o prêmio do plano (Quadra ou Quina). Escolha o plano, marque as dezenas e toque em Processar.", "og-quadra": "Quadra garantida", "og-quina": "Quina garantida", "notif-body": "Sorteio da Mega-Sena em 1 hora! Gere seus jogos agora."});
-Object.assign(LANG.es,{"retry": "Intentar de nuevo", "ok": "Entendido", "caixa-site": "Ver en el sitio oficial de la Caixa ↗", "lbl-late": "Más Atrasados", "hist-sub": "{n} concursos analizados (1 a {m})", "nd-next": "Próximo sorteo · Concurso {n}", "nd-wait": "Esperando resultado", "nd-drawn": "Sorteado: {d}", "nd-est": "Premio estimado: {v}", "src-caixa": "Fuente: Caixa (en vivo)", "src-file": "Fuente: Caixa, vía SorteMax", "src-cache": "Datos guardados en este dispositivo", "checked": "actualizado {d}", "st-ok": "Actualizado", "st-stale": "Desactualizado", "no-data": "Sin resultados cargados", "w-off-t": "Sin conexión a internet", "w-off-m": "No fue posible obtener el resultado más reciente. Mostrando el último resultado guardado: concurso {n} ({d}).", "w-off-m2": " El concurso {p} ya fue sorteado ({pd}) — revisa cuando vuelva la conexión.", "w-nodata-m": "Conéctate a internet para cargar los resultados de la Mega-Sena. Aún no hay resultados guardados en este dispositivo.", "w-err-t": "No fue posible cargar los resultados", "w-err-m": "Los servidores de resultados no respondieron. Intenta de nuevo en unos minutos.", "w-stale-t": "Resultado más reciente aún no disponible", "w-stale-m": "El concurso {p} ya fue sorteado ({pd}), pero el resultado aún no llegó a la app. Mostrando el concurso {n} ({d}). Intenta de nuevo en unos minutos o revisa el sitio de la Caixa.", "cost": "{n} apuesta(s) × {p} = {t}", "new-combo": "nunca sorteado", "old-combo": "ya fue sorteado", "saved-for": "Guardado para el concurso {n}", "opt-plan": "{n} números → {k} — {g} juego(s) · {c}", "guar": "Si las 6 dezenas sorteadas están entre tus {n}, aciertas como mínimo una {k} en al menos uno de los {g} juegos.", "guar-cost": "Costo: {g} × {p} = {t}", "guar-odds": "Probabilidad de que las 6 sorteadas estén entre tus {n}: 1 en {x}.", "sim-conc-lbl": "Verificar en el concurso:", "sim-all-t": "Este juego en todo el historial ({n} concursos):", "sim-all-sena": "⚠️ ¡Esta combinación exacta ya fue sorteada!", "conc-nf": "Concurso {n} no encontrado.", "h-wait": "⏳ Esperando sorteo", "modal-off": "Detalles de premios no disponibles sin conexión.", "help-fech-body": "Si las 6 dezenas sorteadas están entre las que marcaste, la combinación garantiza al menos el premio del plan (Quadra o Quina). Elige el plan, marca los números y toca Procesar.", "og-quadra": "Quadra garantizada", "og-quina": "Quina garantizada", "notif-body": "¡Sorteo de la Mega-Sena en 1 hora! Genera tus juegos ahora."});
-Object.assign(LANG.en,{"retry": "Try again", "ok": "Got it", "caixa-site": "See on the official Caixa site ↗", "lbl-late": "Most Overdue", "hist-sub": "{n} draws analyzed (1 to {m})", "nd-next": "Next draw · Draw {n}", "nd-wait": "Waiting for result", "nd-drawn": "Drawn: {d}", "nd-est": "Estimated prize: {v}", "src-caixa": "Source: Caixa (live)", "src-file": "Source: Caixa, via SorteMax", "src-cache": "Data saved on this device", "checked": "updated {d}", "st-ok": "Up to date", "st-stale": "Outdated", "no-data": "No results loaded", "w-off-t": "No internet connection", "w-off-m": "Could not fetch the latest result. Showing the last saved result: draw {n} ({d}).", "w-off-m2": " Draw {p} has already taken place ({pd}) — check again when you are back online.", "w-nodata-m": "Connect to the internet to load Mega-Sena results. No results are saved on this device yet.", "w-err-t": "Could not load results", "w-err-m": "The results servers did not respond. Please try again in a few minutes.", "w-stale-t": "Latest result not available yet", "w-stale-m": "Draw {p} has taken place ({pd}), but its result has not reached the app yet. Showing draw {n} ({d}). Try again in a few minutes or check the Caixa website.", "cost": "{n} bet(s) × {p} = {t}", "new-combo": "never drawn", "old-combo": "already drawn", "saved-for": "Saved for draw {n}", "opt-plan": "{n} numbers → {k} — {g} game(s) · {c}", "guar": "If the 6 drawn numbers are among your {n}, you get at least a {k} in at least one of the {g} games.", "guar-cost": "Cost: {g} × {p} = {t}", "guar-odds": "Chance that all 6 drawn numbers are among your {n}: 1 in {x}.", "sim-conc-lbl": "Check against draw:", "sim-all-t": "This game across the whole history ({n} draws):", "sim-all-sena": "⚠️ This exact combination has already been drawn!", "conc-nf": "Draw {n} not found.", "h-wait": "⏳ Waiting for draw", "modal-off": "Prize details unavailable offline.", "help-fech-body": "If the 6 drawn numbers are among the ones you marked, the wheel guarantees at least the plan prize (Quadra or Quina). Pick a plan, mark the numbers and tap Process.", "og-quadra": "Quadra guaranteed", "og-quina": "Quina guaranteed", "notif-body": "Mega-Sena draw in 1 hour! Generate your games now."});
-Object.assign(LANG.ko,{"retry": "다시 시도", "ok": "확인", "caixa-site": "Caixa 공식 사이트에서 보기 ↗", "lbl-late": "오래 안 나온 번호", "hist-sub": "{n}개 회차 분석 (1~{m}회)", "nd-next": "다음 추첨 · {n}회", "nd-wait": "결과 기다리는 중", "nd-drawn": "추첨일: {d}", "nd-est": "예상 당첨금: {v}", "src-caixa": "출처: Caixa (실시간)", "src-file": "출처: Caixa (SorteMax 경유)", "src-cache": "이 기기에 저장된 데이터", "checked": "업데이트 {d}", "st-ok": "최신", "st-stale": "지난 정보", "no-data": "불러온 결과가 없습니다", "w-off-t": "인터넷에 연결되어 있지 않아요", "w-off-m": "최신 결과를 가져오지 못했어요. 마지막으로 저장된 결과({n}회, {d})를 보여드려요.", "w-off-m2": " {p}회는 이미 추첨됐어요({pd}). 연결되면 다시 확인하세요.", "w-nodata-m": "메가세나 결과를 불러오려면 인터넷에 연결하세요. 이 기기에 저장된 결과가 아직 없어요.", "w-err-t": "결과를 불러오지 못했어요", "w-err-m": "결과 서버가 응답하지 않아요. 몇 분 뒤 다시 시도하세요.", "w-stale-t": "최신 결과가 아직 없어요", "w-stale-m": "{p}회는 추첨됐지만({pd}) 결과가 아직 앱에 들어오지 않았어요. {n}회({d}) 결과를 보여드려요. 몇 분 뒤 다시 시도하거나 Caixa 사이트에서 확인하세요.", "cost": "{n}게임 × {p} = {t}", "new-combo": "1등 나온 적 없음", "old-combo": "1등 나온 조합", "saved-for": "{n}회 번호로 저장했어요", "opt-plan": "{n}개 번호 → {k} — {g}게임 · {c}", "guar": "추첨된 6개 번호가 고른 {n}개 안에 모두 있으면, {g}게임 중 적어도 하나는 최소 {k}입니다.", "guar-cost": "비용: {g} × {p} = {t}", "guar-odds": "추첨 6개가 고른 {n}개 안에 모두 들어갈 확률: {x}분의 1.", "sim-conc-lbl": "비교할 회차:", "sim-all-t": "이 번호를 전체 기록({n}회)에 대 보면:", "sim-all-sena": "⚠️ 이 조합은 이미 1등으로 나온 적이 있어요!", "conc-nf": "{n}회를 찾을 수 없어요.", "h-wait": "⏳ 추첨 전", "modal-off": "연결이 없어 당첨 상세를 볼 수 없어요.", "help-fech-body": "추첨된 6개 번호가 표시한 번호 안에 모두 있으면, 조합이 플랜의 최소 당첨(Quadra 4개 또는 Quina 5개)을 보장합니다. 플랜을 고르고 번호를 표시한 뒤 처리를 누르세요.", "og-quadra": "Quadra(4개) 보장", "og-quina": "Quina(5개) 보장", "notif-body": "1시간 뒤 메가세나 추첨! 지금 번호를 만들어 보세요."});
+Object.assign(LANG.pt,{"retry": "Tentar de novo", "ok": "Entendi", "caixa-site": "Ver no site oficial da Caixa ↗", "lbl-late": "Mais Atrasados", "hist-sub": "{n} concursos analisados (1 a {m})", "nd-next": "Próximo sorteio · Concurso {n}", "nd-wait": "Aguardando resultado", "nd-drawn": "Sorteado: {d}", "nd-est": "Prêmio estimado: {v}", "src-caixa": "Fonte: Caixa (ao vivo)", "src-file": "Fonte: Caixa, via SorteMax", "src-cache": "Dados salvos neste aparelho", "checked": "atualizado {d}", "st-ok": "Atualizado", "st-stale": "Desatualizado", "no-data": "Sem resultados carregados", "w-off-t": "Sem conexão com a internet", "w-off-m": "Não foi possível buscar o resultado mais recente. Mostrando o último resultado salvo: concurso {n} ({d}).", "w-off-m2": " O concurso {p} já foi sorteado ({pd}) — confira quando a conexão voltar.", "w-nodata-m": "Conecte-se à internet para carregar os resultados da Mega-Sena. Ainda não há resultados salvos neste aparelho.", "w-err-t": "Não foi possível carregar os resultados", "w-err-m": "Os servidores de resultados não responderam. Tente de novo em alguns minutos.", "w-stale-t": "Resultado mais recente ainda não disponível", "w-stale-m": "O concurso {p} foi sorteado ({pd}), mas o resultado ainda não chegou ao app. Mostrando o concurso {n} ({d}). Tente de novo em alguns minutos ou confira no site da Caixa.", "cost": "{n} aposta(s) × {p} = {t}", "new-combo": "nunca sorteado", "old-combo": "já foi sorteado", "saved-for": "Salvo para o concurso {n}", "opt-plan": "{n} números → {k} — {g} jogo(s) · {c}", "guar": "Se as 6 dezenas sorteadas estiverem entre as suas {n}, os {g} jogos são montados para que pelo menos um alcance a {k}. (Cálculo matemático, não promessa de prêmio.)", "guar-cost": "Custo: {g} × {p} = {t}", "guar-odds": "Chance de as 6 sorteadas estarem entre as suas {n}: 1 em {x}.", "sim-conc-lbl": "Conferir no concurso:", "sim-all-t": "Este jogo em todo o histórico ({n} concursos):", "sim-all-sena": "⚠️ Esta combinação exata já foi sorteada!", "conc-nf": "Concurso {n} não encontrado.", "h-wait": "⏳ Aguardando sorteio", "modal-off": "Detalhes de premiação indisponíveis sem conexão.", "help-fech-body": "Se as 6 dezenas sorteadas estiverem entre as que você marcou, o fechamento é montado para que pelo menos um jogo alcance a faixa do plano (Quadra ou Quina). É um cálculo matemático, não uma promessa de prêmio. Escolha o plano, marque as dezenas e toque em Processar.", "og-quadra": "Cobertura de Quadra", "og-quina": "Cobertura de Quina", "notif-body": "Sorteio da Mega-Sena em 1 hora! Gere seus jogos agora."});
+Object.assign(LANG.es,{"retry": "Intentar de nuevo", "ok": "Entendido", "caixa-site": "Ver en el sitio oficial de la Caixa ↗", "lbl-late": "Más Atrasados", "hist-sub": "{n} concursos analizados (1 a {m})", "nd-next": "Próximo sorteo · Concurso {n}", "nd-wait": "Esperando resultado", "nd-drawn": "Sorteado: {d}", "nd-est": "Premio estimado: {v}", "src-caixa": "Fuente: Caixa (en vivo)", "src-file": "Fuente: Caixa, vía SorteMax", "src-cache": "Datos guardados en este dispositivo", "checked": "actualizado {d}", "st-ok": "Actualizado", "st-stale": "Desactualizado", "no-data": "Sin resultados cargados", "w-off-t": "Sin conexión a internet", "w-off-m": "No fue posible obtener el resultado más reciente. Mostrando el último resultado guardado: concurso {n} ({d}).", "w-off-m2": " El concurso {p} ya fue sorteado ({pd}) — revisa cuando vuelva la conexión.", "w-nodata-m": "Conéctate a internet para cargar los resultados de la Mega-Sena. Aún no hay resultados guardados en este dispositivo.", "w-err-t": "No fue posible cargar los resultados", "w-err-m": "Los servidores de resultados no respondieron. Intenta de nuevo en unos minutos.", "w-stale-t": "Resultado más reciente aún no disponible", "w-stale-m": "El concurso {p} ya fue sorteado ({pd}), pero el resultado aún no llegó a la app. Mostrando el concurso {n} ({d}). Intenta de nuevo en unos minutos o revisa el sitio de la Caixa.", "cost": "{n} apuesta(s) × {p} = {t}", "new-combo": "nunca sorteado", "old-combo": "ya fue sorteado", "saved-for": "Guardado para el concurso {n}", "opt-plan": "{n} números → {k} — {g} juego(s) · {c}", "guar": "Si las 6 dezenas sorteadas están entre tus {n}, los {g} juegos están armados para que al menos uno alcance la {k}. (Cálculo matemático, no promesa de premio.)", "guar-cost": "Costo: {g} × {p} = {t}", "guar-odds": "Probabilidad de que las 6 sorteadas estén entre tus {n}: 1 en {x}.", "sim-conc-lbl": "Verificar en el concurso:", "sim-all-t": "Este juego en todo el historial ({n} concursos):", "sim-all-sena": "⚠️ ¡Esta combinación exacta ya fue sorteada!", "conc-nf": "Concurso {n} no encontrado.", "h-wait": "⏳ Esperando sorteo", "modal-off": "Detalles de premios no disponibles sin conexión.", "help-fech-body": "Si las 6 dezenas sorteadas están entre las que marcaste, la combinación está armada para que al menos un juego alcance la categoría del plan (Quadra o Quina). Es un cálculo matemático, no una promesa de premio. Elige el plan, marca los números y toca Procesar.", "og-quadra": "Cobertura de Quadra", "og-quina": "Cobertura de Quina", "notif-body": "¡Sorteo de la Mega-Sena en 1 hora! Genera tus juegos ahora."});
+Object.assign(LANG.en,{"retry": "Try again", "ok": "Got it", "caixa-site": "See on the official Caixa site ↗", "lbl-late": "Most Overdue", "hist-sub": "{n} draws analyzed (1 to {m})", "nd-next": "Next draw · Draw {n}", "nd-wait": "Waiting for result", "nd-drawn": "Drawn: {d}", "nd-est": "Estimated prize: {v}", "src-caixa": "Source: Caixa (live)", "src-file": "Source: Caixa, via SorteMax", "src-cache": "Data saved on this device", "checked": "updated {d}", "st-ok": "Up to date", "st-stale": "Outdated", "no-data": "No results loaded", "w-off-t": "No internet connection", "w-off-m": "Could not fetch the latest result. Showing the last saved result: draw {n} ({d}).", "w-off-m2": " Draw {p} has already taken place ({pd}) — check again when you are back online.", "w-nodata-m": "Connect to the internet to load Mega-Sena results. No results are saved on this device yet.", "w-err-t": "Could not load results", "w-err-m": "The results servers did not respond. Please try again in a few minutes.", "w-stale-t": "Latest result not available yet", "w-stale-m": "Draw {p} has taken place ({pd}), but its result has not reached the app yet. Showing draw {n} ({d}). Try again in a few minutes or check the Caixa website.", "cost": "{n} bet(s) × {p} = {t}", "new-combo": "never drawn", "old-combo": "already drawn", "saved-for": "Saved for draw {n}", "opt-plan": "{n} numbers → {k} — {g} game(s) · {c}", "guar": "If the 6 drawn numbers are among your {n}, the {g} games are built so that at least one reaches a {k}. (A math calculation, not a promise of a prize.)", "guar-cost": "Cost: {g} × {p} = {t}", "guar-odds": "Chance that all 6 drawn numbers are among your {n}: 1 in {x}.", "sim-conc-lbl": "Check against draw:", "sim-all-t": "This game across the whole history ({n} draws):", "sim-all-sena": "⚠️ This exact combination has already been drawn!", "conc-nf": "Draw {n} not found.", "h-wait": "⏳ Waiting for draw", "modal-off": "Prize details unavailable offline.", "help-fech-body": "If the 6 drawn numbers are among the ones you marked, the wheel is built so that at least one game reaches the plan tier (Quadra or Quina). It is a math calculation, not a promise of a prize. Pick a plan, mark the numbers and tap Process.", "og-quadra": "Quadra coverage", "og-quina": "Quina coverage", "notif-body": "Mega-Sena draw in 1 hour! Generate your games now."});
+Object.assign(LANG.ko,{"retry": "다시 시도", "ok": "확인", "caixa-site": "Caixa 공식 사이트에서 보기 ↗", "lbl-late": "오래 안 나온 번호", "hist-sub": "{n}개 회차 분석 (1~{m}회)", "nd-next": "다음 추첨 · {n}회", "nd-wait": "결과 기다리는 중", "nd-drawn": "추첨일: {d}", "nd-est": "예상 당첨금: {v}", "src-caixa": "출처: Caixa (실시간)", "src-file": "출처: Caixa (SorteMax 경유)", "src-cache": "이 기기에 저장된 데이터", "checked": "업데이트 {d}", "st-ok": "최신", "st-stale": "지난 정보", "no-data": "불러온 결과가 없습니다", "w-off-t": "인터넷에 연결되어 있지 않아요", "w-off-m": "최신 결과를 가져오지 못했어요. 마지막으로 저장된 결과({n}회, {d})를 보여드려요.", "w-off-m2": " {p}회는 이미 추첨됐어요({pd}). 연결되면 다시 확인하세요.", "w-nodata-m": "메가세나 결과를 불러오려면 인터넷에 연결하세요. 이 기기에 저장된 결과가 아직 없어요.", "w-err-t": "결과를 불러오지 못했어요", "w-err-m": "결과 서버가 응답하지 않아요. 몇 분 뒤 다시 시도하세요.", "w-stale-t": "최신 결과가 아직 없어요", "w-stale-m": "{p}회는 추첨됐지만({pd}) 결과가 아직 앱에 들어오지 않았어요. {n}회({d}) 결과를 보여드려요. 몇 분 뒤 다시 시도하거나 Caixa 사이트에서 확인하세요.", "cost": "{n}게임 × {p} = {t}", "new-combo": "1등 나온 적 없음", "old-combo": "1등 나온 조합", "saved-for": "{n}회 번호로 저장했어요", "opt-plan": "{n}개 번호 → {k} — {g}게임 · {c}", "guar": "추첨된 6개 번호가 고른 {n}개 안에 모두 있으면, {g}게임 중 적어도 하나가 {k}에 닿도록 짜여 있습니다. (수학 계산일 뿐 당첨 약속은 아닙니다.)", "guar-cost": "비용: {g} × {p} = {t}", "guar-odds": "추첨 6개가 고른 {n}개 안에 모두 들어갈 확률: {x}분의 1.", "sim-conc-lbl": "비교할 회차:", "sim-all-t": "이 번호를 전체 기록({n}회)에 대 보면:", "sim-all-sena": "⚠️ 이 조합은 이미 1등으로 나온 적이 있어요!", "conc-nf": "{n}회를 찾을 수 없어요.", "h-wait": "⏳ 추첨 전", "modal-off": "연결이 없어 당첨 상세를 볼 수 없어요.", "help-fech-body": "추첨된 6개 번호가 표시한 번호 안에 모두 있으면, 적어도 한 게임이 플랜의 등급(Quadra 4개 또는 Quina 5개)에 닿도록 짜여 있습니다. 수학 계산일 뿐 당첨 약속은 아닙니다. 플랜을 고르고 번호를 표시한 뒤 처리를 누르세요.", "og-quadra": "4개 맞춤(Quadra)", "og-quina": "5개 맞춤(Quina)", "notif-body": "1시간 뒤 메가세나 추첨! 지금 번호를 만들어 보세요."});
 Object.assign(LANG.pt,{"help-gen-body": "Escolha Surpresinha (aleatório), Inteligente (filtros estatísticos) ou Sorte (numerologia). Defina a quantidade e toque em Gerar Jogos. Importante: no sorteio todos os números têm a mesma chance — os filtros só evitam combinações com padrões raros.", "odds": "Chance de Sena por aposta simples: 1 em 50.063.860."});
 Object.assign(LANG.es,{"help-gen-body": "Elige Sorpresa (aleatorio), Inteligente (filtros estadísticos) o Suerte (numerología). Define la cantidad y toca Generar Juegos. Importante: en el sorteo todos los números tienen la misma probabilidad — los filtros solo evitan combinaciones con patrones raros.", "odds": "Probabilidad de Sena por apuesta simple: 1 en 50.063.860."});
 Object.assign(LANG.en,{"help-gen-body": "Choose Quick Pick (random), Smart (statistical filters) or Lucky (numerology). Set the quantity and tap Generate Games. Note: every number has the same chance in the draw — filters only avoid combinations with rare patterns.", "odds": "Jackpot odds per simple bet: 1 in 50,063,860."});
@@ -901,6 +918,10 @@ Object.assign(LANG.pt,{"nt-title": "🔔 Avisos de novidades", "nt-sub": "Quer s
 Object.assign(LANG.es,{"nt-title": "🔔 Avisos de novedades", "nt-sub": "¿Quieres saber cuándo sale una nueva versión o novedad de SorteMax? Deja tu correo una sola vez.", "nt-ph": "tu@email.com", "nt-btn": "Quiero avisos", "nt-note": "Opcional. Solo avisos de novedades de la app, sin spam. Para salir, escribe a contato@duriup.com.br.", "nt-done": "✅ ¡Listo! Te avisaremos de las novedades.", "nt-bad": "Revisa el correo que escribiste.", "nt-fail": "No se pudo enviar ahora. Revisa tu internet e inténtalo de nuevo."});
 Object.assign(LANG.en,{"nt-title": "🔔 Update notices", "nt-sub": "Want to know when a new version or feature of SorteMax comes out? Leave your email just once.", "nt-ph": "you@email.com", "nt-btn": "Notify me", "nt-note": "Optional. Only app news, no spam. To unsubscribe, write to contato@duriup.com.br.", "nt-done": "✅ Done! We'll let you know about updates.", "nt-bad": "Please check the email you typed.", "nt-fail": "Couldn't send right now. Check your internet and try again."});
 Object.assign(LANG.ko,{"nt-title": "🔔 새 소식 알림", "nt-sub": "SorteMax 새 버전이나 새 기능이 나오면 알려 드릴까요? 이메일을 한 번만 남겨 주세요.", "nt-ph": "이메일 주소", "nt-btn": "알림 받기", "nt-note": "선택 사항이에요. 앱 새 소식만 보내고 스팸은 없어요. 그만 받으려면 contato@duriup.com.br 로 알려 주세요.", "nt-done": "✅ 등록했어요! 새 소식이 있으면 알려 드릴게요.", "nt-bad": "입력한 이메일을 확인해 주세요.", "nt-fail": "지금은 보낼 수 없어요. 인터넷을 확인하고 다시 해 주세요."});
+Object.assign(LANG.pt,{"plan-l1": "{n} dezenas → {k}", "plan-l2": "{g} jogo(s) · {c}", "plan-sel": "Selecionar", "plan-on": "✓ Selecionado"});
+Object.assign(LANG.es,{"plan-l1": "{n} números → {k}", "plan-l2": "{g} juego(s) · {c}", "plan-sel": "Seleccionar", "plan-on": "✓ Seleccionado"});
+Object.assign(LANG.en,{"plan-l1": "{n} numbers → {k}", "plan-l2": "{g} game(s) · {c}", "plan-sel": "Select", "plan-on": "✓ Selected"});
+Object.assign(LANG.ko,{"plan-l1": "{n}개 번호 → {k}", "plan-l2": "{g}게임 · {c}", "plan-sel": "선택", "plan-on": "✓ 선택됨"});
 var curLang='pt';
 function t(k,v){var s=(LANG[curLang]&&LANG[curLang][k]);if(s===undefined)s=LANG.pt[k];if(s===undefined)return k;if(v)Object.keys(v).forEach(function(x){s=s.split('{'+x+'}').join(v[x]);});return s;}
 function applyLang(lang){
@@ -937,7 +958,10 @@ var SHARE_URL='https://sortemax.duriup.com.br/baixar/';
 function shareText(){return t('sh-text',{u:SHARE_URL});}
 function renderShare(){
   var txt=shareText();
-  document.querySelectorAll('[data-share-msg]').forEach(function(e){e.textContent=txt;});
+  // 미리보기 글 안의 주소는 눌러서 바로 열리게(링크), 나머지는 글자 그대로
+  var esc=function(x){return x.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+  var html=esc(txt).split(esc(SHARE_URL)).join('<a href="'+SHARE_URL+'" target="_blank" rel="noopener">'+esc(SHARE_URL)+'</a>');
+  document.querySelectorAll('[data-share-msg]').forEach(function(e){e.innerHTML=html;});
   document.querySelectorAll('[data-share-wa]').forEach(function(a){a.href='https://wa.me/?text='+encodeURIComponent(txt);});
   var can=!!navigator.share;
   document.querySelectorAll('[data-share-native]').forEach(function(b){b.style.display=can?'':'none';});
@@ -959,6 +983,7 @@ function shareInit(){
 }
 // ── 새 소식 알림 받기(원하는 사람만 이메일 한 번) ─────────────
 var NOTIFY_URL='https://formspree.io/f/xnjrkrkp';
+var NOTIFY_DOMAINS=['gmail.com','hotmail.com','outlook.com','icloud.com','yahoo.com.br','yahoo.com','live.com','uol.com.br','bol.com.br','naver.com'];
 function notifyMark(){document.querySelectorAll('[data-notify]').forEach(function(b){b.classList.add('done');});}
 function notifyInit(){
   try{if(localStorage.getItem('sm_notify'))notifyMark();}catch(e){}
@@ -978,6 +1003,25 @@ function notifyInit(){
     };
     btn.onclick=send;
     inp.addEventListener('keydown',function(e){if(e.key==='Enter')send();});
+    // @ 뒤 주소(도메인)를 목록으로 보여 줘서 눌러 고르게 함
+    var sug=box.querySelector('[data-notify-sug]');
+    var showSug=function(){
+      var v=(inp.value||'').trim().replace(/\s/g,''),at=v.indexOf('@');
+      var local=at<0?v:v.slice(0,at),dom=at<0?'':v.slice(at+1).toLowerCase();
+      sug.innerHTML='';
+      if(!local||NOTIFY_DOMAINS.indexOf(dom)>=0){sug.classList.remove('on');return;}
+      NOTIFY_DOMAINS.filter(function(d){return d.indexOf(dom)===0;}).slice(0,6).forEach(function(d){
+        var b=document.createElement('button');b.type='button';
+        b.appendChild(document.createTextNode(local+'@'));var bb=document.createElement('b');bb.textContent=d;b.appendChild(bb);
+        b.onmousedown=function(e){e.preventDefault();};
+        b.onclick=function(){inp.value=local+'@'+d;sug.classList.remove('on');inp.focus();};
+        sug.appendChild(b);
+      });
+      sug.classList.toggle('on',!!sug.children.length);
+    };
+    inp.addEventListener('input',showSug);
+    inp.addEventListener('focus',showSug);
+    inp.addEventListener('blur',function(){setTimeout(function(){sug.classList.remove('on');},150);});
   });
 }
 function toastLong(msg){var x=el('toast');x.textContent=msg;x.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(function(){x.classList.remove('on');},3500);}
@@ -1282,7 +1326,7 @@ function autoGrid(cId,selArr,cntId,tgtId,btnId,maxFn){
   updateGridUI(selArr,cntId,tgtId,btnId,maxFn);
 }
 var PRICE=6; // R$ 6,00 por aposta simples (valor da Caixa desde jul/2025)
-// 검증된 조합표: 키 'n-k' = n개 번호로 k개(4=Quadra,5=Quina) 보장. 각 게임은 고른 번호의 위치(16진수)
+// 검증된 조합표: 키 'n-k' = n개 번호로 k개(4=Quadra,5=Quina) 맞춤(전수 검사 통과). 각 게임은 고른 번호의 위치(16진수)
 var WHEELS=/*WHEELS*/{"8-4":["234567"],"9-4":["025678","034678","012357"],"10-4":["012347","036789","124568"],"11-4":["12679a","034568","13789a","234589","012457"],"12-4":["0178ab","013468","3467ab","245679","012478","015689","2359ab"],"8-5":["014567","012367","012456","234567"],"9-5":["012368","012348","013468","234567","124567","024678","013578"],"10-5":["012569","014589","045678","013679","023689","012348","012357","125789","345789","134568","234569","024789","023678","124679"],"11-5":["03458a","012457","123679","02347a","12459a","013489","01789a","12568a","14678a","012348","13579a","034679","245789","05679a","23678a","023589","34689a","012389","01236a","014569","135678","025678","23456a","24689a"]};
 function curPlan(){var o=el('wForm').options[el('wForm').selectedIndex];if(!o)return null;var p=o.value.split('-');return{key:o.value,n:+p[0],k:+p[1],games:WHEELS[o.value]};}
 function wLimitFn(){var p=curPlan();return p?p.n:8;}
@@ -1299,7 +1343,26 @@ function buildPlans(){
     sel.appendChild(og);
   });
   if(cur&&WHEELS[cur])sel.value=cur;else if(WHEELS['10-4'])sel.value='10-4';
-  updGuar();
+  updGuar();renderPlanCards();
+}
+// 플랜을 네모 카드로 보여 주고 "선택" 버튼으로 고름(실제 값은 숨긴 wForm 이 가짐)
+function renderPlanCards(){
+  var sel=el('wForm'),box=el('wPlans');box.innerHTML='';
+  [].forEach.call(sel.querySelectorAll('optgroup'),function(og){
+    var h=document.createElement('div');h.className='plan-grp';h.textContent=og.label;box.appendChild(h);
+    var list=document.createElement('div');list.className='plan-list';
+    [].forEach.call(og.querySelectorAll('option'),function(o){
+      var p=o.value.split('-'),n=+p[0],k=+p[1],g=WHEELS[o.value].length,on=o.value===sel.value;
+      var c=document.createElement('div');c.className='plan-card'+(on?' on':'');
+      c.innerHTML='<span class="pl1"></span><span class="pl2"></span><button type="button"></button>';
+      c.querySelector('.pl1').textContent=t('plan-l1',{n:n,k:k===4?'Quadra':'Quina'});
+      c.querySelector('.pl2').textContent=t('plan-l2',{g:g,c:brl(g*PRICE)});
+      var b=c.querySelector('button');b.textContent=on?t('plan-on'):t('plan-sel');
+      b.onclick=function(){if(sel.value===o.value)return;sel.value=o.value;sel.onchange&&sel.onchange();};
+      list.appendChild(c);
+    });
+    box.appendChild(list);
+  });
 }
 function updGuar(){
   var p=curPlan();if(!p){el('wGuar').textContent='';return;}
@@ -1452,7 +1515,7 @@ window.onload=function(){
   el('btnGen').onclick=function(){var mode=document.querySelector('input[name="gMode"]:checked').value,qty=parseInt(el('qVal').value);if(mode==='lucky'){var n=el('lName').value.trim(),b=el('lBirth').value;if(!n||!b){toast(t('fill-lucky'));return;}genGames=[genLucky(n,b)];}else{genGames=[];for(var i=0;i<qty;i++)genGames.push(genUnique(mode==='smart'?genSmart:genRandom,genGames));}renderGen();el('genList').scrollIntoView({behavior:'smooth',block:'nearest'});track('generate_games',{mode:mode,qty:genGames.length});};
   el('btnCopyGen').onclick=function(){copyTxt(genGames.map(function(g){return g.map(pad).join(' ');}).join('\n'));};
   el('btnDlGen').onclick=function(){dlTxt(genGames.map(function(g,i){return t('game',{n:i+1})+': '+g.map(pad).join(' - ');}).join('\n'),'sortemax-jogos.txt');};
-  el('wForm').onchange=function(){resetGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);updGuar();};
+  el('wForm').onchange=function(){resetGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);updGuar();renderPlanCards();};
   el('wReset').onclick=function(){resetGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);};
   el('wAuto').onclick=function(){autoGrid('wGrid',ST.wSel,'wCnt','wTgt','btnFech',wLimitFn);};
   el('btnFech').onclick=function(){var p=curPlan();if(!p||ST.wSel.length!==p.n)return;wheelGames=fechCover(ST.wSel,p);renderWheel();el('wRes').scrollIntoView({behavior:'smooth',block:'nearest'});track('fechamento',{plan:p.key});};
