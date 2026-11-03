@@ -1070,15 +1070,14 @@ function pwaInit(){
   try{if(inTwa)sessionStorage.setItem('sm_twa','1');else inTwa=!!sessionStorage.getItem('sm_twa');}catch(e){}
   if(inTwa)return; // Play 앱 안에서는 설치 안내가 필요 없다
   if((PLAY_LIVE||/[?&]play=1/.test(location.search))&&/Android/i.test(navigator.userAgent)){
-    var ph=0;try{ph=+localStorage.getItem('sm_play_hide')||0;}catch(e){}
     var pb=el('pwaBanner');
     pb.querySelector('[data-i="pwa-txt"]').setAttribute('data-i','play-txt');
     pb.querySelector('[data-i="pwa-txt2"]').setAttribute('data-i','play-txt2');
     el('pwaBtnInstall').setAttribute('data-i','play-install');
     pb.querySelectorAll('[data-i]').forEach(function(e){var s=t(e.dataset.i);if(s)e.textContent=s;});
     el('pwaBtnInstall').onclick=function(){track('play_banner_click');location.href=PLAY_URL;};
-    el('pwaBtnClose').onclick=function(){pb.classList.remove('on');try{localStorage.setItem('sm_play_hide',String(Date.now()));}catch(e){}};
-    if(Date.now()-ph>3*86400000)pb.classList.add('on');
+    el('pwaBtnClose').onclick=function(){pb.classList.remove('on');}; // [KIL 1103] 닫아도 기억하지 않는다 — 열 때마다 다시 뜬다
+    pb.classList.add('on');
     return;
   }
   window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;el('pwaBanner').classList.add('on');});
