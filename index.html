@@ -387,7 +387,7 @@ footer .warn{color:var(--t3)}
     <div class="w-top">
       <span class="w-ver" id="wVer">v0</span>
       <div class="w-langs" id="wLangs">
-        <button class="w-lang" data-lang="pt">PT</button><button class="w-lang" data-lang="es">ES</button><button class="w-lang" data-lang="en">EN</button><button class="w-lang" data-lang="ko">KO</button>
+        <button class="w-lang" data-lang="pt">PT</button><button class="w-lang" data-lang="es">ES</button><button class="w-lang" data-lang="en">EN</button><button class="w-lang" data-lang="ko">KO</button><button class="w-lang" data-lang="zh">中文</button>
       </div>
     </div>
     <div class="w-hero">
@@ -728,6 +728,7 @@ footer .warn{color:var(--t3)}
         <button class="opt" data-lang="es">🇪🇸 Español</button>
         <button class="opt" data-lang="en">🇺🇸 English</button>
         <button class="opt" data-lang="ko">🇰🇷 한국어</button>
+        <button class="opt" data-lang="zh">🇨🇳 中文</button>
       </div>
       <div class="sec-lbl" style="margin-top:6px" data-i="set-theme">Tema</div>
       <div class="opt-grid three" id="themeOpts">
@@ -757,7 +758,7 @@ footer .warn{color:var(--t3)}
 
 <script>
 'use strict';
-var APP_VERSION='2.3.3';
+var APP_VERSION='2.4.0';
 var CONTACT_EMAIL='contato@duriup.com.br';
 var pad=function(n){return n<10?'0'+n:String(n);};
 var brl=function(v){return isNaN(v)||v===null?'R$ 0,00':'R$ '+Number(v).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1.');};
@@ -766,7 +767,7 @@ var ST={draws:{},latest:null,state:null,netOk:false,hotNums:[],coldNums:[],wSel:
 var genGames=[],wheelGames=[],deferredPrompt=null;
 
 // ── 언어 ───────────────────────────────────────────────
-var LOCALE={pt:'pt-BR',es:'es-ES',en:'en-US',ko:'ko-KR'};
+var LOCALE={pt:'pt-BR',es:'es-ES',en:'en-US',ko:'ko-KR',zh:'zh-CN'};
 var LANG={
 pt:{
 'w-free':'100% GRÁTIS','w-sub':'Gere seus jogos da Mega-Sena em segundos. Abra e use — sem cadastro.','w-chip1':'✓ Sem cadastro','w-chip2':'✓ Sem login','w-chip3':'✓ Sem e-mail',
@@ -922,6 +923,46 @@ Object.assign(LANG.pt,{"plan-l1": "{n} dezenas → {k}", "plan-l2": "{g} jogo(s)
 Object.assign(LANG.es,{"plan-l1": "{n} números → {k}", "plan-l2": "{g} juego(s) · {c}", "plan-sel": "Seleccionar", "plan-on": "✓ Seleccionado"});
 Object.assign(LANG.en,{"plan-l1": "{n} numbers → {k}", "plan-l2": "{g} game(s) · {c}", "plan-sel": "Select", "plan-on": "✓ Selected"});
 Object.assign(LANG.ko,{"plan-l1": "{n}개 번호 → {k}", "plan-l2": "{g}게임 · {c}", "plan-sel": "선택", "plan-on": "✓ 선택됨"});
+// [KIL 1103] 중국어(간체) — 브라질에 사는 중국 사람용. 다른 언어처럼 함께 고친다.
+LANG.zh={
+'w-free':'100% 免费','w-sub':'几秒钟生成你的 Mega-Sena 号码。打开就能用,无需注册。','w-chip1':'✓ 无需注册','w-chip2':'✓ 无需登录','w-chip3':'✓ 无需邮箱',
+'wf1':'选号','wf1s':'随机或按统计生成号码','wf2':'组合','wf2s':'有数学覆盖的组合','wf3':'模拟器','wf3s':'用最近一期开奖核对你的号码','wf4':'开奖结果','wf4s':'所有期数,随时更新',
+'w-cta':'免费开始 →','w-legal':'继续即表示你确认已年满 18 岁,并了解 SorteMax 仅供娱乐和统计参考:不保证中奖,与 Caixa Econômica Federal 无关。请理性购彩。',
+'tab-gen':'选号','tab-fech':'组合','tab-sim':'模拟','tab-hist':'我的号码','tab-res':'结果','tab-cont':'联系',
+'gen-title':'选号方式','gen-sub':'选择方法和筛选条件','help-gen-title':'怎么用选号?','help-gen-body':'选择机选(随机)、智能(统计筛选)或幸运(数字命理),设定注数,点“生成号码”。注意:开奖时每个号码的机会都一样,筛选只是避开少见的号码组合。',
+'mode-random':'机选','mode-random-sub':'100% 随机','mode-smart':'智能选号','mode-smart-sub':'使用统计','mode-lucky':'幸运选号','mode-lucky-sub':'个人数字命理',
+'qty-lbl':'注数:','filt-title':'高级筛选','filt-oe':'单双平衡','filt-cons':'不出现 3 个连号','filt-sum':'和值优化 (150–220)','filt-freq':'统计加权',
+'luck-title':'数字命理资料','luck-name':'你的名字:','luck-birth':'出生日期:','ph-name':'例:王小明','ph-date':'日/月/年 (DD/MM/YYYY)',
+'btn-gen':'生成号码','gen-out-title':'生成的号码','gen-empty-txt':'选好选项,点“生成号码”!',
+'fech-title':'数学组合','fech-sub':'用数学覆盖来分配你的号码','fech-plan':'覆盖方案:','help-fech-title':'什么是组合?','help-fech-body':'如果开出的 6 个号码都在你选的号码里,组合会保证至少有一注达到方案的奖级(Quadra 中 4 个或 Quina 中 5 个)。这是数学计算,不是中奖承诺。选方案、选号码,然后点“处理”。',
+'og-quadra':'Quadra 覆盖(中 4 个)','og-quina':'Quina 覆盖(中 5 个)','opt-q8':'8 个号码 → Quadra — 6 注','opt-q10':'10 个号码 → Quadra — 20 注','opt-q12':'12 个号码 → Quadra — 42 注','opt-n9':'9 个号码 → Quina — 12 注','opt-n10':'10 个号码 → Quina — 20 注',
+'sel-lbl':'已选:','btn-fech':'处理组合','fech-out-title':'组合结果','fech-empty-txt':'选好号码再处理。',
+'sim-title':'模拟器','sim-sub':'把你的号码和最近结果对比','help-sim-title':'怎么用模拟器?','help-sim-body':'选 6 个号码,点“核对”。App 会和最近一期结果对比,中的号码显示为绿色。','btn-sim':'马上核对','sim-out-title':'核对结果','sim-empty-txt':'选 6 个号码,点“核对”。',
+'myhist-title':'记录号码','myhist-sub':'选出你买的号码','help-hist-title':'怎么用?','help-hist-body':'选出你买的号码,点“+ 添加”。App 会自动和最近结果对比。','hist-conc-lbl':'期号(可不填):','ph-conc':'例:{n}','btn-add-hist':'+ 添加号码','mygames-title':'我的号码','btn-clear-all':'全部清除',
+'res-title':'历史开奖','res-sub':'查询任意一期','ph-search':'搜索期号...','th-conc':'期号','th-nums':'号码','btn-prev':'上一页','btn-next':'下一页',
+'cont-title':'联系我们','cont-sub':'建议、问题反馈或合作','cont-mail-lbl':'官方邮箱','cont-tipo':'类型','ct-sug':'💡 建议','ct-bug':'🐛 问题','ct-par':'🤝 合作','ct-out':'💬 其他','cont-nome':'名字','ph-yourname':'你的名字','cont-msg':'留言','ph-msg':'想说什么都可以!每条意见都对我们有帮助...','btn-send':'用邮件发送','cont-note':'会打开你的邮件 App,内容已填好,发往 contato@duriup.com.br',
+'channels-title':'我们的频道',
+'ch-duriup':'加密货币、股票和金融市场','ch-sogno':'60 年代意大利复古音乐','ch-cine':'电影原声音乐',
+'btn-copy':'复制','btn-export':'导出','btn-clear':'清除','btn-random':'随机',
+'nd-lbl':'下一期开奖','lbl-last':'最近结果','lbl-hist-sum':'历史统计','lbl-hist-sub':'所有期数的分析','lbl-hot':'出现最多','lbl-cold':'出现最少','lbl-beh':'规律','lbl-oe':'单/双:','lbl-sum':'推荐和值:',
+'footer-warn':'与 Caixa Econômica Federal 无关。请理性购彩。','ft-welcome':'查看开始页面','pwa-txt':'安装 SorteMax','pwa-txt2':'添加到主屏幕!','pwa-install':'安装','play-txt':'Google Play 上的 SorteMax','play-txt2':'免费官方 App!','play-install':'下载',
+'set-title':'设置','set-lang':'语言','set-theme':'主题','th-auto':'跟随系统','th-light':'浅色','th-dark':'深色',
+'sync':'同步中...','sync-ok':'在线','sync-off':'离线','bell':'提醒','bell-on':'已开启','no-notif':'你的浏览器不支持通知。','notif-blocked':'通知已被屏蔽。请在浏览器设置中开启。','notif-body':'Mega-Sena 1 小时后开奖!现在就生成号码吧。',
+'nd-at':'{d} {h}点 (巴西利亚时间)','conc':'第 {n} 期','conc-hash':'第 {n} 期','acum':'奖金累积!','won':'头奖已开出!','winners':'{g} 人中奖 ({v})','bal':'平衡 {p}%',
+'game':'第 {n} 注','bet':'第 {n} 注','eo':'双{e}/单{o}','save':'保存','limit':'最多 {n} 个号码。','ready':'完成!✓','more':'再选 {n} 个','games-n':'{n} 注',
+'wait':'等待数据中...','official':'官方结果:','yours':'你的号码:','sena-msg':'恭喜!6 个全中!','quina-msg':'中 5 个 — Quina!','quadra-msg':'中 4 个 — Quadra!','hits':'中 {n} 个','no-hit':'这次没有中。',
+'need6':'请选 6 个号码。','added':'✅ 已添加!','hist-empty':'📋 还没有保存的号码。<br>生成号码后点 💾 保存','del':'删除','none':'没有找到结果。','view':'查看','page':'第 {a}/{b} 页','loading':'加载中...',
+'date':'日期:','acc':'累积:','yes':'是','no':'否','tier':'奖级','win-h':'中奖人数','prize':'奖金','mode':'方式:',
+'fill-all':'请填写名字和留言。','mail-open':'正在打开邮件 App…','copied':'已复制!✅','fill-lucky':'请填写名字和日期。','confirm-clear':'删除所有保存的号码?','theme-auto':'主题:跟随系统','theme-light':'主题:浅色','theme-dark':'主题:深色','mail-subj':'[SorteMax] {t} - {n}',
+'retry':'重试','ok':'知道了','caixa-site':'在 Caixa 官网查看 ↗','lbl-late':'最久未出','hist-sub':'已分析 {n} 期 (第 1 至 {m} 期)','nd-next':'下一期开奖 · 第 {n} 期','nd-wait':'等待开奖结果','nd-drawn':'开奖日:{d}','nd-est':'预计奖金:{v}','src-caixa':'来源:Caixa (实时)','src-file':'来源:Caixa,经 SorteMax','src-cache':'本设备保存的数据','checked':'更新于 {d}','st-ok':'已是最新','st-stale':'不是最新','no-data':'还没有加载结果',
+'w-off-t':'没有网络连接','w-off-m':'无法获取最新结果。显示上次保存的结果:第 {n} 期 ({d})。','w-off-m2':' 第 {p} 期已经开奖 ({pd}),联网后再看看。','w-nodata-m':'请连接网络来加载 Mega-Sena 结果。本设备还没有保存的结果。','w-err-t':'无法加载结果','w-err-m':'结果服务器没有响应。请几分钟后再试。','w-stale-t':'最新结果还没出来','w-stale-m':'第 {p} 期已经开奖 ({pd}),但结果还没到 App。显示第 {n} 期 ({d})。请几分钟后再试,或到 Caixa 官网查看。',
+'cost':'{n} 注 × {p} = {t}','new-combo':'从未开出','old-combo':'已经开出过','saved-for':'已保存为第 {n} 期','opt-plan':'{n} 个号码 → {k} — {g} 注 · {c}','guar':'如果开出的 6 个号码都在你的 {n} 个号码里,这 {g} 注会保证至少一注达到 {k}。(数学计算,不是中奖承诺。)','guar-cost':'费用:{g} × {p} = {t}','guar-odds':'开出的 6 个号码都在你的 {n} 个号码里的机会:{x} 分之 1。',
+'sim-conc-lbl':'核对期号:','sim-all-t':'这组号码放到全部历史 ({n} 期) 里:','sim-all-sena':'⚠️ 这组号码曾经开出过头奖!','conc-nf':'找不到第 {n} 期。','h-wait':'⏳ 等待开奖','modal-off':'没有网络,无法查看奖金详情。',
+'odds':'单注中头奖 (Sena) 的机会:50,063,860 分之 1。','ft-install':'怎么安装 App','ft-priv':'隐私',
+'sh-title':'把 SorteMax 推荐给朋友','sh-sub':'要下载 App,用手机相机扫描二维码:','sh-or':'或者用 WhatsApp、微信等 App 发送邀请。这是朋友会收到的消息:','sh-copy':'📋 复制邀请','sh-wa':'WhatsApp','sh-more':'📤 其他 App','sh-copied':'邀请已复制!粘贴到 WhatsApp、微信等 App 里发送吧。','sh-text':'🍀 试试 SorteMax Mega:免费的 Mega-Sena App!\n✅ 生成号码、做组合、看官方开奖结果\n✅ 无需注册,无需登录\n\n📲 在这里下载:{u}',
+'nt-title':'🔔 新消息通知','nt-sub':'想知道 SorteMax 出了新版本或新功能吗?留一次邮箱就行。','nt-ph':'你的邮箱','nt-btn':'我要通知','nt-note':'可选。只发 App 的新消息,不发垃圾邮件。不想再收,请写信到 contato@duriup.com.br。','nt-done':'✅ 好了!有新消息我们会通知你。','nt-bad':'请检查你输入的邮箱。','nt-fail':'现在发送不了。请检查网络后再试。',
+'plan-l1':'{n} 个号码 → {k}','plan-l2':'{g} 注 · {c}','plan-sel':'选择','plan-on':'✓ 已选择'
+};
 var curLang='pt';
 function t(k,v){var s=(LANG[curLang]&&LANG[curLang][k]);if(s===undefined)s=LANG.pt[k];if(s===undefined)return k;if(v)Object.keys(v).forEach(function(x){s=s.split('{'+x+'}').join(v[x]);});return s;}
 function applyLang(lang){
@@ -1522,7 +1563,7 @@ window.onload=function(){
   buildGrid('sGrid',ST.sSel,'sCnt','sTgt','btnSim',6);
   buildGrid('hGrid',ST.hSel,'hCnt','hTgt','btnAddH',6);
   var savedLang;try{savedLang=localStorage.getItem('sm_lang');}catch(e){}
-  applyLang(savedLang&&LANG[savedLang]?savedLang:'pt');
+  applyLang(savedLang&&LANG[savedLang]?savedLang:(/^zh/i.test(navigator.language||'')?'zh':'pt')); // [KIL 1103] 휴대폰이 중국어면 처음부터 중국어
   setInterval(adTick,5000);ST.lastLoad=Date.now();loadDB(false);
   document.querySelectorAll('input[name="gMode"]').forEach(function(m){m.onchange=function(){document.querySelectorAll('.mode').forEach(function(o){o.classList.remove('on');});m.closest('.mode').classList.add('on');var val=m.value;el('filtBox').classList.toggle('hidden',val!=='smart');el('luckBox').classList.toggle('hidden',val!=='lucky');el('sgQty').classList.toggle('hidden',val==='lucky');};});
   el('qMinus').onclick=function(){var q=parseInt(el('qVal').value);if(q>1)el('qVal').value=q-1;};

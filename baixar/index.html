@@ -131,7 +131,7 @@ footer .ch img{width:28px;height:28px;border-radius:50%;background:#fff}
   <div class="wrap">
     <div class="top">
       <a class="brand" href="/"><img src="/icons/icon-192.png" alt="" width="30" height="30">SorteMax</a>
-      <div class="langs" id="langs"><button class="lang" data-lang="pt">PT</button><button class="lang" data-lang="es">ES</button><button class="lang" data-lang="en">EN</button><button class="lang" data-lang="ko">KO</button></div>
+      <div class="langs" id="langs"><button class="lang" data-lang="pt">PT</button><button class="lang" data-lang="es">ES</button><button class="lang" data-lang="en">EN</button><button class="lang" data-lang="ko">KO</button><button class="lang" data-lang="zh">中文</button></div>
     </div>
     <div class="hero-grid">
       <div>
@@ -209,7 +209,7 @@ footer .ch img{width:28px;height:28px;border-radius:50%;background:#fff}
       <div class="feat"><div class="e">🧮</div><b data-i="g3">Fechamentos com cobertura matemática</b><span data-i="g3s">Planos de Quadra e Quina verificados matematicamente, com o menor número de jogos e o custo exato.</span></div>
       <div class="feat"><div class="e">🎯</div><b data-i="g4">Simulador</b><span data-i="g4s">Confira seu jogo em qualquer concurso e veja quantas vezes ele teria sido premiado na história.</span></div>
       <div class="feat"><div class="e">💾</div><b data-i="g5">Meus Jogos</b><span data-i="g5s">Salve suas apostas; o app confere sozinho quando sai o resultado.</span></div>
-      <div class="feat"><div class="e">🌐</div><b data-i="g6">4 idiomas e tema escuro</b><span data-i="g6s">Português, Español, English e 한국어. Tema claro, escuro ou automático.</span></div>
+      <div class="feat"><div class="e">🌐</div><b data-i="g6">5 idiomas e tema escuro</b><span data-i="g6s">Português, Español, English, 한국어 e 中文. Tema claro, escuro ou automático.</span></div>
     </div>
   </div>
 </section>
@@ -324,6 +324,23 @@ Object.assign(L.pt,{"ov-t": "Quase pronto!", "ov-p": "Toque no botão abaixo e d
 Object.assign(L.es,{"ov-t": "¡Casi listo!", "ov-p": "Toca el botón de abajo y luego “Instalar”.", "ov-btn": "Instalar ahora", "ov-wait": "Preparando…", "ov-fail": "Si no aparece nada: toca el menú ⋮ del navegador (arriba a la derecha) y elige “Instalar app”.", "ios-t": "Instalar en iPhone", "ios-1": "Toca Compartir ⬆︎ (en la barra de abajo)", "ios-2": "Elige “Agregar a pantalla de inicio”", "ios-3": "Toca “Agregar”", "close": "Cerrar", "nochrome": "No fue posible abrir el instalador. Sigue los 3 pasos de abajo para crear el ícono de la app."});
 Object.assign(L.en,{"ov-t": "Almost there!", "ov-p": "Tap the button below and then “Install”.", "ov-btn": "Install now", "ov-wait": "Getting ready…", "ov-fail": "If nothing shows up: tap the browser ⋮ menu (top right) and choose “Install app”.", "ios-t": "Install on iPhone", "ios-1": "Tap Share ⬆︎ (in the bottom bar)", "ios-2": "Choose “Add to Home Screen”", "ios-3": "Tap “Add”", "close": "Close", "nochrome": "The installer could not be opened. Follow the 3 steps below to create the app icon."});
 Object.assign(L.ko,{"ov-t": "거의 다 됐어요!", "ov-p": "아래 버튼을 누른 뒤 “설치”를 누르세요.", "ov-btn": "지금 설치", "ov-wait": "준비 중…", "ov-fail": "아무것도 안 뜨면: 브라우저 오른쪽 위 메뉴 ⋮ → “앱 설치”를 누르세요.", "ios-t": "아이폰에 설치하기", "ios-1": "아래쪽 공유 버튼 ⬆︎ 누르기", "ios-2": "“홈 화면에 추가” 고르기", "ios-3": "“추가” 누르기", "close": "닫기", "nochrome": "설치 화면을 열지 못했어요. 아래 3단계로 앱 아이콘을 만드세요."});
+// [KIL 1103] 중국어(간체) 추가 — 언어 수도 5개로
+L.zh={badge:'100% 免费',lead:'免费的 Mega-Sena App:生成号码、做有数学覆盖的组合、查看官方开奖结果、模拟你的号码,手机上直接用。',c1:'✓ 无需注册',c2:'✓ 无需登录',c3:'✓ 小巧:不到 1 MB',c4:'✓ 官方结果',install:'免费安装',installed:'已经安装 ✓',open:'在浏览器中打开 →',meta:'安卓 · iPhone · 电脑',
+'how-t':'怎么安装 (10 秒)','how-s':'不需要应用商店:SorteMax 直接从网站安装,像普通 App 一样,主屏幕上会有图标。',pc:'电脑',
+a1:'用 Chrome 打开',a1s:'用 Google Chrome 打开 sortemax.duriup.com.br。',a2:'点“免费安装”',a2s:'或者在 Chrome 菜单 ⋮ 里点“安装应用”/“添加到主屏幕”。',a3:'完成!',a3s:'主屏幕上会出现 SorteMax 图标。像其他 App 一样打开。',
+i1:'用 Safari 打开',i1s:'用 Safari 打开 sortemax.duriup.com.br。',i2:'点“分享”',i2s:'Safari 栏里的 ⬆︎ 按钮(方框加箭头)。',i3:'“添加到主屏幕”',i3s:'往下滑,点这个选项,再点“添加”。',
+p1:'用手机相机扫描',p1s:'扫描下面的二维码,在手机上打开。',p2:'或者安装到电脑',p2s:'在 Chrome 或 Edge 里点“免费安装”,或地址栏里的安装图标。',p3:'随时随地使用',p3s:'保存的号码只留在保存它的设备上。',qr:'用手机相机扫描,打开这个页面并安装 SorteMax。',
+'shots-t':'App 画面预览','shots-s':'这是真实的 App 画面,带有最新官方结果。',f0:'开始页面',f1:'最近结果和下一期奖金',f2:'选号',f3:'数学组合',f4:'模拟器和记录',
+'feat-t':'SorteMax 能做什么','feat-s':'全部免费,无需登录。',g1:'官方结果',g1s:'Mega-Sena 所有期数,每次开奖后自动更新,还有下一期预计奖金。',g2:'选号',g2s:'机选、统计筛选或数字命理。避开已经开出过的组合。',g3:'数学组合',g3s:'经过数学验证的 Quadra 和 Quina 方案,注数最少,费用准确。',g4:'模拟器',g4s:'和任意一期核对,看看历史上会中几次。',g5:'我的号码',g5s:'保存你买的号码,开奖后 App 自动核对。',g6:'5 种语言和深色主题',g6s:'Português、Español、English、한국어 和中文。浅色、深色或自动主题。',
+'faq-t':'常见问题',q1:'真的免费吗?',r1:'是的。100% 免费,无需注册、登录或邮箱。',q2:'为什么不在 Play 商店?',r2:'SorteMax 是可安装的网页 App (PWA)。直接从官网安装,不到 1 MB,不需要手机权限。',q3:'结果是官方的吗?',r3:'是的。每次开奖后自动获取 Caixa 的结果。如果无法更新(例如没有网络),App 会提示你。',q4:'能提高中奖机会吗?',r4:'没有任何方法能保证中奖。每个号码的机会都一样。SorteMax 帮你整理和核对号码;组合只有在开出的 6 个号码都在你选的号码里时,才保证达到最低奖级。',q5:'没有网络能用吗?',r5:'可以,用上次保存的数据。要看新结果需要联网。',q6:'和 Caixa 有关系吗?',r6:'没有。SorteMax 是独立 App,与 Caixa Econômica Federal 无关。购彩只能在彩票店 (lotérica) 或 Caixa 官方渠道。未满 18 岁禁止。',
+'end-t':'准备好了吗?','end-s':'现在就安装,免费,只要 10 秒。',contact:'联系:',legal:'SorteMax 仅供娱乐和统计参考。不保证中奖,与 Caixa Econômica Federal 无关。请理性购彩。仅限 18 岁以上。',
+'see-steps':'按下面的步骤安装 👇','ios-hint':'iPhone:点分享 ⬆︎,再点“添加到主屏幕”。',title:'下载 SorteMax Mega — 免费 Mega-Sena App',
+'sm-t':'用三星浏览器 (Samsung Internet)?🔵','sm-p':'在三星浏览器里安装可能失败(“无法安装网页应用”),或者 Google Play 保护机制显示“已拦截不安全的应用”。这是浏览器的问题,不是 SorteMax 的问题。请用下面的方法之一:','sm-chrome':'在 Chrome 中打开并安装','sm-or':'或者,直接在三星浏览器里:','sm-1':'点菜单 ≡(右下角)。','sm-2':'点“添加页面至”。','sm-3':'选“主屏幕”。SorteMax 图标用起来和 App 一样。','q7':'出现“无法安装”或“已拦截不安全的应用”?','r7':'只在三星浏览器里出现:它用旧的安卓格式生成 App,Google Play 保护机制会拦截。SorteMax 是安全的。用 Google Chrome 打开 sortemax.duriup.com.br 点“安装”,或在三星浏览器里用菜单 ≡ → “添加页面至” → “主屏幕”。','sam-hint':'三星浏览器:安装失败时,用“在 Chrome 中打开”或菜单 ≡ → “添加页面至” → “主屏幕”。',
+'ov-t':'快好了!','ov-p':'点下面的按钮,再点“安装”。','ov-btn':'马上安装','ov-wait':'准备中…','ov-fail':'如果什么都没出现:点浏览器菜单 ⋮(右上角),选“安装应用”。','ios-t':'安装到 iPhone','ios-1':'点分享 ⬆︎(底部栏)','ios-2':'选“添加到主屏幕”','ios-3':'点“添加”','close':'关闭','nochrome':'无法打开安装程序。按下面 3 个步骤创建 App 图标。'};
+Object.assign(L.pt,{g6:'5 idiomas e tema escuro',g6s:'Português, Español, English, 한국어 e 中文. Tema claro, escuro ou automático.'});
+Object.assign(L.es,{g6:'5 idiomas y tema oscuro',g6s:'Português, Español, English, 한국어 y 中文. Tema claro, oscuro o automático.'});
+Object.assign(L.en,{g6:'5 languages and dark theme',g6s:'Português, Español, English, 한국어 and 中文. Light, dark or automatic theme.'});
+Object.assign(L.ko,{g6:'5개 언어와 다크 테마',g6s:'포르투갈어·스페인어·영어·한국어·중국어. 밝게·어둡게·자동 테마.'});
 var cur='pt',deferred=null,showSam=false;
 var $=function(s){return document.querySelector(s);};
 var ua=navigator.userAgent||'';
@@ -339,7 +356,7 @@ var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matc
 function tr(k){return (L[cur]&&L[cur][k])||L.pt[k]||k;}
 function setLang(l){
   if(!L[l])l='pt';cur=l;
-  document.documentElement.lang={pt:'pt-BR',es:'es',en:'en',ko:'ko'}[l];
+  document.documentElement.lang={pt:'pt-BR',es:'es',en:'en',ko:'ko',zh:'zh-CN'}[l];
   document.querySelectorAll('[data-i]').forEach(function(e){var v=L[l][e.dataset.i];if(v!==undefined)e.textContent=v;});
   document.querySelectorAll('.lang').forEach(function(b){b.classList.toggle('on',b.dataset.lang===l);});
   document.title=tr('title');

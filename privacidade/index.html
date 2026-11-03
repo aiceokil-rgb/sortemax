@@ -29,7 +29,7 @@ p,li{color:var(--t2)}
 <main>
 <header>
   <a href="/" style="font-weight:800;text-decoration:none;color:var(--t1)">SorteMax Mega</a>
-  <div class="langs"><button data-l="pt">PT</button><button data-l="es">ES</button><button data-l="en">EN</button><button data-l="ko">KO</button></div>
+  <div class="langs"><button data-l="pt">PT</button><button data-l="es">ES</button><button data-l="en">EN</button><button data-l="ko">KO</button><button data-l="zh">中文</button></div>
 </header>
 
 <section lang="pt-BR" data-l="pt">
@@ -135,10 +135,36 @@ p,li{color:var(--t2)}
 <h2>9. 변경</h2>
 <p>방침이 바뀌면 이 페이지에 수정 날짜와 함께 게시합니다.</p>
 </section>
+
+<section lang="zh-CN" data-l="zh">
+<h1>隐私政策</h1>
+<p class="upd">最后更新:2026 年 10 月 31 日 · 负责人:Duriup · contato@duriup.com.br</p>
+<p>本政策适用于 SorteMax Mega App(网站 sortemax.duriup.com.br 和安卓 App “SorteMax”)。</p>
+<h2>1. 使用时不需要个人资料</h2>
+<p>SorteMax 无需注册、登录或邮箱即可使用。我们不要求姓名、电话、证件或付款信息。</p>
+<p><strong>新消息通知(可选):</strong>如果你愿意,可以在“新消息通知”栏留下邮箱。它只用来通知 SorteMax 的新版本和新消息,不会出售,也不会为广告而分享。邮箱由表单服务 Formspree 接收后转交给我们。不填写不影响使用 App。</p>
+<h2>2. 只保存在你设备上的内容</h2>
+<p>你在“我的号码”里保存的号码、语言、主题和一份结果副本,只保存在你自己的设备上,我们不会收到这些数据。你可以随时用“全部清除”或清除 App/浏览器数据来删除。</p>
+<p>数字命理选号中输入的名字和出生日期只在设备上用来计算号码,不会发送或保存。</p>
+<h2>3. 使用统计 (Google Analytics)</h2>
+<p>我们使用 Google Analytics 以汇总方式了解有多少人使用 App、哪些页面用得最多。它可能收集技术数据,例如设备和浏览器类型、语言、浏览的页面、App 内操作以及根据 IP 地址推算的大致位置。这些数据不会按姓名识别你,也不会出售。详情:<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 隐私政策</a>。</p>
+<h2>4. Mega-Sena 结果</h2>
+<p>为了显示官方结果,App 会访问 Caixa 的服务器和我们自己的网站。访问时你的设备只发送任何上网都会有的普通技术数据(例如 IP 地址)。</p>
+<h2>5. 联系和分享</h2>
+<p>“用邮件发送”按钮会打开你设备上的邮件 App;只有你决定发送,我们才会收到消息。分享按钮只通过你选择的 App 发送邀请文字。</p>
+<h2>6. 权限</h2>
+<p>App 只使用网络访问。如果你开启提醒,设备会请求显示通知的权限,随时可以关闭。</p>
+<h2>7. 年龄和理性购彩</h2>
+<p>SorteMax 是供 18 岁以上人士使用的娱乐和统计参考 App。不出售彩票,不保证中奖,与 Caixa Econômica Federal 无关。</p>
+<h2>8. 你的权利 (LGPD)</h2>
+<p>App 没有账户。如果你为通知留下了邮箱,可以随时写信到 <a href="mailto:contato@duriup.com.br">contato@duriup.com.br</a> 要求查看、更正或删除。其他隐私问题也请用这个地址联系。</p>
+<h2>9. 变更</h2>
+<p>如果本政策有变化,新版本会连同更新日期发布在本页面。</p>
+</section>
 </main>
 <script>
 (function(){var b=document.querySelectorAll('.langs button'),s=document.querySelectorAll('section');
-function set(l){s.forEach(function(x){x.classList.toggle('on',x.dataset.l===l);});b.forEach(function(x){x.classList.toggle('on',x.dataset.l===l);});document.documentElement.lang={pt:'pt-BR',es:'es',en:'en',ko:'ko'}[l];}
+function set(l){s.forEach(function(x){x.classList.toggle('on',x.dataset.l===l);});b.forEach(function(x){x.classList.toggle('on',x.dataset.l===l);});document.documentElement.lang={pt:'pt-BR',es:'es',en:'en',ko:'ko',zh:'zh-CN'}[l];}
 b.forEach(function(x){x.onclick=function(){set(x.dataset.l);};});
 var q=new URLSearchParams(location.search).get('lang'),saved=null;try{saved=localStorage.getItem('sm_lang');}catch(e){}
 set(q||saved||'pt');})();
