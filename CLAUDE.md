@@ -79,6 +79,7 @@
 - [KIL 1009] PIX 후원은 "그건 없애"(남은 글자까지 모두 지웠다).
 - [KIL 1009] 서명키와 Play 파일은 Drive `확장프로그램/SorteMax` 에 저장한다.
 - 보고는 한국어로 짧게 한다. 잘 된 것은 한 줄로, 안 된 것과 조심할 것만 번호로 적는다.
+- [KIL 1103] 두리업 사이트 앱 모음: duriup.com.br/apps/ (WordPress 페이지 id 284, 메뉴 항목 id 180 "Apps"). 옛 메뉴 "App SorteMax (grátis)" 를 이 페이지로 바꿨다. 앱마다 카드 하나, 앱 주소는 각자 서브도메인(앱이름.duriup.com.br) 그대로 두고 링크만 건다. SorteMax 주소는 옮기지 않는다(Play 연결·검색·설치한 사람·공유 링크). 새 앱은 Play 패키지 br.com.duriup.앱이름, 완성된 것만 카드 추가. 페이지 원본 사본 `_로컬/duriup-apps-page.html`. Play 정식 공개 날 SorteMax 카드 버튼을 Play 링크로 바꾼다.
 
 ## 해 보고 버린 것과 이유
 - 원본 파일명 `index.html.html` 을 `index.html` 로 바꿨다. `sw.js` 가 `/index.html` 을 캐시하기 때문이다.
