@@ -106,6 +106,17 @@ summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-cont
 summary::after{content:'+';color:var(--green);font-weight:800}
 details[open] summary::after{content:'−'}
 details p{margin-top:8px;color:var(--t2);font-size:.92rem}
+.guide{display:grid;grid-template-columns:1fr;gap:10px}
+.gcard{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;box-shadow:var(--sh)}
+.gcard b{display:block;font-family:'Outfit',sans-serif;font-size:1.05rem;margin-bottom:6px}
+.gcard ol{margin-left:20px;font-size:.9rem;color:var(--t2)}
+.gcard li{margin:4px 0}
+.ex{margin-top:14px;background:var(--card);border:2px solid var(--gold);border-radius:18px;padding:18px 16px;box-shadow:var(--sh)}
+.ex h3{font-family:'Outfit',sans-serif;font-size:1.15rem;margin-bottom:10px}
+.ex-row{display:flex;gap:12px;align-items:flex-start;margin:8px 0;font-size:.93rem}
+.ex-n{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#1a1200;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.ex-note{margin-top:10px;font-size:.84rem;color:var(--t2);border-top:1px solid var(--bd);padding-top:10px}
+.safe .feat b{margin-top:0}
 .bottom-cta{text-align:center;background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:24px 16px;box-shadow:var(--sh)}
 .bottom-cta .btn{max-width:380px;margin:14px auto 0}
 footer{padding:26px 16px calc(30px + var(--sab));text-align:center;font-size:.8rem;color:var(--t3)}
@@ -120,6 +131,7 @@ footer .ch img{width:28px;height:28px;border-radius:50%;background:#fff}
   .hero-grid{grid-template-columns:1.2fr .8fr;margin-top:40px}
   .phone{width:290px}
   .feats{grid-template-columns:repeat(3,1fr)}
+  .guide,.feats.safe{grid-template-columns:repeat(2,1fr)}
   .steps.on{grid-template-columns:repeat(3,1fr)}
   .shots figure{flex-basis:240px}
 }
@@ -142,7 +154,8 @@ footer .ch img{width:28px;height:28px;border-radius:50%;background:#fff}
         <div class="cta">
           <button class="btn btn-main" id="installBtn">📲 <span id="installTxt" data-i="install">Instalar grátis</span></button>
           <a class="btn btn-ghost" href="/" id="openBtn" data-i="open">Abrir no navegador →</a>
-          <p class="meta"><span data-i="meta">Android · iPhone · Computador</span> · <span id="ver">v2.1</span></p>
+          <a class="btn btn-ghost" href="#" id="playAlt" style="display:none" target="_blank" rel="noopener" data-i="play-alt">Android: baixar na Google Play →</a>
+          <p class="meta"><span data-i="meta">Android · iPhone · Computador</span> · <span id="ver">v2.4</span></p>
         </div>
       </div>
       <div class="phone"><img src="img/tela-1.webp" alt="SorteMax" width="540" height="1169"></div>
@@ -153,7 +166,7 @@ footer .ch img{width:28px;height:28px;border-radius:50%;background:#fff}
 <section id="instalar">
   <div class="wrap">
     <h2 data-i="how-t">Como instalar (10 segundos)</h2>
-    <p class="sub" data-i="how-s">Não precisa de loja de apps: o SorteMax é instalado direto do site, como um app normal, com ícone na tela inicial.</p>
+    <p class="sub" id="howS" data-i="how-s">Não precisa de loja de apps: o SorteMax é instalado direto do site, como um app normal, com ícone na tela inicial.</p>
     <div class="steps-tabs" role="tablist">
       <button class="st-tab" data-os="android">Android</button>
       <button class="st-tab" data-os="ios">iPhone</button>
@@ -163,6 +176,11 @@ footer .ch img{width:28px;height:28px;border-radius:50%;background:#fff}
       <div class="step"><div class="num">1</div><div><b data-i="a1">Abra no Chrome</b><span data-i="a1s">Acesse sortemax.duriup.com.br pelo Google Chrome.</span></div></div>
       <div class="step"><div class="num">2</div><div><b data-i="a2">Toque em “Instalar grátis”</b><span data-i="a2s">Ou no menu ⋮ do Chrome, toque em “Instalar app” / “Adicionar à tela inicial”.</span></div></div>
       <div class="step"><div class="num">3</div><div><b data-i="a3">Pronto!</b><span data-i="a3s">O ícone do SorteMax aparece na tela inicial. Abra como qualquer app.</span></div></div>
+    </div>
+    <div class="steps" data-os="aplay">
+      <div class="step"><div class="num">1</div><div><b data-i="pl1">Toque em “Baixar na Google Play”</b><span data-i="pl1s">Abre a página oficial do SorteMax na Google Play.</span></div></div>
+      <div class="step"><div class="num">2</div><div><b data-i="pl2">Toque em “Instalar”</b><span data-i="pl2s">O download é pequeno e grátis.</span></div></div>
+      <div class="step"><div class="num">3</div><div><b data-i="pl3">Pronto!</b><span data-i="pl3s">Abra o SorteMax pela tela inicial, como qualquer app.</span></div></div>
     </div>
     <div class="steps" data-os="ios">
       <div class="step"><div class="num">1</div><div><b data-i="i1">Abra no Safari</b><span data-i="i1s">Acesse sortemax.duriup.com.br pelo Safari.</span></div></div>
@@ -214,15 +232,50 @@ footer .ch img{width:28px;height:28px;border-radius:50%;background:#fff}
   </div>
 </section>
 
+<section style="padding-top:6px" id="guia">
+  <div class="wrap">
+    <h2 data-i="guide-t">Passo a passo</h2>
+    <p class="sub" data-i="guide-s">Como usar cada parte do app, em poucos toques.</p>
+    <div class="guide">
+      <div class="gcard"><b data-i="gA">📊 Ver o resultado</b><ol><li data-i="gA1"></li><li data-i="gA2"></li><li data-i="gA3"></li></ol></div>
+      <div class="gcard"><b data-i="gB">🎲 Gerar jogos</b><ol><li data-i="gB1"></li><li data-i="gB2"></li><li data-i="gB3"></li></ol></div>
+      <div class="gcard"><b data-i="gC">🧮 Montar um fechamento</b><ol><li data-i="gC1"></li><li data-i="gC2"></li><li data-i="gC3"></li></ol></div>
+      <div class="gcard"><b data-i="gD">🎯 Conferir seus jogos</b><ol><li data-i="gD1"></li><li data-i="gD2"></li><li data-i="gD3"></li></ol></div>
+    </div>
+    <div class="ex">
+      <h3 data-i="ex-t">Exemplo de fechamento</h3>
+      <div class="ex-row"><span class="ex-n">1</span><span data-i="ex-1"></span></div>
+      <div class="ex-row"><span class="ex-n">2</span><span data-i="ex-2"></span></div>
+      <div class="ex-row"><span class="ex-n">3</span><span data-i="ex-3"></span></div>
+      <p class="ex-note" data-i="ex-note"></p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:6px">
+  <div class="wrap">
+    <h2 data-i="safe-t">Seguro e simples</h2>
+    <p class="sub" data-i="safe-s">Feito para usar sem complicação.</p>
+    <div class="feats safe">
+      <div class="feat"><b data-i="s1">🔒 Sem cadastro</b><span data-i="s1s"></span></div>
+      <div class="feat"><b data-i="s2">📱 Seus jogos no seu celular</b><span data-i="s2s"></span></div>
+      <div class="feat"><b data-i="s3">🚫 Nada de acessos</b><span data-i="s3s"></span></div>
+      <div class="feat"><b data-i="s4">⚖️ Honesto</b><span data-i="s4s"></span></div>
+    </div>
+  </div>
+</section>
+
 <section style="padding-top:6px">
   <div class="wrap">
     <h2 data-i="faq-t">Perguntas frequentes</h2>
     <details><summary data-i="q1">É grátis mesmo?</summary><p data-i="r1">Sim. O SorteMax é 100% gratuito, sem cadastro, sem login e sem e-mail.</p></details>
-    <details><summary data-i="q2">Por que não está na Play Store?</summary><p data-i="r2">O SorteMax é um app web instalável (PWA). Ele é instalado direto do site oficial, ocupa menos de 1 MB e não pede nenhuma permissão do celular.</p></details>
+    <details><summary id="q2" data-i="q2">Tem na Google Play?</summary><p id="r2" data-i="r2"></p></details>
     <details><summary data-i="q3">Os resultados são oficiais?</summary><p data-i="r3">Sim. Os resultados vêm da Caixa e são atualizados automaticamente após cada sorteio. Se não for possível atualizar (por exemplo, sem internet), o app avisa.</p></details>
     <details><summary data-i="q4">O app aumenta minhas chances?</summary><p data-i="r4">Não existe método que garanta prêmio: todos os números têm a mesma chance. O SorteMax ajuda a organizar e conferir seus jogos, e os fechamentos cobrem a faixa mínima apenas se as 6 dezenas sorteadas estiverem entre as escolhidas.</p></details>
     <details><summary data-i="q5">Funciona sem internet?</summary><p data-i="r5">Sim, com os últimos dados salvos. Para ver um resultado novo é preciso conexão.</p></details>
-    <details><summary data-i="q7">Apareceu “Não é possível instalar” ou “App não seguro bloqueado”?</summary><p data-i="r7">Isso acontece em alguns celulares com o navegador Samsung Internet. Abra sortemax.duriup.com.br no Google Chrome e toque em “Instalar”, ou no Samsung Internet use o menu ≡ → “Adicionar página a” → “Tela inicial”.</p></details>
+    <details><summary data-i="q8">Serve para a Mega da Virada?</summary><p data-i="r8"></p></details>
+    <details><summary data-i="q9">Onde ficam meus jogos salvos?</summary><p data-i="r9"></p></details>
+    <details id="q7box"><summary data-i="q7">Apareceu “Não é possível instalar” ou “App não seguro bloqueado”?</summary><p data-i="r7">Isso acontece em alguns celulares com o navegador Samsung Internet. Abra sortemax.duriup.com.br no Google Chrome e toque em “Instalar”, ou no Samsung Internet use o menu ≡ → “Adicionar página a” → “Tela inicial”.</p></details>
     <details><summary data-i="q6">Tem vínculo com a Caixa?</summary><p data-i="r6">Não. O SorteMax é independente e não tem vínculo com a Caixa Econômica Federal. As apostas são feitas apenas nas lotéricas ou nos canais oficiais da Caixa. Proibido para menores de 18 anos.</p></details>
   </div>
 </section>
@@ -231,8 +284,8 @@ footer .ch img{width:28px;height:28px;border-radius:50%;background:#fff}
   <div class="wrap">
     <div class="bottom-cta">
       <h2 data-i="end-t">Pronto para começar?</h2>
-      <p class="sub" style="margin:0" data-i="end-s">Instale agora — é grátis e leva 10 segundos.</p>
-      <button class="btn btn-main" id="installBtn2">📲 <span data-i="install">Instalar grátis</span></button>
+      <p class="sub" style="margin:0" id="endS" data-i="end-s">Instale agora — é grátis e leva 10 segundos.</p>
+      <button class="btn btn-main" id="installBtn2">📲 <span class="instTxt" data-i="install">Instalar grátis</span></button>
     </div>
   </div>
 </section>
@@ -341,6 +394,72 @@ Object.assign(L.pt,{g6:'5 idiomas e tema escuro',g6s:'Português, Español, Engl
 Object.assign(L.es,{g6:'5 idiomas y tema oscuro',g6s:'Português, Español, English, 한국어 y 中文. Tema claro, oscuro o automático.'});
 Object.assign(L.en,{g6:'5 languages and dark theme',g6s:'Português, Español, English, 한국어 and 中文. Light, dark or automatic theme.'});
 Object.assign(L.ko,{g6:'5개 언어와 다크 테마',g6s:'포르투갈어·스페인어·영어·한국어·중국어. 밝게·어둡게·자동 테마.'});
+// [KIL 1103] 설명 보완(단계별 사용법·조합 예시·안전·FAQ) + Play 공개 스위치 문구. 조합 예시는 앱의 실제 10-4 조합표(3게임) 기준
+Object.assign(L.pt,{'guide-t':'Passo a passo','guide-s':'Como usar cada parte do app, em poucos toques.',
+gA:'📊 Ver o resultado',gA1:'Abra o app: o último concurso aparece logo no início, com as 6 dezenas e os ganhadores.',gA2:'Toque no resultado para ver os prêmios de cada faixa (Sena, Quina e Quadra).',gA3:'Na aba Resultados, procure qualquer concurso pelo número.',
+gB:'🎲 Gerar jogos',gB1:'Na aba Gerador, escolha Surpresinha, Gerador Inteligente (filtros) ou Gerador da Sorte (nome e data).',gB2:'Escolha quantos jogos quer e toque em “Gerar Jogos”.',gB3:'Veja o custo total, copie ou salve com 💾 para conferir depois.',
+gC:'🧮 Montar um fechamento',gC1:'Na aba Fechamento, escolha um plano (por exemplo, 10 números → Quadra).',gC2:'Marque as suas dezenas ou toque em “Aleatório”.',gC3:'Toque em “Processar Fechamento”: o app monta os jogos e mostra o custo exato.',
+gD:'🎯 Conferir seus jogos',gD1:'Na aba Simulador, marque 6 dezenas e confira com qualquer concurso.',gD2:'Veja também quantas vezes esse jogo teria sido premiado em toda a história.',gD3:'Em Meus Jogos, salve o que você apostou: o app confere sozinho quando sai o resultado.',
+'ex-t':'Exemplo de fechamento','ex-1':'Você escolhe 10 dezenas e o plano “10 números → Quadra”.','ex-2':'O app monta só 3 jogos: R$ 18,00 no total (R$ 6,00 cada, valor da Caixa).','ex-3':'Se as 6 dezenas sorteadas estiverem entre as suas 10, pelo menos 1 desses 3 jogos acerta a Quadra (4 números). Isso é cálculo matemático, não promessa de prêmio.','ex-note':'A condição é difícil: a chance de as 6 sorteadas estarem entre 10 dezenas é de 1 em 238.399. O fechamento não muda a chance de cada número sair — ele organiza seus jogos para você gastar menos.',
+'safe-t':'Seguro e simples','safe-s':'Feito para usar sem complicação.',s1:'🔒 Sem cadastro',s1s:'Não pede nome, e-mail nem senha para usar.',s2:'📱 Seus jogos no seu celular',s2s:'Os jogos salvos ficam só no aparelho. Nada é enviado para nós.',s3:'🚫 Nada de acessos',s3s:'Não acessa contatos, fotos, câmera nem localização.',s4:'⚖️ Honesto',s4s:'Não promete prêmio. Mostra as chances reais e o custo de cada aposta.',
+q2:'Tem na Google Play?',r2:'Em breve o SorteMax estará na Google Play para Android. Enquanto isso, instale direto do site: é o mesmo app, ocupa menos de 1 MB e não pede nenhuma permissão do celular.',
+q2L:'Tem na Google Play?',r2L:'Sim. No Android, baixe pela Google Play. No iPhone e no computador, instale direto do site: é o mesmo app, com as mesmas funções.',
+q8:'Serve para a Mega da Virada?',r8:'Sim. A Mega da Virada é um concurso da Mega-Sena com as mesmas regras (6 dezenas de 1 a 60). Você pode gerar jogos e montar fechamentos para ela, e o resultado aparece no app depois do sorteio de 31 de dezembro.',
+q9:'Onde ficam meus jogos salvos?',r9:'Só no seu celular. O SorteMax não tem conta nem servidor de jogos. Se você apagar os dados do app ou trocar de celular, os jogos salvos não vão junto.',
+'play-btn':'Baixar na Google Play','play-alt':'Android: baixar na Google Play →','how-s-play':'No Android, baixe pela Google Play. No iPhone e no computador, instale direto do site — é o mesmo app.','end-s-play':'É grátis: Google Play no Android, direto do site no iPhone e no computador.',
+pl1:'Toque em “Baixar na Google Play”',pl1s:'Abre a página oficial do SorteMax na Google Play.',pl2:'Toque em “Instalar”',pl2s:'O download é pequeno e grátis.',pl3:'Pronto!',pl3s:'Abra o SorteMax pela tela inicial, como qualquer app.'});
+Object.assign(L.es,{'guide-t':'Paso a paso','guide-s':'Cómo usar cada parte de la app, en pocos toques.',
+gA:'📊 Ver el resultado',gA1:'Abre la app: el último concurso aparece al inicio, con las 6 dezenas y los ganadores.',gA2:'Toca el resultado para ver los premios de cada categoría (Sena, Quina y Quadra).',gA3:'En la pestaña Resultados, busca cualquier concurso por su número.',
+gB:'🎲 Generar juegos',gB1:'En la pestaña Generador, elige Sorpresa, Generador Inteligente (filtros) o Generador de la Suerte (nombre y fecha).',gB2:'Elige cuántos juegos quieres y toca “Generar Juegos”.',gB3:'Mira el costo total, copia o guarda con 💾 para verificar después.',
+gC:'🧮 Armar una combinación',gC1:'En la pestaña Combinar, elige un plan (por ejemplo, 10 números → Quadra).',gC2:'Marca tus dezenas o toca “Aleatorio”.',gC3:'Toca “Procesar Combinación”: la app arma los juegos y muestra el costo exacto.',
+gD:'🎯 Verificar tus juegos',gD1:'En la pestaña Simulador, marca 6 dezenas y compáralas con cualquier concurso.',gD2:'Mira también cuántas veces ese juego habría ganado en toda la historia.',gD3:'En Mis Juegos, guarda lo que apostaste: la app lo verifica sola cuando sale el resultado.',
+'ex-t':'Ejemplo de combinación','ex-1':'Eliges 10 dezenas y el plan “10 números → Quadra”.','ex-2':'La app arma solo 3 juegos: R$ 18,00 en total (R$ 6,00 cada uno, valor de la Caixa).','ex-3':'Si las 6 dezenas sorteadas están entre tus 10, al menos 1 de esos 3 juegos acierta la Quadra (4 números). Es cálculo matemático, no una promesa de premio.','ex-note':'La condición es difícil: la probabilidad de que las 6 sorteadas estén entre 10 dezenas es de 1 en 238.399. La combinación no cambia la probabilidad de cada número — organiza tus juegos para que gastes menos.',
+'safe-t':'Seguro y simple','safe-s':'Hecho para usar sin complicaciones.',s1:'🔒 Sin registro',s1s:'No pide nombre, e-mail ni contraseña para usarla.',s2:'📱 Tus juegos en tu celular',s2s:'Los juegos guardados quedan solo en el dispositivo. Nada se nos envía.',s3:'🚫 Sin accesos',s3s:'No accede a contactos, fotos, cámara ni ubicación.',s4:'⚖️ Honesta',s4s:'No promete premios. Muestra las probabilidades reales y el costo de cada apuesta.',
+q2:'¿Está en Google Play?',r2:'Pronto SorteMax estará en Google Play para Android. Mientras tanto, instálala directo desde el sitio: es la misma app, ocupa menos de 1 MB y no pide ningún permiso del celular.',
+q2L:'¿Está en Google Play?',r2L:'Sí. En Android, descárgala desde Google Play. En iPhone y en la computadora, instálala directo desde el sitio: es la misma app, con las mismas funciones.',
+q8:'¿Sirve para la Mega da Virada?',r8:'Sí. La Mega da Virada es un concurso de la Mega-Sena con las mismas reglas (6 dezenas del 1 al 60). Puedes generar juegos y armar combinaciones para ella, y el resultado aparece en la app después del sorteo del 31 de diciembre.',
+q9:'¿Dónde quedan mis juegos guardados?',r9:'Solo en tu celular. SorteMax no tiene cuenta ni servidor de juegos. Si borras los datos de la app o cambias de celular, los juegos guardados no se van contigo.',
+'play-btn':'Descargar en Google Play','play-alt':'Android: descargar en Google Play →','how-s-play':'En Android, descárgala desde Google Play. En iPhone y en la computadora, instálala directo desde el sitio — es la misma app.','end-s-play':'Es gratis: Google Play en Android, directo desde el sitio en iPhone y computadora.',
+pl1:'Toca “Descargar en Google Play”',pl1s:'Abre la página oficial de SorteMax en Google Play.',pl2:'Toca “Instalar”',pl2s:'La descarga es pequeña y gratis.',pl3:'¡Listo!',pl3s:'Abre SorteMax desde la pantalla de inicio, como cualquier app.'});
+Object.assign(L.en,{'guide-t':'Step by step','guide-s':'How to use each part of the app, in a few taps.',
+gA:'📊 See the result',gA1:'Open the app: the latest draw shows right at the start, with the 6 numbers and the winners.',gA2:'Tap the result to see the prize for each tier (Sena, Quina and Quadra).',gA3:'In the Results tab, look up any draw by its number.',
+gB:'🎲 Generate games',gB1:'In the Generator tab, choose Quick Pick, Smart Generator (filters) or Lucky Generator (name and date).',gB2:'Choose how many games you want and tap “Generate Games”.',gB3:'See the total cost, copy, or save with 💾 to check later.',
+gC:'🧮 Build a wheel',gC1:'In the Wheeling tab, pick a plan (for example, 10 numbers → Quadra).',gC2:'Mark your numbers or tap “Random”.',gC3:'Tap “Process Wheel”: the app builds the games and shows the exact cost.',
+gD:'🎯 Check your games',gD1:'In the Simulator tab, mark 6 numbers and check them against any draw.',gD2:'See how many times that game would have won in the whole history.',gD3:'In My Games, save what you bet: the app checks it by itself when the result comes out.',
+'ex-t':'Wheel example','ex-1':'You pick 10 numbers and the plan “10 numbers → Quadra”.','ex-2':'The app builds only 3 games: R$ 18.00 in total (R$ 6.00 each, Caixa’s price).','ex-3':'If the 6 drawn numbers are among your 10, at least 1 of those 3 games hits the Quadra (4 numbers). This is math, not a promise of a prize.','ex-note':'The condition is hard: the chance that all 6 drawn numbers are among 10 is 1 in 238,399. A wheel does not change the chance of any number — it organizes your games so you spend less.',
+'safe-t':'Safe and simple','safe-s':'Made to use without hassle.',s1:'🔒 No sign-up',s1s:'No name, e-mail or password needed.',s2:'📱 Your games on your phone',s2s:'Saved games stay only on the device. Nothing is sent to us.',s3:'🚫 No access',s3s:'Does not access contacts, photos, camera or location.',s4:'⚖️ Honest',s4s:'No prize promises. It shows the real odds and the cost of each bet.',
+q2:'Is it on Google Play?',r2:'SorteMax is coming soon to Google Play for Android. Meanwhile, install it straight from the site: it is the same app, takes less than 1 MB and asks for no phone permissions.',
+q2L:'Is it on Google Play?',r2L:'Yes. On Android, get it from Google Play. On iPhone and computer, install it straight from the site: same app, same features.',
+q8:'Does it work for the Mega da Virada?',r8:'Yes. The Mega da Virada is a Mega-Sena draw with the same rules (6 numbers from 1 to 60). You can generate games and build wheels for it, and the result shows in the app after the December 31 draw.',
+q9:'Where are my saved games kept?',r9:'Only on your phone. SorteMax has no account and no game server. If you clear the app data or change phones, saved games do not come along.',
+'play-btn':'Get it on Google Play','play-alt':'Android: get it on Google Play →','how-s-play':'On Android, get it from Google Play. On iPhone and computer, install it straight from the site — it is the same app.','end-s-play':'It is free: Google Play on Android, straight from the site on iPhone and computer.',
+pl1:'Tap “Get it on Google Play”',pl1s:'It opens the official SorteMax page on Google Play.',pl2:'Tap “Install”',pl2s:'The download is small and free.',pl3:'Done!',pl3s:'Open SorteMax from your home screen, like any app.'});
+Object.assign(L.ko,{'guide-t':'단계별 사용법','guide-s':'앱의 각 기능을 몇 번만 눌러 쓰는 방법이에요.',
+gA:'📊 결과 보기',gA1:'앱을 열면 최근 회차가 맨 처음에 나와요. 6개 번호와 당첨자 수까지요.',gA2:'결과를 누르면 등수별(Sena·Quina·Quadra) 당첨금이 나와요.',gA3:'결과 탭에서 회차 번호로 어떤 회차든 찾을 수 있어요.',
+gB:'🎲 번호 만들기',gB1:'생성 탭에서 자동 번호, 스마트 생성(필터), 행운 생성(이름·생일) 중 하나를 고르세요.',gB2:'게임 수를 고르고 “번호 생성”을 누르세요.',gB3:'전체 비용을 보고, 복사하거나 💾 로 저장해 나중에 맞춰 보세요.',
+gC:'🧮 조합 만들기',gC1:'조합 탭에서 플랜을 고르세요(예: 10개 번호 → Quadra).',gC2:'번호를 직접 고르거나 “무작위”를 누르세요.',gC3:'“조합 처리”를 누르면 게임을 짜고 정확한 비용을 보여 줘요.',
+gD:'🎯 내 번호 확인',gD1:'시뮬 탭에서 6개 번호를 고르고 원하는 회차와 맞춰 보세요.',gD2:'그 번호가 역대 전체에서 몇 번 당첨됐을지도 보여 줘요.',gD3:'내 번호에 산 번호를 저장하면, 결과가 나올 때 앱이 알아서 맞춰 봐요.',
+'ex-t':'조합 예시','ex-1':'번호 10개를 고르고 “10개 번호 → Quadra” 플랜을 골라요.','ex-2':'앱은 3게임만 짜요. 모두 R$ 18,00 (한 게임 R$ 6,00, Caixa 가격).','ex-3':'추첨된 6개가 고른 10개 안에 모두 있으면, 3게임 중 적어도 1게임은 Quadra(4개)를 맞춰요. 수학 계산이지, 당첨 약속이 아니에요.','ex-note':'이 조건은 어려워요. 추첨 6개가 10개 안에 모두 들어갈 확률은 238,399분의 1이에요. 조합은 번호가 나올 확률을 바꾸지 않아요 — 돈을 덜 쓰게 게임을 정리해 줄 뿐이에요.',
+'safe-t':'안전하고 간단해요','safe-s':'복잡한 것 없이 쓰도록 만들었어요.',s1:'🔒 가입 없음',s1s:'이름·이메일·비밀번호를 묻지 않아요.',s2:'📱 내 번호는 내 휴대폰에',s2s:'저장한 번호는 기기에만 남고, 저희에게 보내지 않아요.',s3:'🚫 접근 없음',s3s:'연락처·사진·카메라·위치에 접근하지 않아요.',s4:'⚖️ 정직해요',s4s:'당첨을 약속하지 않아요. 실제 확률과 게임마다 비용을 보여 줘요.',
+q2:'Google Play 에 있나요?',r2:'곧 안드로이드용 Google Play 에 나와요. 그동안은 사이트에서 바로 설치하세요. 같은 앱이고, 1MB 미만이며 휴대폰 권한을 요구하지 않아요.',
+q2L:'Google Play 에 있나요?',r2L:'네. 안드로이드는 Google Play 에서 받으세요. 아이폰과 컴퓨터는 사이트에서 바로 설치하세요. 같은 앱, 같은 기능이에요.',
+q8:'Mega da Virada 에도 쓸 수 있나요?',r8:'네. Mega da Virada 는 규칙이 같은(1~60 중 6개) 메가세나 회차예요. 번호 생성과 조합 모두 쓸 수 있고, 12월 31일 추첨 뒤 결과가 앱에 나와요.',
+q9:'저장한 번호는 어디에 있나요?',r9:'내 휴대폰에만 있어요. SorteMax 는 계정도, 번호 서버도 없어요. 앱 데이터를 지우거나 휴대폰을 바꾸면 저장한 번호는 따라가지 않아요.',
+'play-btn':'Google Play 에서 받기','play-alt':'안드로이드: Google Play 에서 받기 →','how-s-play':'안드로이드는 Google Play 에서 받으세요. 아이폰과 컴퓨터는 사이트에서 바로 설치해요 — 같은 앱이에요.','end-s-play':'무료예요. 안드로이드는 Google Play, 아이폰·컴퓨터는 사이트에서 바로.',
+pl1:'“Google Play 에서 받기” 누르기',pl1s:'Google Play 의 SorteMax 공식 페이지가 열려요.',pl2:'“설치” 누르기',pl2s:'작고 무료예요.',pl3:'끝!',pl3s:'홈 화면에서 SorteMax 를 여세요. 일반 앱과 같아요.'});
+Object.assign(L.zh,{'guide-t':'一步一步','guide-s':'几下就会用 App 的每个功能。',
+gA:'📊 看开奖结果',gA1:'打开 App,最近一期马上出现,有 6 个号码和中奖人数。',gA2:'点结果,可以看各奖级 (Sena、Quina、Quadra) 的奖金。',gA3:'在“结果”页,输入期号就能查任何一期。',
+gB:'🎲 生成号码',gB1:'在“选号”页,选机选、智能选号(筛选)或幸运选号(名字和日期)。',gB2:'选好注数,点“生成号码”。',gB3:'看总费用,复制,或点 💾 保存,之后再核对。',
+gC:'🧮 做组合',gC1:'在“组合”页选一个方案(例如 10 个号码 → Quadra)。',gC2:'选你的号码,或点“随机”。',gC3:'点“处理组合”:App 排好号码,显示准确费用。',
+gD:'🎯 核对号码',gD1:'在“模拟”页选 6 个号码,和任意一期核对。',gD2:'还能看到这组号码在全部历史里会中几次。',gD3:'在“我的号码”保存你买的号码:开奖后 App 自动核对。',
+'ex-t':'组合例子','ex-1':'你选 10 个号码,用“10 个号码 → Quadra”方案。','ex-2':'App 只排 3 注:一共 R$ 18,00 (每注 R$ 6,00,Caixa 价格)。','ex-3':'如果开出的 6 个号码都在你的 10 个号码里,这 3 注里至少有 1 注中 Quadra (4 个号码)。这是数学计算,不是中奖承诺。','ex-note':'这个条件不容易:开出的 6 个号码全在 10 个号码里的机会是 238,399 分之 1。组合不会改变每个号码开出的机会,只是帮你整理号码、少花钱。',
+'safe-t':'安全又简单','safe-s':'用起来不麻烦。',s1:'🔒 无需注册',s1s:'不要名字、邮箱或密码。',s2:'📱 号码只在你手机里',s2s:'保存的号码只留在设备上,不会发给我们。',s3:'🚫 不读取隐私',s3s:'不读取通讯录、照片、相机或位置。',s4:'⚖️ 说实话',s4s:'不承诺中奖。显示真实的机会和每注的费用。',
+q2:'Google Play 上有吗?',r2:'SorteMax 很快会上架安卓的 Google Play。在那之前,直接从网站安装:是同一个 App,不到 1 MB,不需要手机权限。',
+q2L:'Google Play 上有吗?',r2L:'有。安卓手机请从 Google Play 下载。iPhone 和电脑直接从网站安装:同一个 App,功能一样。',
+q8:'Mega da Virada 也能用吗?',r8:'能。Mega da Virada 是规则一样的 Mega-Sena 期数 (1 到 60 选 6 个)。可以为它生成号码、做组合,12 月 31 日开奖后结果会出现在 App 里。',
+q9:'保存的号码在哪里?',r9:'只在你的手机里。SorteMax 没有账号,也没有号码服务器。如果清除 App 数据或换手机,保存的号码不会跟着走。',
+'play-btn':'在 Google Play 下载','play-alt':'安卓:在 Google Play 下载 →','how-s-play':'安卓手机请从 Google Play 下载。iPhone 和电脑直接从网站安装 — 是同一个 App。','end-s-play':'完全免费:安卓用 Google Play,iPhone 和电脑直接从网站安装。',
+pl1:'点“在 Google Play 下载”',pl1s:'会打开 Google Play 上 SorteMax 的官方页面。',pl2:'点“安装”',pl2s:'下载很小,免费。',pl3:'完成!',pl3s:'从主屏幕打开 SorteMax,和其他 App 一样。'});
 var cur='pt',deferred=null,showSam=false;
 var $=function(s){return document.querySelector(s);};
 var ua=navigator.userAgent||'';
@@ -352,6 +471,10 @@ var canInstallHere=isAndroid&&/Chrome\/\d/.test(ua)&&!/SamsungBrowser|OPR|MiuiBr
 var needsChrome=isAndroid&&!canInstallHere;
 var qs=new URLSearchParams(location.search);
 var CHROME_INTENT='intent://sortemax.duriup.com.br/baixar/?auto=1#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent('https://sortemax.duriup.com.br/baixar/?semchrome=1')+';end';
+// [KIL 1103] Play 정식 공개 날 PLAY_LIVE 를 true 로 바꾸면 안드로이드는 웹 설치 대신 Google Play 로 보낸다(아이폰·컴퓨터는 웹 설치 그대로). ?play=1 로 미리 보기.
+var PLAY_LIVE=false,PLAY_URL='https://play.google.com/store/apps/details?id=br.com.duriup.sortemax&referrer=utm_source%3Dsite%26utm_medium%3Dbaixar';
+var playMode=PLAY_LIVE||qs.get('play')==='1',playAndroid=playMode&&isAndroid;
+if(playMode){$('#q2').dataset.i='q2L';$('#r2').dataset.i='r2L';$('#howS').dataset.i='how-s-play';$('#endS').dataset.i='end-s-play';$('#q7box').style.display='none';if(!isAndroid){var pa=$('#playAlt');pa.href=PLAY_URL;pa.style.display='flex';pa.onclick=function(){ga('play_click',{from:'baixar_alt'});};}}
 var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
 function tr(k){return (L[cur]&&L[cur][k])||L.pt[k]||k;}
 function setLang(l){
@@ -366,13 +489,14 @@ function setLang(l){
 function toast(m){var x=$('#toast');x.textContent=m;x.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){x.classList.remove('on');},3200);}
 function showOS(os){
   document.querySelectorAll('.st-tab').forEach(function(b){b.classList.toggle('on',b.dataset.os===os);});
-  document.querySelectorAll('.steps').forEach(function(s){s.classList.toggle('on',s.dataset.os===os);});
+  var so=os==='android'&&playMode?'aplay':os;
+  document.querySelectorAll('.steps').forEach(function(s){s.classList.toggle('on',s.dataset.os===so);});
   $('#qrBox').style.display=os==='pc'?'flex':'none';
-  $('#samBox').classList.toggle('on',os==='android'&&(isSamsung||showSam));
+  $('#samBox').classList.toggle('on',!playMode&&os==='android'&&(isSamsung||showSam));
 }
 function updBtn(){
-  var t=standalone?tr('installed'):tr('install');
-  document.querySelectorAll('#installTxt').forEach(function(e){e.textContent=t;});
+  var t=standalone?tr('installed'):playAndroid?tr('play-btn'):tr('install');
+  document.querySelectorAll('#installTxt,.instTxt').forEach(function(e){e.textContent=t;});
 }
 function ga(n,p){if(typeof gtag==='function')gtag('event',n,p||{});}
 function openOv(id){document.getElementById(id).classList.add('on');}
@@ -387,6 +511,7 @@ function androidOverlay(){
 }
 function install(){
   if(standalone){location.href='/';return;}
+  if(playAndroid){ga('play_click',{from:'baixar'});location.href=PLAY_URL;return;}
   // 크롬이 아닌 안드로이드 브라우저: 버튼 한 번으로 크롬을 열어 설치 화면으로
   if(needsChrome){ga('install_open_chrome',{ua:isSamsung?'samsung':'other'});location.href=CHROME_INTENT;return;}
   if(isIOS){openOv('ovIOS');ga('install_ios_guide');return;}
@@ -412,8 +537,8 @@ setLang(saved||(L[nav]?nav:'pt'));
 showOS(isIOS?'ios':isAndroid?'android':'pc');
 if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(function(){});
 // 크롬으로 넘어온 경우 바로 설치 안내, 크롬이 없어 돌아온 경우 홈 화면 추가 안내
-if(!standalone&&qs.get('auto')==='1'&&canInstallHere)androidOverlay();
-if(qs.get('semchrome')==='1'){showSam=true;showOS('android');setTimeout(function(){$('#samBox').scrollIntoView({behavior:'smooth',block:'center'});toast(tr('nochrome'));},300);}
+if(!standalone&&!playAndroid&&qs.get('auto')==='1'&&canInstallHere)androidOverlay();
+if(!playAndroid&&qs.get('semchrome')==='1'){showSam=true;showOS('android');setTimeout(function(){$('#samBox').scrollIntoView({behavior:'smooth',block:'center'});toast(tr('nochrome'));},300);}
 if(qs.get('ios')==='1'&&isIOS&&!standalone)openOv('ovIOS');
 </script>
 </body>
