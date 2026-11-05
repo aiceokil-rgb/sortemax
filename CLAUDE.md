@@ -83,6 +83,8 @@
 - 보고는 한국어로 짧게 한다. 잘 된 것은 한 줄로, 안 된 것과 조심할 것만 번호로 적는다.
 - [KIL 1103] 두리업 사이트 앱 모음: duriup.com.br/apps/ (WordPress 페이지 id 284, 메뉴 항목 id 180 "Apps"). 옛 메뉴 "App SorteMax (grátis)" 를 이 페이지로 바꿨다. 앱마다 카드 하나, 앱 주소는 각자 서브도메인(앱이름.duriup.com.br) 그대로 두고 링크만 건다. SorteMax 주소는 옮기지 않는다(Play 연결·검색·설치한 사람·공유 링크). 새 앱은 Play 패키지 br.com.duriup.앱이름, 완성된 것만 카드 추가. 페이지 원본 사본 `_로컬/duriup-apps-page.html`. Play 정식 공개 날 SorteMax 카드 버튼을 Play 링크로 바꾼다.
 
+- [KIL 1105] 홍보 영상 첫 묶음 8편(숏츠 P01~P06, 롱폼 L01·L02)을 @Duriup 에 올린다. 기획표·완성본은 `_로컬/홍보영상/`, 작업 도구(녹화 cast.js·음성 voice.py·렌더 render.py)는 `D:\ZZ-Local\작업\SorteMax-홍보\`. 끝 화면 A(사이트 주소)는 시험용, 올리는 것은 B(Google Play)판만 정식 공개 뒤. P01 시험본 KIL ok 뒤 나머지를 만든다.
+
 ## 해 보고 버린 것과 이유
 - 원본 파일명 `index.html.html` 을 `index.html` 로 바꿨다. `sw.js` 가 `/index.html` 을 캐시하기 때문이다.
 - 시작할 때마다 등록 정보를 지우던 테스트 줄을 삭제했다. 남겨 두면 이메일 화면이 매번 떴다.
