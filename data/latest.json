@@ -32,6 +32,6 @@
   "data": "15/11/2026",
   "estimativa": 27000000
  },
- "fonte": "caixa",
+ "fonte": "heroku",
  "verificadoEm": "2026-11-13T06:59:29.458Z"
 }
