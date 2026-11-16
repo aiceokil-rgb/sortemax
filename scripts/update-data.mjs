@@ -1,6 +1,7 @@
 // Mega-Sena 결과를 받아 data/megasena.json, data/latest.json 을 최신으로 맞춤.
 // 실행: node scripts/update-data.mjs  (GitHub Actions 에서 자동 실행)
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { loadDet, saveDet, fill } from './details.mjs';
 
 const HIST = 'data/megasena.json';
 const LATEST = 'data/latest.json';
@@ -119,6 +120,17 @@ async function main() {
   const same = prev && JSON.stringify({ ...prev, verificadoEm: 0, fonte: 0 }) === JSON.stringify({ ...latest, verificadoEm: 0, fonte: 0 });
   latest.verificadoEm = same ? prev.verificadoEm : now;
   await writeFile(LATEST, JSON.stringify(latest, null, 1) + '\n');
+  // 회차별 상세(결과 페이지용): 최신 회차는 항상, 빠진 회차는 한 번에 40개까지
+  try {
+    const det = await loadDet();
+    const cur = det[latest.concurso];
+    const fresh = { d: latest.data, a: !!latest.acumulado, r: (latest.rateio || []).slice(0, 3).map(p => [p.ganhadores, p.premio]) };
+    if (cur && cur.o) fresh.o = cur.o;
+    det[latest.concurso] = fresh;
+    const n = await fill(det, sorted, 40);
+    await saveDet(det);
+    console.log(`detalhes: ${Object.keys(det).length} (+${n})`);
+  } catch (e) { console.log('detalhes falhou:', e.message); }
   console.log(`ok: ${count} concursos, +${added} novos, faltando ${missing.length}`);
   if (missing.length) console.log('faltando:', missing.slice(0, 50).join(','));
 }

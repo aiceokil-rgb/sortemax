@@ -1,4 +1,4 @@
-const CACHE = 'sortemax-v19';
+const CACHE = 'sortemax-v20';
 const ASSETS = [
   '/',
   '/index.html',
@@ -51,11 +51,15 @@ self.addEventListener('fetch', function(e) {
   if (e.request.mode === 'navigate' || e.request.destination === 'document') {
     e.respondWith(
       fetch(e.request).then(function(res) {
-        var clone = res.clone();
-        caches.open(CACHE).then(function(c) { c.put('/index.html', clone); });
+        // 앱 첫 화면만 저장본으로 둔다(결과·안내 페이지가 앱 자리를 덮지 않게)
+        var p = new URL(url).pathname;
+        if (res && res.ok && (p === '/' || p === '/index.html')) {
+          var clone = res.clone();
+          caches.open(CACHE).then(function(c) { c.put('/index.html', clone); });
+        }
         return res;
       }).catch(function() {
-        return caches.match('/index.html');
+        return caches.match(e.request).then(function(r) { return r || caches.match('/index.html'); });
       })
     );
     return;

@@ -25,11 +25,13 @@ jobs:
           node-version: '22'
       - name: Buscar resultados
         run: node scripts/update-data.mjs
+      - name: Gerar páginas de resultado
+        run: node scripts/build-results.mjs
       - name: Salvar se mudou
         run: |
           git config user.name "sortemax-bot"
           git config user.email "contato@duriup.com.br"
-          git add data/
+          git add data/ resultado/ sitemap.xml
           if git diff --cached --quiet; then echo "sem novidades"; exit 0; fi
           git commit -m "dados: concurso $(node -p "require('./data/latest.json').concurso")"
           git push

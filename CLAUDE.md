@@ -7,7 +7,7 @@
 - **SorteMax Mega**: 브라질 Mega-Sena 번호 생성·통계·조합(fechamento)·모의추첨 무료 PWA다. 5개 언어(포·스·영·한·중 간체)를 지원하고, Duriup 브랜드로 운영한다.
 - 사이트는 https://sortemax.duriup.com.br 이다(GitHub Pages 자동 배포). 소개와 설치 안내는 `/baixar/` 에 있다.
 - **지금 상태 (2026-10-28)**:
-  - 웹앱 v2.4.0 이 운영 중이다(sw 캐시 v19, 1103 중국어 추가·설치 안내 페이지 보완).
+  - 웹앱 v2.4.0 이 운영 중이다(sw 캐시 v20, 1103 중국어 추가·설치 안내 페이지 보완, 1116 회차별 결과 페이지).
   - 결과는 자동으로 갱신되고 있다(최근 3075회).
   - Android 앱(TWA) 1.0.1(versionCode 2, minSdk 24) 비공개 테스트(Alpha)가 10월30일 검토 통과·게시됐다(테스터 14명, 국가 브라질·대한민국). 참여 링크 https://play.google.com/apps/testing/br.com.duriup.sortemax — 10월31일 기준 참여 0명. 데이터 보안에 이메일 주소(선택)를 더한 변경 1개가 검토 제출 대기.
   - Play 개발자 계정: 신원·전화·이메일 인증이 모두 끝났다(10월28일 확인, 정책 문제 없음).
@@ -17,7 +17,8 @@
 - `index.html`: 앱 본체 한 파일. 5개 언어 문구 `LANG` 과 조합표 `WHEELS` 가 들어 있다.
 - `manifest.json`, `sw.js`(캐시 이름 `sortemax-vNN`)
 - `baixar/`: 설치 안내(5개 언어) / `privacidade/`: 개인정보 처리방침(5개 언어, Play 제출용)
-- `data/megasena.json`, `data/latest.json`: 결과 데이터(자동 갱신, 손대지 않음) / `scripts/update-data.mjs`: 갱신 스크립트
+- `data/megasena.json`, `data/latest.json`, `data/detalhes.json`(회차별 날짜·당첨자·상금·추첨 순서): 결과 데이터(자동 갱신, 손대지 않음) / `scripts/update-data.mjs`: 갱신 스크립트 / `scripts/details.mjs`: 상세 모으기(`--all` 은 한꺼번에)
+- `resultado/`: 회차별 결과 페이지(포어, 검색용) — `scripts/build-results.mjs` 가 만든다(손대지 않음). `sitemap.xml` 도 이 스크립트가 다시 쓴다.
 - `icons/`: 아이콘·채널 로고·QR / `.well-known/assetlinks.json`: Play 앱 연결(`.nojekyll` 필요)
 - `android/`: TWA 프로젝트(패키지 `br.com.duriup.sortemax`)
 - `.github/workflows/`: `update-data.yml`(하루 10회), `build-android.yml`(수동 실행만)
@@ -43,7 +44,7 @@
 
 ## 배포 규칙
 - 작업은 main 에 바로 반영한다. 브랜치로 올렸다면 main 에 합친 뒤 사이트 확인까지 한다.
-- 코드를 고쳐 올릴 때마다 `sw.js` 캐시 이름을 하나 올린다(지금 v19 → v20…). 안 올리면 설치한 사람에게 새 버전이 안 보인다.
+- 코드를 고쳐 올릴 때마다 `sw.js` 캐시 이름을 하나 올린다(지금 v20 → v21…). 안 올리면 설치한 사람에게 새 버전이 안 보인다.
 - main 에 push 한 직후 다른 브랜치를 같이 push 하지 않는다(그때 Pages 배포가 두 번 실패함). 배포가 실패하면 "pages build and deployment" 를 한 번 다시 돌린다.
 - 올린 뒤 1~2분 기다렸다가 사이트에서 바뀐 것이 보이는지 직접 확인하고 보고한다.
 
@@ -84,6 +85,9 @@
 - [KIL 1103] 두리업 사이트 앱 모음: duriup.com.br/apps/ (WordPress 페이지 id 284, 메뉴 항목 id 180 "Apps"). 옛 메뉴 "App SorteMax (grátis)" 를 이 페이지로 바꿨다. 앱마다 카드 하나, 앱 주소는 각자 서브도메인(앱이름.duriup.com.br) 그대로 두고 링크만 건다. SorteMax 주소는 옮기지 않는다(Play 연결·검색·설치한 사람·공유 링크). 새 앱은 Play 패키지 br.com.duriup.앱이름, 완성된 것만 카드 추가. 페이지 원본 사본 `_로컬/duriup-apps-page.html`. Play 정식 공개 날 SorteMax 카드 버튼을 Play 링크로 바꾼다.
 
 - [KIL 1105] 홍보 영상 첫 묶음 8편(숏츠 P01~P06, 롱폼 L01·L02)을 @Duriup 에 올린다. 기획표·완성본은 `_로컬/홍보영상/`, 작업 도구(녹화 cast.js·음성 voice.py·렌더 render.py)는 `D:\ZZ-Local\작업\SorteMax-홍보\`. 끝 화면 A(사이트 주소)는 시험용, 올리는 것은 B(Google Play)판만 정식 공개 뒤. P01 시험본 KIL ok 뒤 나머지를 만든다.
+
+- [KIL 1116] 검색 손님을 늘리려고 회차별 결과 페이지(`/resultado/`, `/resultado/NNNN/`, 목록 `/resultado/p/N/`)를 만들었다. 포어만, 데이터 파일 값만 쓴다(지어낸 값 없음). 갱신 봇이 결과를 받은 뒤 `build-results.mjs` 를 돌려 페이지·사이트맵을 같이 커밋한다. 상세는 1116 PC 에서 `details.mjs --all` 로 처음 채웠고, 그 뒤로는 봇이 최신 회차를 넣고 빠진 것을 한 번에 40개까지 채운다. 앱 바닥(5개 언어 `ft-res`)과 설치 안내 바닥에 링크.
+- [1116] sw 버그 고침: 화면 요청을 받을 때마다 그 응답을 `/index.html` 로 저장해서, `/baixar/`·결과 페이지를 연 뒤 오프라인이면 앱 대신 그 페이지가 떴다. 이제 `/`·`/index.html` 일 때만 저장한다(v20).
 
 ## 해 보고 버린 것과 이유
 - 원본 파일명 `index.html.html` 을 `index.html` 로 바꿨다. `sw.js` 가 `/index.html` 을 캐시하기 때문이다.
