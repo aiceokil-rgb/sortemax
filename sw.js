@@ -1,4 +1,4 @@
-const CACHE = 'sortemax-v20';
+const CACHE = 'sortemax-v21';
 const ASSETS = [
   '/',
   '/index.html',
@@ -40,7 +40,7 @@ self.addEventListener('fetch', function(e) {
   var url = e.request.url;
   if (e.request.method !== 'GET') return;
   // 결과 데이터·API·통계 요청은 캐시 안 함(항상 최신, 실패는 앱이 직접 처리)
-  if (url.includes('/data/') ||
+  if (url.includes('/data/') || url.includes('/house-ads.json') ||
       url.includes('servicebus2.caixa.gov.br') ||
       url.includes('raw.githubusercontent.com') ||
       url.includes('googletagmanager.com') ||

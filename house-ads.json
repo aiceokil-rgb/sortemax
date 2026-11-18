@@ -1,0 +1,86 @@
+{
+ "note": "자체 광고 목록 — 우리 앱·두리업 알리기. 각 앱은 자기 id 를 뺀 나머지 중 live:true 만 보여 준다. 고치면 SorteMax 저장소의 house-ads.json 에도 같은 내용을 넣는다(그 주소에서 다른 앱이 바로 읽을 수 있음: https://sortemax.duriup.com.br/house-ads.json, CORS 허용). 처음 채움: SorteMax 방 1118.",
+ "updated": "2026-11-18",
+ "ads": [
+  {
+   "id": "sortemax", "kind": "app", "live": true,
+   "name": "SorteMax Mega",
+   "line": {
+    "pt": "Gere seus jogos da Mega-Sena em segundos — grátis, sem cadastro",
+    "es": "Genera tus juegos de la Mega-Sena en segundos — gratis, sin registro",
+    "en": "Create your Mega-Sena games in seconds — free, no sign-up",
+    "ko": "메가세나 번호를 몇 초 만에 — 무료, 가입 없음",
+    "zh": "几秒钟生成 Mega-Sena 号码 — 免费,无需注册"
+   },
+   "url": "https://sortemax.duriup.com.br/?utm_source=house",
+   "icon": "https://sortemax.duriup.com.br/icons/icon-192.png",
+   "play": "br.com.duriup.sortemax", "playLive": false
+  },
+  {
+   "id": "cambio", "kind": "app", "live": false,
+   "name": "Duriup Câmbio",
+   "line": {
+    "pt": "Quanto você paga de verdade no dólar, euro e cripto",
+    "es": "Cuánto pagas de verdad por dólar, euro y cripto",
+    "en": "What you really pay for dollars, euros and crypto",
+    "ko": "달러·유로·코인 살 때 실제로 내는 돈",
+    "zh": "买美元、欧元和加密货币时真正要付多少"
+   },
+   "url": "https://cambio.duriup.com.br/?utm_source=house",
+   "icon": "https://cambio.duriup.com.br/icons/icon-192.png",
+   "play": "br.com.duriup.cambio", "playLive": false
+  },
+  {
+   "id": "duriup-apps", "kind": "site", "live": true,
+   "name": "Apps Duriup",
+   "line": {
+    "pt": "Todos os apps grátis da Duriup",
+    "es": "Todas las apps gratis de Duriup",
+    "en": "All free Duriup apps",
+    "ko": "두리업 무료 앱 모음",
+    "zh": "Duriup 全部免费应用"
+   },
+   "url": "https://duriup.com.br/apps/?utm_source=house",
+   "icon": "https://sortemax.duriup.com.br/icons/duriup-yt.png"
+  },
+  {
+   "id": "yt-duriup", "kind": "channel", "live": true,
+   "name": "Duriup",
+   "line": {
+    "pt": "Cripto, ações e mercados financeiros",
+    "es": "Cripto, acciones y mercados financieros",
+    "en": "Crypto, stocks and financial markets",
+    "ko": "코인·주식·금융 시장",
+    "zh": "加密货币、股票和金融市场"
+   },
+   "url": "https://www.youtube.com/@Duriup",
+   "icon": "https://sortemax.duriup.com.br/icons/duriup-yt.png"
+  },
+  {
+   "id": "yt-sogno", "kind": "channel", "live": true,
+   "name": "Sogno d'Argento",
+   "line": {
+    "pt": "Música italiana vintage dos anos 60",
+    "es": "Música italiana vintage de los años 60",
+    "en": "Vintage Italian music from the 60s",
+    "ko": "60년대 이탈리아 빈티지 음악",
+    "zh": "60 年代意大利复古音乐"
+   },
+   "url": "https://www.youtube.com/@sognodargento",
+   "icon": "https://yt3.ggpht.com/YJG6FUluNtYyUiEe6lu3ceB7Sw0NM9IWGizTJePffpjFCkbCMTJQi2Dl6_mvqUMd-9IKGGfW7A=s600-c-k-c0x00ffffff-no-rj-rp-mo"
+  },
+  {
+   "id": "yt-cine", "kind": "channel", "live": true,
+   "name": "Cinema Ballad",
+   "line": {
+    "pt": "Trilhas sonoras do cinema",
+    "es": "Bandas sonoras del cine",
+    "en": "Movie soundtracks",
+    "ko": "영화 음악",
+    "zh": "电影原声音乐"
+   },
+   "url": "https://www.youtube.com/@CinemaBallad",
+   "icon": "https://sortemax.duriup.com.br/icons/cinema-ballad.jpg"
+  }
+ ]
+}
