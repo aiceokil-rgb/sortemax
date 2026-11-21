@@ -1211,6 +1211,8 @@ function loadHouse(){
 }
 function tabInit(){
   document.querySelectorAll('.tab').forEach(function(btn){btn.onclick=function(){document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});btn.classList.add('on');var tg=btn.dataset.t;el(tg).classList.add('on');el('dash').classList.toggle('on',tg==='p-gen');if(tg==='p-hist')renderHist();if(tg==='p-res')renderTable();window.scrollTo({top:0,behavior:'smooth'});track('tab_view',{tab:tg});};});
+  // 앱 바로가기·링크로 탭 바로 열기: ?tab=gen|fech|sim|hist|res|cont [1121, Play 1.0.2 바로가기]
+  try{var qtab=new URLSearchParams(location.search).get('tab');var qb=qtab&&document.querySelector('.tab[data-t="p-'+qtab.replace(/[^a-z]/g,'')+'"]');if(qb){qb.click();track('shortcut_open',{tab:qtab});}}catch(e){}
   el('dash').classList.add('on');
 }
 function helpInit(){

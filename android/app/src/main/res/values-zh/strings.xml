@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sc_gen_short">生成号码</string>
+    <string name="sc_gen_long">生成 Mega-Sena 号码</string>
+    <string name="sc_res_short">开奖结果</string>
+    <string name="sc_res_long">最新结果和历史</string>
+    <string name="sc_hist_short">我的号码</string>
+    <string name="sc_hist_long">核对我的号码</string>
+</resources>

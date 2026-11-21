@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sc_gen_short">번호 만들기</string>
+    <string name="sc_gen_long">메가세나 번호 만들기</string>
+    <string name="sc_res_short">결과</string>
+    <string name="sc_res_long">최근 결과와 지난 회차</string>
+    <string name="sc_hist_short">내 게임</string>
+    <string name="sc_hist_long">내 게임 확인</string>
+</resources>

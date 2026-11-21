@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sc_gen_short">Make games</string>
+    <string name="sc_gen_long">Make Mega-Sena games</string>
+    <string name="sc_res_short">Results</string>
+    <string name="sc_res_long">Latest result and history</string>
+    <string name="sc_hist_short">My games</string>
+    <string name="sc_hist_long">Check my games</string>
+</resources>

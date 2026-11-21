@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 앱 아이콘을 길게 누르면 나오는 바로가기 (1.0.2, 테스터 의견: 처음 쓰는 사람이 어디를 눌러야 할지 헷갈림) -->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut android:shortcutId="gerar" android:enabled="true" android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/sc_gen_short" android:shortcutLongLabel="@string/sc_gen_long">
+        <intent android:action="android.intent.action.VIEW"
+            android:targetPackage="br.com.duriup.sortemax"
+            android:targetClass="com.google.androidbrowserhelper.trusted.LauncherActivity"
+            android:data="https://sortemax.duriup.com.br/?tab=gen&amp;source=shortcut" />
+    </shortcut>
+    <shortcut android:shortcutId="resultados" android:enabled="true" android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/sc_res_short" android:shortcutLongLabel="@string/sc_res_long">
+        <intent android:action="android.intent.action.VIEW"
+            android:targetPackage="br.com.duriup.sortemax"
+            android:targetClass="com.google.androidbrowserhelper.trusted.LauncherActivity"
+            android:data="https://sortemax.duriup.com.br/?tab=res&amp;source=shortcut" />
+    </shortcut>
+    <shortcut android:shortcutId="meusjogos" android:enabled="true" android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/sc_hist_short" android:shortcutLongLabel="@string/sc_hist_long">
+        <intent android:action="android.intent.action.VIEW"
+            android:targetPackage="br.com.duriup.sortemax"
+            android:targetClass="com.google.androidbrowserhelper.trusted.LauncherActivity"
+            android:data="https://sortemax.duriup.com.br/?tab=hist&amp;source=shortcut" />
+    </shortcut>
+</shortcuts>

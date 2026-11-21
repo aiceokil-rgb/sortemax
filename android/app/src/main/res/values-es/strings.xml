@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sc_gen_short">Generar juegos</string>
+    <string name="sc_gen_long">Generar juegos de la Mega-Sena</string>
+    <string name="sc_res_short">Resultados</string>
+    <string name="sc_res_long">Último resultado e historial</string>
+    <string name="sc_hist_short">Mis juegos</string>
+    <string name="sc_hist_long">Revisar mis juegos</string>
+</resources>
