@@ -139,3 +139,13 @@ API 키·토큰은 없다. 코드·설정에 `D:\ZZ-Channel\…` 절대 경로�
   - 소노 @sognodargento(이탈리아 60년대 음악)
   - 시네 @CinemaBallad(영화 음악)
   - 두리업 @Duriup(코인·주식, 브라질)
+
+## [1126] 폴더 옮기기 전 멈춘 자리 — 새 자리 `D:\ZZ-Local\DuriupGrp\AppDev\SorteMax`
+- 하던 일: Play 2차 비공개 테스트 중(11/20 "추가 테스트 필요" → 빠르면 12/4 재신청). 1.0.2(vc3, 앱 바로가기) 11/21 비공개 트랙 검토 제출, 테스터 2차 부탁글 11/23 KIL 에게 줌. 기록 `_로컬\Play제출\2차테스트-기록.md`, 계획 `D:\ZZ-Channel\_KIL-바로쓰기\앱개발\SorteMax\SorteMax-2차테스트-계획-v1.md`.
+- 다시 켤 것·고칠 것:
+  1. 새 자리에서 `git status`·`git pull`(원격 aiceokil-rgb/sortemax 그대로).
+  2. 옛 경로 `D:\ZZ-Local\앱개발\SorteMax` 를 적어 둔 곳을 새 경로로: 예약 작업 `sortemax-l02-virada-prep`(12/1 10:00, 기획표 경로)·`sortemax-production-review`(꺼짐)·`sortemax-14day-check`(끝남), `D:\ZZ-Local\AppDev\_기획부\SorteMax-현황.md`, `D:\ZZ-Local\AppDev\_공용\목록.md`·`Play-비공개테스트-프로덕션-절차.md`·`_로컬\Play-테스터.md`, 클코 메모리 `sortemax-location`.
+  3. 서명 도구 `_로컬\Play제출\1.0.2-sign.bat` + `_도구\sign-1.0.2.ps1`(상대 경로라 그대로 됨), JDK `C:\Program Files\Microsoft\jdk-21.0.13.21-hotspot`.
+  4. 미리보기 `.claude\launch.json`(python http.server 8080), 화면 시험 `D:\ZZ-Local\작업\SorteMax-홍보\shot_res.js`·`chk_*.js` 안의 `ROOT` 경로.
+  5. 다음 차례: 1.0.2 검토 통과 확인 → 테스터 의견 기록 → 12/1 무렵 1.0.3 → 12/4 이후 재신청(KIL ok).
+- 켜 둔 서버·에뮬레이터·이 폴더의 터미널 작업 없음(1126 확인). gradle·kotlin 데몬 2개는 이 앱이 띄운 것이 아니라(이 앱은 Actions 에서 빌드) 그대로 둠.
