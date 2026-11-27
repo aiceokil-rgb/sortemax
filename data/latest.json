@@ -1,13 +1,13 @@
 {
- "concurso": 3090,
- "data": "24/11/2026",
+ "concurso": 3091,
+ "data": "26/11/2026",
  "dezenas": [
-  10,
-  14,
-  27,
+  4,
+  19,
+  22,
+  23,
   28,
-  47,
-  57
+  37
  ],
  "acumulado": true,
  "rateio": [
@@ -18,20 +18,20 @@
   },
   {
    "faixa": "5 acertos",
-   "ganhadores": 41,
-   "premio": 38160.32
+   "ganhadores": 64,
+   "premio": 25521.49
   },
   {
    "faixa": "4 acertos",
-   "ganhadores": 3800,
-   "premio": 588.18
+   "ganhadores": 5321,
+   "premio": 438.52
   }
  ],
  "proximo": {
-  "concurso": 3091,
-  "data": "26/11/2026",
-  "estimativa": 75000000
+  "concurso": 3092,
+  "data": "29/11/2026",
+  "estimativa": 82000000
  },
  "fonte": "caixa",
- "verificadoEm": "2026-11-25T08:55:44.000Z"
+ "verificadoEm": "2026-11-27T08:52:14.617Z"
 }
