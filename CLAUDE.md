@@ -123,7 +123,7 @@
    - 새 소식 알림 신청(Formspree, 받는 주소 info@mixmania.blog → aiceokil@gmail.com)은 Gmail 필터가 받은편지함을 건너뛰고 라벨 "SorteMax 알림신청"에 모은다(1031). 이 메일들이 알림 명단 원본이니 지우지 않는다.
 5. 외부 데이터: Caixa API `servicebus2.caixa.gov.br/portaldeloterias/api/megasena`. 예비로 guidi·heroku 미러를 쓴다.
 6. 코드 안의 공개 값(비밀 아님): Google 애널리틱스 `G-7KKRM14D7Y`, 새 소식 알림용 Formspree 폼 주소(1031 다시 넣음, 무료 요금제 월 접수 한도 있음).
-7. 서명키 `sortemax-upload.jks` 와 비밀번호 안내 txt: PC `D:\ZZ-Local\앱개발\SorteMax\_로컬\서명키\`(git 제외), 백업은 Drive `확장프로그램/SorteMax`. 저장소에는 없다.
+7. 서명키 `sortemax-upload.jks` 와 비밀번호 안내 txt: PC `D:\ZZ-Local\DuriupGrp\AppDev\SorteMax\_로컬\서명키\`(git 제외), 백업은 Drive `확장프로그램/SorteMax`. 저장소에는 없다.
 8. Google Play Console: 개발자 계정 aiceokil@gmail.com, 패키지 `br.com.duriup.sortemax`.
 9. 다른 채널 폴더:
    - 두리업 로고를 `icons/duriup-yt.png` 로 한 번 복사했다.
@@ -140,12 +140,7 @@ API 키·토큰은 없다. 코드·설정에 `D:\ZZ-Channel\…` 절대 경로�
   - 시네 @CinemaBallad(영화 음악)
   - 두리업 @Duriup(코인·주식, 브라질)
 
-## [1126] 폴더 옮기기 전 멈춘 자리 — 새 자리 `D:\ZZ-Local\DuriupGrp\AppDev\SorteMax`
-- 하던 일: Play 2차 비공개 테스트 중(11/20 "추가 테스트 필요" → 빠르면 12/4 재신청). 1.0.2(vc3, 앱 바로가기) 11/21 비공개 트랙 검토 제출, 테스터 2차 부탁글 11/23 KIL 에게 줌. 기록 `_로컬\Play제출\2차테스트-기록.md`, 계획 `D:\ZZ-Channel\_KIL-바로쓰기\앱개발\SorteMax\SorteMax-2차테스트-계획-v1.md`.
-- 다시 켤 것·고칠 것:
-  1. 새 자리에서 `git status`·`git pull`(원격 aiceokil-rgb/sortemax 그대로).
-  2. 옛 경로 `D:\ZZ-Local\앱개발\SorteMax` 를 적어 둔 곳을 새 경로로: 예약 작업 `sortemax-l02-virada-prep`(12/1 10:00, 기획표 경로)·`sortemax-production-review`(꺼짐)·`sortemax-14day-check`(끝남), `D:\ZZ-Local\AppDev\_기획부\SorteMax-현황.md`, `D:\ZZ-Local\AppDev\_공용\목록.md`·`Play-비공개테스트-프로덕션-절차.md`·`_로컬\Play-테스터.md`, 클코 메모리 `sortemax-location`.
-  3. 서명 도구 `_로컬\Play제출\1.0.2-sign.bat` + `_도구\sign-1.0.2.ps1`(상대 경로라 그대로 됨), JDK `C:\Program Files\Microsoft\jdk-21.0.13.21-hotspot`.
-  4. 미리보기 `.claude\launch.json`(python http.server 8080), 화면 시험 `D:\ZZ-Local\작업\SorteMax-홍보\shot_res.js`·`chk_*.js` 안의 `ROOT` 경로.
-  5. 다음 차례: 1.0.2 검토 통과 확인 → 테스터 의견 기록 → 12/1 무렵 1.0.3 → 12/4 이후 재신청(KIL ok).
-- 켜 둔 서버·에뮬레이터·이 폴더의 터미널 작업 없음(1126 확인). gradle·kotlin 데몬 2개는 이 앱이 띄운 것이 아니라(이 앱은 Actions 에서 빌드) 그대로 둠.
+## [1126] 폴더 옮김
+- 앱 폴더 `D:\ZZ-Local\DuriupGrp\AppDev\SorteMax` (옛 `D:\ZZ-Local\앱개발\SorteMax` 는 연결 폴더라 그대로 열림). 공통 규칙은 `D:\ZZ-Local\DuriupGrp\AppDev\CLAUDE.md`. 우편함 `D:\ZZ-Local\앱개발\_교환\SorteMax\`·공용 `D:\ZZ-Local\AppDev\_공용\` 은 그대로.
+- 시각을 정해 두고 할 일은 방 안 예약 대신 **윈도우 예약 작업 + 스크립트**(`_로컬\예약\`) [KIL 1126].
+- 하던 일: Play 2차 비공개 테스트(11/20 "추가 테스트 필요" → 빠르면 12/4 재신청). 1.0.2(vc3, 앱 바로가기) 11/21 검토 제출. 기록 `_로컬\Play제출차테스트-기록.md`.
