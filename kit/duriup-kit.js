@@ -127,7 +127,7 @@ function loadAds(){
 }
 
 /* ── 2) 의견 보내기 ── */
-function waHref(text){var n=String(C.whatsapp||'').replace(/\D/g,'');return n?'https://wa.me/'+n+'?text='+encodeURIComponent(text||''):'';}
+function waHref(text){var n=String(C.whatsapp||'').replace(/\D/g,'');return n?'https://wa.me/'+n+'?text='+encodeURIComponent('['+(C.appName||C.app)+'] '+(text||'')):'';} // 받는 쪽이 어느 앱 의견인지 알게 앞에 [앱 이름]
 function mailHref(text){return C.email?'mailto:'+C.email+'?subject='+encodeURIComponent((C.appName||C.app)+' — '+t('fbTitle'))+'&body='+encodeURIComponent(text||''):'';}
 function openFeedback(from){
  tr('feedback_open',{from:from||''});
@@ -195,7 +195,7 @@ function iosNudge(){
 
 /* ── 밖에서 부르는 것 ── */
 window.DuriupKit={
- version:'1.0.0',
+ version:'1.0.1',
  init:function(opt){
   for(var k in opt)if(Object.prototype.hasOwnProperty.call(opt,k))C[k]=opt[k];
   if(typeof C.stripMount==='string')C.stripMount=document.querySelector(C.stripMount);
