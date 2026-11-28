@@ -1,4 +1,4 @@
-const CACHE = 'sortemax-v22';
+const CACHE = 'sortemax-v23';
 const ASSETS = [
   '/',
   '/index.html',
@@ -9,7 +9,8 @@ const ASSETS = [
   '/icons/maskable-512.png',
   '/icons/duriup-yt.png',
   '/icons/cinema-ballad.jpg',
-  '/icons/qr-baixar.svg'
+  '/icons/qr-baixar.svg',
+  '/kit/duriup-kit.js?v=1'
 ];
 const FONT_CSS = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap';
 
