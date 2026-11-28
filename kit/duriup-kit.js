@@ -14,7 +14,7 @@ var T={
  ko:{how:'방법 보기',more:'앱 더 보기',moreTitle:'두리업 앱 더 보기',open:'열기',close:'닫기',fb:'의견 보내기',fbTitle:'의견 보내기',fbSub:'쉬웠던 것, 어려웠던 것, 있었으면 하는 것 — 한 줄이면 충분해요.',fbPh:'여기에 적어 주세요…',fbSend:'보내기',fbOk:'고맙습니다! 의견을 받았어요.',fbFail:'지금은 보내지 못했어요. WhatsApp 이나 이메일로 보내 주세요.',fbEmpty:'몇 글자라도 적어 주세요.',fbWa:'WhatsApp',fbMail:'이메일',fbOr:'또는',insTitle:'아이폰에 설치하기',insSub:'홈 화면에서 앱처럼 바로 열 수 있어요:',ins1:'공유 버튼을 누르세요',ins1b:'(Safari 아래나 위의 네모에 화살표)',ins2:'"홈 화면에 추가"를 고르세요',ins2b:'(안 보이면 목록을 아래로 내리세요)',ins3:'"추가"를 누르세요',ins3b:'홈 화면에 아이콘이 생겨요.',later:'나중에',ok:'알겠어요',insSafari:'아이폰에서는 Safari 로 이 사이트를 열어야 설치할 수 있어요.'},
  zh:{how:'查看方法',more:'更多应用',moreTitle:'Duriup 的更多应用',open:'打开',close:'关闭',fb:'发送意见',fbTitle:'您的意见',fbSub:'哪里好用、哪里难用、还缺什么?一句话就很有帮助。',fbPh:'在这里写…',fbSend:'发送',fbOk:'谢谢!我们收到了您的意见。',fbFail:'暂时无法发送。请通过 WhatsApp 或电子邮件发送。',fbEmpty:'请至少写几个字。',fbWa:'WhatsApp',fbMail:'电子邮件',fbOr:'或',insTitle:'在 iPhone 上安装',insSub:'像应用一样从主屏幕直接打开:',ins1:'点"分享"',ins1b:'(Safari 底部或顶部带箭头的方框)',ins2:'选择"添加到主屏幕"',ins2b:'(看不到就把列表往下滑)',ins3:'点"添加"',ins3b:'图标会出现在主屏幕上。',later:'以后再说',ok:'知道了',insSafari:'在 iPhone 上请用 Safari 打开本网站来安装。'}
 };
-var C={app:'',appName:'',lang:function(){return 'pt';},track:function(){},houseUrl:'',houseFallback:null,formUrl:'',whatsapp:'',email:'',stripMount:null,fbMount:null,iosGuide:true,rotateMs:6000,storePrefix:'dk_'};
+var C={app:'',appName:'',lang:function(){return 'pt';},track:function(){},houseUrl:'',houseFallback:null,formUrl:'',whatsapp:'5511955994522',email:'',stripMount:null,fbMount:null,iosGuide:true,rotateMs:6000,storePrefix:'dk_'};
 var ADS=[],idx=0,timer=null;
 function L(){var l=(C.lang&&C.lang())||'pt';return T[l]?l:'pt';}
 function t(k){return T[L()][k]||T.pt[k]||k;}
@@ -195,7 +195,7 @@ function iosNudge(){
 
 /* ── 밖에서 부르는 것 ── */
 window.DuriupKit={
- version:'1.0.1',
+ version:'1.0.2',
  init:function(opt){
   for(var k in opt)if(Object.prototype.hasOwnProperty.call(opt,k))C[k]=opt[k];
   if(typeof C.stripMount==='string')C.stripMount=document.querySelector(C.stripMount);

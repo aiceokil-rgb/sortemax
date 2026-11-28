@@ -23,7 +23,7 @@
 // 화면이 그려지기 전에 테마를 먼저 적용(깜빡임 방지)
 (function(){try{var t=localStorage.getItem('sm_theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
-<script defer src="/kit/duriup-kit.js?v=2"></script>
+<script defer src="/kit/duriup-kit.js?v=3"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7KKRM14D7Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7KKRM14D7Y');</script>
 <style>
@@ -746,7 +746,7 @@ footer .warn{color:var(--t3)}
 
 <script>
 'use strict';
-var APP_VERSION='2.4.2';
+var APP_VERSION='2.4.3';
 var CONTACT_EMAIL='contato@duriup.com.br';
 var pad=function(n){return n<10?'0'+n:String(n);};
 var brl=function(v){return isNaN(v)||v===null?'R$ 0,00':'R$ '+Number(v).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1.');};
@@ -1179,7 +1179,7 @@ var HOUSE_FALLBACK=[
 function kitInit(){
   if(!window.DuriupKit)return;
   DuriupKit.init({app:'sortemax',appName:'SorteMax',lang:function(){return curLang;},track:track,
-    houseUrl:'/house-ads.json',houseFallback:HOUSE_FALLBACK,formUrl:NOTIFY_URL,email:'contato@duriup.com.br',whatsapp:'5511955994522',
+    houseUrl:'/house-ads.json',houseFallback:HOUSE_FALLBACK,formUrl:NOTIFY_URL,email:'contato@duriup.com.br',
     stripMount:'#dkStrip',fbMount:'#dkFb',storePrefix:'sm_dk_',iosGuide:false}); // 아이폰 안내는 SorteMax 설치 배너가 이미 띄움 → 배너 버튼이 부품의 그림 안내를 엶
 }
 function tabInit(){
